@@ -1,0 +1,24 @@
+<!-- <div class="panel-bd pop-index-0 animated active"> -->
+<div class="panel-content">
+  <div class="panel-item-title">工商变更信息：</div>
+
+  <table class="table table-bordered table-align-c" id="businessChangeInfo" *ngIf="companyChangeList.length>0">
+    <tr>
+      <th>变更事项</th>
+      <th>变更前内容</th>
+      <th>变更后内容</th>
+      <th>变更日期</th>
+    </tr>
+    <tr *ngFor="let data of companyChangeList">
+      <td>{{data.changeType}}</td>
+      <td>{{data.changeAfterContent}}</td>
+      <td>{{data.changeBeforeContent}}</td>
+      <td class="nowrap">{{data.changeDate}}</td>
+    </tr>
+  </table>
+
+  <div class="no-data-tips" *ngIf="companyChangeList.length<1">
+    {{CompanyChangeInfoTips}}
+  </div>
+</div>
+<!-- </div> -->

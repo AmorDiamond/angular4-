@@ -1,0 +1,20 @@
+.cygmCon .column_title_box h3:hover{
+    background: none;
+    box-shadow: none;
+    color: #f9b620;
+}
+.cygmCon .column_title_box h3{
+    cursor: inherit;
+}
+.panel-chart{
+    padding: 0 10px;
+}
+.panel-chart .flex-cell > .flex-item{
+    height: 1.583333rem;
+}
+.chart_div{
+    height: 100%;
+}
+.cygmCon{
+    margin-bottom: 20px;
+}

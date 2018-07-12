@@ -1,0 +1,29 @@
+<div class="panel-content">
+  <div>
+    <div class="panel-item-title">履约缴费：</div>
+    <div class="con" *ngIf="PerformancePayment.length>0">
+      <table class="table table-bordered">
+        <tr>
+          <th>公积金缴存登记号</th>
+          <th>最近缴存时间</th>
+          <th>缴至月份</th>
+          <th>拖欠状态</th>
+          <th>数据提供单位</th>
+          <th>数据提供时间</th>
+        </tr>
+        <tr *ngFor="let item of PerformancePayment">
+          <td>{{item.depositRegistration}}</td>
+          <td>{{item.lastDepositTime}}</td>
+          <td>{{item.payToTheMonth}}</td>
+          <td>{{item.arrears}}</td>
+          <td>{{item.dataProvider}}</td>
+          <td>{{item.dataSupplyTime | date:'yyyy-MM-dd'}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="no-data-tips" *ngIf="PerformancePayment.length<1">
+      {{PerformancePaymentTips}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,272 @@
+<!-- 经济指标信息 -->
+<div class="panel-bd pop-index-3 animated m-b-20">
+  <div class="panel-content">
+    <div class="flex">
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="businessIncomeData" (chartClick)="changeBusinessIncomeRatioData($event)" id="main"></div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="businessIncomeRatioData" [loading]="businessIncomeRatioLoading" id="main3"></div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="numberOfActiveStaffData" id="main2"></div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="parkNumberData" id="main4"></div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="StaffCompositionRatioData"></div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="relationPeople" id="guanxi-main"></div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="flex-cell">
+        <div class="flex-item" id="guanxi-main2"></div>
+      </div>
+    </div>
+
+    <!--<div class="panel-item-title">信息：</div>
+    <table class="table table-bordered m-t-20" id="param">
+      <tr>
+        <td class="nowrap">行业类别:</td>
+        <td name="industryType"></td>
+        <td class="nowrap">政企对接联系人:</td>
+        <td name="man">{{gobernmentContacts}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">企业年报:</td>
+        <td colspan="3">暂无</td>
+      </tr>
+      <tr>
+        <td class="nowrap">股权出质:</td>
+        <td class="nowrap" colspan="3">暂无</td>
+      </tr>
+    </table>-->
+    <div class="panel-item-title">政企联系人信息：</div>
+    <table class="table table-bordered m-t-20 table-align-c" id="" *ngIf="ProjectDeclarations.length>0">
+      <tr>
+        <th>姓名</th>
+        <th>职务</th>
+        <th>联系方式</th>
+        <th>关系公司</th>
+        <th>类型</th>
+      </tr>
+      <tr *ngFor="let data of gobernmentContacts">
+        <td class="nowrap">{{data.contactsName}}</td>
+        <td class="nowrap">{{data.duties}}</td>
+        <td class="nowrap">{{data.contactInfo}}</td>
+        <td class="nowrap">{{data.relationshipCompany}}</td>
+        <td class="nowrap">{{data.type}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="ProjectDeclarations.length<1">
+      暂无信息！
+    </div>
+
+    <div class="panel-item-title">政府项目申报信息：</div>
+    <table class="table table-bordered m-t-20 table-align-c" id="" *ngIf="ProjectDeclarations.length>0">
+      <tr>
+        <th>项目名称</th>
+        <th>所在区市县</th>
+        <th>组织机构代码/统一社会信用代码</th>
+        <th>项目负责人姓名</th>
+        <th>联合单位名</th>
+        <th>项目总经费</th>
+        <th>申报市级财政科技资金</th>
+        <th>单位自筹资金</th>
+      </tr>
+      <tr *ngFor="let item of ProjectDeclarations">
+        <td class="nowrap">{{item.projectName}}</td>
+        <td class="nowrap">{{item.location}}</td>
+        <td class="nowrap">{{item.code}}</td>
+        <td class="nowrap">{{item.leader}}</td>
+        <td class="nowrap">{{item.jointCompanyName}}</td>
+        <td class="nowrap">{{item.money}}</td>
+        <td class="nowrap">{{item.declareMoney}}</td>
+        <td class="nowrap">{{item.financingMoney}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="ProjectDeclarations.length<1">
+      暂无信息！
+    </div>
+
+    <div class="panel-item-title">招中标信息：</div>
+    <table class="table table-bordered m-t-20 table-align-c" id="" *ngIf="WinningBid.length>0">
+      <tr>
+        <th>项目名称</th>
+        <th>项目编号</th>
+        <th>标的物</th>
+        <th>招标方</th>
+        <th>代理人</th>
+        <th>标题</th>
+        <th>内容</th>
+      </tr>
+      <tr *ngFor="let item of WinningBid">
+        <td class="nowrap">{{item.projectName}}</td>
+        <td class="nowrap">{{item.projectCode}}</td>
+        <td class="nowrap">{{item.corpore}}</td>
+        <td class="nowrap">{{item.tenderer}}</td>
+        <td class="nowrap">{{item.agent}}</td>
+        <td class="nowrap">{{item.title}}</td>
+        <td class="nowrap">{{item.content}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="WinningBid.length<1">
+      暂无信息！
+    </div>
+
+    <div class="panel-item-title">股权出资信息：</div>
+    <table class="table table-bordered m-t-20 table-align-c" id="" *ngIf="EquityPledged.length>0">
+      <tr>
+        <th>登记编号</th>
+        <th>出质人</th>
+        <th>证照/证件号码</th>
+        <th>出质股权数额</th>
+        <th>质权人</th>
+        <th>公示日期</th>
+        <th>状态</th>
+      </tr>
+      <tr *ngFor="let item of EquityPledged">
+        <td class="nowrap">{{item.regCode}}</td>
+        <td class="nowrap">{{item.pledgor}}</td>
+        <td class="nowrap">{{item.identificationCode}}</td>
+        <td class="nowrap">{{item.amountStock}}</td>
+        <td class="nowrap">{{item.pledgee}}</td>
+        <td class="nowrap">{{item.publicityDate | date: 'yyyy-MM-dd'}}</td>
+        <td class="nowrap">{{item.status}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="EquityPledged.length<1">
+      暂无信息！
+    </div>
+
+    <div class="panel-item-title">招聘数据：</div>
+    <table class="table table-bordered m-t-20 table-align-c" id="" *ngIf="EIIRecruit.length>0">
+      <tr>
+        <th>公司名称</th>
+        <th>招聘标题</th>
+        <th>更新时间</th>
+        <th>薪酬福利</th>
+        <th>工作经验</th>
+        <th>职位</th>
+        <th>学历</th>
+        <!-- <th>招聘内容</th>
+        <th>企业地址</th>
+        <th>公司性质</th>
+        <th>招聘人数</th> -->
+      </tr>
+      <tr *ngFor="let item of EIIRecruit">
+        <td class="nowrap">{{item.enterpriseName}}</td>
+        <td class="nowrap">{{item.title}}</td>
+        <td class="nowrap">{{item.updateDate}}</td>
+        <td class="nowrap">{{item.salary}}</td>
+        <td class="nowrap">{{item.experience}}</td>
+        <td class="nowrap">{{item.position}}</td>
+        <td class="nowrap">{{item.education}}</td>
+        <!-- <td class="nowrap"><div style="display: -webkit-box; width: 100px;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          overflow: hidden;">{{item.recruitContent}}</div></td>
+        <td class="nowrap">{{item.address}}</td>
+        <td class="nowrap">{{item.nature}}</td>
+        <td class="nowrap">{{item.number}}</td> -->
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="EIIRecruit.length<1">
+      暂无信息！
+    </div>
+
+    <!--<div class="panel-item-title">公司公告：</div>
+    <table class="table table-bordered m-t-20 table-align-c" id="">
+      <tr>
+        <th>发布日期</th>
+        <th>标题</th>
+        <th>内容</th>
+      </tr>
+      <tr *ngFor="let item of notices">
+        <td class="nowrap">{{item.releaseDate | date: 'yyyy-MM-dd'}}</td>
+        <td class="nowrap">{{item.title}}</td>
+        <td class="nowrap">{{item.content}}</td>
+      </tr>
+    </table>-->
+
+    <div class="panel-item-title">企业年报：</div>
+    <div class="annual-report">
+      <table class="table table-bordered" *ngIf="AnnualReport.length>0">
+        <tr>
+          <th>年份</th>
+          <th>股东</th>
+          <th>变更前股权比例(%)</th>
+          <th>变更后股权比例(%)</th>
+          <th>变更日期</th>
+        </tr>
+        <tr *ngFor="let item of AnnualReport">
+          <td>{{item.year}}</td>
+          <td>{{item.shareholder}}</td>
+          <td>{{item.ratioBeforeChange}}</td>
+          <td>{{item.ratioAfterChange}}</td>
+          <td>{{item.date | date:'yyyy-MM-dd'}}</td>
+        </tr>
+      </table>
+      <div class="no-data-tips" *ngIf="AnnualReport.length<1">
+        暂无信息！
+      </div>
+    </div>
+
+    <!--<div class="panel-item-title">热点舆论：</div>
+    <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd()">
+      <table class="table table-bordered m-t-20 table-align-c" id="" style="max-width: 100%;">
+        <tr>
+          <th>发布日期</th>
+          <th>标题</th>
+          <th>内容</th>
+        </tr>
+        <tr *ngFor="let item of PublicOpinions">
+          <td class="nowrap">{{item.releaseDate | date: 'yyyy-MM-dd'}}</td>
+          <td class="nowrap">{{item.title}}</td>
+          <td></td>
+          &lt;!&ndash; <td class="nowrap">{{item.content}}</td> &ndash;&gt;
+        </tr>
+      </table>
+    </perfect-scrollbar>-->
+
+    <!--<div class="panel-item-title">动产抵押：</div>
+    <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd()">
+      <table class="table table-bordered m-t-20 table-align-c" id="" style="max-width: 100%;">
+        <tr>
+          &lt;!&ndash; <th>登记编号</th> &ndash;&gt;
+          <th>登记机关</th>
+          <th>登记日期</th>
+          <th>状态</th>
+          <th>被担保债权类型</th>
+          <th>被担保债权数额</th>
+          <th>债务人履行债务期限</th>
+          &lt;!&ndash; <th>担保范围</th> &ndash;&gt;
+          &lt;!&ndash; <th>抵押权人名称</th>
+          <th>抵押权人证照／证件类型</th>
+          <th>证件／证照号码</th> &ndash;&gt;
+        </tr>
+        <tr *ngFor="let item of ChattelMortgage">
+          &lt;!&ndash; <td class="nowrap">{{item.regCode}}</td> &ndash;&gt;
+          <td class="nowrap">{{item.regAuthority}}</td>
+          <td class="nowrap">{{item.regDate | date: 'yyyy-MM-dd'}}</td>
+          <td class="nowrap">{{item.status}}</td>
+          <td class="nowrap">{{item.type}}</td>
+          <td class="nowrap">{{item.amount}}</td>
+          <td class="nowrap">{{item.debtMaturity}}</td>
+          &lt;!&ndash; <td class="nowrap">{{item.scopeSecurity}}</td> &ndash;&gt;
+          &lt;!&ndash; <td class="nowrap">{{item.mortgagedName}}</td>
+          <td class="nowrap">{{item.mortgagedDocumentType}}</td>
+          <td class="nowrap">{{item.documentNumber}}</td> &ndash;&gt;
+          &lt;!&ndash; <td class="nowrap">{{item.content}}</td> &ndash;&gt;
+        </tr>
+      </table>
+    </perfect-scrollbar>-->
+  </div>
+</div>

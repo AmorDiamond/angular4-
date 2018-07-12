@@ -1,0 +1,43 @@
+<div class="macros-view-bd">
+  <div class="right-panel tab_con public-budget-con">
+    <div class="content">
+      <div class="panel-menu-right">
+        <div class="panel-bd pop-index-1 active">
+          <perfect-scrollbar style="height: 100%">
+            <div class="down-budget">
+              <button class="down-budget-btn fr">导出预测数据</button>
+            </div>
+            <div class="panel-content m-b-10">
+              <div class="flex">
+                <div class="flex-cell">
+                  <div class="flex-item" echarts [options]='gdpOptions'></div>
+                </div>
+                <div class="flex-cell">
+                  <div class="flex-item" echarts [options]='pillarOptions'></div>
+                </div>
+              </div>
+
+              <div class="flex">
+                <div class="flex-cell">
+                  <div class="flex-item" echarts [options]='investOptions'></div>
+                </div>
+                <div class="flex-cell">
+                  <div class="flex-item" echarts [options]='budgetOptions'></div>
+                </div>
+              </div>
+
+              <div class="flex">
+                <div class="flex-cell">
+                  <div class="flex-item" echarts [options]='expendOptions'></div>
+                </div>
+                <div class="flex-cell">
+                  <div class="flex-item" echarts [options]='incomeOptions'></div>
+                </div>
+              </div>
+            </div>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,149 @@
+<!-- 企业资质信息 -->
+<div class="panel-bd pop-index-1 animated">
+  <div class="panel-content">
+    <div class="panel-item-title">行业资格认证：</div>
+    <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('getCertification')" *ngIf="Certifications.length>0">
+      <table class="table table-bordered" *ngFor="let item of Certifications">
+        <tr>
+          <td class="nowrap">许可事项/证书名称:</td>
+          <td name="name">{{item.certificateName}}</td>
+          <td class="nowrap">许可文件编号:</td>
+          <td name="number">{{item.licenseCode}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">许可内容/范围:</td>
+          <td colspan="3" name="content">{{item.licenseContent}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">许可/发证机关:</td>
+          <td name="office">{{item.permitOrganization}}</td>
+          <td class="nowrap">许可/发证日期:</td>
+          <td class="nowrap" name="certificationDate">{{item.permitDate | date: "yyyy-MM-dd"}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">有效期自:</td>
+          <td name="validityStart">{{item.validPeriodBegin | date: "yyyy-MM-dd"}}</td>
+          <td class="nowrap">有效期至:</td>
+          <td name="validityEnd">{{item.validityPeriodEnd | date: "yyyy-MM-dd"}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">数据提供单位:</td>
+          <td name="dataProvider">{{item.dataSource}}</td>
+          <td class="nowrap">数据提供日期:</td>
+          <td name="dataSupplyTime">{{item.dataProvisionTime | date: "yyyy-MM-dd"}}</td>
+        </tr>
+      </table>
+    </perfect-scrollbar>
+    <div class="no-data-tips" *ngIf="Certifications.length<1">
+      {{CertificationTips}}
+    </div>
+  </div>
+  <div class="panel-content">
+    <div class="panel-item-title">高企认证：</div>
+    <perfect-scrollbar style="max-height: 366px" *ngIf="HiTechCertifications.length>0">
+      <table class="table table-bordered" *ngFor="let item of HiTechCertifications">
+        <tr>
+          <td class="nowrap">证书名:</td>
+          <td name="name">{{item.certificateName}}</td>
+          <td class="nowrap">证书编号:</td>
+          <td name="number">{{item.certificateCode}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">批准机关:</td>
+          <td name="office">{{item.permitOrganization}}</td>
+          <td class="nowrap">发证时间:</td>
+          <td class="nowrap" name="certificationDate">{{item.date | date: "yyyy-MM-dd"}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">有效期:</td>
+          <td colspan="3" name="validityEnd">{{item.validPeriod}}</td>
+        </tr>
+      </table>
+    </perfect-scrollbar>
+    <div class="no-data-tips" *ngIf="HiTechCertifications.length<1">
+      {{HiTechCertificationTips}}
+    </div>
+
+  </div>
+  <!--<div class="panel-content">
+    <div class="panel-item-title">标准制定：</div>
+    <div id="certificationsDiv"></div>
+    <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('getStandardSetting')">
+      <table class="table table-bordered" *ngFor="let item of StandardSettings">
+        <tr>
+          <td class="nowrap">标准名称:</td>
+          <td name="name">{{item.standardName}}</td>
+          <td class="nowrap">标准编号:</td>
+          <td name="number">{{item.standardCode}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">标准内容:</td>
+          <td name="content">{{item.standardContent}}</td>
+          <td class="nowrap">公开时间:</td>
+          <td name="content">{{item.publicityDate | date: "yyyy-MM-dd"}}</td>
+        </tr>
+      </table>
+    </perfect-scrollbar>
+
+  </div>-->
+  <div class="panel-content">
+    <div class="panel-item-title">名优产品目录：</div>
+    <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('getFamousProduct')" *ngIf="FamousProduct.length>0">
+      <table class="table table-bordered" *ngFor="let item of FamousProduct">
+        <tr>
+          <td class="nowrap">产品名:</td>
+          <td name="name">{{item.name}}</td>
+          <td class="nowrap">产品类别:</td>
+          <td name="number">{{item.type}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">质量标准认证:</td>
+          <td name="name">{{item.qualityStandardCert}}</td>
+          <td class="nowrap">编码:</td>
+          <td name="number">{{item.code}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">联系人:</td>
+          <td name="content">{{item.contacts}}</td>
+          <td class="nowrap">联系电话:</td>
+          <td name="content">{{item.contactNumber}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">获奖信息:</td>
+          <td colspan="3" name="office">{{item.winning}}</td>
+        </tr>
+        <tr>
+          <td class="nowrap">主要原材料:</td>
+          <td name="validityStart">{{item.rawMaterial}}</td>
+          <td class="nowrap">配套产品:</td>
+          <td name="validityEnd">{{item.accessoryProducts}}</td>
+        </tr>
+      </table>
+    </perfect-scrollbar>
+    <div class="no-data-tips" *ngIf="FamousProduct.length<1">
+      {{FamousProductTips}}
+    </div>
+
+  </div>
+  <div class="panel-content">
+    <div class="panel-item-title">上市挂牌：</div>
+
+    <div class="no-data-tips">
+      暂无信息！
+    </div>
+  </div>
+  <div class="panel-content">
+    <div class="panel-item-title">上规入库：</div>
+
+    <div class="no-data-tips">
+      暂无信息！
+    </div>
+  </div>
+  <div class="panel-content">
+    <div class="panel-item-title">其它资质认证：</div>
+
+    <div class="no-data-tips">
+      暂无信息！
+    </div>
+  </div>
+</div>

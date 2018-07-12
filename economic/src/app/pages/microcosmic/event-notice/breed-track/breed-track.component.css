@@ -1,0 +1,31 @@
+.table tr td {
+  text-align: center;
+}
+
+.flex-item {
+  height: 2rem;
+}
+
+.follow-list {
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.follow-list .title {
+  font-size: 16px;
+  color: #f9b620;
+}
+
+.follow-list li {
+  float: left;
+  margin: 10px 10px 0;
+  border: 1px solid rgba(249, 182, 32, .3);
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.follow-list li.active {
+  color: #f9b620;
+  border-color: #f9b620;
+}

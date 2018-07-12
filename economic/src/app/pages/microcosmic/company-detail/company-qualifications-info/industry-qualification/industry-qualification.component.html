@@ -1,0 +1,39 @@
+<!-- 企业资质信息 -->
+<!-- <div class="panel-bd pop-index-1 animated"> -->
+<div class="panel-content">
+  <div class="panel-item-title">行业资格认证：</div>
+  <div id="certificationsDiv"></div>
+  <perfect-scrollbar>
+    <table class="table table-bordered" *ngFor="let item of Certifications">
+      <tr>
+        <td class="nowrap">许可事项/证书名称:</td>
+        <td name="name">{{item.certificateName}}</td>
+        <td class="nowrap">许可文件编号:</td>
+        <td name="number">{{item.licenseCode}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">许可内容/范围:</td>
+        <td colspan="3" name="content">{{item.licenseContent}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">许可/发证机关:</td>
+        <td name="office">{{item.permitOrganization}}</td>
+        <td class="nowrap">许可/发证日期:</td>
+        <td class="nowrap" name="certificationDate">{{item.permitDate | date: "yyyy-MM-dd"}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">有效期自:</td>
+        <td name="validityStart">{{item.validPeriodBegin | date: "yyyy-MM-dd"}}</td>
+        <td class="nowrap">有效期至:</td>
+        <td name="validityEnd">{{item.validityPeriodEnd | date: "yyyy-MM-dd"}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">数据提供单位:</td>
+        <td name="dataProvider">{{item.dataSource}}</td>
+        <td class="nowrap">数据提供日期:</td>
+        <td name="dataSupplyTime">{{item.dataProvisionTime | date: "yyyy-MM-dd"}}</td>
+      </tr>
+    </table>
+  </perfect-scrollbar>
+</div>
+<!-- </div> -->

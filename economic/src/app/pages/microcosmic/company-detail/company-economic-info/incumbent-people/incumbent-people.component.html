@@ -1,0 +1,18 @@
+<div class="panel-content m-b-20">
+  <div class="flex">
+    <div class="flex-cell">
+      <div class="flex-item" echarts [options]="parkNumberData" (chartClick)="changeEnterprisePeopleByYear($event)" id="main4"></div>
+    </div>
+    <div class="flex-cell">
+      <div class="flex-item" echarts [options]="StaffCompositionRatioData" id="main2"></div>
+    </div>
+  </div>
+  <div class="flex">
+    <div class="flex-cell">
+      <div class="flex-item" echarts [options]="ManagementStructureEchartData"></div>
+    </div>
+    <div class="flex-cell">
+      <div class="flex-item" echarts [options]="EmploymentStatusEchartData"></div>
+    </div>
+  </div>
+</div>

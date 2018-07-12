@@ -1,0 +1,203 @@
+.column_box {
+  background-color: #151411;
+  border-radius: 10px;
+  box-shadow: inset 0 0 3px 0 #000;
+  position: relative;
+}
+
+.column_one {
+  height: 560px;
+}
+
+.column_box_two {
+  height: 330px;
+  margin-top: 20px;
+}
+
+.column_box_two .column_box {
+  height: 100%;
+  width: 100%;
+}
+
+.column_one:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(left top, rgba(0, 0, 0, 0), rgba(125, 133, 203, 0.35));
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom right, rgba(0, 0, 0, 0), rgba(125, 133, 203, 0.35));
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom right, rgba(0, 0, 0, 0), rgba(125, 133, 203, 0.35));
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0), rgba(125, 133, 203, 0.35));
+  /* 标准的语法（必须放在最后） */
+}
+
+.column_two:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(left top, rgba(0, 0, 0, 0), rgba(29, 181, 282, 0.15));
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom right, rgba(0, 0, 0, 0), rgba(29, 181, 282, 0.15));
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom right, rgba(0, 0, 0, 0), rgba(29, 181, 282, 0.15));
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0), rgba(29, 181, 282, 0.15));
+  /* 标准的语法（必须放在最后） */
+}
+
+.column_three:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(left top, rgba(0, 0, 0, 0), rgba(244, 55, 35, 0.15));
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(bottom right, rgba(0, 0, 0, 0), rgba(244, 55, 35, 0.15));
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(bottom right, rgba(0, 0, 0, 0), rgba(244, 55, 35, 0.15));
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(to bottom right, rgba(0, 0, 0, 0), rgba(244, 55, 35, 0.15));
+  /* 标准的语法（必须放在最后） */
+}
+
+.column_title_box,
+.panel-hd .title {
+  height: 50px;
+  position: relative;
+  background-color: #22211d;
+  border-radius: 6px;
+}
+
+.column_title_box:before,
+.panel-hd .title:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  background: -webkit-linear-gradient(left, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
+  /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(right, #22211d, #3a3934);
+  /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(right, #22211d, #3a3934);
+  /* Firefox 3.6 - 15 */
+  background: linear-gradient(to right, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
+  /* 标准的语法 */
+  border-radius: 6px;
+}
+
+.column_title_box h3 {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 9;
+  font-size: 16px;
+  color: #f9b620;
+  line-height: 50px;
+  text-indent: 2em;
+}
+
+.chart_box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 50px;
+  padding: 10px;
+}
+
+.chart_con {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  /*margin:20px;*/
+  /*background-color:#888;*/
+}
+
+.chart_con.fl {
+  width: 50%;
+  height: 50%;
+}
+
+.flex_item {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(249, 182, 32, 0.3);
+}
+
+.sub_menu_box {
+  display: table;
+  table-layout: fixed;
+  /*width:100%;height:100%;*/
+}
+
+.sub_menu_item {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.sub_menu_item a {
+  display: block;
+  /*border:1px solid #f9b620;*/
+  border-radius: 10px;
+  width: 80%;
+  /*height:60%;*/
+  margin: 0 auto;
+  overflow: hidden;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.9);
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  -o-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+}
+
+.sub_menu_item img {
+  display: block;
+  margin: 20px auto;
+  height: 60px;
+}
+
+.sub_menu_item span {
+  display: block;
+  margin: 20px auto;
+  color: #bcbdbf;
+  text-align: center;
+  font-size: 16px;
+  height: 44px;
+  line-height: 22px;
+  padding: 0 15px;
+  text-decoration: none;
+}
+
+.sub_menu_item a:hover {
+  text-decoration: none;
+  /*-webkit-transform: scale(1.1,1.1);
+    -moz-transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+    -o-transform: scale(1.1,1.1);
+    transform: scale(1.1,1.1);*/
+  box-shadow: 0 0 3px 0 rgba(255, 255, 255, 0.5)
+}
+
+.column_title_box h3:hover {
+  background: none;
+  box-shadow: none;
+  cursor: auto;
+}

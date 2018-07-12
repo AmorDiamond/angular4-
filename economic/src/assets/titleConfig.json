@@ -1,0 +1,8 @@
+{
+  "/mic": "微观",
+  "/int/indexAbstract": "中观",
+  "/mac/economic/gdp": "宏观",
+  "/mic/companyList": "搜索列表",
+  "/mic/companyDetail/basic/business-registration": "工商登记信息",
+  "/mic/companyDetail/basic/business-change": "工商变更信息"
+}

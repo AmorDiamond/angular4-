@@ -1,0 +1,12 @@
+<div class="pagination-box">
+  <span id="companyPage" class="companyPage">第{{currentPage}}页，共{{totalPage}}页</span>
+  <ul class="company-pagination">
+    <li class="prev" id="prev" (click)="prev()">&laquo;</li>
+    <li class="number">
+      <input type="text" id="pageNumber" #pageNumber [(ngModel)]="gotoPage" (keyup)="changeGotoPage()">
+    </li>
+    <li style="width:50px" id="pageSubmit" (click)="pageSubmit()">确定</li>
+    <li class="next" id="next" (click)="next()">&raquo;</li>
+    <li class="last" id="last" (click)="last()">&raquo;</li>
+  </ul>
+</div>

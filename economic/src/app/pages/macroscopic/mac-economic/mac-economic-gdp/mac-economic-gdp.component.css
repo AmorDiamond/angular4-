@@ -1,0 +1,37 @@
+.chose-time .input-group {
+  width: 90px;
+}
+
+.table tr td {
+  text-align: center;
+}
+
+.chose-time .form-control {
+  padding: 0 10px;
+  height: 25px;
+  background: none;
+  color: #fff;
+  border-color: rgba(249, 182, 32, .3);
+}
+
+.chose-time .input-group-addon {
+  padding: 0 10px;
+  background: none;
+  color: #fff;
+  border-color: rgba(249, 182, 32, .3);
+}
+
+.flex-cell {
+  padding-top: 10px;
+}
+
+.flex-cell:nth-child(2n) {
+  padding-left: 10px;
+}
+
+.flex-item {
+  width: 100%;
+  height: 3rem;
+  border: 1px solid rgba(249, 182, 32, .3);
+  border-radius: 10px;
+}

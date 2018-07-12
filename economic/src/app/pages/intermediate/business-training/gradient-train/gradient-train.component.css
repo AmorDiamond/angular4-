@@ -1,0 +1,18 @@
+.panel-menu{
+    white-space: nowrap;
+}
+.panel-content{
+    margin-bottom: 20px;
+}
+.foster-tool-box .foster-table{
+    display: table;
+}
+.foster-tool-box .row{
+    display: table-row;
+}
+.foster-tool-box .row .td{
+    display: table-cell;
+}
+.foster-tool-box table tr td{
+    border: none !important;
+}

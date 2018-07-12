@@ -1,0 +1,66 @@
+ul {
+    white-space: nowrap;
+    display: inline-block;
+}
+
+li.flex-cell {
+    display: inline-block;
+    width: 280px;
+    margin-left: 12px;
+    border: 1px solid rgba(249, 182, 32, .3);
+    border-radius: 10px;
+}
+
+li.flex-cell:first-of-type {
+    margin-left: 0;
+}
+
+div.flex-item {
+    height: auto;
+}
+
+.panel-content .flex>.flex-cell {
+    padding: 0;
+}
+
+.panel-content .flex>.flex-cell:nth-child(2n) {
+    margin: 0 20px 0;
+}
+
+.button-box {
+    float: right;
+    height: 215%;
+}
+
+.button-box .fa {
+    cursor: pointer;
+    color: #626262;
+    font-size: 26px;
+}
+
+.button-box .fa:hover {
+    color: #7d85cb;
+}
+
+.button-box .fa.is-first:hover {
+    cursor: default;
+    color: #626262;
+}
+.panel-content .project-report .flex-item{
+    border: 1px solid rgba(249, 182, 32, .3);
+    border-radius: 10px;
+}
+.panel-content .project-report{
+    white-space: nowrap;
+    display: inline-block;
+}
+.project-report .flex-cell{
+    display: inline-block;
+    width: 300px;
+}
+.project-report>.flex-cell:nth-child(2n) {
+    margin: 0 20px 0;
+}
+.project-report-scroll{
+    overflow-x: auto;
+}

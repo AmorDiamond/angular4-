@@ -1,0 +1,45 @@
+<!-- 高新区GDP -->
+<div class="animated">
+  <div class="chose-time flex">
+      <div class="chose-time-left flex-cell">
+          <div class="input-group date fl" id="datetimepicker" data-date="2016" data-date-format="yyyy">
+              <input class="form-control" size="16" type="text" readonly>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+          </div>
+      </div>
+      <div class="chose-time-right  flex-cell">
+          <div class="input-group date fl" id="datetimepicker2" style="display:none" data-date="2017" data-date-format="yyyy">
+              <input class="form-control" size="16" type="text" value="2017" readonly>
+              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+          </div>
+      </div>
+  </div>
+  <div class="flex">
+      <div class="flex-cell">
+          <div class="flex-item" echarts [options]="gdpOptions"></div>
+      </div>
+      <div class="flex-cell">
+          <div class="flex-item" echarts [options]="gdpGrowthRateOptions"></div>
+      </div>
+  </div>
+  <div class="flex">
+      <div class="flex-cell">
+          <table class="table table-bordered" id="GDP-info">
+              <tr><td>季度</td><td>金额</td></tr>
+              <tr><td>一季度</td><td>294.4亿元</td></tr>
+              <tr><td>二季度</td><td>335.99亿元</td></tr>
+              <tr><td>三季度</td><td>338.3亿元</td></tr>
+              <tr><td>四季度</td><td>467.81亿元</td></tr>
+          </table>
+      </div>
+      <div class="flex-cell">
+          <table class="table table-bordered" id="GDP-change-info">
+              <tr><td>地区</td><td>增速</td></tr>
+              <tr><td>中国</td><td>6.7%</td></tr>
+              <tr><td>四川省</td><td>7.7%</td></tr>
+              <tr><td>成都</td><td>7.7%</td></tr>
+              <tr><td>高新区</td><td>8.5%</td></tr>
+          </table>
+      </div>
+  </div>
+</div>

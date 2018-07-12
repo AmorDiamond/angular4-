@@ -1,0 +1,37 @@
+<div class="panel-content">
+  <div class="panel-item-title">名优产品目录：</div>
+  <div id="certificationsDiv"></div>
+  <perfect-scrollbar style="max-height: 100%">
+    <table class="table table-bordered" *ngFor="let item of FamousProduct">
+      <tr>
+        <td class="nowrap">产品名:</td>
+        <td name="name">{{item.name}}</td>
+        <td class="nowrap">产品类别:</td>
+        <td name="number">{{item.type}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">质量标准认证:</td>
+        <td name="name">{{item.qualityStandardCert}}</td>
+        <td class="nowrap">编码:</td>
+        <td name="number">{{item.code}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">联系人:</td>
+        <td name="content">{{item.contacts}}</td>
+        <td class="nowrap">联系电话:</td>
+        <td name="content">{{item.contactNumber}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">获奖信息:</td>
+        <td colspan="3" name="office">{{item.winning}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">主要原材料:</td>
+        <td name="validityStart">{{item.rawMaterial}}</td>
+        <td class="nowrap">配套产品:</td>
+        <td name="validityEnd">{{item.accessoryProducts}}</td>
+      </tr>
+    </table>
+  </perfect-scrollbar>
+
+</div>

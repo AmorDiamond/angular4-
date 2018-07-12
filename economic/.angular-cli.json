@@ -1,0 +1,69 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "economic"
+  },
+  "apps": [{
+    "root": "src",
+    "outDir": "dist",
+    "assets": [
+      "assets",
+      "favicon.ico"
+    ],
+    "index": "index.html",
+    "main": "main.ts",
+    "polyfills": "polyfills.ts",
+    "test": "test.ts",
+    "tsconfig": "tsconfig.app.json",
+    "testTsconfig": "tsconfig.spec.json",
+    "prefix": "app",
+    "styles": [
+      "styles.css",
+      "../node_modules/ng2-toasty/style-material.css",
+      "../node_modules/font-awesome/css/font-awesome.css",
+      "../node_modules/ng2-toasty/style.css",
+      "assets/css/animate.min.css",
+      "assets/css/normalize.css",
+      "assets/css/jquery.mCustomScrollbar.min.css",
+      "assets/css/bootstrap-3.3.7.min.css",
+      "assets/css/bootstrap-datetimepicker.min.css"
+    ],
+    "scripts": [
+      "../node_modules/echarts/dist/echarts.min.js",
+      "assets/js/jquery-2.0.0.min.js",
+      "assets/js/jquery.mousewheel.js",
+      "assets/js/jquery.mCustomScrollbar.concat.min.js",
+      "assets/js/jquery.svg3dtagcloud.min.js",
+      "assets/js/bootstrap-datetimepicker.min.js"
+    ],
+    "environmentSource": "environments/environment.ts",
+    "environments": {
+      "dev": "environments/environment.ts",
+      "prod": "environments/environment.prod.ts"
+    }
+  }],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [{
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

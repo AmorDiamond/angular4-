@@ -1,0 +1,103 @@
+select {
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px rgba(249, 182, 32, .3);
+    /*很关键：将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+}
+
+.chose-time-left .input-group {
+    width: 100px;
+}
+.chose-time-left .input-group .form-control {
+    height: 25px;
+    background-color: #151512;
+    border-color: rgba(249,182,32,.3);
+}
+.chose-time-left .input-group-addon {
+    padding: 0 10px;
+    background: none;
+    color: #fff;
+    background-color: #151512;
+    border-color: rgba(249,182,32,.3);
+}
+
+.chose-time-left .select-box {
+    margin-left: 30px;
+    height: 100%;
+    width: 200px;
+}
+
+.chose-time-left .select-box select {
+    outline: none;
+    height: 100%;
+    padding: 0 20px;
+    background: #151411;
+}
+.panel-content .top-land-list .table tr:first-child td:first-child,.panel-content .top-land-list .table tr:first-child th:first-child {
+    border-top-left-radius: 0;
+}
+
+.panel-content .top-land-list .table tr:first-child td:last-child,.panel-content .top-land-list .table tr:first-child th:last-child {
+    border-top-right-radius: 0;
+}
+
+.panel-content .top-land-list .table tr:last-child td:first-child {
+    border-bottom-left-radius: 0;
+}
+
+.panel-content .top-land-list .table tr:last-child td:last-child {
+    border-bottom-right-radius: 0;
+}
+.panel-content .top-land-list .table>thead>tr:first-child td:first-child {
+    border-top-left-radius: 5px;
+}
+.panel-content .top-land-list .table>thead>tr:first-child td:last-child {
+    border-top-right-radius: 5px;
+}
+.panel-content .top-land-list .table>tbody>tr:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+.panel-content .top-land-list .table>tbody>tr:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+.top-land-list .table>tbody>tr:nth-of-type(odd) {
+    background: rgba(0, 0, 0, .3)
+}
+.top-land-list .table>tbody>tr>td {
+    padding: 16px 8px;
+}
+.top-land-list .table>tbody>tr:hover {
+    cursor: pointer;
+    background: rgba(249, 182, 32, 0.1);
+    color: #f9b620;
+}
+.table-btn{
+    width: 50px;
+    border-radius: 3px;
+    border: 1px solid #534428;
+    background: none;
+}
+.table-btn:hover{
+    border-color: #f9b621;
+}
+.top-land-list .table>tbody>tr.curr {
+    background: rgba(249, 182, 32, 0.1);
+    color: #f9b620;
+}
+.panel-content .eco-top-list .top-land-list .table tr td{
+    text-align: center;
+}
+.amap-marker-content .amap-overlay-text-container {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: 0px 0px 10px #000;
+}

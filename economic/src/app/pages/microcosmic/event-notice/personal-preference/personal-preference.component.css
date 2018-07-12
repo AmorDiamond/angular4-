@@ -1,0 +1,37 @@
+.personal-set-con{
+    padding: 20px;
+}
+.preference-con{
+    padding: 20px;
+}
+.preference-con .item{
+    margin: 0 20px;
+    float: left;
+    cursor: pointer;
+    user-select: none;
+}
+.preference-con .item em{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border: 1px solid #f9b620;
+}
+.preference-con .item.active em{
+    background: url("../../../../../assets/images/checked_arrow.png") no-repeat center;
+    background-size: 90%;
+}
+.preference-con .active{
+    color: #f9b620;
+}
+.submit-con{
+    text-align: center;
+    margin-top: 30px;
+}
+.submit-con .btn{
+    margin: 0 auto;
+    color: #333;
+    padding: 4px 10px;
+    background: #f9b620;
+    border-radius: 6px;
+}

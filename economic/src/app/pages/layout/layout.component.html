@@ -1,0 +1,161 @@
+<div class="notifycation" [hidden]="!hasNotifycation">
+  <div class="before"></div>
+  <div class="notifycation-title" (click)="showNotifyContent()"> {{news.title}} </div>
+  <div class="close-box" (click)="noticeClose()">
+    <span class="notice-close"></span>
+  </div>
+</div>
+<div class="notify-content" [hidden]="!canShowNotifyContent">
+  <div class="content">
+    <perfect-scrollbar style="height: 100%">
+      <div class="piture">
+        <img src="http://www.chinacenn.com/uploads/allimg/171123/1G51KR8-0.jpg" alt="">
+      </div>
+      <div class="text">
+        <h2>{{news.content}}</h2>
+        <small class="data">2017/2/2</small>
+        <div class="text-content">
+          <p>党的十九大凝聚了我们中国共产党人的智慧，反映时代要求和人民愿望，是我们党团结带领全国各族人民迈进新时代、开启新征程、续写新篇章、把新时代中国特色社会主义不断推向前进的政治宣言和行动纲领。中国能建安徽电建一公司华电芜湖项目部党总支认真做好“三个坚持”，组织广大党员干部、一线作业员工全面、深入学习十九大精神，并以十九大精神为指导，不忘初心、砥砺奋进，推进华电集团安徽首个百万机组项目--华电芜湖电厂二期（1×1000MW）3号机组工程的高标准执行。</p>
+          <p>坚持全员全面学习。项目部组织全体员工集中观看党的十九大开幕式，并按照公司的统一部署，快速掀起学习热潮，先后组织召开党员大会2次，支委会2次，党小组会议6次，团员大会1次，专题学习宣传党的十九大精神以及传达公司对于学习宣贯十九大精神的要求。在施工现场、生活区、职工食堂悬挂横幅、布设展板，利用内部局域网、项目部QQ群群发十九大学习材料，为全体党员集中发放十九大报告学习读本和党章，并将十九大材料打印发放至一线班组，通过将十九大精神“进班组、进现场、进宿舍、进食堂”宣传等多种形式，确保党的十九大报告内容，十九大提出的重大思想、重大判断、历史性成就和新时代的基本方略等会议精神及时传达到一线、学习在一线，落实在一线。</p>
+          <p>坚持全员全面学习。项目部组织全体员工集中观看党的十九大开幕式，并按照公司的统一部署，快速掀起学习热潮，先后组织召开党员大会2次，支委会2次，党小组会议6次，团员大会1次，专题学习宣传党的十九大精神以及传达公司对于学习宣贯十九大精神的要求。在施工现场、生活区、职工食堂悬挂横幅、布设展板，利用内部局域网、项目部QQ群群发十九大学习材料，为全体党员集中发放十九大报告学习读本和党章，并将十九大材料打印发放至一线班组，通过将十九大精神“进班组、进现场、进宿舍、进食堂”宣传等多种形式，确保党的十九大报告内容，十九大提出的重大思想、重大判断、历史性成就和新时代的基本方略等会议精神及时传达到一线、学习在一线，落实在一线。</p>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>
+
+<div class="default-container">
+  <!-- <div id="gaodemap-container" class="gaodemap-container" tabindex="0"></div> -->
+  <app-map></app-map>
+  <!--菜单按钮-->
+  <div class="circle-menu" [ngClass]="{'active': isCircleMenuShow, 'resetactive': !isCircleMenuShow}">
+    <!-- <div class="item circle-item3 active" [ngClass]="{'big': isCircleMenuShow}"> -->
+    <div class="item circle-item3 active" [@ItemAnimate]="animateState" (click)="itemClick('right')" [@ItemPositionAnimate]="itemPosition['third']"
+      [ngClass]="{'curr': isCircleMenuShowCopy}">
+      <div class="menu-top">
+        <span class="circle" [@CircleAnimate]="animateState"></span>
+      </div>
+      <span class="menu-bot">微观经济指标</span>
+    </div>
+    <div class="item circle-item2" [@ItemAnimate]="animateState" (click)="itemClick('middle')" [@ItemPositionAnimate]="itemPosition['second']"
+      [ngClass]="{'curr': isCircleMenuShowCopy}">
+      <div class="menu-top">
+        <span class="circle" [@CircleAnimate]="animateState"></span>
+      </div>
+      <span class="menu-bot">中观经济指标</span>
+    </div>
+    <div class="item circle-item1" [@ItemAnimate]="animateState" (click)="itemClick('left')" [@ItemPositionAnimate]="itemPosition['first']"
+      [ngClass]="{'curr': isCircleMenuShowCopy}">
+      <div class="menu-top">
+        <span class="circle" [@CircleAnimate]="animateState"></span>
+      </div>
+      <span class="menu-bot">宏观经济指标</span>
+    </div>
+  </div>
+  <!--遮罩层-->
+  <div class="cover-mask" [ngClass]="{'active': isCircleMenuShow}" (click)="itemClick('')"></div>
+
+  <!-- ===== 搜索 start ===== ===== ===== ===== ===== -->
+  <div class="fast-menu">
+    <div class="menu_box search_menu_box" (click)="$event.stopPropagation();notSearchActive()">
+      <div class="menu_box_hover">搜索</div>
+    </div>
+    <div class="menu_box follow_menu_box" routerLink="/mic/eventNotice/track">
+      <div class="menu_box_hover">关注</div>
+    </div>
+    <div class="menu_box manager_menu_box" routerLink="/admin" (click)="$event.stopPropagation();">
+      <div class="menu_box_hover">管理</div>
+    </div>
+  </div>
+  <div class="search_mask" [ngClass]="{'active': isSearchActive}" (click)="$event.stopPropagation();notSearchActive()">
+  </div>
+  <div class="search_input_box" [ngClass]="{'active': isSearchActive}">
+    <input type="text" class="search_input" [(ngModel)]="keyWord" (keyup.enter)="search();notSearchActive()">
+    <button class="search_btn" id="searchBtn" (click)="$event.stopPropagation();search();notSearchActive()"></button>
+  </div>
+  <!-- ===== 搜索 the end ===== ===== ===== ===== ===== -->
+  <!-- ===== 内容面板 start ===== ===== ===== ===== ===== -->
+  <div class="microcosmic_container animated" id="microcosmic_container" [ngStyle]="container" [ngClass]="{'slideInRight': isRirhtPanelShow, 'slideOutRight': !isRirhtPanelShow}">
+    <div class="back-arrow">
+      <span class="back-arrow-btn" (click)="notRirhtPanelShow()" [ngClass]="{'active': !isRirhtPanelShow && !isSearchActive}"></span>
+    </div>
+    <div class="microcosmic_content" id="microcosmic_content">
+      <router-outlet></router-outlet>
+      <app-loading></app-loading>
+    </div>
+  </div>
+  <!-- ===== 内容面板 the end ===== ===== ===== ===== ===== -->
+
+  <div id="panel" class="park-build scrollbar1" [ngClass]="{'active': isShowParkBuildBar, 'right': !isRirhtPanelShow && !isSearchActive}">
+    <div class="park-build-con">
+      <div class="park-name" (click)="showParkNameList()">{{choseParkName}}<span class="fa fa-caret-down build-arrow" [ngClass]="{'active': isShowParkNameList}"></span></div>
+      <div class="park-list" *ngIf="isShowParkNameList">
+        <div class="park-item" *ngFor="let park of parkNameLists" (click)="changeParkName(park)"><span class="park-name-icon" [ngClass]="{'active': park == choseParkName}"></span>{{park}}</div>
+      </div>
+      <div class="park-build-bd">
+        <!--<div class="park-info">
+            <div class="info-l fl">写字楼<span><em class="num">8</em>栋</span></div>
+            <div class="info-r fl">企业<span><em class="num">200</em>家</span></div>
+        </div>-->
+        <div class="choose-park-buid" (click)="showBuildMarkerEl=!showBuildMarkerEl;isShowParkNameList=false"><div class="choose-park-buid-name">{{choseBuildName}}</div><span class="fa fa-caret-down build-arrow" [ngClass]="{'active': showBuildMarkerEl}"></span></div>
+        <div id="myList" [hidden]="!showBuildMarkerEl"></div>
+      </div>
+    </div>
+  </div>
+  <div class="time-colors-panel my-hide" [ngClass]="{'active': showTimeColorControl.isShowColorsBar, 'right': !isRirhtPanelShow && !isSearchActive}">
+    <div class="land-choose-time my-hide" [ngClass]="{'active': showTimeColorControl.isShowTime}">
+      <div class="park-build-con">
+        <div class="park-name">时间</div>
+        <!--<div class="park-info">
+            <div class="info-l fl">写字楼<span><em class="num">8</em>栋</span></div>
+            <div class="info-r fl">企业<span><em class="num">200</em>家</span></div>
+        </div>-->
+        <div class="datetimepicker-box my-hide" [ngClass]="{'active': showTimeColorControl.isShowEcoTime}">
+          <div class="input-group date fl" id="datetimepicker" data-date="" data-date-format="yyyy">
+            <input class="form-control" size="16" type="text" [(ngModel)]="ecoRevenueTime" readonly>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+          </div>
+        </div>
+        <div class="datetimepicker-top-box my-hide" [ngClass]="{'active': showTimeColorControl.isShowTopTime}">
+          <div class="input-group date fl" id="datetimepicker-top" data-date="" data-date-format="yyyy">
+            <input class="form-control" size="16" type="text" [(ngModel)]="ecoTopRevenueTime" readonly>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="land-colors-list" id="land-colors-list">
+      <div class="nature-color my-hide" [ngClass]="{'active': showTimeColorControl.isShowNatureColor}">
+        <div class="color-item"><span class="color-blank reserve-land"></span>储备用地</div>
+        <div class="color-item"><span class="color-blank industry-land"></span>工业用地</div>
+        <div class="color-item"><span class="color-blank other-land"></span>公共设施及其他用地</div>
+        <div class="color-item"><span class="color-blank teach-land"></span>科研用地</div>
+        <div class="color-item"><span class="color-blank bsiness-land"></span>商服用地</div>
+        <div class="color-item"><span class="color-blank  house-land"></span>住宅用地</div>
+      </div>
+      <div class="inefficient-color my-hide" [ngClass]="{'active': showTimeColorControl.isShowInefficientColor}">
+        <div class="color-item"><span class="color-blank uninefficient-land"></span>非低效用地</div>
+        <div class="color-item"><span class="color-blank inefficient-land"></span>低效用地</div>
+      </div>
+      <div class="top-color my-hide" [ngClass]="{'active': showTimeColorControl.isShowTopColor}">
+        <div class="color-item active"><span class="color-blank living-land" [ngClass]="{'active': ecoTopIndustry.living}" (click)="drawTopSingleIndustryLand('living')" data-catname="living"></span>生物医药</div>
+        <div class="color-item active"><span class="color-blank electron-land" [ngClass]="{'active': ecoTopIndustry.electron}" (click)="drawTopSingleIndustryLand('electron')" data-catname="electron"></span>电子信息</div>
+        <div class="color-item active"><span class="color-blank yiqi-land" [ngClass]="{'active': ecoTopIndustry.yiqi}" (click)="drawTopSingleIndustryLand('yiqi')" data-catname="yiqi"></span>精密制造</div>
+          <div class="color-item active"><span class="color-blank top-other-land" [ngClass]="{'active': ecoTopIndustry.other}" (click)="drawTopSingleIndustryLand('other')" data-catname="other"></span>其他</div>
+        <div class="color-item active"><span class="color-blank service-land" [ngClass]="{'active': ecoTopIndustry.service}" (click)="drawTopSingleIndustryLand('service')" data-catname="service"></span>服务业</div>
+      </div>
+      <div class="eco-color my-hide" [ngClass]="{'active': showTimeColorControl.isShowEcoColor}">
+        <div class="color-item active"><span class="color-blank living-land" [ngClass]="{'active': ecoOutputIndustry.living}" (click)="drawEcoSingleIndustryLand('living')" data-catname="living"></span>生物医药</div>
+        <div class="color-item active"><span class="color-blank electron-land" [ngClass]="{'active': ecoOutputIndustry.electron}" (click)="drawEcoSingleIndustryLand('electron')" data-catname="electron"></span>电子信息</div>
+        <div class="color-item active"><span class="color-blank yiqi-land" [ngClass]="{'active': ecoOutputIndustry.yiqi}" (click)="drawEcoSingleIndustryLand('yiqi')" data-catname="yiqi"></span>精密制造</div>
+        <div class="color-item active"><span class="color-blank top-other-land" [ngClass]="{'active': ecoOutputIndustry.other}" (click)="drawEcoSingleIndustryLand('other')" data-catname="other"></span>其他</div>
+        <div class="color-item active"><span class="color-blank service-land" [ngClass]="{'active': ecoOutputIndustry.service}" (click)="drawEcoSingleIndustryLand('service')" data-catname="service"></span>服务业</div>
+      </div>
+      <div class="single-color my-hide" [ngClass]="{'active': showTimeColorControl.isShowSingleColor}">
+        <div class="color-item"><span class="color-blank uninefficient-land"></span>楼宇</div>
+        <div class="color-item"><span class="color-blank inefficient-land"></span>单一业主</div>
+      </div>
+    </div>
+  </div>
+  <ng2-toasty [position]="'center-center'"></ng2-toasty>
+</div>

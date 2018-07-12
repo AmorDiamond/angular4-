@@ -1,0 +1,168 @@
+<!-- 企业基本信息 -->
+<div class="panel-bd pop-index-0 animated active">
+  <div class="panel-content">
+    <div class="panel-item-title">工商登记信息：</div>
+
+    <table class="table table-bordered">
+      <tr>
+        <td class="nowrap">公司名称:</td>
+        <td colspan="3" id="companyName">{{companyDetail.name}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">住所:</td>
+        <td colspan="3" id="companyAddress">{{companyDetail.address}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">重要人员信息:</td>
+        <td colspan="3" id="duties">{{companyDetail.mainStaff}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">社会信用代码:</td>
+        <td id="creditCode">{{companyDetail.creditCode}}</td>
+        <td class="nowrap">类型:</td>
+        <td id="enterpriseType">{{companyDetail.enterpriseType}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">法人:</td>
+        <td id="legalPerson">{{companyDetail.legalRepresentative}}</td>
+        <td class="nowrap">成立日期:</td>
+        <td id="establishTime">{{companyDetail.establishDate}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">注册资本:</td>
+        <td id="funds">{{companyDetail.registeredCapital}}</td>
+        <td class="nowrap">登记机关:</td>
+        <td id="registrationAuthority">{{companyDetail.regOrganization}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">登记状态:</td>
+        <td id="registrationType">{{companyDetail.regStatus}}</td>
+        <td class="nowrap">核准日期:</td>
+        <td id="approvedTime">{{companyDetail.approvedDate}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">企业联系电话:</td>
+        <td colspan="3" id="telephone">{{companyDetail.epTelephone}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">企业通讯地址:</td>
+        <td colspan="3" id="companyEms">{{companyDetail.mailingAddress}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">经营范围:</td>
+        <td colspan="3" id="range">{{companyDetail.businessScope}}</td>
+      </tr>
+
+    </table>
+
+    <div class="panel-item-title">工商变更信息：</div>
+
+    <table class="table table-bordered table-align-c" id="businessChangeInfo">
+      <tr>
+        <th>变更事项</th>
+        <th>变更前内容</th>
+        <th>变更后内容</th>
+        <th>变更日期</th>
+      </tr>
+      <tr *ngFor="let data of companyChangeList">
+        <td>{{data.changeType}}</td>
+        <td>{{data.changeAfterContent}}</td>
+        <td>{{data.changeBeforeContent}}</td>
+        <td class="nowrap">{{data.changeDate}}</td>
+      </tr>
+    </table>
+
+    <div class="panel-item-title">税务登记信息：</div>
+    <div id="taxationsDiv"> </div>
+    <table class="table table-bordered" id="taxations">
+      <tr>
+        <th>登记注册类型</th>
+        <th>核算方式</th>
+        <th>发证日期</th>
+        <th>国税信用等级</th>
+        <th>地税信息</th>
+        <!--<th>国地税共管户</th>-->
+        <th>纳税人状态</th>
+        <th>主管税务机关</th>
+        <th>数据提供单位</th>
+        <th>数据提供时间</th>
+      </tr>
+      <tr *ngFor="let companyTaxation of companyTaxationList">
+        <td>{{companyTaxation.regType}}</td>
+        <td>{{companyTaxation.accountingMethod}}</td>
+        <td>{{companyTaxation.issuingDate}}</td>
+        <td>{{companyTaxation.creditRating}}</td>
+        <td>{{companyTaxation.landTaxInfo}}</td>
+        <!--<td>{{companyTaxation.isCondominium}}</td>-->
+        <td>{{companyTaxation.taxpayerStatus}}</td>
+        <td>{{companyTaxation.taxOrganization}}</td>
+        <td>{{companyTaxation.dataSource}}</td>
+        <td>{{companyTaxation.dataProvisionTime}}</td>
+      </tr>
+    </table>
+
+    <div class="panel-item-title">社会保险登记信息：</div>
+    <table class="table table-bordered">
+      <tr>
+        <td class="nowrap">单位地址:</td>
+        <td colspan="3" id="companyAddress">{{companyDetail.unitAddress}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">参保险种:</td>
+        <td colspan="3">{{companyDetail.insurType}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">单位社保编码:</td>
+        <td id="insuranceCode">{{companyDetail.socialInsurCode}}</td>
+        <td class="nowrap">社保登记日期:</td>
+        <td class="nowrap" id="insuranceRecordDate">{{companyDetail.regDate}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">是否新参保:</td>
+        <td id="isNewInsured">{{companyDetail.isNewInsured}}</td>
+        <td class="nowrap">养老保险参保人数:</td>
+        <td id="Insuran1">{{companyDetail.endowmentInsurNum}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">医疗保险参保人数:</td>
+        <td id="Insuran2">{{companyDetail.medicalInsurNum}}</td>
+        <td class="nowrap">工商保险参保人数:</td>
+        <td id="Insuran3">{{companyDetail.employmentInjuryInsurNum}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">失业保险参保人数:</td>
+        <td id="Insuran4">{{companyDetail.unemployedInsurNum}}</td>
+        <td class="nowrap">生育保险参保人数:</td>
+        <td id="Insuran5">{{companyDetail.maternityInsurNum}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">公积金缴纳人数:</td>
+        <td colspan="3">{{companyDetail.accumulationFundNum}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">当年应缴保险费:</td>
+        <td id="premiumPayable">{{companyDetail.yearShouldPay}}</td>
+        <td class="nowrap">当年实缴保险费:</td>
+        <td id="premiumPaid">{{companyDetail.yearReallyPay}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">是否足额缴纳:</td>
+        <td id="isFullPayment">{{companyDetail.isPayCompleted}}</td>
+        <td class="nowrap">应缴滞纳金:</td>
+        <td id="lateFees">{{companyDetail.overduePayment}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">缴费年度:</td>
+        <td id="paymentYear">{{companyDetail.paymentYear}}</td>
+        <td class="nowrap">参保缴费状态:</td>
+        <td id="insuredPaymentStatus">{{companyDetail.insurPayStatus}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">数据提供单位:</td>
+        <td id="dataProvider">{{companyDetail.dataSource}}</td>
+        <td class="nowrap">数据提供时间:</td>
+        <td class="nowrap" id="dataSupplyTime">{{companyDetail.dataProvisionTime}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

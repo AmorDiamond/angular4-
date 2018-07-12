@@ -1,0 +1,44 @@
+.pagination-box {
+  line-height: 32px;
+}
+
+.companyPage {
+  display: inline-block;
+  vertical-align: sub;
+}
+
+.company-pagination {
+  float: right;
+}
+
+.company-pagination li {
+  float: left;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border: 1px solid rgba(249, 182, 32, .3);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.company-pagination li.active {
+  color: #f9b620;
+  border-color: #f9b620;
+}
+
+.company-pagination li.number {
+  width: 50px;
+}
+
+.company-pagination li.number input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  outline: none;
+  text-align: center;
+}

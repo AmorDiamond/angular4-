@@ -1,0 +1,64 @@
+<header class="admin-head">
+  <div class="system-back" routerLink="/mic"></div>
+  <div class="head-right">
+    <div class="system-name fl">后台管理</div>
+    <div class="fr admin-name">{{loginUserName}}</div>
+  </div>
+</header>
+<div class="admin-container">
+  <div class="left-bar">
+    <ul class="nav-list">
+      <li class="nav_item">
+        <a routerLink="import" routerLinkActive="active" (click)="changeMenuShow()">
+          <i class="fa fa-handshake-o"></i>EXCEL导入
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+      <li class="nav_item">
+        <a routerLink="users" routerLinkActive="active" (click)="changeMenuShow()">
+          <i class="fa fa-user-o fa-fw"></i>用户管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+      <li class="nav_item">
+        <a routerLink="roles" routerLinkActive="active" (click)="changeMenuShow('user')">
+          <i class="fa fa-vcard-o fa-fw"></i>权限管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+      <ul class="drown-menu" *ngIf="menusControl.user">
+        <li>
+          <a routerLink="roles/rolesList" routerLinkActive="active">角色管理</a>
+        </li>
+        <li>
+          <a routerLink="roles/function" routerLinkActive="active">功能管理</a>
+        </li>
+      </ul>
+      <li class="nav_item">
+        <a routerLink="project-declaration" routerLinkActive="active" (click)="changeMenuShow()">
+          <i class="fa fa-pencil-square-o"></i>项目申报管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+      <li class="nav_item">
+        <a routerLink="eqi-hi-tech-certification" routerLinkActive="active" (click)="changeMenuShow()">
+          <i class="fa fa-gavel"></i>高企认证管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+      <li class="nav_item">
+        <a routerLink="scale-library" routerLinkActive="active" (click)="changeMenuShow()">
+          <i class="fa fa-rocket fa-fw"></i>上规入库管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="right-con">
+    <perfect-scrollbar>
+      <div class="con-box">
+        <router-outlet></router-outlet>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>

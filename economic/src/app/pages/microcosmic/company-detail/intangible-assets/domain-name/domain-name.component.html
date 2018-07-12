@@ -1,0 +1,24 @@
+<!-- 域名信息 -->
+<div class="panel-content">
+  <div class="panel-item-title">企业域名信息：</div>
+  <table class="table table-bordered table-align-c">
+    <tr>
+      <th>公司名称</th>
+      <th>主页 URL</th>
+      <th>备案许可号</th>
+      <th>网站名称</th>
+      <th>核查日期</th>
+      <th>域名</th>
+      <th>最后更新时间</th>
+    </tr>
+    <tr *ngFor="let data of domainList">
+      <td>{{data.enterpriseName}}</td>
+      <td>{{data.homepageURL}}</td>
+      <td>{{data.permitCode}}</td>
+      <td>{{data.websiteName}}</td>
+      <td>{{data.auditDate}}</td>
+      <td>{{data.domainName}}</td>
+      <td>{{data.newestDate}}</td>
+    </tr>
+  </table>
+</div>

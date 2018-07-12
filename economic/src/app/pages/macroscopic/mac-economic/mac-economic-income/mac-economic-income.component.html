@@ -1,0 +1,86 @@
+<!-- 人均收入 -->
+<perfect-scrollbar style="height: 100%">
+  <div class="animated">
+    <div class="chose-time flex">
+      <div class="chose-time-left flex-cell">
+        <div class="input-group date fl" id="datetimepicker" data-date="" data-date-format="yyyy">
+          <input class="form-control" size="16" type="text" value="" readonly>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="chose-time-right  flex-cell" style="display:none">
+        <div class="input-group date fl" id="datetimepicker2" data-date="" data-date-format="yyyy">
+          <input class="form-control" size="16" type="text" value="" readonly>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="incomeOptions"></div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="incomeTypeOptions"></div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="flex-cell">
+        <table class="table table-bordered" id="table1">
+          <tr>
+            <td>季度</td>
+            <td>金额</td>
+            <td>同比增速</td>
+          </tr>
+          <tr>
+            <td>一季度</td>
+            <td>3400亿元</td>
+            <td>17%</td>
+          </tr>
+          <tr>
+            <td>二季度</td>
+            <td>3600亿元</td>
+            <td>18%</td>
+          </tr>
+          <tr>
+            <td>三季度</td>
+            <td>3800亿元</td>
+            <td>19%</td>
+          </tr>
+          <tr>
+            <td>四季度</td>
+            <td>4000亿元</td>
+            <td>20%</td>
+          </tr>
+        </table>
+      </div>
+      <div class="flex-cell">
+        <table class="table table-bordered" id="table2">
+          <tr>
+            <td>类型</td>
+            <td>占比</td>
+          </tr>
+          <tr>
+            <td>土木工程</td>
+            <td>15%</td>
+          </tr>
+          <tr>
+            <td>互联网及软件</td>
+            <td>34%</td>
+          </tr>
+          <tr>
+            <td>机械制造</td>
+            <td>21%</td>
+          </tr>
+          <tr>
+            <td>其他</td>
+            <td>30%</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</perfect-scrollbar>

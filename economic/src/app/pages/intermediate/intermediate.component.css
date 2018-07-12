@@ -1,0 +1,94 @@
+.middle-view-bd {
+  position: relative;
+  overflow: hidden;
+  height: calc(100% - 0.260417rem);
+}
+.mapMarker.active{
+  animation: markermove 1.5s infinite;
+  box-shadow: 0 0 0 10px rgba(0,0,0,0.4);
+}
+@keyframes markermove {
+  0%,100%{transform: scale(1)}
+  50%{transform: scale(1.1)}
+}
+.panel-content .flex .flex-item {
+  border: 1px solid rgba(249,182,32,.3);
+  border-radius: 10px;
+}
+.panel-content .flex-item {
+   width: 100%;
+   height: 2.083333rem;
+}
+.panel-content .flex .flex-cell {
+   padding-top: 20px;
+}
+.panel-content .flex>.flex-cell:nth-child(2n) {
+    padding-left: 20px;
+}
+.m-b-10 {
+  margin-bottom: 10px;
+}
+.chose-time-left .input-group .form-control {
+    height: 25px;
+    background-color: #151512;
+    border-color: rgba(249,182,32,.3);
+}
+select {
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px rgba(249, 182, 32, .3);
+    /*很关键：将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+}
+
+.chose-time-left .input-group {
+    width: 100px;
+}
+.chose-time-left .input-group .form-control {
+    height: 25px;
+    background-color: #151512;
+    border-color: rgba(249,182,32,.3);
+}
+.chose-time-left .input-group-addon {
+    padding: 0 10px;
+    background: none;
+    color: #fff;
+    background-color: #151512;
+    border-color: rgba(249,182,32,.3);
+}
+
+.chose-time-left .select-box {
+    margin-left: 30px;
+    height: 100%;
+    width: 200px;
+}
+
+.chose-time-left .select-box select {
+    outline: none;
+    height: 100%;
+    padding: 0 20px;
+    background: #151411;
+}
+
+.cygmCon .flex-row .column-box:nth-child(2n) .panel-chart-box{
+    background: -webkit-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+    background: -moz-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+    background: -o-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+    background: linear-gradient(to bottom right, #1b1b1c 50%,#151411 70%, #162627 );
+    border-radius: 6px;
+}
+.cygmCon .flex-row .column-box:nth-child(2n+1) .panel-chart-box{
+    background: -webkit-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+    background: -moz-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+    background: -o-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+    background: linear-gradient(to bottom right, #151411 50%,#251612 70%, #2e1813);
+    border-radius: 6px;
+}
+.cygmCon .flex-row .panel-chart .flex-cell>.flex-item {
+    margin: 0 0 0.104167rem;
+}

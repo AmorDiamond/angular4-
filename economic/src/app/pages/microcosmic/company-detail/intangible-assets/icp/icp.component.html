@@ -1,0 +1,26 @@
+<div class="panel-content">
+  <div class="panel-item-title">ICP备案信息：</div>
+  <table class="table table-bordered table-align-c" *ngIf="icpList.length>0">
+    <tr>
+      <th>企业名称</th>
+      <th>首页网址</th>
+      <th>备案许可号</th>
+      <th>网站名称</th>
+      <th>审核时间</th>
+      <th>域名</th>
+      <th>到期日期</th>
+    </tr>
+    <tr *ngFor="let data of icpList">
+      <td>{{data.enterpriseName}}</td>
+      <td>{{data.homepageURL}}</td>
+      <td>{{data.permitCode}}</td>
+      <td>{{data.websiteName}}</td>
+      <td>{{data.auditDate | date:'yyyy-MM-dd'}}</td>
+      <td>{{data.domainName}}</td>
+      <td>{{data.expirationDate | date:'yyyy-MM-dd'}}</td>
+    </tr>
+  </table>
+  <div class="no-data-tips" *ngIf="icpList.length<1">
+    {{IcpListTips}}
+  </div>
+</div>

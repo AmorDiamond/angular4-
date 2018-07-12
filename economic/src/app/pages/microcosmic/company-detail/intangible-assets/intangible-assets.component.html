@@ -1,0 +1,116 @@
+<div class="panel-bd animated active">
+  <div class="panel-content">
+    <div class="panel-item-title">企业商标信息：</div>
+    <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('getTrademarkList')">
+      <table class="table table-bordered table-align-c" id="businessChangeInfo">
+        <tr>
+          <th>商标名称</th>
+          <th>注册号</th>
+          <th>分类码</th>
+          <th>分类名</th>
+          <th>申请日期</th>
+          <th>商标链接</th>
+          <th>流程日期</th>
+          <th>流程内容</th>
+        </tr>
+        <tr *ngFor="let data of trademarkList">
+          <td>{{data.trademarkName}}</td>
+          <td>{{data.regCode}}</td>
+          <td>{{data.classificationCode}}</td>
+          <td>{{data.classification}}</td>
+          <td class="nowrap">{{data.applicationDate}}</td>
+          <td>{{data.pictureLink}}</td>
+          <td>{{data.proccessDate}}</td>
+          <td>{{data.processContent}}</td>
+        </tr>
+      </table>
+    </perfect-scrollbar>
+    <div class="panel-item-title">企业专利信息：</div>
+    <table class="table table-bordered table-align-c">
+      <tr>
+        <th>专利名称</th>
+        <th>类型</th>
+        <th>申请日期</th>
+        <th>专利号</th>
+      </tr>
+      <tr *ngFor="let data of patenList">
+        <td>{{data.patentName}}</td>
+        <td>{{data.patentType}}</td>
+        <td class="nowrap">{{data.applicationDate}}</td>
+        <td class="nowrap">{{data.patentCode}}</td>
+      </tr>
+    </table>
+    <div class="panel-item-title">软件著作权信息：</div>
+    <table class="table table-bordered table-align-c">
+      <tr>
+        <th>企业名称</th>
+        <th>软件全称</th>
+        <th>软件简称</th>
+        <th>登记日期</th>
+      </tr>
+      <tr *ngFor="let data of softwareCopyrightList">
+        <td>{{data.enterpriseName}}</td>
+        <td>{{data.softwareName}}</td>
+        <td>{{data.SoftwareAbbreviated}}</td>
+        <td class="nowrap">{{data.regDate}}</td>
+      </tr>
+    </table>
+    <div class="panel-item-title">作品著作权信息：</div>
+    <table class="table table-bordered table-align-c">
+      <tr>
+        <th>企业名称</th>
+        <th>作品名称</th>
+        <th>类别</th>
+        <th>完成日期</th>
+      </tr>
+      <tr *ngFor="let data of worksCopyrightList">
+        <td>{{data.enterpriseName}}</td>
+        <td>{{data.worksName}}</td>
+        <td class="nowrap">{{data.worksType}}</td>
+        <td class="nowrap">{{data.completedDate}}</td>
+      </tr>
+    </table>
+    <div class="panel-item-title">ICP备案信息：</div>
+    <table class="table table-bordered table-align-c">
+      <tr>
+        <th>公司名称</th>
+        <th>主页 URL</th>
+        <th>备案许可号</th>
+        <th>网站名称</th>
+        <th>核查日期</th>
+        <th>域名</th>
+        <th>最后更新时间</th>
+      </tr>
+      <tr *ngFor="let data of icpList">
+        <td>{{data.enterpriseName}}</td>
+        <td>{{data.homepageURL}}</td>
+        <td>{{data.permitCode}}</td>
+        <td>{{data.websiteName}}</td>
+        <td>{{data.auditDate}}</td>
+        <td>{{data.domainName}}</td>
+        <td>{{data.newestDate}}</td>
+      </tr>
+    </table>
+    <div class="panel-item-title">企业域名信息：</div>
+    <table class="table table-bordered table-align-c">
+      <tr>
+        <th>公司名称</th>
+        <th>主页 URL</th>
+        <th>备案许可号</th>
+        <th>网站名称</th>
+        <th>核查日期</th>
+        <th>域名</th>
+        <th>最后更新时间</th>
+      </tr>
+      <tr *ngFor="let data of domainList">
+        <td>{{data.enterpriseName}}</td>
+        <td>{{data.homepageURL}}</td>
+        <td>{{data.permitCode}}</td>
+        <td>{{data.websiteName}}</td>
+        <td>{{data.auditDate}}</td>
+        <td>{{data.domainName}}</td>
+        <td>{{data.newestDate}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="panel-content">
+  <div class="panel-item-title">企业简介：</div>
+  <div class="company-profile-con">
+    <div class="company-profile" *ngIf="baseInfo?.introductionLe">
+      {{baseInfo?.introduction}}
+    </div>
+    <div class="no-data-tips" *ngIf="!baseInfo?.introduction">
+      {{CompanyProfile}}
+    </div>
+  </div>
+  <div class="panel-item-title">企业联系人：</div>
+  <div class="company-profile-con">
+<!--姓名，职位，联系电话-->
+    <div class="contact-people" *ngIf="baseInfo?.contactPeople">
+      <table>
+        <tr>
+          <th>姓名</th><td>{{baseInfo?.contactPeople}}</td><th>职位</th><td></td><th>联系电话</th><td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="no-data-tips" *ngIf="!baseInfo?.contactPeople">
+      {{CompanyProfile}}
+    </div>
+  </div>
+  <div class="panel-item-title">企业主要产品：</div>
+  <div class="company-profile-con">
+    <!--<div class="major-product" *ngIf="baseInfo?.businessScope">
+      <div>{{baseInfo?.businessScope}}</div>
+    </div>-->
+    <div [hidden]="!baseInfo?.businessScope" id="holderProduct" style="width: 3.645833rem;height:200px;text-align: center;"></div>
+    <div class="no-data-tips" *ngIf="!baseInfo?.businessScope">
+      {{CompanyProfile}}
+    </div>
+  </div>
+</div>

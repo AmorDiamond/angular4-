@@ -1,0 +1,124 @@
+header {
+  overflow: hidden;
+  height: 58px;
+  line-height: 58px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  min-width: 1200px;
+}
+header .system-back{
+  position: relative;
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border-radius: 50%;
+  background-color: #1c202c;
+  background-image: url("../../../assets/images/admin_system_back.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+}
+header .system-back::after{
+  content: '';
+  position: absolute;
+  width: 1px;
+  top: 3px;
+  bottom: 3px;
+  right: -10px;
+  background: #1c202c;
+}
+.head-right{
+  margin-left: 80px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #939393;
+  letter-spacing: 3px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+}
+a{
+  text-decoration: none;
+}
+.admin-container{
+  overflow: hidden;
+  height: 100%;
+  padding-top: 58px;
+  display: flex;
+  background-color: #33363f;
+}
+.admin-container .right-con{
+  flex: 1;
+  background: #fff;
+  padding: 20px 0 20px 20px;
+}
+.left-bar{
+  overflow: hidden;
+  height: 100%;
+  float: left;
+  min-width: 180px;
+}
+.nav_item a:hover, .nav_item a.active {
+  background-color: #1c202c;
+  color: #f9b71c;
+}
+.nav_item a {
+  cursor: pointer;
+  color: #939393;
+  font-size: 14px;
+  border-top: 1px solid #4e515b;
+  border-bottom: 1px solid #242730;
+  display: block;
+  line-height: 38px;
+  padding: 0 10px;
+}
+.nav_item i {
+  float: left;
+  line-height: 38px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+.nav_item .arrow {
+  float: right;
+  height: 38px;
+  overflow: hidden;
+  font-size: 18px;
+  line-height: 38px;
+  text-align: center;
+  color: #1c202c;
+}
+.drown-menu li a{
+  cursor: pointer;
+  color: #939393;
+  font-size: 14px;
+  border-top: 1px solid #4e515b;
+  border-bottom: 1px solid #242730;
+  display: block;
+  line-height: 38px;
+  padding: 0 30px;
+}
+.drown-menu li a:hover,.drown-menu li a.active{
+  background-color: #1c202c;
+  color: #f9b71c;
+}
+.head-right .system-name,.head-right .admin-name{
+  text-shadow: 3px 3px 10px #000;
+}
+.head-right .admin-name{
+  font-weight: normal;
+  color: #fff;
+  font-size: 16px;
+  margin-right: 20px;
+}
+button{
+  outline: none;
+}
+.text-c th{
+  text-align: center;
+}
+.admin-container .con-box{
+  padding-right: 20px;
+}

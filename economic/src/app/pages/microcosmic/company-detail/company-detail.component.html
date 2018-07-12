@@ -1,0 +1,135 @@
+<div class="right-panel company-detail animated slideInRight">
+  <div class="panel-hd">
+    <div class="title">
+      <div class="title-con">
+        <div class="back-box fl" routerLink="/mic/companyList">
+          <span class="back-btn"></span>
+        </div>
+        <!-- <h3 class="fl" id="name">{{id}}企业科技有限公司</h3> -->
+        <h3 class="fl" id="name" [innerHTML]="rowKey"></h3>
+        <div class="follow-box" (click)="notFollow()">
+          <div class="not-follow" *ngIf="isFollow">
+            <img src="assets/images/not-follow.png" alt="">
+            <span>已关注</span>
+          </div>
+          <div class="follow" *ngIf="!isFollow">
+            <img src="assets/images/follow.png" alt="">
+            <span>关注</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="panel-menu-box">
+      <!-- <ul class="panel-menu">
+        <li routerLink="basic" routerLinkActive="active">企业基本信息</li>
+        <li routerLink="qualifications" routerLinkActive="active">企业资质信息</li>
+        <li routerLink="credit" routerLinkActive="active">企业信用信息</li>
+        <li routerLink="assets" routerLinkActive="active">企业无形资产</li>
+        <li routerLink="economicIndicators" routerLinkActive="active">经济指标信息</li>
+        <li routerLink="economicForecast" routerLinkActive="active">经济指标预测</li>
+        <li routerLink="businessContext" routerLinkActive="active">业务关联视图</li>
+        <li routerLink="operatorNexus" routerLinkActive="active">经营者关联视图</li>
+        <li routerLink="overview" routerLinkActive="active">企业综合评价</li>
+      </ul> -->
+      <div class="industry-menu">
+        <div class="menu-row" [ngClass]="{'active':showIndustryMenusControl === 'basic'}">
+          <div class="menu-item" [routerLink]="['basic/company-profile']" [queryParams]="{name: rowKey}" (click)="showIndustryMenus('basic')">
+            <div class="menu-text">企业基本信息</div><span class="fa fa-caret-down info-arrow"></span></div>
+          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'basic'">
+            <li [routerLink]="['basic/company-profile']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>企业概况</li>
+            <li [routerLink]="['basic/business-registration']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>工商登记信息</li>
+            <li [routerLink]="['basic/business-change']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>工商变更信息</li>
+            <li [routerLink]="['basic/tax-tegistration']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>税务登记信息</li>
+            <li [routerLink]="['basic/social-security']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>社会保障信息</li>
+            <li [routerLink]="['basic/business-problem-ledger']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>企业问题台账</li>
+          </ul>
+        </div>
+        <div class="menu-row" [routerLink]="['qualifications']" [queryParams]="{name: rowKey}" routerLinkActive="active" [ngClass]="{'active':showIndustryMenusControl === 'qualifications'}">
+          <div class="menu-item" (click)="showIndustryMenus('qualifications')">
+            <div class="menu-text">企业资质信息</div>
+          </div>
+          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'qualificationsX'">
+            <li routerLink="qualifications/industry-qualification" routerLinkActive="active"><em></em>行业资格认证</li>
+            <li routerLink="qualifications/senior-company" routerLinkActive="active"><em></em>高企认证</li>
+            <li routerLink="qualifications/standard" routerLinkActive="active"><em></em>标准制定</li>
+            <li routerLink="qualifications/famous-product" routerLinkActive="active"><em></em>名优产品目录</li>
+          </ul>
+        </div>
+        <div class="menu-row" [ngClass]="{'active':showIndustryMenusControl === 'credit'}">
+          <div class="menu-item" (click)="showIndustryMenus('credit')" [routerLink]="['credit/honor']" [queryParams]="{name: rowKey}">
+            <div class="menu-text">企业信用信息</div><span class="fa fa-caret-down info-arrow"></span></div>
+          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'credit'">
+            <li [routerLink]="['credit/honor']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>企业荣誉</li>
+            <li [routerLink]="['credit/blacklist']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>黑名单</li>
+            <li [routerLink]="['credit/performance-payment']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>履约缴费</li>
+            <li [routerLink]="['credit/industry-rating']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>行业评级</li>
+            <!-- <li routerLink="landMenu/ecoTop" routerLinkActive="active" class="item3"><em></em>表彰奖励信息</li>
+            <li routerLink="landMenu/ecoOutput" routerLinkActive="active" class="item2"><em></em>其他荣誉信息</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>行政处罚信息</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>司法判决信息</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>失信被执行人</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>被执行人</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>企业经营异常</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>开庭公告</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>裁判文书</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>法院公告</li>
+            <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>税务违法</li> -->
+          </ul>
+        </div>
+        <div class="menu-row" [ngClass]="{'active':showIndustryMenusControl === 'assets'}">
+          <div class="menu-item" (click)="showIndustryMenus('assets')" [routerLink]="['assets/trademark']" [queryParams]="{name: rowKey}">
+            <div class="menu-text">企业无形资产</div><span class="fa fa-caret-down info-arrow"></span></div>
+          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'assets'">
+            <li [routerLink]="['assets/trademark']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item4"><em></em>企业商标信息</li>
+            <li [routerLink]="['assets/patent']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item1"><em></em>企业专利信息</li>
+            <!--<li routerLink="assets/copyright" routerLinkActive="active" class="item3"><em></em>著作权信息</li>-->
+            <!-- <li routerLink="buildMenu/companyType" routerLinkActive="active" class="item3"><em></em>作品著作权信息</li> -->
+            <li [routerLink]="['assets/icp']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item3"><em></em>ICP备案信息</li>
+            <!--<li routerLink="assets/domain-name" routerLinkActive="active" class="item3"><em></em>企业域名信息</li>-->
+          </ul>
+        </div>
+        <div class="menu-row" [ngClass]="{'active':showIndustryMenusControl === 'economicIndicators'}">
+          <div class="menu-item" (click)="showIndustryMenus('economicIndicators')" [routerLink]="['economicIndicators/operatingIncome']" [queryParams]="{name: rowKey}">
+            <div class="menu-text">经济指标信息</div><span class="fa fa-caret-down info-arrow"></span>
+          </div>
+          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'economicIndicators'">
+            <li [routerLink]="['economicIndicators/operatingIncome']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item4"><em></em>经济概况</li>
+            <li [routerLink]="['economicIndicators/incumbentPeople']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item1"><em></em>人员概况</li>
+            <li [routerLink]="['economicIndicators/technologyInnovation']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>科技创新概况</li>
+            <li [routerLink]="['economicIndicators/governmentFunds']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item3"><em></em>政府资金</li>
+            <li [routerLink]="['economicIndicators/annualReport']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>企业年报</li>
+            <li [routerLink]="['economicIndicators/jobOffers']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>招聘信息</li>
+          </ul>
+        </div>
+        <!--<div class="menu-row" routerLink="economicForecast" routerLinkActive="active" [ngClass]="{'active':showIndustryMenusControl === 'economicForecast'}">
+          <div class="menu-item" (click)="showIndustryMenus('economicForecast')">
+            <div class="menu-text">经济指标预测</div>
+          </div>
+        </div>-->
+        <!--<div class="menu-row" routerLink="businessContext" routerLinkActive="active" [ngClass]="{'active':showIndustryMenusControl === 'businessContext'}">
+          <div class="menu-item" (click)="showIndustryMenus('businessContext')">
+            <div class="menu-text">业务关联视图</div>
+          </div>
+        </div>
+        <div class="menu-row" routerLink="operatorNexus" routerLinkActive="active" [ngClass]="{'active':showIndustryMenusControl === 'operatorNexus'}">
+          <div class="menu-item" (click)="showIndustryMenus('operatorNexus')">
+            <div class="menu-text" style="margin-right:0;">经营者关联视图</div>
+          </div>
+        </div>-->
+        <div class="menu-row" [routerLink]="['overview']" [queryParams]="{name: rowKey}" routerLinkActive="active" [ngClass]="{'active':showIndustryMenusControl === 'overview'}">
+          <div class="menu-item" (click)="showIndustryMenus('overview')">
+            <div class="menu-text">企业综合评价</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-menu-right">
+
+      <perfect-scrollbar style="height: 100%">
+        <router-outlet></router-outlet>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>

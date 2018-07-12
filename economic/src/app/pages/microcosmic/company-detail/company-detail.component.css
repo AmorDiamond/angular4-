@@ -1,0 +1,124 @@
+.company-detail .panel-content .flex-item {
+  width: 3.125rem;
+  height: 2.083333rem;
+}
+
+#guanxi-main,
+#guanxi-main2 {
+  width: 100%;
+}
+
+.company-list-addr {
+  position: relative;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, .7);
+  background: #f9b620;
+  white-space: nowrap;
+  margin-left: 30px;
+  font-size: 12px;
+}
+
+.company-list-addr:hover {
+  z-index: 9;
+}
+
+.company-list-addr:after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -45px;
+  top: -15px;
+  /* background: url("../images/position_icon.png") center no-repeat; */
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+}
+
+.follow-box {
+  float: right;
+  margin-right: 20px;
+  font-size: 20px;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.follow-box .not-follow span {
+  color: #bdbec0;
+}
+
+.industry-menu {
+  position: relative;
+  height: 100%;
+  float: left;
+  margin-top: 10px;
+}
+.menu-row {
+  outline: none;
+}
+.menu-item {
+  position: relative;
+  width: 145px;
+  outline: none;
+  padding: 10px 15px;
+  text-align: left;
+  cursor: pointer;
+  transition: all .5s;
+}
+
+.menu-row.active .menu-item,
+.industry-menu .menu-item:hover {
+  background: rgba(249, 182, 32, 0.2);
+  color: #f9b620;
+}
+
+.menu-item .menu-text {
+  margin-right: 20px;
+}
+
+.menu-item .info-arrow {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  line-height: inherit;
+  color: #7d85cb;
+  transition: transform .3s;
+}
+
+.menu-row.active .info-arrow {
+  transform: rotate(180deg);
+}
+
+.sub-menu {
+  background: rgba(0, 0, 0, .5);
+}
+
+.menu-row:not(:first-child) .sub-menu {
+  /*display: none;*/
+}
+
+.sub-menu li {
+  padding: 10px 15px;
+  cursor: pointer;
+  color: #86878b;
+}
+
+.sub-menu li.active,
+.sub-menu li:hover {
+  color: #bcbdbf;
+}
+
+.sub-menu li em {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #f9b620;
+  border-radius: 5px;
+  vertical-align: middle;
+  margin-right: 4px;
+  visibility: hidden;
+}
+
+.sub-menu li.active em,
+.sub-menu li:hover em {
+  visibility: visible;
+}

@@ -1,0 +1,24 @@
+<div class="panel-content">
+  <div class="panel-item-title">高企认证：</div>
+  <div id="certificationsDiv"></div>
+  <perfect-scrollbar style="max-height: 100%">
+    <table class="table table-bordered" *ngFor="let item of HiTechCertifications">
+      <tr>
+        <td class="nowrap">证书名:</td>
+        <td name="name">{{item.certificateName}}</td>
+        <td class="nowrap">证书编号:</td>
+        <td name="number">{{item.certificateCode}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">批准机关:</td>
+        <td name="office">{{item.permitOrganization}}</td>
+        <td class="nowrap">发证时间:</td>
+        <td class="nowrap" name="certificationDate">{{item.date | date: "yyyy-MM-dd"}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">有效期:</td>
+        <td colspan="3" name="validityEnd">{{item.validPeriod}}</td>
+      </tr>
+    </table>
+  </perfect-scrollbar>
+</div>

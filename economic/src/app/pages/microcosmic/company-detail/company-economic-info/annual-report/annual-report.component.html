@@ -1,0 +1,98 @@
+<div class="panel-content">
+  <div class="panel-item-title">股东出资信息：</div>
+  <div class="annual-report">
+    <table class="table table-bordered" *ngIf="ShareholderFunding.length>0">
+      <tr>
+        <th>年份</th>
+        <th>股东</th>
+        <th>认缴出资额(万元)</th>
+        <th>认缴出资方式</th>
+        <th>认缴出资时间</th>
+        <th>实缴出资额(万元)</th>
+        <th>实缴出资方式</th>
+        <th>实缴出资时间</th>
+      </tr>
+      <tr *ngFor="let item of ShareholderFunding">
+        <td>{{item.year}}</td>
+        <td>{{item.shareholderName}}</td>
+        <td>{{item.capital}}</td>
+        <td>{{item.capitalType}}</td>
+        <td>{{item.capitalDate | date:'yyyy-MM-dd'}}</td>
+        <td>{{item.paid}}</td>
+        <td>{{item.paidType}}</td>
+        <td>{{item.paidDate | date:'yyyy-MM-dd'}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="ShareholderFunding.length<1">
+      {{ShareholderFundingTips}}
+    </div>
+  </div>
+  <div class="panel-item-title">股权信息：</div>
+  <div class="annual-report">
+    <table class="table table-bordered" *ngIf="EquityInformation.length>0">
+      <tr>
+        <th>年份</th>
+        <th>股东</th>
+        <th>变更前股权比例(%)</th>
+        <th>变更后股权比例(%)</th>
+        <th>变更日期</th>
+      </tr>
+      <tr *ngFor="let item of EquityInformation">
+        <td>{{item.year}}</td>
+        <td>{{item.shareholder}}</td>
+        <td>{{item.ratioBeforeChange}}</td>
+        <td>{{item.ratioAfterChange}}</td>
+        <td>{{item.date | date:'yyyy-MM-dd'}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="EquityInformation.length<1">
+      {{EquityInformationTips}}
+    </div>
+  </div>
+  <div class="panel-item-title">对外投资信息：</div>
+  <div class="annual-report">
+    <table class="table table-bordered" *ngIf="ForeignInvestment.length>0">
+      <tr>
+        <th>年份</th>
+        <th>统一社会信用代码</th>
+        <th>投资设立企业或购买股权企业名称</th>
+      </tr>
+      <tr *ngFor="let item of ForeignInvestment">
+        <td>{{item.year}}</td>
+        <td>{{item.creditCode}}</td>
+        <td>{{item.name}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="ForeignInvestment.length<1">
+      {{ForeignInvestmentTips}}
+    </div>
+  </div>
+  <div class="panel-item-title">保证担保信息：</div>
+  <div class="annual-report">
+    <table class="table table-bordered" *ngIf="GuaranteeGuarantee.length>0">
+      <tr>
+        <th>年份</th>
+        <th>债权人</th>
+        <th>债务人</th>
+        <th>主债权种类</th>
+        <th>主债权数额</th>
+        <th>履行债务的期限</th>
+        <th>保证的期间</th>
+        <th>保证的方式</th>
+      </tr>
+      <tr *ngFor="let item of GuaranteeGuarantee">
+        <td>{{item.year}}</td>
+        <td>{{item.creditor}}</td>
+        <td>{{item.obligor}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.amount}}</td>
+        <td>{{item.term}}</td>
+        <td>{{item.guaranteePeriodBegin | date:'yyyy-MM-dd'}}~{{item.guaranteePeriodEnd | date:'yyyy-MM-dd'}}</td>
+        <td>{{item.mode}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="GuaranteeGuarantee.length<1">
+      {{GuaranteeGuaranteeTips}}
+    </div>
+  </div>
+</div>

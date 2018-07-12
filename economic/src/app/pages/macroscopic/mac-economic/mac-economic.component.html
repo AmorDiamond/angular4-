@@ -1,0 +1,28 @@
+<!-- 宏观经济看板首页 -->
+<div class="macros-view-bd">
+  <div class="animated active tab_con public-budget">
+    <div class="right-panel">
+      <div class="content">
+        <div class="panel-menu-box">
+          <div class="panel-menu macros-menu">
+            <ul>
+              <li routerLink="gdp" routerLinkActive="active">高新区GDP</li>
+              <li routerLink="pillar" routerLinkActive="active">支柱产业</li>
+              <li routerLink="invest" routerLinkActive="active">固定投资</li>
+              <li routerLink="budget" routerLinkActive="active">公共性预算</li>
+              <li routerLink="expend" routerLinkActive="active">公共性支出</li>
+              <li routerLink="income" routerLinkActive="active">人均收入</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel-menu-right">
+          <div class="panel-bd pop-index-1 active">
+            <div class="panel-content" id="panel-content">
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

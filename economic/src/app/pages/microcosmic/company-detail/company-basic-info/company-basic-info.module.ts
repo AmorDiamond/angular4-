@@ -1,0 +1,29 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RoutingModule } from './routing/routing.module';
+import { BusinessRegistrationComponent } from './business-registration/business-registration.component';
+import { BusinessChangeComponent } from './business-change/business-change.component';
+import { CompanyBasicService } from './company-basic.service';
+import { TaxRegistrationComponent } from './tax-registration/tax-registration.component';
+import { SocialSecurityComponent } from './social-security/social-security.component';
+import { CompanyProfileComponent } from './company-profile/company-profile.component';
+import { BusinessProblemLedgerComponent } from './business-problem-ledger/business-problem-ledger.component';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RoutingModule
+  ],
+  declarations: [
+    BusinessRegistrationComponent,
+    BusinessChangeComponent,
+    TaxRegistrationComponent,
+    SocialSecurityComponent,
+    CompanyProfileComponent,
+    BusinessProblemLedgerComponent
+  ],
+  providers: [
+    CompanyBasicService
+  ]
+})
+export class CompanyBasicInfoModule { }

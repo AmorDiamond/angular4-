@@ -1,0 +1,96 @@
+.column_title_box h3:hover {
+  background: none;
+  box-shadow: none;
+  cursor: auto;
+  color: #f9b620;
+}
+
+.column_title_box {
+  height: 50px;
+  line-height: 50px;
+  /* z-index: 1; */
+}
+
+.column-box {
+  height: 2.265625rem;
+  margin-top: 0.104167rem;
+}
+
+.basic-info-btn {
+  position: absolute;
+  right: 20px;
+  top: 0;
+  color: #fff;
+  height: 100%;
+  line-height: inherit;
+  color: #bcbdbf;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.basic-info-btn span {
+  margin-left: 7px;
+  transition: all .3s;
+}
+
+.basic-info-btn .info-arrow.active {
+  transform: rotate(180deg);
+}
+
+.basic-info-con {
+  /*height: 0;*/
+  padding: 20px;
+  background: #151411;
+  border-radius: 0 0 6px 6px;
+  line-height: normal;
+  color: #bcbdbf;
+  box-shadow: 0px 3px 3px #2d2e3c;
+  display: none;
+}
+
+.panel-chart-box {
+  height: 100%;
+  border-radius: 6px;
+}
+
+.flex-row .column-box:nth-child(2n+1) .panel-chart-box {
+  background: -webkit-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+  background: -moz-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+  background: -o-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+  /*background: linear-gradient(to bottom right, #151411 50%,#251612 70%, #2e1813);*/
+}
+
+.flex-row .column-box:nth-child(2n) .panel-chart-box {
+  background: -webkit-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+  background: -moz-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+  background: -o-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+  /*background: linear-gradient(to bottom right, #1b1b1c 50%,#251612 70%, #212126);*/
+}
+
+.panel-chart {
+  height: calc(100% - 0.260417rem);
+  padding: 0 0.026042rem;
+  color: #bcbdbf;
+}
+
+.panel-chart .flex-cell {
+  padding: 0 5px;
+}
+
+.panel-chart .flex-cell>.flex-item {
+  height: 1.583333rem;
+  border: 1px solid rgba(249, 182, 32, .3);
+  border-radius: 6px;
+  margin: 0.104167rem 0;
+}
+.panel-chart .flex-cell>.flex-item .chart_div {
+  height: 100%;
+}
+
+.flex-row .column-box:nth-child(2n+1) .panel-chart-box {
+  background: linear-gradient(to bottom right, #151411 50%,#251612 70%, #2e1813);
+}
+
+.flex-row .column-box:nth-child(2n) .panel-chart-box {
+  background: linear-gradient(to bottom right, #1b1b1c 50%,#251612 70%, #212126);
+}

@@ -1,0 +1,57 @@
+<div class="con-hd">
+  <button class="excel-import" routerLink="../upload">EXCEL导入</button>
+  <button class="excel-export">
+    <a href="">EXCEL模板下载
+    </a>
+  </button>
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>公司名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.companyName" placeholder="公司名称">
+    </div>
+    <div class="form-group">
+      <label>项目名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.projectName" placeholder="公司名称">
+    </div>
+    <div class="filter-bt" style="margin: 10px 0;">
+      <button class="btn search-btn" (click)="getList()">搜索</button>
+      <a *ngIf="list.length > 0" class="btn export-btn" href="{{'http://127.0.0.1:5080/v1/kETProjectDeclarationPojo/exportExcelForm?companyName='+getListParams.companyName}}"
+        download="{{getListParams.companyName+'-项目申报.xlsx'}}">
+        导出
+      </a>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+    <tr class="text-c">
+      <th>企业名称</th>
+      <th>项目名称</th>
+      <th>进度追踪</th>
+      <th>批复文号</th>
+      <th>项目总投资</th>
+      <th>已完成投资</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="text-c ng-scope" *ngFor="let item of list">
+      <td class="nowrap">{{item.enterpriseName}}</td>
+      <td class="nowrap">{{item.projectName}}</td>
+      <td class="nowrap">{{item.trackProgress}}</td>
+      <td class="nowrap">{{item.replyNo}}</td>
+      <td class="nowrap">{{item.projectTotalInvestment}}</td>
+      <td class="nowrap">{{item.investmentHasBeenCompleted}}</td>
+      <td class="nowrap">{{item.remarks}}</td>
+    </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-xs-12 col-12">
+    <!-- <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination> -->
+  </div>
+</div>
+<ng2-toasty [position]="'center-center'"></ng2-toasty>

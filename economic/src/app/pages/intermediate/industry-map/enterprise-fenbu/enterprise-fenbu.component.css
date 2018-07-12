@@ -1,0 +1,40 @@
+.column-box{
+    height: 2.265625rem;
+    margin-top: 0.104167rem;
+}
+.panel-chart-box{
+    height: 100%;
+    border-radius: 6px;
+}
+.cygmCon .column_title_box h3:hover{
+    background: none;
+    box-shadow: none;
+    color: #f9b620;
+}
+.cygmCon .column_title_box h3{
+    cursor: inherit;
+}
+.cygmCon .column-box:nth-child(2n) .panel-chart-box{
+    background: -webkit-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+    background: -moz-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+    background: -o-radial-gradient(bottom right, farthest-side, #162627 20%, #151411 80%);
+     background: linear-gradient(to bottom right, #1b1b1c 50%,#251612 70%, #212126);
+}
+.cygmCon .column-box:nth-child(2n+1) .panel-chart-box{
+    background: -webkit-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+    background: -moz-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+    background: -o-radial-gradient(bottom right, farthest-corner, #2e1813 20%, #151411 70%);
+     background: linear-gradient(to bottom right, #151411 50%,#251612 70%, #2e1813);
+}
+.panel-chart.flex-cell {
+    padding: 0 10px
+}
+.panel-chart.flex-cell>.flex-item {
+    height: 1.583333rem;
+    border: 1px solid rgba(249,182,32,.3);
+    border-radius: 6px;
+    margin: 0.104167rem 0;
+}
+.chart_div{
+    height: 100%;
+}

@@ -1,0 +1,105 @@
+<!-- 重点企业追踪 -->
+<!--
+<div class="panel-content">
+  <div class="panel-item-title">
+    <span>签订合同的情况：</span>
+    <div class="button-box">
+      <span class="fa fa-chevron-circle-left" (click)="contractPre()" [ngClass]="{'is-first': CONTRACTS_PAGE == 1}" style="margin-right: 20px;"></span>
+      <span class="fa fa-chevron-circle-right" (click)="contractNext()"></span>
+    </div>
+  </div>
+  <perfect-scrollbar data-scroll="X">
+    <div class="flex" [@side]="side">
+      <div class="flex-cell" *ngFor="let item of Contracts">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">{{item.name}}</div>
+          <ul>
+            <li class="title">协议名称</li>
+            <li>{{item.protocol}}</li>
+            <li class="title">签订时间</li>
+            <li>{{item.signTime | date: 'yyyy-MM-dd'}}</li>
+            <li class="title">签订情况</li>
+            <li>{{item.signSituation}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+  <div>
+    <div class="panel-item-title">
+      <span>项目申报：</span>
+      <div class="button-box">
+        <span class="fa fa-chevron-circle-left" (click)="contractPre()" [ngClass]="{'is-first': CONTRACTS_PAGE == 1}" style="margin-right: 20px;"></span>
+        <span class="fa fa-chevron-circle-right" (click)="contractNext()"></span>
+      </div>
+    </div>
+    <perfect-scrollbar data-scroll="X">
+      <div class="flex" [@side]="side">
+        <div class="flex-cell" *ngFor="let item of Contracts">
+          <div class="flex-item" style="width: 100%;">
+            <div class="flex-head">{{item.name}}</div>
+            <ul>
+              <li class="title">协议名称</li>
+              <li>{{item.protocol}}</li>
+              <li class="title">签订时间</li>
+              <li>{{item.signTime | date: 'yyyy-MM-dd'}}</li>
+              <li class="title">签订情况</li>
+              <li>{{item.signSituation}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+  <div>
+    <div class="panel-item-title">
+      <span>政府补贴：</span>
+      <div class="button-box">
+        <span class="fa fa-chevron-circle-left" (click)="contractPre()" [ngClass]="{'is-first': CONTRACTS_PAGE == 1}" style="margin-right: 20px;"></span>
+        <span class="fa fa-chevron-circle-right" (click)="contractNext()"></span>
+      </div>
+    </div>
+    <perfect-scrollbar data-scroll="X">
+      <div class="flex" [@side]="side">
+        <div class="flex-cell" *ngFor="let item of Contracts">
+          <div class="flex-item" style="width: 100%;">
+            <div class="flex-head">{{item.name}}</div>
+            <ul>
+              <li class="title">协议名称</li>
+              <li>{{item.protocol}}</li>
+              <li class="title">签订时间</li>
+              <li>{{item.signTime | date: 'yyyy-MM-dd'}}</li>
+              <li class="title">签订情况</li>
+              <li>{{item.signSituation}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+  <div>
+    <div class="panel-item-title">
+      <span>新闻事件：</span>
+      <div class="button-box">
+        <span class="fa fa-chevron-circle-left" (click)="newsPre()" [ngClass]="{'is-first': NEWS_PAGE == 1}" style="margin-right: 20px;"></span>
+        <span class="fa fa-chevron-circle-right" (click)="newsNext()"></span>
+      </div>
+    </div>
+    <perfect-scrollbar data-scroll="X">
+      <div class="flex">
+        <div class="flex-cell" *ngFor="let item of News">
+          <div class="flex-item" style="width: 100%;">
+            <div class="flex-head">{{item.enterpriseName}}</div>
+            <ul>
+              <li class="title">新闻标题</li>
+              <li>{{item.title}}</li>
+              <li class="title">时间</li>
+              <li>{{item.releaseDate | date: 'yyyy-MM-dd'}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>-->
+<router-outlet></router-outlet>

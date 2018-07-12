@@ -1,0 +1,21 @@
+.panel-bd {
+  min-height: 100%;
+  visibility: visible;
+}
+.panel-content .flex .flex-cell {
+    padding-top: 20px;
+}
+.panel-content .flex>.flex-cell:nth-child(2n) {
+    padding-left: 20px;
+}
+.panel-content .flex .flex-item {
+    border: 1px solid rgba(249,182,32,.3);
+    border-radius: 10px;
+}
+.panel-content .flex-item {
+    /*width: 3.125rem;*/
+    height: 2.083333rem;
+}
+.m-b-20{
+    margin-bottom: 20px;
+}

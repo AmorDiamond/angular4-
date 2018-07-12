@@ -1,0 +1,10 @@
+<div class="panel-content">
+  <div class="flex">
+    <div class="flex-cell">
+      <div class="flex-item" echarts [options]="businessIncomeData" (chartClick)="changeBusinessIncomeRatioData($event)" id="main"></div>
+    </div>
+    <div class="flex-cell">
+      <div class="flex-item" echarts [options]="businessIncomeRatioData" [loading]="businessIncomeRatioLoading" id="main3"></div>
+    </div>
+  </div>
+</div>

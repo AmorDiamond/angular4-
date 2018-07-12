@@ -1,0 +1,7 @@
+.content{
+    height: 100%;
+    display: flex;
+}
+.content .panel-menu-box{
+    color: #bcbdbf;
+}

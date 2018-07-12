@@ -1,0 +1,33 @@
+<!-- 著作权 -->
+<div class="panel-content">
+  <div class="panel-item-title">软件著作权信息：</div>
+  <table class="table table-bordered table-align-c">
+    <tr>
+      <th>企业名称</th>
+      <th>软件全称</th>
+      <th>软件简称</th>
+      <th>登记日期</th>
+    </tr>
+    <tr *ngFor="let data of softwareCopyrightList">
+      <td>{{data.enterpriseName}}</td>
+      <td>{{data.softwareName}}</td>
+      <td>{{data.SoftwareAbbreviated}}</td>
+      <td class="nowrap">{{data.regDate}}</td>
+    </tr>
+  </table>
+  <div class="panel-item-title">作品著作权信息：</div>
+  <table class="table table-bordered table-align-c">
+    <tr>
+      <th>企业名称</th>
+      <th>作品名称</th>
+      <th>类别</th>
+      <th>完成日期</th>
+    </tr>
+    <tr *ngFor="let data of worksCopyrightList">
+      <td>{{data.enterpriseName}}</td>
+      <td>{{data.worksName}}</td>
+      <td class="nowrap">{{data.worksType}}</td>
+      <td class="nowrap">{{data.completedDate}}</td>
+    </tr>
+  </table>
+</div>

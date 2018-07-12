@@ -1,0 +1,70 @@
+<!--产业看板-->
+<div class="industry-panel animated tab_con">
+  <div class="right-panel">
+    <div class="content">
+      <div class="panel-menu-box">
+        <div class="industry-menu">
+          <div class="menu-row" [ngClass]="{'active':showIndustryMenusControl.isShowIndustryMenu}">
+            <div class="menu-item" (click)="showIndustryMenus('IndustryMenu')"><div class="menu-text">行业(产业)发展统计</div><span class="fa fa-caret-down info-arrow"></span></div>
+            <ul class="sub-menu" *ngIf="showIndustryMenusControl.isShowIndustryMenu">
+              <li routerLink="fenbu" routerLinkActive="active"><em></em>企业分布</li>
+              <li routerLink="scale" routerLinkActive="active"><em></em>经济规模</li>
+              <li routerLink="jiegou" routerLinkActive="active"><em></em>企业结构</li>
+              <li routerLink="leadIndustry" routerLinkActive="active"><em></em>主导园区结构</li>
+            </ul>
+          </div>
+          <div class="menu-row" [ngClass]="{'active':showIndustryMenusControl.isShowParkMenu}">
+            <div  class="menu-item" (click)="showIndustryMenus('ParkMenu')"><div class="menu-text">园区产业统计</div><span class="fa fa-caret-down info-arrow"></span></div>
+            <ul class="sub-menu" *ngIf="showIndustryMenusControl.isShowParkMenu">
+              <!--<li><em></em>基本信息</li>
+              <li><em></em>经济规模</li>
+              <li><em></em>企业规模</li>
+              <li><em></em>企业类型</li>
+              <li><em></em>行业体系</li>-->
+              <!--西区演示数据-->
+              <li routerLink="parkMenu/registMoney" routerLinkActive="active"><em></em>注册资本</li>
+              <li routerLink="parkMenu/companyType" routerLinkActive="active"><em></em>企业类型</li>
+            </ul>
+          </div>
+          <div class="menu-row" [ngClass]="{'active':showIndustryMenusControl.isShowLandMenu}">
+            <div  class="menu-item" (click)="showIndustryMenus('LandMenu')"><div class="menu-text">地块统计</div><span class="fa fa-caret-down info-arrow"></span></div>
+            <ul class="sub-menu" *ngIf="showIndustryMenusControl.isShowLandMenu">
+              <li routerLink="landMenu/landNature" routerLinkActive="active" class="item4"><em></em>用地性质</li>
+              <li routerLink="landMenu/singleFloor" routerLinkActive="active" class="item1"><em></em>单一业主和楼宇</li>
+              <li routerLink="landMenu/ecoTop" routerLinkActive="active" class="item3"><em></em>单一业主收入排名</li>
+              <li routerLink="landMenu/ecoOutput" routerLinkActive="active" class="item2"><em></em>单一业主经济产出</li>
+              <li routerLink="landMenu/inefficientLand" routerLinkActive="active" class="item5"><em></em>低效用地</li>
+              <!--<li class="item6"><em></em>楼宇</li>-->
+            </ul>
+          </div>
+          <div class="menu-row" [ngClass]="{'active':showIndustryMenusControl.isShowFloorMenu}">
+            <div  class="menu-item" (click)="showIndustryMenus('FloorMenu')"><div class="menu-text">楼宇统计</div><span class="fa fa-caret-down info-arrow"></span></div>
+            <ul class="sub-menu" *ngIf="showIndustryMenusControl.isShowFloorMenu">
+              <li routerLink="buildMenu/builds" routerLinkActive="active" class="item4"><em></em>楼宇信息</li>
+              <li routerLink="buildMenu/registMoney" routerLinkActive="active" class="item1"><em></em>注册资本</li>
+              <li routerLink="buildMenu/companyType" routerLinkActive="active" class="item3"><em></em>企业类型</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--<div class="panel-menu-box">
+          <ul class="panel-menu industry-menu">
+              <li class="active" data-view="parkMenu/parkBasicInfo.html">基本信息</li>
+              <li data-view="parkMenu/economicScale.html">经济规模</li>
+              <li data-view="parkMenu/enterpriseScale.html">企业规模</li>
+              <li data-view="parkMenu/enterpriseType.html">企业类型</li>
+              <li data-view="parkMenu/industrySystem.html">行业体系</li>
+          </ul>
+      </div>-->
+      <div class="panel-menu-right company-detail">
+        <div class="panel-bd pop-index-1 active">
+          <perfect-scrollbar style="height: 100%">
+            <div class="panel-content" id="industry-content">
+              <router-outlet></router-outlet>
+            </div>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,453 @@
+<!-- 信用信息 -->
+<div class="panel-bd pop-index-2 animated">
+  <div class="panel-content" id="divs">
+    <div id="">
+      <div class="panel-item-title">政府表彰信息：</div>
+      <table class="table table-bordered table-align-c">
+        <tr>
+          <th>荣誉名称</th>
+          <th>奖励级别</th>
+          <th>名次</th>
+          <th>表彰内容</th>
+          <th>年度</th>
+        </tr>
+        <tr *ngFor="let data of governmentHonorList">
+          <td>{{data.honorName}}</td>
+          <td>{{data.level}}</td>
+          <td>{{data.ranking}}</td>
+          <td>{{data.commendContent}}</td>
+          <td>{{data.year}}</td>
+        </tr>
+      </table>
+    </div>
+    <div id="xingzheng">
+      <div class="panel-item-title">行政奖励信息：</div>
+      <table class="table table-bordered table-align-c">
+        <tr>
+          <th>荣誉名称</th>
+          <th>奖励级别</th>
+          <th>名次</th>
+          <th>表彰内容</th>
+          <th>年度</th>
+          <th>证书/登记编号</th>
+          <th>发证机关</th>
+          <th>发证日期</th>
+          <th>数据提供单位</th>
+          <th>数据提供日期</th>
+        </tr>
+        <tr *ngFor="let data of administrationHonorList">
+          <td>{{data.honorName}}</td>
+          <td>{{data.level}}</td>
+          <td>{{data.ranking}}</td>
+          <td>{{data.commendContent}}</td>
+          <td>{{data.year}}</td>
+          <td>{{data.code}}</td>
+          <td>{{data.evaluationInstitution}}</td>
+          <td>{{data.evaluationDate}}</td>
+          <td>{{data.dataSource}}</td>
+          <td>{{data.dataProvisionTime}}</td>
+        </tr>
+      </table>
+    </div>
+    <div id="biaozhang">
+      <div class="panel-item-title">表彰奖励信息：</div>
+      <table class="table table-bordered table-align-c">
+        <tr>
+          <th>荣誉名称</th>
+          <th>奖励级别</th>
+          <th>名次</th>
+          <th>表彰内容</th>
+          <th>年度</th>
+          <th>证书/登记编号</th>
+          <th>发证机关</th>
+          <th>发证日期</th>
+          <th>数据提供单位</th>
+          <th>数据提供日期</th>
+        </tr>
+        <tr *ngFor="let data of commendHonorList">
+          <td>{{data.honorName}}</td>
+          <td>{{data.level}}</td>
+          <td>{{data.ranking}}</td>
+          <td>{{data.commendContent}}</td>
+          <td>{{data.year}}</td>
+          <td>{{data.code}}</td>
+          <td>{{data.evaluationInstitution}}</td>
+          <td>{{data.evaluationDate}}</td>
+          <td>{{data.dataSource}}</td>
+          <td>{{data.dataProvisionTime}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="">
+      <div class="panel-item-title">其他荣誉信息：</div>
+      <table class="table table-bordered table-align-c">
+        <tr>
+          <th>荣誉名称</th>
+          <th>奖励级别</th>
+          <th>名次</th>
+          <th>表彰内容</th>
+          <th>年度</th>
+          <th>证书/登记编号</th>
+          <th>发证机关</th>
+          <th>发证日期</th>
+          <th>数据提供单位</th>
+          <th>数据提供日期</th>
+        </tr>
+        <tr *ngFor="let data of otherHonorList">
+          <td>{{data.honorName}}</td>
+          <td>{{data.level}}</td>
+          <td>{{data.ranking}}</td>
+          <td>{{data.commendContent}}</td>
+          <td>{{data.year}}</td>
+          <td>{{data.code}}</td>
+          <td>{{data.evaluationInstitution}}</td>
+          <td>{{data.evaluationDate}}</td>
+          <td>{{data.dataSource}}</td>
+          <td>{{data.dataProvisionTime}}</td>
+        </tr>
+      </table>
+    </div>
+    <div id="chufa">
+      <div class="panel-item-title">行政处罚信息：</div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findAdministrativePenaltyPage')">
+        <table class="table table-bordered" *ngFor="let item of eCIAdministrativePenaltyPojos">
+          <tr>
+            <td class="nowrap">违法行为类型:</td>
+            <td colspan="3" name="illegalTypes">{{item.illegalType}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap">行政处罚内容:</td>
+            <td colspan="3" name="content">{{item.punishContent}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap">决定书文号:</td>
+            <td name="documentNumber">{{item.bookNumber}}</td>
+            <td class="nowrap">决定机关名称:</td>
+            <td name="office">{{item.departmentName}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap">处罚决定日期:</td>
+            <td class="nowrap" name="date">{{item.punishDate | date: 'yyyy-MM-dd'}}</td>
+            <td class="nowrap">公示日期:</td>
+            <td class="nowrap" name="ddate">{{item.publicityDate | date: 'yyyy-MM-dd'}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap">详情:</td>
+            <td colspan="3">{{item.details}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap">数据提供单位:</td>
+            <td name="dataProvider">{{item.dateSource}}</td>
+            <td class="nowrap">数据提供日期:</td>
+            <td class="nowrap">{{item.dataProvisionTime | date: 'yyyy-MM-dd'}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap">案件类型:</td>
+            <td name="dataProvider">{{item.caseType}}</td>
+            <td class="nowrap">执行类别:</td>
+            <td class="nowrap">{{item.executionCategory}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap">案件结果:</td>
+            <td name="dataProvider">{{item.caseResults}}</td>
+            <td class="nowrap">处罚种类:</td>
+            <td class="nowrap">{{item.punishmentType}}</td>
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+    <div id="panjue">
+      <div class="panel-item-title">司法判决信息：</div>
+      <div id="judicialDecisionEntitiesDiv"></div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findJudicialDecisionPage')">
+        <table class="table table-bordered" id="judicialDecisionEntities">
+          <tr>
+            <th>案号</th>
+            <th>案由</th>
+            <th>立案时间</th>
+            <th>案件类型</th>
+            <th>当事人</th>
+            <th>诉讼请求</th>
+            <th>结案日期</th>
+            <th>结案方式</th>
+            <th>结案案由</th>
+            <th>判决情况</th>
+            <th>是否执行</th>
+            <th>法院</th>
+            <th>数据提供单位</th>
+            <th>数据提供日期</th>
+          </tr>
+          <tr *ngFor="let item of eCIJudicialDecisionPojos">
+            <td>{{item.caseCode}}</td>
+            <td>{{item.caseReason}}</td>
+            <td>{{item.filingTime | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.caseType}}</td>
+            <td>{{item.litigant}}</td>
+            <td>{{item.claims}}</td>
+            <td>{{item.closingDate | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.closeType}}</td>
+            <td>{{item.caseClosedBy}}</td>
+            <td>{{item.judgment}}</td>
+            <td>{{item.whetherImplemented ? '已执行' : '未执行'}}</td>
+            <td>{{item.court}}</td>
+            <td>{{item.dataSource}}</td>
+            <td>{{item.dataProvisionTime | date: 'yyyy-MM-dd'}}</td>
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+    <div id="panjue">
+      <div class="panel-item-title">失信被执行人：</div>
+      <div id="judicialDecisionEntitiesDiv"></div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findDebtorInfoPage')">
+        <table class="table table-bordered" id="judicialDecisionEntities">
+          <tr>
+            <th>案号</th>
+            <th>失信被执行人名称</th>
+            <th>企业法人名称</th>
+            <th>执行法院</th>
+            <th>地域名称</th>
+            <th>执行依据文号</th>
+            <th>作出依据执行的单位</th>
+            <th>法律生效文书确定的义务</th>
+            <th>被执行人履行情况</th>
+            <th>发布时间</th>
+            <th>立案时间</th>
+            <!-- <th>履行状态</th>
+            <th>执行金额</th>
+            <th>数据来源</th>
+            <th>最新更新日期</th> -->
+          </tr>
+          <tr *ngFor="let item of DebtorInfos">
+            <td>{{item.caseNo}}</td>
+            <td>{{item.executorName}}</td>
+            <td>{{item.legalRepresentative}}</td>
+            <td>{{item.executionCourt}}</td>
+            <td>{{item.region}}</td>
+            <td>{{item.executionBasis}}</td>
+            <td>{{item.unitOfExecution}}</td>
+            <td>{{item.content}}</td>
+            <td>{{item.fulfillment}}</td>
+            <td>{{item.releaseTime | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.filingTime | date: 'yyyy-MM-dd'}}</td>
+            <!-- <td>{{item.status}}</td>
+            <td>{{item.executionMoney}}</td>
+            <td>{{item.dataSource}}</td>
+            <td>{{item.newestDate | date: 'yyyy-MM-dd'}}</td> -->
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+    <div id="panjue">
+      <div class="panel-item-title">被执行人：</div>
+      <div id="judicialDecisionEntitiesDiv"></div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findDebtorPage')">
+        <table class="table table-bordered" id="judicialDecisionEntities">
+          <tr>
+            <th>案号</th>
+            <th>被执行人名称</th>
+            <th>企业法人名称</th>
+            <th>执行法院</th>
+            <th>地域名称</th>
+            <th>执行依据文号</th>
+            <th>作出依据执行的单位</th>
+            <th>法律生效文书确定的义务</th>
+            <th>被执行人履行情况</th>
+            <th>发布时间</th>
+            <th>立案时间</th>
+            <th>履行状态</th>
+            <th>执行金额</th>
+            <th>数据来源</th>
+            <th>最新更新日期</th>
+          </tr>
+          <tr *ngFor="let item of Debtors">
+            <td>{{item.caseNo}}</td>
+            <td>{{item.executorName}}</td>
+            <td>{{item.legalRepresentative}}</td>
+            <td>{{item.executionCourt}}</td>
+            <td>{{item.region}}</td>
+            <td>{{item.executionBasis}}</td>
+            <td>{{item.unitOfExecution}}</td>
+            <td>{{item.content}}</td>
+            <td>{{item.fulfillment}}</td>
+            <td>{{item.releaseTime | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.filingTime | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.status}}</td>
+            <td>{{item.executionMoney}}</td>
+            <td>{{item.dataSource}}</td>
+            <td>{{item.newestDate | date: 'yyyy-MM-dd'}}</td>
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+    <div id="panjue">
+      <div class="panel-item-title">企业经营异常：</div>
+      <div id="judicialDecisionEntitiesDiv"></div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findAbnormalBusinessPage')">
+        <table class="table table-bordered" id="judicialDecisionEntities">
+          <tr>
+            <th>注册号</th>
+            <th>法定代表人</th>
+            <th>列入企业经营异常的原因</th>
+            <th>设立日期</th>
+            <th>列入决定机关名称</th>
+            <th>最新更新日期</th>
+            <th>数据来源</th>
+          </tr>
+          <tr *ngFor="let item of AbnormalBusiness">
+            <td>{{item.regCode}}</td>
+            <td>{{item.legalRepresentative}}</td>
+            <td>{{item.reason}}</td>
+            <td>{{item.establishDate | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.departmentName}}</td>
+            <td>{{item.newestDate}}</td>
+            <td>{{item.dataSource}}</td>
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+    <div id="panjue">
+      <div class="panel-item-title">开庭公告：</div>
+      <div id="judicialDecisionEntitiesDiv"></div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findECIProclamationPage')">
+        <table class="table table-bordered" id="judicialDecisionEntities">
+          <tr>
+            <th>案由</th>
+            <th>案号</th>
+            <th>原告</th>
+            <th>被告</th>
+            <th>开庭日期</th>
+            <th>承办部门</th>
+            <th>审判长</th>
+            <th>法院</th>
+            <th>法庭</th>
+            <th>发布日期</th>
+            <th>公告类型</th>
+            <th>公告内容</th>
+            <!-- <th>裁判文书内容</th> -->
+          </tr>
+          <tr *ngFor="let item of Proclamations">
+            <td>{{item.cause}}</td>
+            <td>{{item.number}}</td>
+            <td>{{item.appellant}}</td>
+            <td>{{item.theAppellant}}</td>
+            <td>{{item.courtDate}}</td>
+            <td>{{item.underwritingDepartment}}</td>
+            <td>{{item.presidingJudge}}</td>
+            <td>{{item.court}}</td>
+            <td>{{item.curia}}</td>
+            <td>{{item.releaseDate}}</td>
+            <td>{{item.bulletinType}}</td>
+            <td>{{item.bulletinContent}}</td>
+            <!-- <td>{{item.refereeDocuments}}</td> -->
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+    <div id="panjue">
+      <div class="panel-item-title">裁判文书：</div>
+      <div id="judicialDecisionEntitiesDiv"></div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findRefereeDocumentsPage')">
+        <table class="table table-bordered" id="judicialDecisionEntities">
+          <tr>
+            <th>案由</th>
+            <th>案号</th>
+            <!-- <th>原告</th>
+            <th>被告</th>
+            <th>开庭日期</th>
+            <th>承办部门</th>
+            <th>审判长</th> -->
+            <th>法院</th>
+            <th>法庭</th>
+            <th>发布日期</th>
+            <!-- <th>公告类型</th>
+            <th>公告内容</th>
+            <th>裁判文书内容</th> -->
+          </tr>
+          <tr *ngFor="let item of RefereeDocuments">
+            <td>{{item.cause}}</td>
+            <td>{{item.number}}</td>
+            <!-- <td>{{item.appellant}}</td>
+            <td>{{item.theAppellant}}</td>
+            <td>{{item.courtDate}}</td>
+            <td>{{item.underwritingDepartment}}</td>
+            <td>{{item.presidingJudge}}</td> -->
+            <td>{{item.court}}</td>
+            <td>{{item.curia}}</td>
+            <td>{{item.releaseDate | date: 'yyyy-MM-dd'}}</td>
+            <!-- <td>{{item.bulletinType}}</td>
+            <td>{{item.bulletinContent}}</td>
+            <td>{{item.refereeDocuments}}</td> -->
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+    <div id="panjue">
+      <div class="panel-item-title">法院公告：</div>
+      <div id="judicialDecisionEntitiesDiv"></div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findCourtNoticePage')">
+        <table class="table table-bordered" id="judicialDecisionEntities">
+          <tr>
+            <!-- <th>案由</th>
+            <th>案号</th> -->
+            <th>原告</th>
+            <th>被告</th>
+            <!-- <th>开庭日期</th>
+            <th>承办部门</th>
+            <th>审判长</th> -->
+            <th>法院</th>
+            <!-- <th>法庭</th> -->
+            <th>发布日期</th>
+            <th>公告类型</th>
+            <th>公告内容</th>
+            <!-- <th>裁判文书内容</th> -->
+          </tr>
+          <tr *ngFor="let item of CourtNotice">
+            <!-- <td>{{item.cause}}</td>
+            <td>{{item.number}}</td> -->
+            <td>{{item.appellant}}</td>
+            <td>{{item.theAppellant}}</td>
+            <!-- <td>{{item.courtDate}}</td>
+            <td>{{item.underwritingDepartment}}</td>
+            <td>{{item.presidingJudge}}</td> -->
+            <td>{{item.court}}</td>
+            <!-- <td>{{item.curia}}</td> -->
+            <td>{{item.releaseDate | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.bulletinType}}</td>
+            <td>{{item.bulletinContent}}</td>
+            <!-- <td>{{item.refereeDocuments}}</td> -->
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+    <div id="panjue">
+      <div class="panel-item-title">税务违法：</div>
+      <div id="judicialDecisionEntitiesDiv"></div>
+      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findECITaxIllegalPage')">
+        <table class="table table-bordered" id="judicialDecisionEntities">
+          <tr>
+            <th>纳税人</th>
+            <th>税务登记证号</th>
+            <th>组织机构代码</th>
+            <th>事件日期</th>
+            <th>事件名称</th>
+            <th>金额</th>
+            <th>事件类型</th>
+            <th>案件性质</th>
+          </tr>
+          <tr *ngFor="let item of ECITaxIllegal">
+            <td>{{item.taxpayer}}</td>
+            <td>{{item.taxationCode}}</td>
+            <td>{{item.organizationCode}}</td>
+            <td>{{item.eventDate | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.eventName}}</td>
+            <td>{{item.money}}</td>
+            <td>{{item.eventType}}</td>
+            <td>{{item.casenature}}</td>
+          </tr>
+        </table>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>

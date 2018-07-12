@@ -1,0 +1,151 @@
+<div class="cygmCon">
+  <!--<div class="microcosmic_scroll" id="cygmCon">-->
+
+  <!--['信息技术', '生物', '装备', '节能环保', '服务']-->
+  <!--['信息网络', '电子核心', '生物医药', '高端软件', '生物医学', '航空装备', '先进环保']-->
+  <div class="zdy_box">
+    <div class="cy_box clearfix" *ngFor="let item of industryTypeList">
+      <div class="fl zhudaocy">{{item}}</div>
+      <div class="zhudao_cy_con clearfix">
+        <label class="cy_item fl" *ngFor="let type of industryTypeList[item]"><input type="checkbox" [(ngModel)]="selectIndustryTypeList[type]"><span>{{type}}</span></label>
+        <!--<label class="cy_item fl"><input type="checkbox" value="生物"><span>生物</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="装备"><span>装备</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="节能环保"><span>节能环保</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="服务"><span>服务</span></label>-->
+
+      </div>
+    </div>
+    <!--<div class="cy_box clearfix">
+      <div class="fl zhudaocy">主导产业</div>
+      <div class="zhudao_cy_con clearfix">
+        <label class="cy_item fl"><input type="checkbox" value="信息技术"><span>信息技术</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="生物"><span>生物</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="装备"><span>装备</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="节能环保"><span>节能环保</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="服务"><span>服务</span></label>
+
+      </div>
+    </div>
+    <div class="cy_box clearfix">
+      <div class="fl zhudaocy">新兴产业</div>
+      <div class="zhudao_cy_con clearfix">
+        <label class="cy_item fl"><input type="checkbox" value="信息网络"><span>信息网络</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="电子核心"><span>电子核心</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="生物医药"><span>生物医药</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="高端软件"><span>高端软件</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="生物医学"><span>生物医学</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="航空装备"><span>航空装备</span></label>
+        <label class="cy_item fl"><input type="checkbox" value="先进环保"><span>先进环保</span></label>
+
+      </div>
+    </div>-->
+    <div class="cy_box clearfix">
+      <label class="cy_item fl" *ngFor="let item of addCustomizeTypeList"><input type="checkbox" [(ngModel)]="selectIndustryTypeList[item]"><span>{{item}}</span></label>
+      <div id="add-new-industry">
+        <input type="text" class="new-industry-input" [(ngModel)]="addCustomizeTypeValue" placeholder="请输入关键字">
+        <button class="add-new-industry" (click)="addCustomizeType()">自定义</button>
+      </div>
+    </div>
+
+    <div class="btn_box clearfix">
+      <button class="fl submit-btn" (click)="submitSelectType()">确定</button>
+      <button class="fl reset" (click)="resetSelectType()">重置</button>
+    </div>
+
+
+  </div>
+
+
+  <div class="flex flex-row">
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box1">
+        <div class="column_title_box">
+          <h3>总产值</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_zcz" echarts [options]="totalOutputValueEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box2">
+        <div class="column_title_box">
+          <h3>企业规模</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_qygm" echarts [options]="enterpriseScaleEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row">
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box1">
+        <div class="column_title_box">
+          <h3>国家级基地</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_gjjjd" echarts [options]="countryBaseEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box2">
+        <div class="column_title_box">
+          <h3>重点企业</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_zdqy" echarts [options]="importantEnterpriseEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row">
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box1">
+        <div class="column_title_box">
+          <h3>全球百强入住</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_qqbqrz" echarts [options]="global00Echart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--<div class="column-box flex-cell">
+        <div class="panel-chart-box panel-chart-box1">
+            <div class="column_title_box">
+                <h3>公共性预算</h3>
+            </div>
+            <div class="panel-chart flex">
+                <div class="flex-cell">
+                    <div class="flex-item">
+                        <div id="jjgm_ggxys" class="chart_div chart_div_border"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+  </div>
+</div>

@@ -1,0 +1,7 @@
+table.table {
+  max-width: 95% !important;
+}
+.panel-bd {
+  min-height: 100%;
+  visibility: visible;
+}

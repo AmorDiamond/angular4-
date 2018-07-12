@@ -1,0 +1,86 @@
+<!-- 公共性支出 -->
+<perfect-scrollbar style="height: 100%">
+  <div class="animated">
+    <div class="chose-time flex">
+      <div class="chose-time-left flex-cell">
+        <div class="input-group date fl" id="datetimepicker" data-date="" data-date-format="yyyy">
+          <input class="form-control" size="16" type="text" value="" readonly>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+      <div class="chose-time-right  flex-cell">
+        <div class="input-group date fl" id="datetimepicker2" data-date="" data-date-format="yyyy">
+          <input class="form-control" size="16" type="text" value="" readonly>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="expendOptions"></div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="expendDetailOptions"></div>
+      </div>
+    </div>
+    <div class="flex">
+      <div class="flex-cell">
+        <table class="table table-bordered" id="table1">
+          <tr>
+            <td>季度</td>
+            <td>金额</td>
+            <td>同比增速</td>
+          </tr>
+          <tr>
+            <td>一季度</td>
+            <td>318亿元</td>
+            <td>4%</td>
+          </tr>
+          <tr>
+            <td>二季度</td>
+            <td>397亿元</td>
+            <td>4.5%</td>
+          </tr>
+          <tr>
+            <td>三季度</td>
+            <td>417亿元</td>
+            <td>5.23%</td>
+          </tr>
+          <tr>
+            <td>四季度</td>
+            <td>423亿元</td>
+            <td>5.47%</td>
+          </tr>
+        </table>
+      </div>
+      <div class="flex-cell">
+        <table class="table table-bordered" id="table2">
+          <tr>
+            <td>类型</td>
+            <td>金额</td>
+          </tr>
+          <tr>
+            <td>环保</td>
+            <td>849万元</td>
+          </tr>
+          <tr>
+            <td>公共交通建设</td>
+            <td>425万元</td>
+          </tr>
+          <tr>
+            <td>民生</td>
+            <td>318万元</td>
+          </tr>
+          <tr>
+            <td>社保医疗</td>
+            <td>425万元</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</perfect-scrollbar>

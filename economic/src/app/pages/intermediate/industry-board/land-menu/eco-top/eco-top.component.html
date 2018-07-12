@@ -1,0 +1,41 @@
+<div class="eco-top-list">
+  <div class="flex">
+    <div class="chose-time-left flex-cell">
+      <div class="input-group date fl" id="datetimepicker-eco-top" [attr.data-date]="revenueTime" data-date-format="yyyy">
+        <input class="form-control" size="16" type="text" [(ngModel)]="revenueTime" readonly>
+        <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+      </div>
+      <div class="select-box data fl">
+        <label for="enterpriseType">产业类型: </label>
+        <select name="type" id="enterpriseType" [(ngModel)]="enterpriseType" (change)="changeEnterpriseType()">
+          <option *ngFor="let item of enterpriseTypeList" [value]="item">{{item}}</option>
+          <!--<option value="服务业">服务业</option>
+          <option value="精密制造">精密制造</option>
+          <option value="生物医药">生物医药</option>
+          <option value="其他">其他</option>-->
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="flex">
+    <div class="flex-cell top-land-list">
+      <table class="table table-bordered">
+        <thead>
+        <tr><td></td><td>公司名称</td><td>地址（住所）</td><td>营业收入金额（万元）</td><td>地块每平米营收价值（万元）</td><td>公司详情</td></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of companys;index as index" data-landmarkerid="item.unifiedLandMark" [ngClass]="{'curr': selectLandMark == item.unifiedLandMark}" (click)="selectLandMark = item.unifiedLandMark">
+            <td>{{index + 1}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.address}}</td>
+            <td>{{(item.operatingIncome / 10).toFixed(6)}}</td>
+            <td>{{(item.pricepermeter / 10).toFixed(6)}}</td>
+            <td><button class="table-btn company-top-list" data-companyid="item.companyId">详情</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

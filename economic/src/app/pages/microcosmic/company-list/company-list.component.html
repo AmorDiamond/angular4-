@@ -1,0 +1,70 @@
+<div class='zdy-cover-mask' *ngIf="hasLoading">
+  <div class='zdy-big-mask'></div>
+  <div class="zdy-mask-con spinner">
+    <div class="spinner-container container1">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+      <div class="circle3"></div>
+      <div class="circle4"></div>
+    </div>
+    <div class="spinner-container container2">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+      <div class="circle3"></div>
+      <div class="circle4"></div>
+    </div>
+    <div class="spinner-container container3">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+      <div class="circle3"></div>
+      <div class="circle4"></div>
+    </div>
+  </div>
+</div>
+<div class="right-panel company-list animated slideInRight">
+  <div class="panel-hd">
+    <div class="title">
+      <div class="title-con">
+        <div class="back-box fl" routerLink="/mic">
+          <span class="back-btn"></span>
+        </div>
+        <h3 class="fl" id="titleName">
+          {{keyWord}}
+        </h3>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="panel-menu-box">
+      <ul class="panel-menu" id="filterMenu">
+        <perfect-scrollbar style="height: 100%">
+          <li class="" (click)="enterpriseTypeClick()">全部</li>
+          <li *ngFor="let enterpriseType of enterpriseTypes" [ngClass]="{'active': enterpriseTypeActive[enterpriseType] || (selectType == enterpriseType && !enterpriseTypeActive[enterpriseType])}" (click)="enterpriseTypeClick(enterpriseType)">{{enterpriseType.length>6 ? enterpriseType.slice(0,6) + '...' : enterpriseType}}（{{enterpriseTypesNumber[enterpriseType]}}）</li>
+        </perfect-scrollbar>
+      </ul>
+    </div>
+    <div class="panel-menu-right" id="panel-menu-right">
+      <div class="panel-top">
+        <perfect-scrollbar style="height: 100%">
+          <div class="panel-bd pop-index-0 animated active">
+            <div class="panel-content" id="companyList">
+              <div class="company-item animated flipInX" *ngFor="let company of companys">
+                <div class="company-logo">
+                  <img src="assets/images/company_logo.png" alt="">
+                </div>
+                <div class="info"[routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: company.rowKey}"> <!-- [routerLink]="['/mic/companyDetail', company?.rowKey]" -->
+                  <div class="name" [innerHTML]="company?.hilightName ? company?.hilightName : company?.name"></div>
+                  <span [innerHTML]="company?.enterpriseType"></span>
+                  <span class="num">{{company?.id}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+      <div class="panel-bot">
+        <app-pagination [pageParam]="pageParam" (page)="consolePage($event)"></app-pagination>
+      </div>
+    </div>
+  </div>
+</div>

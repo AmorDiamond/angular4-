@@ -1,0 +1,13 @@
+.focus-business-con{
+    padding: 10px;
+}
+.focus-business-con li{
+    cursor: pointer;
+    overflow: hidden;
+}
+.focus-business-con li:hover{
+    background: rgba(249, 182, 32, .5);
+}
+.focus-business-con li .item{
+    padding: 10px;
+}

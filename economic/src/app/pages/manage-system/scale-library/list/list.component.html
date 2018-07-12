@@ -1,0 +1,46 @@
+<div class="con-hd">
+  <button class="excel-import" routerLink="../upload">EXCEL导入</button>
+  <button class="excel-export">EXCEL模板下载</button>
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>公司名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
+    </div>
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="getList()">搜索</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>企业名称</th>
+    <th>专项名称</th>
+    <th>所属产业</th>
+    <th>所属行业</th>
+    <th>兑现批次</th>
+    <th>补贴资金</th>
+    <th>备注</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-c ng-scope" *ngFor="let item of list">
+    <td class="nowrap">{{item.enterpriseName}}</td>
+    <td class="nowrap">{{item.specialName}}</td>
+    <td class="nowrap">{{item.industryType}}</td>
+    <td class="nowrap">{{item.tradeType}}</td>
+    <td class="nowrap">{{item.cashBatch}}</td>
+    <td class="nowrap">{{item.subsidies}}万元</td>
+    <td class="nowrap">{{item.comments}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-xs-12 col-12">
+    <!-- <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination> -->
+  </div>
+</div>
+<ng2-toasty [position]="'center-center'"></ng2-toasty>

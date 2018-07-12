@@ -1,0 +1,134 @@
+.macros-view-bd {
+  height: calc(100% - 38px);
+}
+
+.microcosmic_container {
+  width: 93%;
+}
+
+.macros-view-bd {
+  height: calc(100% - 50px);
+}
+
+.right-panel .content {
+  height: 100%;
+}
+
+.column_title_box h3 {
+  float: left;
+  text-align: center;
+  margin-left: 10px;
+  padding: 0 20px;
+  text-indent: 0;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.column_title_box h3.active,
+.column_title_box h3:hover {
+  background: #f9b620;
+  color: #151411;
+  box-shadow: inset 0px -2px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+}
+
+.macros-view-bd .tab_con .flex>.flex-cell:nth-child(2n) {
+  padding-left: 10px;
+}
+
+.macros-view-bd .panel-content {
+  height: 100%;
+}
+
+.macros-view-bd .panel-content .table tr td {
+  text-align: center;
+}
+
+.macros-view-bd .tab_con .flex-cell {
+  padding-top: 10px;
+}
+
+.macros-view-bd .tab_con .flex-item {
+  width: 100%;
+  height: 3rem;
+  border: 1px solid rgba(249, 182, 32, .3);
+  border-radius: 10px;
+}
+
+.macros-view-bd .tab_con {
+  width: 100%;
+  height: 100%;
+}
+
+.macros-view-bd .panel-menu {
+  padding-top: 10px;
+}
+
+.macros-view-bd .panel-menu li.active,
+.macros-view-bd .panel-menu li:hover {
+  background: rgba(249, 182, 32, 0.2);
+  color: #f9b620;
+  box-shadow: none;
+}
+
+.macros-view-bd .panel-menu li {
+  margin: 0;
+}
+
+.public-budget .flex {
+  justify-content: center;
+}
+
+.public-budget .flex-cell {
+  flex: none;
+  width: 80%;
+}
+
+.panel-menu-right .panel-bd {
+  height: 100%;
+}
+
+.chose-time {
+  overflow: hidden;
+}
+
+.chose-time .input-group {
+  width: 90px;
+}
+
+.chose-time .form-control {
+  padding: 0 10px;
+  height: 25px;
+  background: none;
+  color: #fff;
+  border-color: rgba(249, 182, 32, .3);
+}
+
+.chose-time .input-group-addon {
+  padding: 0 10px;
+  background: none;
+  color: #fff;
+  border-color: rgba(249, 182, 32, .3);
+}
+
+.chose-time .quarter-select {
+  line-height: 25px;
+  margin-left: 5px;
+  border: 1px solid rgba(249, 182, 32, .3);
+  border-radius: 3px;
+}
+
+.chose-time .quarter-select select {
+  background: none;
+  color: #fff;
+}
+
+.chose-time .quarter-select select {
+  background: none;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+
+.chose-time .quarter-select option {
+  background: #151411;
+}

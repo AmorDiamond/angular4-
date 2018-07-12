@@ -1,0 +1,44 @@
+<div class="address-con"><span class="back-btn" routerLink="/admin/roles/function"></span><span class="home-icon fa fa-home"></span>首页 > 功能管理 > 添加功能</div>
+<div class="single-form">
+  <form #functionForm="ngForm">
+    <div class="form-group">
+      <label class="form-label" for="name">权限名称</label>
+      <input type="text" class="form-control" id="name" minlength="4" required [(ngModel)]="functionName" name="name" placeholder="请输入权限名称" #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <div *ngIf="name.errors.required">
+          权限名称不能为空.
+        </div>
+        <div *ngIf="name.errors.minlength">
+          权限名称不能少于4位.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="method">methods</label>
+      <select class="form-control" id="method" required [(ngModel)]="functionMethod" name="method" #method="ngModel">
+        <option *ngFor="let method of methods" [value]="method">{{method}}</option>
+      </select>
+      <div *ngIf="method.invalid && (method.dirty || method.touched)" class="alert alert-danger">
+        <div *ngIf="method.errors.required">
+          methods不能为空.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="desc">权限串</label>
+      <input type="text" class="form-control" id="desc" required [(ngModel)]="functionDesc" name="desc" placeholder="请输入权限串" #desc="ngModel">
+      <div *ngIf="desc.invalid && (desc.dirty || desc.touched)" class="alert alert-danger">
+        <div *ngIf="desc.errors.required">
+          权限串不能为空.
+        </div>
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-save" [disabled]="!functionForm.form.valid" (click)="onSubmit()">确定</button>
+    <!-- - -->
+  </form>
+</div>
+<ng2-toasty [position]="'center-center'"></ng2-toasty>

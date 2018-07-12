@@ -1,0 +1,38 @@
+<!--产业地图看板-->
+<div class="industry-map-panel animated tab_con">
+  <div class="right-panel">
+    <div class="content">
+      <div class="panel-menu-box">
+        <div class="industry-map-menu">
+          <div class="menu-row" [ngClass]="{'active':showIndustryMapMenusControl.fenbuMenu}">
+            <div class="menu-item" (click)="showIndustryMapMenus('fenbuMenu')"><div class="menu-text">园区产业分布</div><span class="fa fa-caret-down info-arrow"></span></div>
+            <ul class="sub-menu" *ngIf="showIndustryMapMenusControl.fenbuMenu">
+              <li routerLink="enterpriseFenbu" routerLinkActive="active"><em></em>企业分布</li>
+              <li routerLink="economicScale" routerLinkActive="active"><em></em>经济规模</li>
+              <li routerLink="enterpriseJiegou" routerLinkActive="active"><em></em>企业结构</li>
+              <li routerLink="leadIndustryJiegou" routerLinkActive="active"><em></em>主导行业结构</li>
+            </ul>
+          </div>
+          <div class="menu-row" routerLink="leadIndustryFenbu" routerLinkActive="active">
+            <div  class="menu-item" (click)="showIndustryMapMenus()"><div class="menu-text">主导产业分布</div></div>
+          </div>
+          <div class="menu-row" routerLink="newIndustry" routerLinkActive="active">
+            <div  class="menu-item" (click)="showIndustryMapMenus()"><div class="menu-text">新兴产业分布</div></div>
+          </div>
+          <div class="menu-row" routerLink="customizeIndustry" routerLinkActive="active">
+            <div  class="menu-item" (click)="showIndustryMapMenus()"><div class="menu-text">自定义产业分布</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-menu-right company-detail">
+        <div class="industry-map-con">
+          <perfect-scrollbar style="height: 100%">
+            <div class="panel-content" id="industry-content">
+              <router-outlet></router-outlet>
+            </div>
+          </perfect-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

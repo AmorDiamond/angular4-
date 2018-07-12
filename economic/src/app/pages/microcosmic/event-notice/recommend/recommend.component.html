@@ -1,0 +1,36 @@
+<!-- 拟规上企业推荐 -->
+<div class="panel-content">
+  <div class="panel-item-title">拟规上企业推荐：</div>
+  <div class="flex">
+    <div class="flex-cell" *ngFor="let item of Recommend">
+      <div class="flex-item" style="width: 100%;">
+        <div class="flex-head">{{item.name}}</div>
+        <ul>
+          <li class="title">公司名称</li>
+          <li>{{item.name}}</li>
+          <li class="title">公司地址</li>
+          <li>{{item.address}}</li>
+          <!-- <li class="title">成立日期</li>
+          <li>{{item.establishDate | date: 'yyyy-MM-dd'}}</li>
+          <li class="title">注册资本</li>
+          <li>{{item.registeredCapital}}</li> -->
+        </ul>
+      </div>
+    </div>
+    <!-- <div class="flex-cell" style="padding-left:12px;">
+      <div class="flex-item" style="width: 100%;">
+        <div class="flex-head">成都万山科技有限责任公司</div>
+        <ul>
+          <li class="title">公司名称</li>
+          <li>成都万山科技有限责任公司</li>
+          <li class="title">公司地址</li>
+          <li>移动互联大厦</li>
+          <li class="title">年产值</li>
+          <li>4000万</li>
+          <li class="title">推荐时间</li>
+          <li>2017/11/21</li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+</div>

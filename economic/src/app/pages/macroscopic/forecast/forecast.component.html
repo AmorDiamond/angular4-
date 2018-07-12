@@ -1,0 +1,101 @@
+<div class="macros-view-bd">
+  <div class="budget-xplain">
+    <div class="xplain-con" *ngIf="step === 'first'">
+      <div class="xplain-text">经济预测基于线性回归算法，利用今年经济数据和历史年度经济数据，对未来可能的经济走向进行预测。预测结果并不能考虑突发情况，只能为经济政策提供指导性意见。</div>
+      <div class="xplain-img">
+        <div class="xplain-item xplain-item1">
+          <div class="xplain-item-top">
+            <div class="xplain-icon icon1">
+              <div class="icon"></div>
+              <div class="icon-bot">授信数据</div>
+            </div>
+            <div class="xplain-icon icon2">
+              <div class="icon"></div>
+              <div class="icon-bot">网络数据</div>
+            </div>
+            <div class="xplain-icon icon3">
+              <div class="icon"></div>
+              <div class="icon-bot">政务数据</div>
+            </div>
+          </div>
+          <div class="xplain-item-btn">
+            数据源
+          </div>
+        </div>
+        <div class="xplain-item xplain-item2">
+          <div class="xplain-item-top">
+            <div class="xplain-icon icon1">
+              <div class="icon"></div>
+              <div class="icon-bot">数据汇集</div>
+            </div>
+            <div class="xplain-icon icon2">
+              <div class="icon"></div>
+              <div class="icon-bot">数据清洗</div>
+            </div>
+            <div class="xplain-icon icon3">
+              <div class="icon"></div>
+              <div class="icon-bot">数据分析</div>
+            </div>
+          </div>
+          <div class="xplain-item-btn">
+            数据分析
+          </div>
+        </div>
+        <div class="xplain-item xplain-item3">
+          <div class="xplain-item-top">
+            <div class="xplain-icon icon1">
+              <div class="icon"></div>
+              <div class="icon-bot">分析结果</div>
+            </div>
+          </div>
+          <div class="xplain-item-btn">
+            分析结果
+          </div>
+        </div>
+        <span class="budget-xplain-arrow"></span>
+        <span class="budget-xplain-arrow"></span>
+      </div>
+      <div class="budget-explain-btn">
+        <div class="xplain-btn" id="explain-btn" (click)="changeStep('seconed')">
+          <div class="explain-btn-bg"></div>点击预测</div>
+        <!--<canvas id="myCanvas" width="900" height="500"></canvas>-->
+      </div>
+
+      <div class="waveWrapper waveAnimation">
+        <div class="waveWrapperInner bgTop">
+          <div class="wave waveTop" style="background-image: url(../../assets/images/wave-top.png)"></div>
+        </div>
+        <div class="waveWrapperInner bgMiddle">
+          <div class="wave waveMiddle" style="background-image: url(../../assets/images/wave-mid.png)"></div>
+        </div>
+        <div class="waveWrapperInner bgBottom">
+          <div class="wave waveBottom" style="background-image: url(../../assets/images/wave-bot.png)"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="explain-progress-bar" *ngIf="step === 'seconed' || step === 'third'">
+      <div class="progress-bar-con animated" [ngClass]="{'bounceOut': isProgressEnd}">
+        <canvas id="canvas" width="600" height="600"></canvas>
+        <div class="explain-progress-text">{{progressNumber}}%</div>
+      </div>
+      <!--数据计算完确认页面-->
+      <div class="enter-budget animated" *ngIf="step === 'third'" [ngClass]="{'bounceIn': step === 'third'}">
+        <div class="enter-budget-text">数据已预测完毕</div>
+        <div class="enter-budget-btn" routerLink="/mac/forecast/result">
+          <div class="explain-btn-bg"></div>确认</div>
+      </div>
+      <div class="waveWrapper waveAnimation">
+        <div class="waveWrapperInner bgTop">
+          <div class="wave waveTop" style="background-image: url(../../assets/images/wave-top.png)"></div>
+        </div>
+        <div class="waveWrapperInner bgMiddle">
+          <div class="wave waveMiddle" style="background-image: url(../../assets/images/wave-mid.png)"></div>
+        </div>
+        <div class="waveWrapperInner bgBottom">
+          <div class="wave waveBottom" style="background-image: url(../../assets/images/wave-bot.png)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="panel-content">
+  <div class="panel-item-title">政府项目申报信息：</div>
+  <table class="table table-bordered m-t-20 table-align-c" id="" *ngIf="ProjectDeclarations.length>0">
+    <tr>
+      <th>项目名称</th>
+      <th>所在区市县</th>
+      <th>组织机构代码/统一社会信用代码</th>
+      <th>项目负责人姓名</th>
+      <th>联合单位名</th>
+      <th>项目总经费</th>
+      <th>申报市级财政科技资金</th>
+      <th>单位自筹资金</th>
+    </tr>
+    <tr *ngFor="let item of ProjectDeclarations">
+      <td class="nowrap">{{item.projectName}}</td>
+      <td class="nowrap">{{item.location}}</td>
+      <td class="nowrap">{{item.code}}</td>
+      <td class="nowrap">{{item.leader}}</td>
+      <td class="nowrap">{{item.jointCompanyName}}</td>
+      <td class="nowrap">{{item.money}}</td>
+      <td class="nowrap">{{item.declareMoney}}</td>
+      <td class="nowrap">{{item.financingMoney}}</td>
+    </tr>
+  </table>
+  <div class="no-data-tips" *ngIf="ProjectDeclarations.length<1">
+    {{GovernmentProjectTips}}
+  </div>
+</div>

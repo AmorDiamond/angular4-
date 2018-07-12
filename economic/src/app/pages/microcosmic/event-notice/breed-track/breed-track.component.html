@@ -1,0 +1,51 @@
+<!-- 重点企业培育跟踪 -->
+
+<div class="panel-content" id="key-foster-content">
+  <div class="flex">
+    <div class="flex-cell">
+      <div class="flex-item" echarts [options]="breedTrackOptions" (chartMouseOver)="onChartEvent($event, 'chartMouseOver')"></div>
+    </div>
+  </div>
+  <div class="flex">
+    <div class="flex-cell">
+      <table class="table table-bordered" id="foster-genzong-change">
+        <tr>
+          <td>{{month}}专利A申请材料</td>
+          <td>已通过审批</td>
+        </tr>
+        <tr>
+          <td>{{month}}专利B申请材料</td>
+          <td>审批未通过,理由:专利用途描述不详细</td>
+        </tr>
+        <tr>
+          <td>{{month}}某某某土地用地申请</td>
+          <td>未通过,理由:所申请的用地为绿化用地</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="flex">
+    <div class="flex-cell">
+      <div class="follow-list">
+        <div class="title">关注重点企业</div>
+        <ul class="fl">
+          <li>新希望集团有限公司</li>
+          <li>鸿富锦精密电子(成都)有限公司</li>
+          <li>一汽大众汽车有限公司成都分公司</li>
+          <li>通威集团有限公司</li>
+          <li>中国石油天然气股份有限公司西南油气田分公司</li>
+        </ul>
+      </div>
+      <div class="follow-list">
+        <div class="title">智能推荐企业</div>
+        <ul class="fl">
+          <li>四川粮油批发中心直属储备库</li>
+          <li>成都康弘药业集团股份有限公司</li>
+          <li>成都光明光电股份有限公司</li>
+          <li>中国南车成都机车车辆有限公司</li>
+          <li>成都文化旅游发展集团有限责任公司</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<app-map></app-map>
+<div class="mask">
+  <ng2-toasty [position]="'top-center'"></ng2-toasty>
+</div>
+<div class="login-box">
+  <div class="column_title_box">
+    <h3 id="lesMiserablesTit">用户登录</h3>
+  </div>
+  <form>
+    <div for="" class="label">
+      <input type="text" placeholder="输入账号" [(ngModel)]="username" name="username">
+      <div class="img-box">
+        <div>
+          <img src="assets/images/input-user.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div for="" class="label">
+      <input type="password" placeholder="输入密码" [(ngModel)]="password" name="password">
+      <div class="img-box">
+        <div>
+          <img src="assets/images/input-password.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div for="" class="label">
+      <input type="submit" value="登录" class="login" (click)="login()">
+    </div>
+  </form>
+</div>

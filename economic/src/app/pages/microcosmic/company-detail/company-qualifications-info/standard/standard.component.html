@@ -1,0 +1,21 @@
+<div class="panel-content">
+  <div class="panel-item-title">标准制定：</div>
+  <div id="certificationsDiv"></div>
+  <perfect-scrollbar>
+    <table class="table table-bordered" *ngFor="let item of StandardSettings">
+      <tr>
+        <td class="nowrap">标准名称:</td>
+        <td name="name">{{item.standardName}}</td>
+        <td class="nowrap">标准编号:</td>
+        <td name="number">{{item.standardCode}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap">标准内容:</td>
+        <td name="content">{{item.standardContent}}</td>
+        <td class="nowrap">公开时间:</td>
+        <td name="content">{{item.publicityDate | date: "yyyy-MM-dd"}}</td>
+      </tr>
+    </table>
+  </perfect-scrollbar>
+
+</div>

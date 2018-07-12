@@ -1,0 +1,64 @@
+/* .column_title_box h3 {
+  float: left;
+  text-align: center;
+  margin-left: 10px;
+  padding: 0 20px;
+  text-indent: 0;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.column_title_box h3.active,
+.column_title_box h3:hover {
+  background: #f9b620;
+  color: #151411;
+  box-shadow: inset 0px -2px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+} */
+
+/* .column_title_box,
+.panel-hd .title {
+  height: 50px;
+  position: relative;
+  background-color: #22211d;
+  border-radius: 6px;
+}
+
+.column_title_box:before,
+.panel-hd .title:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  background: -webkit-linear-gradient(left, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
+  background: -o-linear-gradient(right, #22211d, #3a3934);
+  background: -moz-linear-gradient(right, #22211d, #3a3934);
+  background: linear-gradient(to right, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
+  border-radius: 6px;
+}
+
+.column_title_box h3 {
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0;
+  z-index: 9;
+  font-size: 16px;
+  padding: 0 20px;
+  margin-left: 10px;
+  outline: none;
+  color: #f9b620;
+  line-height: 50px;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.column_title_box h3.active,
+.column_title_box h3:hover {
+  background: #f9b620;
+  color: #151411;
+  box-shadow: inset 0px -2px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+} */

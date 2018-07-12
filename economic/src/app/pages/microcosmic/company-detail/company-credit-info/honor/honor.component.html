@@ -1,0 +1,119 @@
+<!-- <div class="panel-bd pop-index-2 animated"> -->
+<div class="panel-content" id="divs">
+  <div id="">
+    <div class="panel-item-title">政府表彰信息：</div>
+    <table class="table table-bordered table-align-c" *ngIf="governmentHonorList.length>0">
+      <tr>
+        <th>荣誉名称</th>
+        <th>奖励级别</th>
+        <th>名次</th>
+        <th>表彰内容</th>
+        <th>年度</th>
+      </tr>
+      <tr *ngFor="let data of governmentHonorList">
+        <td>{{data.honorName}}</td>
+        <td>{{data.level}}</td>
+        <td>{{data.ranking}}</td>
+        <td>{{data.commendContent}}</td>
+        <td>{{data.year}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="governmentHonorList.length<1">
+      {{GovernmentHonorTips}}
+    </div>
+  </div>
+  <div id="xingzheng">
+    <div class="panel-item-title">行政奖励信息：</div>
+    <table class="table table-bordered table-align-c" *ngIf="administrationHonorList.length>0">
+      <tr>
+        <th>荣誉名称</th>
+        <th>奖励级别</th>
+        <th>名次</th>
+        <th>表彰内容</th>
+        <th>年度</th>
+        <th>证书/登记编号</th>
+        <th>发证机关</th>
+        <th>发证日期</th>
+        <th>数据提供单位</th>
+        <th>数据提供日期</th>
+      </tr>
+      <tr *ngFor="let data of administrationHonorList">
+        <td>{{data.honorName}}</td>
+        <td>{{data.level}}</td>
+        <td>{{data.ranking}}</td>
+        <td>{{data.commendContent}}</td>
+        <td>{{data.year}}</td>
+        <td>{{data.code}}</td>
+        <td>{{data.evaluationInstitution}}</td>
+        <td>{{data.evaluationDate}}</td>
+        <td>{{data.dataSource}}</td>
+        <td>{{data.dataProvisionTime}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="administrationHonorList.length<1">
+      {{AdministrationHonorTips}}
+    </div>
+  </div>
+  <div id="biaozhang">
+    <div class="panel-item-title">表彰奖励信息：</div>
+    <table class="table table-bordered table-align-c" *ngIf="commendHonorList.length>0">
+      <tr>
+        <th>荣誉名称</th>
+        <th>奖励级别</th>
+        <th>名次</th>
+        <th>表彰内容</th>
+        <th>年度</th>
+        <th>证书/登记编号</th>
+        <th>发证机关</th>
+        <th>发证日期</th>
+        <th>数据提供单位</th>
+        <th>数据提供日期</th>
+      </tr>
+      <tr *ngFor="let data of commendHonorList">
+        <td>{{data.honorName}}</td>
+        <td>{{data.level}}</td>
+        <td>{{data.ranking}}</td>
+        <td>{{data.commendContent}}</td>
+        <td>{{data.year}}</td>
+        <td>{{data.code}}</td>
+        <td>{{data.evaluationInstitution}}</td>
+        <td>{{data.evaluationDate}}</td>
+        <td>{{data.dataSource}}</td>
+        <td>{{data.dataProvisionTime}}</td>
+      </tr>
+    </table>
+    <div class="no-data-tips" *ngIf="commendHonorList.length<1">
+      {{CommendHonorTips}}
+    </div>
+  </div>
+  <!--<div id="">
+    <div class="panel-item-title">其他荣誉信息：</div>
+    <table class="table table-bordered table-align-c">
+      <tr>
+        <th>荣誉名称</th>
+        <th>奖励级别</th>
+        <th>名次</th>
+        <th>表彰内容</th>
+        <th>年度</th>
+        <th>证书/登记编号</th>
+        <th>发证机关</th>
+        <th>发证日期</th>
+        <th>数据提供单位</th>
+        <th>数据提供日期</th>
+      </tr>
+      <tr *ngFor="let data of otherHonorList">
+        <td>{{data.honorName}}</td>
+        <td>{{data.level}}</td>
+        <td>{{data.ranking}}</td>
+        <td>{{data.commendContent}}</td>
+        <td>{{data.year}}</td>
+        <td>{{data.code}}</td>
+        <td>{{data.evaluationInstitution}}</td>
+        <td>{{data.evaluationDate}}</td>
+        <td>{{data.dataSource}}</td>
+        <td>{{data.dataProvisionTime}}</td>
+      </tr>
+    </table>
+  </div>-->
+</div>
+<!-- </div> -->

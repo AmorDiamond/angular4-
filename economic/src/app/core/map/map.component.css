@@ -1,0 +1,243 @@
+.t-amap {
+  width: 100%;
+  height: 100vh;
+}
+
+.mapMarker {
+  position: relative;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  background-color: rgba(249, 182, 32, 0.8);
+  box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.mapMarker span {
+  display: block;
+  width: 32px;
+  padding: 15px 0;
+  margin: 0 auto;
+  height: 70px;
+  line-height: 20px;
+  font-size: 16px;
+  color: #151411;
+}
+.park-build{
+  position: absolute;
+  top: 20px;
+  right: 60%;
+  margin-right: 20px;
+  background: rgba(252, 249, 242, .9);
+  border-radius: 6px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, .2);
+  display: none;
+  transition: right 1s;
+}
+.park-build .park-list{
+  padding: 5px 10px;
+  background: #11100d;
+  color: #bcbdbf;
+}
+.park-build .park-list .park-item{
+  margin: 5px 0;
+  cursor: pointer;
+}
+.park-build .park-list .park-item .park-name-icon{
+  display: inline-block;
+  padding: 3px;
+  background: transparent;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+.park-build .park-list .park-item .park-name-icon.active{
+  background: #f9b71c;
+}
+.park-build-bd{
+  padding: 10px;
+  padding-top: 0;
+}
+.land-choose-time{
+  width: 130px;
+  padding: 10px;
+  overflow: hidden;
+  display: none;
+}
+.park-build-con .park-name{
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px;
+  color: #f9b71c;
+  background: #252420;
+  cursor: pointer;
+  border-radius: 6px 6px 0 0;
+}
+.park-build-con .info-l{
+  margin-right: 20px;
+}
+.park-info{
+  color: #999999;
+  overflow: hidden;
+}
+.park-info span{
+  color: #333;
+  font-weight: bold;
+}
+.amap-info-content{
+  position: relative;
+  padding-left: 60px;
+  border-radius: 25px;
+  border: 2px solid #f9b620;
+  height: 54px;
+  line-height: 30px;
+  font-size: 20px;
+  white-space: nowrap;
+}
+.amap-info-content:before{
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-image: url("../../../assets/images/park_build_infowind.png");
+  background-color: #f9b620;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 0;
+  left: -2px;
+}
+.amap-info-sharp{
+  top: -16px;
+  background: none;
+  width: 30px !important;
+  height: 30px !important;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-left: 2px solid #f9b620;
+  border-bottom: 2px solid #f9b620;
+  transform: rotate(-45deg);
+  background: #fff;
+  border-radius: 0 10px 0 0;
+}
+/*#myList{
+  display: none;
+}*/
+#myList li{
+  cursor: pointer;
+}
+.choose-park-buid{
+  position: relative;
+  border: 1px solid rgba(37, 36, 33, .6);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 5px;
+  min-width: 120px;
+}
+.choose-park-buid .build-arrow,.park-name .build-arrow{
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  transition: transform .3s;
+}
+.choose-park-buid .build-arrow.active,.park-name .build-arrow.active{
+  transform: rotate(180deg);
+}
+.park-build-con .park-name .build-arrow{
+  color: #f9b71c;
+  top: 10px;
+}
+li.poibox.selected,#myList li:hover {
+  color: #f9b621;
+}
+.zdy-full-cover-mask .zdy-big-mask,.zdy-full-cover-mask .spinner,.zdy-buildfull-cover-mask .zdy-big-mask,.zdy-buildfull-cover-mask .spinner{
+  z-index: 20;
+}
+.poi-title .build-name-icon{
+  margin: 0 5px;
+}
+.park-build.active{
+  display: block;
+}
+/*颜色列表*/
+.eco-color .color-blank,.top-color .color-blank{
+  cursor:pointer;
+  background: #ddd;
+}
+.time-colors-panel{
+  position: absolute;
+  top: 20px;
+  right: 60%;
+  padding: 10px;
+  margin-right: 20px;
+  background: rgba(252, 249, 242, .9);
+  border-radius: 6px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, .2);
+  transition: right 1s;
+}
+.color-blank{
+  padding: 10px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+  /*opacity: .8;*/
+}
+.color-item{
+  height: 30px;
+  line-height: 30px;
+}
+/*性质*/
+.reserve-land{
+  background: #fff;
+}
+.industry-land{
+  background: #a57c52;
+}
+.other-land{
+  /*background: #7edfff;*/
+  background: #2a8ab8;
+}
+.teach-land{
+  background: #ff7eff;
+}
+.bsiness-land{
+  background: #ff0000;
+}
+.house-land{
+  /*background: #ffdf7e;*/
+  background: #ffd041;
+}
+/*低效*/
+.uninefficient-land{
+  background: #f9b620;
+}
+.inefficient-land{
+  background: #4747f1;
+}
+/*top*/
+.active .living-land{
+  background: #ff7e9f;
+}
+.active .electron-land{
+  background: #ff7e00;
+}
+.active .yiqi-land{
+  background: #a57c52;
+}
+.active .top-other-land{
+  background: #7d7dff;
+}
+.active .service-land{
+  background: #ff0000;
+}
+.my-hide{
+  display: none;
+}
+.my-hide.active{
+  display: block;
+}
+.time-colors-panel.right,.park-build.right{
+  right: 20px;
+}
+

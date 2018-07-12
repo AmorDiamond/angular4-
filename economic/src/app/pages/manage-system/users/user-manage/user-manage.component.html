@@ -1,0 +1,32 @@
+<div class="address-con"><span class="back-btn" routerLink="/admin/users"></span><span class="home-icon fa fa-home"></span>首页 > 用户管理 > 添加用户</div>
+<div class="single-form">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label class="form-label" for="name">用户名称</label>
+      <input type="text" class="form-control" id="name" minlength="4" required [(ngModel)]="ldapName" name="name" placeholder="请输入用户名称" #name="ngModel">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+        <div *ngIf="name.errors.required">
+          用户名称不能为空.
+        </div>
+        <div *ngIf="name.errors.minlength">
+          用户名称不能少于4位.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="nodeType">类型</label>
+      <select class="form-control" id="nodeType" required [(ngModel)]="ldapNodeType" name="nodeType" #nodeType="ngModel">
+        <option *ngFor="let nodeType of ldapNodeTypes" [selected]="(ldapNodeType == nodeType.value) ? selected : null" [ngValue]="nodeType.value">{{nodeType.label}}</option>
+      </select>
+      <div *ngIf="nodeType.invalid && (nodeType.dirty || nodeType.touched)" class="alert alert-danger">
+        <div *ngIf="nodeType.errors.required">
+          类型不能为空.
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-save" [disabled]="!userForm.form.valid">确定</button>
+    <!-- - -->
+  </form>
+</div>
+<ng2-toasty [position]="'center-center'"></ng2-toasty>

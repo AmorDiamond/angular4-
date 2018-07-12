@@ -1,0 +1,25 @@
+<div class="address-con"><span class="back-btn" routerLink="/admin/users"></span><span class="home-icon fa fa-home"></span>首页 > 用户管理 > 设置角色</div>
+<div class="single-form">
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label class="form-label" for="name">用户名称</label>
+      <input type="text" class="form-control" disabled id="name" [ngModel]="ldapName" name="name">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="nodeType">类型</label>
+      <select class="form-control" disabled id="nodeType" required [ngModel]="ldapNodeType" name="nodeType" #nodeType="ngModel">
+        <option *ngFor="let nodeType of ldapNodeTypes" [selected]="(ldapNodeType == nodeType.value) ? selected : null" [ngValue]="nodeType.value">{{nodeType.label}}</option>
+      </select>
+    </div>
+    <div class="roles-con">
+      <div class="roles-all">用户角色</div>
+      <div class="roles-list">
+        <div class="roles-item" *ngFor="let item of userRoles"><label><input type="checkbox" [(ngModel)]="item.hasChecked" [name]="item.id" [checked]="item.hasChecked"><i></i>{{item.name}}</label></div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-save" [disabled]="!userForm.form.valid">确定</button>
+    <!-- - -->
+  </form>
+</div>
+<ng2-toasty [position]="'center-center'"></ng2-toasty>

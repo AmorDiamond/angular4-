@@ -1,0 +1,35 @@
+<div class="animated">
+  <div class="flex">
+    <div class="flex-cell">
+      <div class="build-info">
+        <table class="table table-bordered" id="basic-data" *ngIf="!choseBuildName">
+          <tr>
+            <th class="nowrap">名称</th>
+            <th class="nowrap">地址</th>
+            <th class="nowrap">办公楼面积</th>
+            <th class="nowrap">总面积</th>
+          </tr>
+
+          <tr *ngFor="let build of buildDataList">
+            <td class="nowrap">{{build.floorName ? build.floorName : '未知'}}</td>
+            <td class="nowrap">{{build.floorAddress ? build.floorAddress: '未知'}}</td>
+            <td class="nowrap">{{build.officeFloorArea ? build.officeFloorArea: '未知'}}</td>
+            <td class="nowrap">{{build.totalArea ? build.totalArea: '未知'}}</td>
+          </tr>
+        </table>
+
+        <div class="right_div company-list" id="basic-company-list">
+          <div class="company-item" *ngFor="let company of buildOfCompanys">
+            <div class="company-logo">
+              <img src="../../../../../../assets/images/company_logo.png" alt="" class="mCS_img_loaded">
+            </div>
+            <div class="info">
+              <div class="name">{{company.name}}</div>
+              <div>企业类型：{{company.enterpriseType}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

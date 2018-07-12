@@ -1,0 +1,95 @@
+<div class="cygmCon">
+  <!--<div class="microcosmic_scroll" id="cygmCon">-->
+  <div class="flex flex-row">
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box1">
+        <div class="column_title_box">
+          <h3>季度总产值</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_jdzcz" echarts [options]="jiduOutputValueEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box2">
+        <div class="column_title_box">
+          <h3>行业总产值</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_hyzcz" echarts [options]="hangyeOutputValueEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row">
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box1">
+        <div class="column_title_box">
+          <h3>进出口总额</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_jckze" echarts [options]="importExportValueEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box2">
+        <div class="column_title_box">
+          <h3>纳税总额</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_nsze" echarts [options]="payTaxesValueEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row">
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box1">
+        <div class="column_title_box">
+          <h3>人均收入</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_rjsr" echarts [options]="renjunShouruValueEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column-box flex-cell">
+      <div class="panel-chart-box panel-chart-box1">
+        <div class="column_title_box">
+          <h3>公共性预算</h3>
+        </div>
+        <div class="panel-chart flex">
+          <div class="flex-cell">
+            <div class="flex-item">
+              <div id="jjgm_ggxys" echarts [options]="gonggongYusuanValueEchart" class="chart_div chart_div_border"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
