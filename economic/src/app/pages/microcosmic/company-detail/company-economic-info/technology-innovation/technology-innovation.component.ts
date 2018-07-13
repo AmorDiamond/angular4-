@@ -15,6 +15,7 @@ export class TechnologyInnovationComponent implements OnInit {
   ) { }
   companyName: any;
   OrganizationEchartData: any;
+  OrganizationPeopleEchartData: any;
   ExpenditureEchartData: any;
   IntellectualPropertyEchartData: any;
 
@@ -38,17 +39,15 @@ export class TechnologyInnovationComponent implements OnInit {
       }
     })
     // const options = { xAxis: [2013, 2014, 2015, 2016, 2017], number: [100, 120, 130, 180, 190], people: [1000, 2000, 2500, 3200, 5000] };
-    const options = { xAxis: [], number: [1000], people: [10200], money: [100000000] };
-    // this.creatOrganizationEchart(options);
+    const options = { xAxis: [], number: [92], people: [10200], money: [101000000] };
+    /*绘制机构数据图表*/
+    this.creatOrganizationEchart(options);
+    /*绘制机构人数图表*/
+    this.creatOrganizationPeopleEchart(options);
     /*绘制经费支出数据图表*/
-    const money = 100000000;
-    // this.creatExpenditureEchart(money);
-    this.creatOrganizationEchartOld(options);
-  }
-  /*获取经费支出数据*/
-  getExpenditureData() {
-    const money = 100000000;
+    const money = 101000000;
     this.creatExpenditureEchart(money);
+    // this.creatOrganizationEchartOld(options);
   }
   /*获取知识产权数据*/
   getIntellectualPropertyData() {
@@ -252,7 +251,7 @@ export class TechnologyInnovationComponent implements OnInit {
         axisTick: {
           alignWithLabel: true
         },
-        data: data.xAxis,
+        data: ['机构数'],
         axisLabel: {
           textStyle: {
             color: '#bcbdbf'
@@ -272,7 +271,7 @@ export class TechnologyInnovationComponent implements OnInit {
           }
         }
       },
-        {
+        /*{
           type: 'value',
           name: '机构人员(人)',
           nameTextStyle: {
@@ -285,12 +284,13 @@ export class TechnologyInnovationComponent implements OnInit {
               color: '#bcbdbf'
             }
           }
-        }
+        }*/
       ],
       series: [{
         name: '机构数',
         type: 'bar',
         color: ['#1eb5d4'],
+        barMaxWidth: '40%',
         // stack: '总数',
         label: {
           normal: {
@@ -303,7 +303,7 @@ export class TechnologyInnovationComponent implements OnInit {
         },
         data: data.number
       },
-        {
+        /*{
         name: '机构人员',
         type: 'bar',
         // stack: '总数',
@@ -327,10 +327,88 @@ export class TechnologyInnovationComponent implements OnInit {
           }
         },
         data: data.people
-      }
+      }*/
       ]
     };
     this.OrganizationEchartData = option;
+  }
+  creatOrganizationPeopleEchart(options) {
+    // const data = { xAxis: [], number: [], people: [] };
+    const data = options;
+    const echatsTitle = new Date().getFullYear() - 1;
+    const option = {
+      title: {
+        text: echatsTitle + '机构人员数据',
+        left: 'center', // 居中
+        textStyle: {
+          color: '#bcbdbf'
+        }
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      toolbox: {
+      },
+      grid: {
+        top: '25%',
+        left: '3%',
+        right: '3%',
+        bottom: '5%',
+        containLabel: true
+      },
+      legend: {
+        data: ['机构数', '机构人员', '经费支出'],
+        textStyle: {
+          color: '#bcbdbf'
+        },
+        top: '10%'
+      },
+      xAxis: [{
+        type: 'category',
+        axisTick: {
+          alignWithLabel: true
+        },
+        data: ['机构人员'],
+        axisLabel: {
+          textStyle: {
+            color: '#bcbdbf'
+          }
+        }
+      }],
+      yAxis: [{
+        type: 'value',
+        name: '机构人员(人)',
+        nameTextStyle: {
+          color: '#bcbdbf'
+        },
+        min: 0,
+        axisLabel: {
+          textStyle: {
+            color: '#bcbdbf'
+          }
+        }
+      }
+      ],
+      series: [{
+        name: '机构人员',
+        type: 'bar',
+        color: ['#1eb5d4'],
+        barMaxWidth: '40%',
+        // stack: '总数',
+        label: {
+          normal: {
+            show: true,
+            position: 'top',
+            formatter: function (param) {
+              return param.data + '人';
+            }
+          }
+        },
+        data: data.people
+      }
+      ]
+    };
+    this.OrganizationPeopleEchartData = option;
   }
   /*绘制经费支出数据图表*/
   creatExpenditureEchart(options) {
@@ -351,19 +429,25 @@ export class TechnologyInnovationComponent implements OnInit {
       toolbox: {
       },
       grid: {
+        top: '25%',
         left: '3%',
         right: '3%',
         bottom: '5%',
         containLabel: true
       },
       legend: {
+        data: ['机构数', '机构人员', '经费支出'],
+        textStyle: {
+          color: '#bcbdbf'
+        },
+        top: '10%'
       },
       xAxis: [{
         type: 'category',
         axisTick: {
           alignWithLabel: true
         },
-        data: data.xAxis,
+        data: ['经费支出'],
         axisLabel: {
           textStyle: {
             color: '#bcbdbf'
@@ -388,7 +472,7 @@ export class TechnologyInnovationComponent implements OnInit {
         name: '经费支出',
         type: 'bar',
         color: ['#1eb5d4'],
-        barMaxWidth: '20%',
+        barMaxWidth: '40%',
         // stack: '总数',
         label: {
           normal: {

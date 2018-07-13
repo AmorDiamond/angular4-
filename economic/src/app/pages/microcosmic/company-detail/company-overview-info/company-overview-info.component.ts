@@ -72,7 +72,18 @@ export class CompanyOverviewInfoComponent implements OnInit {
             ]
           this.creat3DcloudTag(options);
         }
-        this.inferiorityLists = results[2].data.eAEvaluationPojos;
+        if (results[2].data.eAEvaluationPojos.length > 0) {
+          this.inferiorityLists = results[2].data.eAEvaluationPojos;
+        }else {
+          const options = [
+            {inferiorityType: '资质劣势', inferiority: '暂无'},
+            {inferiorityType: '经济指标劣势', inferiority: '暂无'},
+            {inferiorityType: '能耗劣势', inferiority: '暂无'},
+            {inferiorityType: '信用劣势', inferiority: '暂无'},
+            {inferiorityType: '发展事态劣势', inferiority: '暂无'}
+          ];
+          this.inferiorityLists = options;
+        }
         // this.loadingService.loadingStop();
       }, err => {
         // alert('数据请求出错！');
@@ -201,7 +212,7 @@ export class CompanyOverviewInfoComponent implements OnInit {
         entries: entries,
 //                width: "100%",
         width: 500,
-        height: 500,
+        height: 300,
 //                radius: '65%',//图像大小
         radiusMin: 75,
         bgDraw: true,

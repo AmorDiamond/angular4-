@@ -32,10 +32,10 @@ export class SocialSecurityComponent implements OnInit {
     this.companyBasicService.getCompanySocialSecurity(this.keyWord).subscribe(res => {
       console.log('社会保障信息', res)
       if (res.responseCode === '_200') {
-        if (res.data.informationPojo.length < 1) {
+        if (!res.data.informationPojo[0]) {
           this.CompanyDetailTips = '暂无信息！';
         }
-        this.companyDetail = res.data.informationPojo;
+        this.companyDetail = res.data.informationPojo[0];
       }
     });
   }

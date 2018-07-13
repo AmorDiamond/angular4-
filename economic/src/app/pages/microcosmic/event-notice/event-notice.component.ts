@@ -5,7 +5,7 @@ import { CHANGE } from '../../../core/container-ngrx/container.action';
 import { EventNoticeService } from './event-notice.service';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
+  // encapsulation: ViewEncapsulation.None,
   selector: 'app-event-notice',
   templateUrl: './event-notice.component.html',
   providers: [EventNoticeService],

@@ -30,7 +30,7 @@ export class OperatingIncomeComponent implements OnInit {
   getBusinessIncome() {
     this.companyEconomicInfoService.findListByUrl(this.companyName, 'companyIncomeStatisticsByYearUrl').subscribe(res => {
       console.log('获取营业收入', res)
-      this.creatBusinessIncomeEChart(res.data, [2013, 2014, 2015, 2016, 2017]);
+      this.creatBusinessIncomeEChart(res.data, [2015, 2016, 2017]);
     });
     /*this.companyEconomicInfoService.getIncomeStatisticsByYear('鸿富锦精密电子(成都)有限公司', [2015, 2016, 2017]).subscribe(results => {
       console.log('获取营业收入', results)
@@ -64,8 +64,9 @@ export class OperatingIncomeComponent implements OnInit {
     /*获取收入占比信息*/
     this.businessIncomeRatioLoading = true;
     const time = event.name;
-    const BusinessIncomeRatioPramas = { companyName: this.companyName, year: time };
+    const BusinessIncomeRatioPramas = { name: this.companyName, year: time };
     this.companyEconomicInfoService.findListByUrl(BusinessIncomeRatioPramas, 'companyIncomeStatisticsByYearUrl').subscribe(res => {
+    // this.companyEconomicInfoService.getRevenueShare(this.companyName, time).subscribe(res => {
       /*const data = {
         2017:{"timestemp":1529639550524,"data":{"pagination":{"currentPage":1,"pageSize":10,"lastRowKey":null},"eIIRevenueAndStaffPojo":[{"rowKey":"5b877abb-e9d9-42d5-a6eb-3e8a5b09cbd1","enterpriseName":"test1","facet":"2","year":"2017","totalMoney":null,"money":1200,"type":"技术转让","quarter":null,"number":0,"proportion":null},{"rowKey":"75316988-4b84-49e9-acc1-88cacecd6687","enterpriseName":"test1","facet":"2","year":"2017","totalMoney":null,"money":352,"type":"技术承包","quarter":null,"number":0,"proportion":null},{"rowKey":"b99c91d6-0f05-4909-9e0a-c7314d1d1f8b","enterpriseName":"test1","facet":"2","year":"2017","totalMoney":null,"money":500,"type":"技术咨询与服务","quarter":null,"number":0,"proportion":null},{"rowKey":"bdb5dcc1-6d33-4528-9def-0e2767fa79bf","enterpriseName":"test1","facet":"2","year":"2017","totalMoney":null,"money":1100,"type":"接受委托研究开发","quarter":null,"number":0,"proportion":null},{"rowKey":"d81e707e-3137-4fb2-a45f-31f910598a7f","enterpriseName":"test1","facet":"2","year":"2017","totalMoney":null,"money":157,"type":"产品销售","quarter":null,"number":0,"proportion":null},{"rowKey":"f97a4444-075c-4252-97c5-9dda887bfc7d","enterpriseName":"test1","facet":"2","year":"2017","totalMoney":null,"money":850,"type":"商品销售","quarter":null,"number":0,"proportion":null}]},"responseCode":"_200","errorMsg":null},
         2016:{"timestemp":1529639635285,"data":{"pagination":{"currentPage":1,"pageSize":10,"lastRowKey":null},"eIIRevenueAndStaffPojo":[{"rowKey":"1d96d4d6-2f56-480d-bd40-6ea217a981a8","enterpriseName":"test1","facet":"2","year":"2016","totalMoney":null,"money":1850,"type":"技术转让","quarter":null,"number":0,"proportion":null},{"rowKey":"3fcde07e-aaf4-491b-96fa-791e4ac0a2f6","enterpriseName":"test1","facet":"2","year":"2016","totalMoney":null,"money":200,"type":"技术承包","quarter":null,"number":0,"proportion":null},{"rowKey":"8b676875-03ef-4ac4-8004-34c0cd7df68e","enterpriseName":"test1","facet":"2","year":"2016","totalMoney":null,"money":100,"type":"技术咨询与服务","quarter":null,"number":0,"proportion":null},{"rowKey":"8d4d0f19-87af-4386-b83b-87eaf4b1240c","enterpriseName":"test1","facet":"2","year":"2016","totalMoney":null,"money":252,"type":"接受委托研究开发","quarter":null,"number":0,"proportion":null},{"rowKey":"94e496e1-f9cc-4f79-82ec-7ebddc93d75b","enterpriseName":"test1","facet":"2","year":"2016","totalMoney":null,"money":157,"type":"产品销售","quarter":null,"number":0,"proportion":null},{"rowKey":"e658ccdf-fcb5-4fda-a500-845c13d63888","enterpriseName":"test1","facet":"2","year":"2016","totalMoney":null,"money":1100,"type":"商品销售","quarter":null,"number":0,"proportion":null}]},"responseCode":"_200","errorMsg":null},
@@ -78,7 +79,10 @@ export class OperatingIncomeComponent implements OnInit {
       }else {
         result = res;
       }*/
-      this.creatBusinessIncomeRatioEChart(res.data[0], time);
+      console.log('获取收入占比', res);
+      if (res.data[0]) {
+        this.creatBusinessIncomeRatioEChart(res.data[0], time);
+      }
     });
   }
   /*绘制营业收入图表*/
@@ -253,7 +257,7 @@ export class OperatingIncomeComponent implements OnInit {
         }
       },
       title: {
-        text: '公司几年内收入变化图',
+        text: '公司近三年内收入变化',
         left: 'center', // 居中
         top: 20, // 距离上边框距离
         textStyle: {
@@ -274,7 +278,7 @@ export class OperatingIncomeComponent implements OnInit {
         position: 'bottom',
         data: dataAxis,
         axisLabel: {
-          inside: true,
+          // inside: true,
           textStyle: {
             color: '#fff'
           }

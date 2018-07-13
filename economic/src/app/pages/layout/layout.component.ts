@@ -9,6 +9,7 @@ import 'rxjs/add/operator/delay';
 import { Subscription } from 'rxjs/Subscription';
 import { LayoutService } from './layout.service';
 import { IntermediateService } from '../intermediate/intermediate.service';
+import { MicrocosmicService } from "../microcosmic/microcosmic.service";
 import {ADD_MARKER_MID, ADD_POLYGON, ADD_SINGLE_POLYGON, CLEAR_MARKER} from '../../core/amap-ngrx/amap.actions';
 import { Amap } from '../../core/amap-ngrx/amap.model';
 declare var $: any;
@@ -112,15 +113,21 @@ export class LayoutComponent implements OnInit, OnDestroy {
     other: false,
     service: false
   }
+  panelHide: boolean = false;
+  PanleHideSubscription: Subscription;
   constructor(private router: Router,
     private layoutService: LayoutService,
     private intermediateService: IntermediateService,
+    private microcosmicService: MicrocosmicService,
     private store: Store<ContainerStyle>,
     private storeAmap: Store<Amap>) {
     this.tagState$ = this.store.select('container');
   }
 
   search() {
+
+    /*临时隐藏微观概况面板*/
+    this.microcosmicService.changePanleHide(false);
     this.layoutService.search({
       keyWord: this.keyWord
     });
@@ -128,6 +135,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.ecoRevenueTime = this.ecoTopRevenueTime = this.intermediateService.getInitRevenueTime();
+    /*临时用于隐藏微观概况面板*/
+    this.PanleHideSubscription = this.microcosmicService.getPanleHide().subscribe(res => {
+      if (res.hide) {
+        this.panelHide = true;
+      }else {
+        this.panelHide = false;
+      }
+    })
     /*经济产出地图时间控制*/
     $("#datetimepicker").datetimepicker({
       autoclose: 1,
@@ -265,6 +280,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     this.socketSubscription.unsubscribe();
     this.socketStatusSubscription.unsubscribe();
+    this.PanleHideSubscription.unsubscribe();
   }
 
   noticeClose() {

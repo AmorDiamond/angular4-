@@ -12,3 +12,9 @@
     /*width: 3.125rem;*/
     height: 2.083333rem;
 }
+.company-detail .panel-content .flex .flex-cell{
+    padding-left: 20px;
+}
+.company-detail .panel-content .flex .flex-cell:first-child{
+    padding-left: 0;
+}

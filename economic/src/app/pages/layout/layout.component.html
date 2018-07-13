@@ -75,7 +75,7 @@
   </div>
   <!-- ===== 搜索 the end ===== ===== ===== ===== ===== -->
   <!-- ===== 内容面板 start ===== ===== ===== ===== ===== -->
-  <div class="microcosmic_container animated" id="microcosmic_container" [ngStyle]="container" [ngClass]="{'slideInRight': isRirhtPanelShow, 'slideOutRight': !isRirhtPanelShow}">
+  <div class="microcosmic_container animated" id="microcosmic_container" [hidden]="panelHide" [ngStyle]="container" [ngClass]="{'slideInRight': isRirhtPanelShow, 'slideOutRight': !isRirhtPanelShow}">
     <div class="back-arrow">
       <span class="back-arrow-btn" (click)="notRirhtPanelShow()" [ngClass]="{'active': !isRirhtPanelShow && !isSearchActive}"></span>
     </div>

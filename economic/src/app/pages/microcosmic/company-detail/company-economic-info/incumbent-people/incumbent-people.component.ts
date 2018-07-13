@@ -32,7 +32,7 @@ export class IncumbentPeopleComponent implements OnInit {
   getEnterprisePeople() {
     this.companyEconomicInfoService.findListByUrl(this.echartsParams, 'companyNumberOfActiveStaffByYearUrl').subscribe(res => {
       console.log('企业人数', res)
-      this.creatParkNumber(res.data, [2013, 2014, 2015, 2016, 2017]);
+      this.creatParkNumber(res.data, [2015, 2016, 2017]);
       /*获取园区人数占比数据*/
       /*this.companyEconomicInfoService.findListByUrl(this.echartsParams, 'companyParkNumberUrl').subscribe(proportionres => {
         const options = { number: res.data.eIIRevenueAndStaffPojo, proportion: proportionres.data.eIIRevenueAndStaffPojo };
@@ -46,12 +46,14 @@ export class IncumbentPeopleComponent implements OnInit {
     this.companyEconomicInfoService.findListByUrl(params, 'companyNumberOfActiveStaffByYearUrl').subscribe(res => {
       console.log('结构人数', res.data);
       const options = res.data[0];
-      /*获取人员构成占比图表*/
-      this.creatStaffCompositionRatioEChart(options);
-      /*获取管理结构情况图表*/
-      this.creatManagementStructureEchart(options);
-      /*获取就业情况图表*/
-      this.creatEmploymentStatusEchart(options);
+      if (options) {
+        /*获取人员构成占比图表*/
+        this.creatStaffCompositionRatioEChart(options);
+        /*获取管理结构情况图表*/
+        this.creatManagementStructureEchart(options);
+        /*获取就业情况图表*/
+        this.creatEmploymentStatusEchart(options);
+      }
     });
   }
   /*获取所需年份企业结构人数*/
@@ -92,7 +94,7 @@ export class IncumbentPeopleComponent implements OnInit {
       // data.proportion = data.proportion.slice(data.proportion.length - 7, data.proportion.length);
       data.number = data.number.slice(data.number.length - 7, data.number.length);
     }
-    const echatsTitle = `${nowTime - 6}-${nowTime - 1}`;
+    const echatsTitle = `公司近三年`;
     const option4 = {
       title: {
         text: echatsTitle + '在职人员总数',

@@ -45,9 +45,9 @@
         <td>{{data.year}}</td>
         <td>{{data.code}}</td>
         <td>{{data.evaluationInstitution}}</td>
-        <td>{{data.evaluationDate}}</td>
+        <td class="nowrap">{{data.evaluationDate | date:'yyyy-MM-dd'}}</td>
         <td>{{data.dataSource}}</td>
-        <td>{{data.dataProvisionTime}}</td>
+        <td class="nowrap">{{data.dataProvisionTime | date:'yyyy-MM-dd'}}</td>
       </tr>
     </table>
     <div class="no-data-tips" *ngIf="administrationHonorList.length<1">
@@ -77,9 +77,9 @@
         <td>{{data.year}}</td>
         <td>{{data.code}}</td>
         <td>{{data.evaluationInstitution}}</td>
-        <td>{{data.evaluationDate}}</td>
+        <td class="nowrap">{{data.evaluationDate | date:'yyyy-MM-dd'}}</td>
         <td>{{data.dataSource}}</td>
-        <td>{{data.dataProvisionTime}}</td>
+        <td class="nowrap">{{data.dataProvisionTime | date:'yyyy-MM-dd'}}</td>
       </tr>
     </table>
     <div class="no-data-tips" *ngIf="commendHonorList.length<1">

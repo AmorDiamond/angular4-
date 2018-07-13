@@ -20,6 +20,8 @@ export class CompanyProfileComponent implements OnInit {
   keyWord: any;
   baseInfo: any;
   CompanyProfile = '加载中...';
+  CompanyIntroductionTips = '加载中...';
+  CompanyContactPeopleTips = '加载中...';
   ngOnInit() {
 
     this.keyWord = this.microcomicService.getUrlParams('name');
@@ -34,10 +36,16 @@ export class CompanyProfileComponent implements OnInit {
         if (!res.data.baseInfoPojos[0]) {
           this.CompanyProfile = '暂无信息！';
         }
+        if (!res.data.baseInfoPojos[0] || !res.data.introduction) {
+          this.CompanyIntroductionTips = '暂无信息！';
+        }
+        if (!res.data.baseInfoPojos[0] || !res.data.contactPeople) {
+          this.CompanyContactPeopleTips = '暂无信息！';
+        }
         this.baseInfo = res.data.baseInfoPojos[0];
         /*判断是否有主要产品信息*/
         if (this.baseInfo && this.baseInfo.businessScope) {
-          const options = this.baseInfo.businessScope.split(',');
+          const options = this.baseInfo.businessScope.split(/[。、；]/);
           this.creat3DcloudTag(options);
         }
       }
@@ -77,7 +85,11 @@ export class CompanyProfileComponent implements OnInit {
       { label: '',  target: '_top' },
     ];
     options.forEach((v, i) => {
-      entries[i].label = v;
+      if (entries[i]) {
+        entries[i].label = v;
+      }else {
+        entries.push({ label: v,  target: '_top' })
+      }
     })
     /*for (let i = 0; i < options.value.length; i++) {
       entries[i].label = options.value[i];

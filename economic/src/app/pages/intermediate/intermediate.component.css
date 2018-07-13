@@ -22,8 +22,14 @@
 .panel-content .flex .flex-cell {
    padding-top: 20px;
 }
-.panel-content .flex>.flex-cell:nth-child(2n) {
+/*.panel-content .flex>.flex-cell:nth-child(2n) {
     padding-left: 20px;
+}*/
+.panel-content .flex>.flex-cell {
+    padding-left: 20px;
+}
+.panel-content .flex>.flex-cell:first-child {
+    padding-left: 0;
 }
 .m-b-10 {
   margin-bottom: 10px;

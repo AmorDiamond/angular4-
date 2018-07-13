@@ -11,7 +11,7 @@
     <tr *ngFor="let data of patenList">
       <td>{{data.patentName}}</td>
       <td>{{data.patentType}}</td>
-      <td class="nowrap">{{data.applicationDate}}</td>
+      <td class="nowrap">{{data.applicationDate | date:'yyyy-MM-dd'}}</td>
       <td class="nowrap">{{data.patentCode}}</td>
     </tr>
   </table>

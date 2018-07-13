@@ -12,6 +12,8 @@ export class MicrocosmicService {
   private companyNameSubject = new BehaviorSubject<any>(0);
   companyName: any;
   private subject = new BehaviorSubject<any>(0);
+  /*临时用于隐藏和显示面板*/
+  private panelSubject = new BehaviorSubject<any>(0);
 
   private getDataUrl = '/v1/enterpriseMicroKanbanPojo/getMicInformation';
   // 区别四个区域
@@ -2012,5 +2014,11 @@ export class MicrocosmicService {
   }
   getUrlParams(option) {
     return this.routerInfo.snapshot.queryParams[option];
+  }
+  changePanleHide(flag) {
+    this.panelSubject.next({hide: flag})
+  }
+  getPanleHide(): Observable<any> {
+    return this.panelSubject.asObservable();
   }
 }

@@ -49,7 +49,9 @@ export class MapComponent implements OnInit {
     //   console.log(this.AMAPOBJ);
     // });
     setTimeout(() => {
-      const map = new AMap.Map('t-amap');
+      const map = new AMap.Map('t-amap', {
+        features: ['bg', 'road', 'building']
+      });
       this.AMAPOBJ = map;
       this.action = {
         'openInfo': (data) => {
@@ -72,7 +74,7 @@ export class MapComponent implements OnInit {
             });
           });
           map.setFitView();
-          map.panBy(-580, 10);
+          // map.panBy(-580, 10);
         },
         'ADD_MARKER_MID': (data) => {
           /*判断是否存在海量点layer，有就清空显示*/

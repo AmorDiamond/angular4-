@@ -39,6 +39,8 @@ export class MicrocosmicComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    /*临时隐藏微观概况面板*/
+    this.microcosmicService.changePanleHide(true);
     this.subscription = this.microcosmicService.getData().subscribe(data => {
       // 年产值
       this.annualOutputValue = data.outputValue;
@@ -90,5 +92,7 @@ export class MicrocosmicComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    /*临时隐藏微观概况面板*/
+    this.microcosmicService.changePanleHide(false);
   }
 }
