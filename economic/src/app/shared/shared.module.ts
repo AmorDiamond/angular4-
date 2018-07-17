@@ -5,13 +5,15 @@ import { PaginationModule } from './pagination/pagination.module';
 import { ScrollbarComponent } from './scrollbar.component';
 import { LoadingModule } from './loading/loading.module';
 import { FormsModule } from '@angular/forms';
+import { PopoverModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     NgxEchartsModule,
     PaginationModule,
-    LoadingModule
+    LoadingModule,
+    PopoverModule.forRoot()
   ],
   exports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     PaginationModule,
     LoadingModule,
     ScrollbarComponent,
-    FormsModule
+    FormsModule,
+    PopoverModule
   ],
   declarations: [ScrollbarComponent]
 })

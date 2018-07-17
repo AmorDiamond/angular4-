@@ -128,9 +128,13 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     /*临时隐藏微观概况面板*/
     this.microcosmicService.changePanleHide(false);
+    /*将搜索的关键字储存用于详情页返回列表页*/
+    localStorage.setItem('searchName', this.keyWord);
     this.layoutService.search({
       keyWord: this.keyWord
     });
+    /*点击搜索后重置*/
+    this.keyWord = '';
   }
 
   ngOnInit() {

@@ -59,6 +59,8 @@ export class CompanyEconomicInfoService {
     private OrganizationExpenditureUrl = '/v1/DomesticDevelopment/findMechanism';
     /*科技创新 知识产权信息*/
     private IntellectualPropertyUrl = '/v1/STAOtherSituation/findKnowHow';
+    /*单独获取专利数据接口*/
+    private PatentUrl = '/v1/IATrademarkAndPatent/findPatentPage';
     constructor(private http: HttpClient) { }
 
     getIncomeStatistics(company): Observable<any> {
@@ -125,5 +127,22 @@ export class CompanyEconomicInfoService {
         const params = new HttpParams({ fromString: paramsString });
         return this.http.get(url, { params });
     }
+
+  /*通过多个请求获取数据*/
+  getRequestByForkJoin(company, time, https: Array<string>): Observable<any> {
+    const forkJoinArr = [];
+    if (https.length > 0) {
+      for (let i = 0; i < https.length; i++) {
+          let post;
+          if (https[i] === 'PatentUrl') {
+            post = this.http.get(`${this[https[i]]}?enterpriseName=${company}`);
+          }else {
+            post = this.http.get(`${this[https[i]]}?name=${company}&year=${time}`);
+          }
+        forkJoinArr.push(post);
+      }
+    }
+    return Observable.forkJoin(forkJoinArr);
+  }
 
 }

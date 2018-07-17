@@ -4,15 +4,15 @@
 
   <table class="table table-bordered table-align-c" id="businessChangeInfo" *ngIf="companyChangeList.length>0">
     <tr>
-      <th>变更事项</th>
-      <th>变更前内容</th>
-      <th>变更后内容</th>
-      <th>变更日期</th>
+      <th class="nowrap">变更事项</th>
+      <th class="nowrap">变更前内容</th>
+      <th class="nowrap">变更后内容</th>
+      <th class="nowrap">变更日期</th>
     </tr>
     <tr *ngFor="let data of companyChangeList">
       <td>{{data.changeType}}</td>
-      <td>{{data.changeAfterContent}}</td>
-      <td>{{data.changeBeforeContent}}</td>
+      <td style="max-width: 200px">{{data.changeAfterContent}}</td>
+      <td style="max-width: 200px">{{data.changeBeforeContent}}</td>
       <td class="nowrap">{{data.changeDate | date:'yyyy-MM--dd'}}</td>
     </tr>
   </table>

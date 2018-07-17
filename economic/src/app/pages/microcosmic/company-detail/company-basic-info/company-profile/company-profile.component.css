@@ -1,0 +1,24 @@
+.contact-item{
+    overflow: hidden;
+    height: 30px;
+    line-height: 30px;
+}
+.contact-item .label{
+    margin-left: 10px;
+    padding: 0;
+}
+.contact-item button, .contact-item input{
+    color: #f9b620cc;
+    height: 26px;
+    line-height: 26px;
+    margin-left: 10px;
+    padding: 0px 10px;
+    border: 1px solid;
+    border-radius: 6px;
+    background: none;
+    outline: none;
+}
+.contact-item input{
+    color: #ddd;
+    border: 1px solid #fff;
+}

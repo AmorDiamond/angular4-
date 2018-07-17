@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-// import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+// import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class CompanyBasicService {
@@ -14,6 +14,8 @@ export class CompanyBasicService {
   private companyTaxationUrl = '/v1/epTaxationPojo/findListByCompanyName';
   private companyProfileUrl = '/v1/epBaseInfoPojo/findNameAllEpBaseInfo';
   private companySocialSecurityUrl = '/v1/InsuranceInformationPojo';
+  /*获取企业联系人姓名、电话、职位*/
+  private companyContactPeopleUrl = '/v1/eIIRelationPojo/findGobernmentContactsByCompanyName';
   constructor(private http: HttpClient) {}
 
   getCompanyDetail(rowkey): Observable<any> {
@@ -37,6 +39,17 @@ export class CompanyBasicService {
   }
   getCompanySocialSecurity(company): Observable<any> {
     return this.http.get(`${this.companySocialSecurityUrl}?companyName=${company}`);
+  }
+  findListByUrl(findParams, type): Observable<any> {
+    let paramsString = '';
+    const url = this[type];
+    for (const key in findParams) {
+      if (findParams.hasOwnProperty(key)) {
+        paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
+      }
+    }
+    const params = new HttpParams({ fromString: paramsString });
+    return this.http.get(url, { params });
   }
 
 }

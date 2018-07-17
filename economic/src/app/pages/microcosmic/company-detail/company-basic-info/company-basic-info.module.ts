@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RoutingModule } from './routing/routing.module';
+import { SharedModule } from "../../../../shared/shared.module";
 import { BusinessRegistrationComponent } from './business-registration/business-registration.component';
 import { BusinessChangeComponent } from './business-change/business-change.component';
 import { CompanyBasicService } from './company-basic.service';
@@ -12,7 +13,8 @@ import { BusinessProblemLedgerComponent } from './business-problem-ledger/busine
 @NgModule({
   imports: [
     CommonModule,
-    RoutingModule
+    RoutingModule,
+    SharedModule
   ],
   declarations: [
     BusinessRegistrationComponent,

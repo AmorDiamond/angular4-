@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       username: this.username,
       password: this.password
     };
+
     this.loginService.login(params)
       .subscribe((res: any) => {
         if (res.responseCode === '_200') {

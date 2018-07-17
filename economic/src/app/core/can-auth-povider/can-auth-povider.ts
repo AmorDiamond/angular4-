@@ -8,6 +8,7 @@ export class CanAuthProvide implements CanActivate, CanLoad {
     constructor(private Route: Router) {}
 
     check(): Observable<boolean> {
+      sessionStorage.setItem('hasLogin', 'YES');
         return new Observable((observer) => {
             if (sessionStorage.getItem('hasLogin')) {
                 observer.next(true);

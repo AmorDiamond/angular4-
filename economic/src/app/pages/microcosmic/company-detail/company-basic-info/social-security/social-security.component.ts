@@ -6,7 +6,11 @@ import { MicrocosmicService } from '../../../microcosmic.service';
 @Component({
   selector: 'app-social-security',
   templateUrl: './social-security.component.html',
-  styles: []
+  styles: [`
+    .table-label{
+        width: 110px;
+    }
+  `]
 })
 export class SocialSecurityComponent implements OnInit {
 

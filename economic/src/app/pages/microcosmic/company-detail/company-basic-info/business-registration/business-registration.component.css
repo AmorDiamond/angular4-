@@ -1,0 +1,25 @@
+.table-label{
+    width: 110px;
+}
+:host >>> .popover {
+    background-color: #009688;
+    color: #fff;
+}
+:host >>> .popover>.arrow:after {
+    border-right-color: #009688;
+}
+.correct-info button, .correct-info input{
+    color: #f9b620;
+    height: 26px;
+    line-height: 26px;
+    margin-left: 10px;
+    padding: 0px 10px;
+    border: 1px solid;
+    border-radius: 6px;
+    background: none;
+    outline: none;
+}
+.correct-info input{
+    color: #ddd;
+    border: 1px solid #fff;
+}

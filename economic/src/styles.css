@@ -44,10 +44,18 @@ span {
 }
 
 .flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
 }
 
 .flex>.flex-cell {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
   flex: 1;
 }
 
@@ -70,6 +78,10 @@ span {
 
 .right-panel .content {
   position: relative;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   height: calc(100% - 50px);
   color: #bcbdbf;
@@ -137,6 +149,10 @@ span {
   height: 100%;
   position: relative;
   float: left;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -ms-flex: 1;
+  -webkit-flex: 1;
   flex: 1;
   border-radius: 0 6px 6px 6px;
   background: linear-gradient(to bottom right, #151411 30%, #151816 50%, #162c2e);
@@ -167,11 +183,18 @@ span {
   left: 0;
   width: 100%;
   height: 100%;
+  -webkit-box-shadow: inset 3px -2px 3px 0 rgba(255, 255, 255, 0.4), inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9);
+  -moz-box-shadow: inset 3px -2px 3px 0 rgba(255, 255, 255, 0.4), inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9);
+  -o-box-shadow: inset 3px -2px 3px 0 rgba(255, 255, 255, 0.4), inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9);
   box-shadow: inset 3px -2px 3px 0 rgba(255, 255, 255, 0.4), inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9);
   background: -webkit-linear-gradient(left, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
   background: -o-linear-gradient(right, #22211d, #3a3934);
   background: -moz-linear-gradient(right, #22211d, #3a3934);
   background: linear-gradient(to right, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
+  -webkit-border-radius: 0 0 6px 6px;
+  -moz-border-radius: 0 0 6px 6px;
+  -o-border-radius: 0 0 6px 6px;
+  -ms-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;
 }
 
@@ -187,6 +210,9 @@ span {
 .panel-menu li:hover {
   background: #f9b620;
   color: #151411;
+  -webkit-box-shadow: inset -3px 0px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -moz-box-shadow: inset -3px 0px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -o-box-shadow: inset -3px 0px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
   box-shadow: inset -3px 0px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
 }
 
@@ -205,6 +231,10 @@ span {
   left: 0;
   width: 4px;
   height: 14px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
   border-radius: 6px;
   background: #7d85cb;
   margin: 3px 0;
@@ -308,6 +338,10 @@ table tr td:first-child {
   height: 50px;
   position: relative;
   background-color: #22211d;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
   border-radius: 6px;
 }
 
@@ -320,11 +354,18 @@ table tr td:first-child {
   left: 0;
   width: 100%;
   height: 100%;
+  -webkit-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -moz-box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -o-box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
   box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
   background: -webkit-linear-gradient(left, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
   background: -o-linear-gradient(right, #22211d, #3a3934);
   background: -moz-linear-gradient(right, #22211d, #3a3934);
   background: linear-gradient(to right, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
   border-radius: 6px;
 }
 
@@ -348,6 +389,9 @@ table tr td:first-child {
 .column_title_box h3:hover {
   background: #f9b620;
   color: #151411;
+  -webkit-box-shadow: inset 0px -2px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -moz-box-shadow: inset 0px -2px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -o-box-shadow: inset 0px -2px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
   box-shadow: inset 0px -2px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
 }
 
@@ -387,11 +431,19 @@ table tr td:first-child {
   width: 8px;
   height: 8px;
   background-color: #f9b620;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -o-border-radius: 100%;
+  -ms-border-radius: 100%;
   border-radius: 100%;
   position: absolute;
   -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
+  -moz-animation: bouncedelay 1.2s infinite ease-in-out;
+  -o-animation: bouncedelay 1.2s infinite ease-in-out;
   animation: bouncedelay 1.2s infinite ease-in-out;
   -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
   animation-fill-mode: both;
 }
 
@@ -433,56 +485,78 @@ table tr td:first-child {
 
 .container2 .circle1 {
   -webkit-animation-delay: -1.1s;
+  -moz-animation-delay: -1.1s;
+  -o-animation-delay: -1.1s;
   animation-delay: -1.1s;
 }
 
 .container3 .circle1 {
   -webkit-animation-delay: -1.0s;
+  -moz-animation-delay: -1.0s;
+  -o-animation-delay: -1.0s;
   animation-delay: -1.0s;
 }
 
 .container1 .circle2 {
   -webkit-animation-delay: -0.9s;
+  -moz-animation-delay: -0.9s;
+  -o-animation-delay: -0.9s;
   animation-delay: -0.9s;
 }
 
 .container2 .circle2 {
   -webkit-animation-delay: -0.8s;
+  -moz-animation-delay: -0.8s;
+  -o-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }
 
 .container3 .circle2 {
   -webkit-animation-delay: -0.7s;
+  -moz-animation-delay: -0.7s;
+  -o-animation-delay: -0.7s;
   animation-delay: -0.7s;
 }
 
 .container1 .circle3 {
   -webkit-animation-delay: -0.6s;
+  -moz-animation-delay: -0.6s;
+  -o-animation-delay: -0.6s;
   animation-delay: -0.6s;
 }
 
 .container2 .circle3 {
   -webkit-animation-delay: -0.5s;
+  -moz-animation-delay: -0.5s;
+  -o-animation-delay: -0.5s;
   animation-delay: -0.5s;
 }
 
 .container3 .circle3 {
   -webkit-animation-delay: -0.4s;
+  -moz-animation-delay: -0.4s;
+  -o-animation-delay: -0.4s;
   animation-delay: -0.4s;
 }
 
 .container1 .circle4 {
   -webkit-animation-delay: -0.3s;
+  -moz-animation-delay: -0.3s;
+  -o-animation-delay: -0.3s;
   animation-delay: -0.3s;
 }
 
 .container2 .circle4 {
   -webkit-animation-delay: -0.2s;
+  -moz-animation-delay: -0.2s;
+  -o-animation-delay: -0.2s;
   animation-delay: -0.2s;
 }
 
 .container3 .circle4 {
   -webkit-animation-delay: -0.1s;
+  -moz-animation-delay: -0.1s;
+  -o-animation-delay: -0.1s;
   animation-delay: -0.1s;
 }
 
@@ -490,10 +564,72 @@ table tr td:first-child {
   0%,
   80%,
   100% {
-    -webkit-transform: scale(0.0)
+    -webkit-transform: scale(0.0);
+    -moz-transform: scale(0.0);
+    -o-transform: scale(0.0);
+    -ms-transform: scale(0.0);
+    transform: scale(0.0)
   }
   40% {
-    -webkit-transform: scale(1.0)
+    -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0)
+  }
+}
+@-moz-keyframes bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0.0);
+    -moz-transform: scale(0.0);
+    -o-transform: scale(0.0);
+    -ms-transform: scale(0.0);
+    transform: scale(0.0)
+  }
+  40% {
+    -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0)
+  }
+}
+@-o-keyframes bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0.0);
+    -moz-transform: scale(0.0);
+    -o-transform: scale(0.0);
+    -ms-transform: scale(0.0);
+    transform: scale(0.0)
+  }
+  40% {
+    -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0)
+  }
+}
+@-ms-keyframes bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0.0);
+    -moz-transform: scale(0.0);
+    -o-transform: scale(0.0);
+    -ms-transform: scale(0.0);
+    transform: scale(0.0)
+  }
+  40% {
+    -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0)
   }
 }
 
@@ -501,12 +637,18 @@ table tr td:first-child {
   0%,
   80%,
   100% {
-    transform: scale(0.0);
     -webkit-transform: scale(0.0);
+    -moz-transform: scale(0.0);
+    -o-transform: scale(0.0);
+    -ms-transform: scale(0.0);
+    transform: scale(0.0)
   }
   40% {
-    transform: scale(1.0);
     -webkit-transform: scale(1.0);
+    -moz-transform: scale(1.0);
+    -o-transform: scale(1.0);
+    -ms-transform: scale(1.0);
+    transform: scale(1.0)
   }
 }
 
@@ -520,10 +662,16 @@ table tr td:first-child {
 }
 .admin-container .add-btn{
   background: #f9b71c;
+  -webkit-box-shadow: 3px 3px 10px #9a9a9a;
+  -moz-box-shadow: 3px 3px 10px #9a9a9a;
+  -o-box-shadow: 3px 3px 10px #9a9a9a;
   box-shadow: 3px 3px 10px #9a9a9a;
 }
 .admin-container .search-btn{
   background: #f9b71c;
+  -webkit-box-shadow: 3px 3px 10px #9a9a9a;
+  -moz-box-shadow: 3px 3px 10px #9a9a9a;
+  -o-box-shadow: 3px 3px 10px #9a9a9a;
   box-shadow: 3px 3px 10px #9a9a9a;
 }
 .f-14 a{
@@ -537,7 +685,14 @@ a:focus, a:hover {
 }
 .admin-container .con-hd button{
   border: none;
+  -webkit-box-shadow: 3px 3px 10px #9a9a9a;
+  -moz-box-shadow: 3px 3px 10px #9a9a9a;
+  -o-box-shadow: 3px 3px 10px #9a9a9a;
   box-shadow: 3px 3px 10px #9a9a9a;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
   border-radius: 3px;
 }
 .admin-container .excel-import{
@@ -556,6 +711,8 @@ a:focus, a:hover {
     background-image: none;
     outline: 0;
     -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    -moz-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    -o-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
     box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
 }
 .panel-content .flex>.flex-cell{
@@ -584,6 +741,13 @@ a:focus, a:hover {
 
 .scrollbar::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  -o-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
   border-radius: 10px;
   background-color: #555;
 }
@@ -594,8 +758,15 @@ a:focus, a:hover {
 .scrollbar::-webkit-scrollbar-thumb {
   /*width: 10px;*/
   height: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  -o-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color: #555;
 }
 
@@ -605,6 +776,10 @@ a:focus, a:hover {
   color: #000;
   line-height: 50px;
   padding-left: 20px;
+  -webkit-border-radius: 10px 10px 0px 0px;
+  -moz-border-radius: 10px 10px 0px 0px;
+  -o-border-radius: 10px 10px 0px 0px;
+  -ms-border-radius: 10px 10px 0px 0px;
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -644,6 +819,10 @@ a:focus, a:hover {
   background-color: #f9b620;
   height: 4px;
   width: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
   border-radius: 4px;
   margin-right: 3px;
   color: #f9b620;
@@ -658,6 +837,10 @@ a:focus, a:hover {
   height: 50px;
   position: relative;
   background-color: #22211d;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
   border-radius: 6px;
 }
 
@@ -670,6 +853,9 @@ a:focus, a:hover {
   left: 0;
   width: 100%;
   height: 100%;
+  -webkit-box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -moz-box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -o-box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
   box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
   background: -webkit-linear-gradient(left, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
   /* Safari 5.1 - 6.0 */
@@ -679,6 +865,10 @@ a:focus, a:hover {
   /* Firefox 3.6 - 15 */
   background: linear-gradient(to right, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
   /* 标准的语法 */
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
   border-radius: 6px;
 }
 
@@ -688,6 +878,10 @@ a:focus, a:hover {
 
 .panel-content .flex .flex-item {
   border: 1px solid rgba(249, 182, 32, .3);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
   border-radius: 10px;
 }
 

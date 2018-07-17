@@ -18,7 +18,8 @@ export const routes: Routes = [
     canActivate: [CanAuthProvide]
   },
   {path: 'admin', loadChildren: '../pages/manage-system/manage-system.module#ManageSystemModule', canLoad: [CanAuthProvide]},
-  {path: '**', redirectTo: 'login', pathMatch: 'full'}
+  // {path: '**', redirectTo: 'login', pathMatch: 'full'}
+  {path: '**', redirectTo: 'mic', pathMatch: 'full'}
 ];
 
 @NgModule({

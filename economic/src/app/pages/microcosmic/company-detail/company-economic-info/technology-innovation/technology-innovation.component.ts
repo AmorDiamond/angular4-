@@ -35,30 +35,59 @@ export class TechnologyInnovationComponent implements OnInit {
     this.companyEconomicInfoService.findListByUrl({name: this.companyName, year: time}, 'OrganizationExpenditureUrl').subscribe(res => {
       console.log('机构数据', res)
       if (res.responseCode === '_200') {
-        if (res.data.length > 0) {}
+        if (res.data[0]) {
+          // const options = { xAxis: [2013, 2014, 2015, 2016, 2017], number: [100, 120, 130, 180, 190], people: [1000, 2000, 2500, 3200, 5000] };
+          const number = res.data[0].numberOfInstitutions;
+          const people = res.data[0].totalAgencyStaff;
+          const money = res.data[0].institutionalExpenditures;
+          const options = { xAxis: [], number: [number], people: [people], money: [money] };
+          /*绘制机构数据图表*/
+          this.creatOrganizationEchart(options);
+          /*绘制机构人数图表*/
+          this.creatOrganizationPeopleEchart(options);
+          /*绘制经费支出数据图表*/
+          this.creatExpenditureEchart(money);
+          // this.creatOrganizationEchartOld(options);
+        }
       }
     })
-    // const options = { xAxis: [2013, 2014, 2015, 2016, 2017], number: [100, 120, 130, 180, 190], people: [1000, 2000, 2500, 3200, 5000] };
-    const options = { xAxis: [], number: [92], people: [10200], money: [101000000] };
-    /*绘制机构数据图表*/
-    this.creatOrganizationEchart(options);
-    /*绘制机构人数图表*/
-    this.creatOrganizationPeopleEchart(options);
-    /*绘制经费支出数据图表*/
-    const money = 101000000;
-    this.creatExpenditureEchart(money);
-    // this.creatOrganizationEchartOld(options);
   }
   /*获取知识产权数据*/
   getIntellectualPropertyData() {
     const time = new Date().getFullYear() - 1;
-    this.companyEconomicInfoService.findListByUrl({name: this.companyName, year: time}, 'IntellectualPropertyUrl').subscribe(res => {
+    /*this.companyEconomicInfoService.findListByUrl({name: this.companyName, year: time}, 'IntellectualPropertyUrl').subscribe(res => {
       console.log('知识产权数据', res)
-      if (res.responseCode === '_200') {}
+      if (res.responseCode === '_200') {
+        if (res.data[0]) {
+          const data = res.data[0];
+          const options = {
+            xAxis: ['商标数', '专利数', '软件著作权数', '集成电路布图数', '国家科技奖励数', '国际标准数', '国内或行业标准数'],
+            number: [data.trademarkTotal, 40, data.softwareCopyright, data.integratedCircuitLayout, data.technologyAward, data.internationalStandard, data.industryStandard]
+          };
+          /!*绘制知识产权数据图表*!/
+          this.creatIntellectualPropertyEchart(options);
+        }
+      }
+    })*/
+    this.companyEconomicInfoService.getRequestByForkJoin(this.companyName, time, ['IntellectualPropertyUrl', 'PatentUrl']).subscribe(res => {
+      console.log('知识产权和专利数据', res)
+      let options;
+      if (res[0].responseCode === '_200') {
+        if (res[0].data[0]) {
+          const data = res[0].data[0];
+          options = {
+            xAxis: ['商标数', '专利数', '软件著作权数', '集成电路布图数', '国家科技奖励数', '国际标准数', '国内或行业标准数'],
+            number: [data.trademarkTotal, 0, data.softwareCopyright, data.integratedCircuitLayout, data.technologyAward, data.internationalStandard, data.industryStandard]
+          };
+        }
+      }
+      /*单独获取专利数*/
+      if (res[1].responseCode === '_200') {
+        options.number[1] = res[1].data.patentPojos.length;
+      }
+      /*绘制知识产权数据图表*/
+      this.creatIntellectualPropertyEchart(options);
     })
-    const options = {xAxis: ['商标数', '专利数', '软件著作权数', '集成电路布图数', '国家科技奖励数', '国际标准数', '国内或行业标准数'], number: [200, 400, 600, 20, 40, 30, 50]};
-    /*绘制知识产权数据图表*/
-    this.creatIntellectualPropertyEchart(options);
   }
   /*绘制机构数据图表数据*/
   creatOrganizationEchartOld(options) {

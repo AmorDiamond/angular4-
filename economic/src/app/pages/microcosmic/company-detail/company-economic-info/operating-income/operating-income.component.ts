@@ -384,14 +384,14 @@ export class OperatingIncomeComponent implements OnInit {
         formatter: '{a} <br/>{b} : {c}万 ({d}%)'
       },
 
-      visualMap: {
+      /*visualMap: {
         show: false,
         min: 80,
         max: 600,
         inRange: {
           colorLightness: [0, 1]
         }
-      },
+      },*/
       series: [
         {
           name: '收益来源',
