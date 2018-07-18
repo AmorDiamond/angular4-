@@ -9,6 +9,7 @@ import { TaxRegistrationComponent } from './tax-registration/tax-registration.co
 import { SocialSecurityComponent } from './social-security/social-security.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { BusinessProblemLedgerComponent } from './business-problem-ledger/business-problem-ledger.component';
+import { CustomLabelComponent } from './custom-label/custom-label.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { BusinessProblemLedgerComponent } from './business-problem-ledger/busine
     TaxRegistrationComponent,
     SocialSecurityComponent,
     CompanyProfileComponent,
-    BusinessProblemLedgerComponent
+    BusinessProblemLedgerComponent,
+    CustomLabelComponent
   ],
   providers: [
     CompanyBasicService

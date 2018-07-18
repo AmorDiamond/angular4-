@@ -22,12 +22,14 @@ export class CompanyProfileComponent implements OnInit {
   ) { }
   keyWord: any;
   baseInfo: any;
-  contactPeopleInfo = {name: '测试', job: '工程师', phone: '123456789'};
-  changeContactPeopleInfo = {name: this.contactPeopleInfo.name, job: this.contactPeopleInfo.job, phone: this.contactPeopleInfo.phone};
+  contactPeopleInfo: any = {};
+  changeContactPeopleInfo: any = {};
   CompanyProfile = '加载中...';
   CompanyIntroductionTips = '加载中...';
   CompanyContactPeopleTips = '加载中...';
   changeContactPeopleConfirmTips = '确定修改该公司联系人信息吗？';
+  changeContactPeopleStatus = false;
+  dataRowkey: any;
   ngOnInit() {
 
     this.keyWord = this.microcomicService.getUrlParams('name');
@@ -63,20 +65,90 @@ export class CompanyProfileComponent implements OnInit {
       if (!res.data.eIIRelationPojo[0]) {
         this.CompanyContactPeopleTips = '暂无信息！';
       }
+      this.contactPeopleInfo = res.data.eIIRelationPojo[0];
+      this.changeContactPeopleInfo = {contactsName: this.contactPeopleInfo.contactsName, duties: this.contactPeopleInfo.duties, contactInfo: this.contactPeopleInfo.contactInfo};
     })
   }
   /*取消纠错*/
   cancelChangeContactPeople() {
-    this.changeContactPeopleInfo = {name: this.contactPeopleInfo.name, job: this.contactPeopleInfo.job, phone: this.contactPeopleInfo.phone};
+    this.changeContactPeopleInfo = {contactsName: this.contactPeopleInfo.contactsName, duties: this.contactPeopleInfo.duties, contactInfo: this.contactPeopleInfo.contactInfo};
   }
   /*提交修改联系人*/
-  submitChangeContactPeople(template) {
+  submitChangeContactPeople(template, rowkey) {
+    this.dataRowkey = rowkey;
     this.toastModalService.showModal(template)
   }
   /*确认提交修改*/
   saveChangeInfo() {
     this.toastModalService.hideModal();
-    this.toastModalService.showSuccessToast({tipsMsg: '修改成功！'});
+    const requestArr = [];
+    const dataId = this.dataRowkey;
+    const modifierId = sessionStorage.getItem('userId');
+    const changeNameParams = {
+      dataId: dataId,
+      contactsName: 'contactsName',
+      premodifiedValues: this.contactPeopleInfo.contactsName,
+      modifiedValues: this.changeContactPeopleInfo.contactsName,
+      modifierId: modifierId
+    };
+    const changeJobParams = {
+      dataId: dataId,
+      duties: 'duties',
+      premodifiedValues: this.contactPeopleInfo.duties,
+      modifiedValues: this.changeContactPeopleInfo.duties,
+      modifierId: modifierId
+    };
+    const changePhoneParams = {
+      dataId: dataId,
+      contactInfo: 'contactInfo',
+      premodifiedValues: this.contactPeopleInfo.contactInfo,
+      modifiedValues: this.changeContactPeopleInfo.contactInfo,
+      modifierId: modifierId
+    };
+    /*修改姓名*/
+    if (this.changeContactPeopleInfo.contactsName !== this.contactPeopleInfo.contactsName) {
+      /*this.companyBasicService.findListByUrl({dataId: changeNameParams.dataId, contactsName: 'contactsName', premodifiedValues: changeNameParams.premodifiedValues, modifiedValues: changeNameParams.modifiedValues, modifierId: modifierId}, 'changeContactPeopleNameUrl').subscribe(res => {
+        console.log('修改联系人姓名', res)
+        if (res.responseCode === '_200') {
+          this.toastModalService.showSuccessToast({tipsMsg: '修改成功！'});
+        }else {
+          this.toastModalService.showErrorToast({errorMsg: res.errorMsg ? res.errorMsg : '未知错误'});
+        }
+      });*/
+      requestArr.push({findParams: changeNameParams, http: 'changeContactPeopleNameUrl'});
+    }
+    /*修改职位*/
+    if (this.changeContactPeopleInfo.duties !== this.contactPeopleInfo.duties) {
+      /*this.companyBasicService.findListByUrl({dataId: changeJobParams.dataId, duties: 'duties', premodifiedValues: changeJobParams.premodifiedValues, modifiedValues: changeJobParams.modifiedValues, modifierId: modifierId}, 'changeContactPeopleJobUrl').subscribe(res => {
+        console.log('修改联系人职位', res)
+        if (res.responseCode === '_200') {
+          this.toastModalService.showSuccessToast({tipsMsg: '修改成功！'});
+        }else {
+          this.toastModalService.showErrorToast({errorMsg: res.errorMsg ? res.errorMsg : '未知错误'});
+        }
+      });*/
+      requestArr.push({findParams: changeJobParams, http: 'changeContactPeopleJobUrl'});
+    }
+    /*修改联系方式*/
+    if (this.changeContactPeopleInfo.contactInfo !== this.contactPeopleInfo.contactInfo) {
+      requestArr.push({findParams: changePhoneParams, http: 'changeContactPeoplePhoneUrl'});
+    }
+    this.companyBasicService.getRequestByForkJoin(requestArr).subscribe(res => {
+      console.log(res);
+      let success = true;
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].responseCode !== '_200') {
+          success = false
+        }
+      }
+      if (success){
+        this.toastModalService.showSuccessToast({tipsMsg: '修改成功！'});
+      }else {
+        this.toastModalService.showErrorToast({errorMsg: res.errorMsg ? res.errorMsg : '未知错误'});
+      }
+      this.changeContactPeopleStatus = false;
+      this.getContactPeopleInfo(this.keyWord);
+    })
   }
   /*撤销提交操作*/
   declineSaveChangeInfo() {

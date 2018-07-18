@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
       .subscribe((res: any) => {
         if (res.responseCode === '_200') {
           sessionStorage.setItem('hasLogin', 'YES');
+          sessionStorage.setItem('userId', res.data.id);
           this.router.navigate(['mic']);
           // this.noty.alert({
           //   text: 'welcome!'

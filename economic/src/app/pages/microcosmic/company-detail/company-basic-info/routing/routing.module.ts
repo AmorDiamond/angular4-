@@ -6,6 +6,7 @@ import { TaxRegistrationComponent } from '../tax-registration/tax-registration.c
 import { SocialSecurityComponent } from '../social-security/social-security.component';
 import { CompanyProfileComponent } from '../company-profile/company-profile.component';
 import { BusinessProblemLedgerComponent } from '../business-problem-ledger/business-problem-ledger.component';
+import { CustomLabelComponent } from '../custom-label/custom-label.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
   {
     path: 'social-security',
     component: SocialSecurityComponent
+  },
+  {
+    path: 'custom-label',
+    component: CustomLabelComponent
   },
   {
     path: '**',
