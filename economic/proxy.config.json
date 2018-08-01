@@ -1,9 +1,17 @@
 {
+  "/v1/land": {
+    "target": "http://127.0.0.1:5550",
+    "secure": "false"
+  },
   "/v1": {
     "target": "http://127.0.0.1:5080",
     "secure": "false"
   },
   "/manager": {
+    "target": "http://127.0.0.1:5080",
+    "secure": "false"
+  },
+  "/ldap": {
     "target": "http://127.0.0.1:5080",
     "secure": "false"
   },

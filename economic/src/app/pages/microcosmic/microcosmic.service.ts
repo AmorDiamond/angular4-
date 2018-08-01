@@ -45,7 +45,7 @@ export class MicrocosmicService {
     const xAxis = [];
     const series = [
       {
-        name: `${data[0].park}园区`,
+        name: `${data[0] ? data[0].park : ''}园区`,
         type: 'line',
         stack: '总量',
         data: []
@@ -68,7 +68,7 @@ export class MicrocosmicService {
   }
 
   modifyData(data: any) {
-    const title = `${data.grossProduct[0].park}园区`;
+    const title = `${data.grossProduct[0] ? data.grossProduct[0].park : ''}园区`;
     // 企业年产值
     const outputValueObj = this.getObjOfType(data.outputValue, 'outputValue');
     // 生产总值

@@ -11,37 +11,38 @@
   <div class="panel-item-title">企业联系人：</div>
   <div class="company-profile-con">
 <!--姓名，职位，联系电话-->
-    <!--<div class="contact-people" *ngIf="baseInfo?.contactPeople">
-      <table>
+    <div class="contact-people" *ngIf="contactPeopleInfo.length>0">
+      <table class="table table-bordered text-c contact-item">
         <tr>
-          <th>姓名</th><td>{{baseInfo?.contactPeople}}</td><th>职位</th><td></td><th>联系电话</th><td></td>
+          <th>姓名</th>
+          <th>职位</th>
+          <th>联系电话</th>
+          <th>编辑</th>
+        </tr>
+        <tr *ngFor="let item of contactPeopleInfo; index as index">
+          <td>
+            <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.contactsName}}</span>
+            <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.contactsName"></span>
+          </td>
+          <td>
+            <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.duties}}</span>
+            <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.duties"></span>
+          </td>
+          <td>
+            <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.contactInfo}}</span>
+            <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.contactInfo"></span>
+          </td>
+          <td class="last-column">
+            <div *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey">
+              <button (click)="submitChangeContactPeople(changeContactPeopleTemplate,item.rowKey)">提交</button>
+              <button (click)="cancelChangeContactPeople()">取消</button>
+            </div>
+            <button *ngIf="dataRowkey !== item.rowKey" [disabled]="changeContactPeopleStatus && dataRowkey" (click)="getChangeContactInfo(index,item.rowKey)">纠错</button>
+          </td>
         </tr>
       </table>
-    </div>-->
-    <div class="contact-people" *ngIf="contactPeopleInfo">
-      <div class="contact-item">
-        <div class="name fl">
-          <span class="label">姓名：</span>
-          <span *ngIf="!changeContactPeopleStatus">{{contactPeopleInfo?.contactsName}}</span>
-          <span *ngIf="changeContactPeopleStatus"><input type="text" [(ngModel)]="changeContactPeopleInfo.contactsName"></span>
-        </div>
-        <div class="job fl">
-          <span class="label">职位：</span>
-          <span *ngIf="!changeContactPeopleStatus">{{contactPeopleInfo?.duties}}</span>
-          <span *ngIf="changeContactPeopleStatus"><input type="text" [(ngModel)]="changeContactPeopleInfo.duties"></span>
-        </div>
-        <div class="phone fl">
-          <span class="label">联系电话：</span>
-          <span *ngIf="!changeContactPeopleStatus">{{contactPeopleInfo?.contactInfo}}</span>
-          <span *ngIf="changeContactPeopleStatus"><input type="text" [(ngModel)]="changeContactPeopleInfo.contactInfo"></span>
-        </div>
-        <div class="fl">
-          <div *ngIf="changeContactPeopleStatus"><button (click)="submitChangeContactPeople(changeContactPeopleTemplate,contactPeopleInfo.rowKey)">提交纠错</button><button (click)="changeContactPeopleStatus = false;cancelChangeContactPeople()">取消纠错</button></div>
-          <button *ngIf="!changeContactPeopleStatus" (click)="changeContactPeopleStatus = true">纠错</button>
-        </div>
-      </div>
     </div>
-    <div class="no-data-tips" *ngIf="!contactPeopleInfo">
+    <div class="no-data-tips" *ngIf="contactPeopleInfo.length<1">
       {{CompanyContactPeopleTips}}
     </div>
   </div>

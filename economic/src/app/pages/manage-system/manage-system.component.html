@@ -10,7 +10,7 @@
     <ul class="nav-list">
       <li class="nav_item">
         <a routerLink="import" routerLinkActive="active" (click)="changeMenuShow()">
-          <i class="fa fa-handshake-o"></i>EXCEL导入
+          <i class="fa fa-handshake-o  fa-fw"></i>EXCEL导入
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
@@ -35,14 +35,26 @@
         </li>
       </ul>
       <li class="nav_item">
+        <a routerLink="mechanismManege" routerLinkActive="active" (click)="changeMenuShow()">
+          <i class="fa fa-book fa-fw"></i>机构管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+      <li class="nav_item">
+        <a routerLink="logsManage" routerLinkActive="active" (click)="changeMenuShow()">
+          <i class="fa fa-book fa-fw"></i>日志管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+      <li class="nav_item">
         <a routerLink="project-declaration" routerLinkActive="active" (click)="changeMenuShow()">
-          <i class="fa fa-pencil-square-o"></i>项目申报管理
+          <i class="fa fa-pencil-square-o fa-fw"></i>项目申报管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
       <li class="nav_item">
         <a routerLink="eqi-hi-tech-certification" routerLinkActive="active" (click)="changeMenuShow()">
-          <i class="fa fa-gavel"></i>高企认证管理
+          <i class="fa fa-gavel fa-fw"></i>高企认证管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
@@ -62,3 +74,5 @@
     </perfect-scrollbar>
   </div>
 </div>
+<app-loading></app-loading>
+<ng2-toasty [position]="'center-center'"></ng2-toasty>

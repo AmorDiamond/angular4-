@@ -222,8 +222,10 @@
   left: 30px;
   top: 50%;
   width: auto;
-  height: 1.041668rem;
-  margin-top: -0.520834rem;
+  /*height: 1.041668rem;*/
+  /*margin-top: -0.520834rem;*/
+  height: 1.44rem;
+  margin-top: -0.72rem;
 }
 
 .menu_box {
@@ -520,4 +522,13 @@
 }
 .top-color .color-item .color-blank.active,.eco-color .color-item .color-blank.active{
   background: #ddd;
+}
+
+.data_application_menu_box .menu_box_hover{
+  width: 220%;
+}
+.menu_box.data_application_menu_box {
+  margin-top: 50%;
+  background: #f9b620 url("../../../assets/images/data_application_menu.png") no-repeat center;
+  background-size: 55%;
 }

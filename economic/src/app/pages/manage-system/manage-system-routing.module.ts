@@ -11,6 +11,7 @@ import { UsersComponent } from './users/users.component';
 import { UserListComponent } from './users/user-list/user-list.component';
 import { UserManageComponent } from './users/user-manage/user-manage.component';
 import { EditRoelsComponent } from './users/edit-roles/edit-roels.component';
+import { LogsManageComponent } from './logs-manage/logs-manage.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,8 @@ const routes: Routes = [
           { path: '**', redirectTo: 'usersList', pathMatch: 'full' }
         ]
       },
+      {path: 'mechanismManege', loadChildren: './mechanism-manage/mechanism-manage.module#MechanismManageModule'},
+      {path: 'logsManage', component: LogsManageComponent},
       {
         path: 'project-declaration',
         loadChildren:

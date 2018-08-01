@@ -64,3 +64,13 @@ div.flex-item {
 .project-report-scroll{
     overflow-x: auto;
 }
+.flex-item li{
+    white-space: initial;
+}
+.flex-head{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    white-space: initial;
+}

@@ -19,10 +19,11 @@ export class IncumbentPeopleComponent implements OnInit {
   StaffCompositionRatioData: any;
   ManagementStructureEchartData: any;
   EmploymentStatusEchartData: any;
-  echartsParams = { companyName: 'test1', currentPage: 0, pageSize: 20, lastRowKey: '' };
+  echartsParams = { name: 'test1', currentPage: 0, pageSize: 20, lastRowKey: '' };
   ngOnInit() {
     this.companyName = this.microcomicService.getUrlParams('name');
     this.microcomicService.setCompanyName(this.companyName);
+    this.echartsParams.name = this.companyName;
     /*获取企业人数*/
     this.getEnterprisePeople();
     /*获取人员构成数据*/
@@ -30,7 +31,8 @@ export class IncumbentPeopleComponent implements OnInit {
   }
   /*获取企业人数*/
   getEnterprisePeople() {
-    this.companyEconomicInfoService.findListByUrl(this.echartsParams, 'companyNumberOfActiveStaffByYearUrl').subscribe(res => {
+    const params = {name: this.companyName};
+    this.companyEconomicInfoService.findListByUrl(params, 'companyNumberOfActiveStaffByYearUrl').subscribe(res => {
       console.log('企业人数', res)
       this.creatParkNumber(res.data, [2015, 2016, 2017]);
       /*获取园区人数占比数据*/

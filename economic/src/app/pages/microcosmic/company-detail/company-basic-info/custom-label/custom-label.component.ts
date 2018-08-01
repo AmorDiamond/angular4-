@@ -51,7 +51,7 @@ export class CustomLabelComponent implements OnInit {
         }
       }
       const userId = this.userId;
-      this.companyBasicService.findListByUrl({companyName: this.rowkey, userId: userId, content: newLabel}, 'addCompanyCustomLabelUrl').subscribe(res => {
+      this.companyBasicService.findListByTypeAndUrl({companyName: this.rowkey, userId: userId, content: newLabel}, 'addCompanyCustomLabelUrl', 'post').subscribe(res => {
         console.log(res);
         if (res.responseCode === '_200') {
           this.labelLists.push(newLabel);
@@ -63,15 +63,6 @@ export class CustomLabelComponent implements OnInit {
           this.toastModalService.showErrorToast({errorMsg: res.errorMsg});
         }
       })
-      /*this.companyBasicService.addCompanyCustomLabel(this.rowkey, userId).subscribe(res => {
-        console.log(res);
-        if (res.responseCode === '_200') {
-          this.labelLists.push(newLabel);
-          this.toastModalService.showSuccessToast({tipsMsg: '添加标签成功！'});
-          this.addLabelStatus = false;
-          this.newLabel = '';
-        }
-      })*/
     }
   }
   /*删除标签操作*/
@@ -83,7 +74,7 @@ export class CustomLabelComponent implements OnInit {
   confirmDeleteLabel() {
     const iabelID = this.deleteLabelId;
     const userId = this.userId;
-    this.companyBasicService.findListByUrl({iabelID: iabelID, userID: userId}, 'deleteCompanyCustomLabelUrl').subscribe(res => {
+    this.companyBasicService.findListByTypeAndUrl({iabelID: iabelID}, 'deleteCompanyCustomLabelUrl', 'delete').subscribe(res => {
       console.log(res);
       if (res.responseCode === '_200') {
         // this.labelLists.splice(index, 1);

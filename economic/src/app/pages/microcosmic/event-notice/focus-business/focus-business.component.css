@@ -1,13 +1,46 @@
 .focus-business-con{
     padding: 10px;
 }
-.focus-business-con li{
+.focus-business-item{
+    width: 90%;
+    height: 100px;
+    margin: 0 auto;
+    border-bottom: 1px solid #f9b620;
     cursor: pointer;
-    overflow: hidden;
+    margin-top: 15px;
+    outline: none;
 }
-.focus-business-con li:hover{
-    background: rgba(249, 182, 32, .5);
+.focus-business-item:hover{
+    background: rgba(255, 255, 255, .2);
 }
-.focus-business-con li .item{
+.focus-business-item .logo {
+    width: 100px;
+    float: left;
+    height: inherit;
     padding: 10px;
+}
+.focus-business-item .logo img {
+    height: 100%;
+}
+.focus-business-item .column-item {
+    height: inherit;
+    padding: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.focus-business-item .column-item .name {
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 40px;
+    color: #fff;
+}
+.focus-business-item .column-item .other {
+    font-size: 14px;
+}
+.focus-business-item .column-item .other span {
+    margin-right: 20px;
+}
+.focus-business-item .column-item .other i {
+    font-style: normal;
+    color: #fff;
 }

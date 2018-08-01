@@ -1,0 +1,23 @@
+<div class="data-application-box">
+  <div class="public-panel-title">
+    <h3>数据应用</h3>
+    <!--<h3 routerLink="/mac/forecast" routerLinkActive="active">宏观经济预测</h3>-->
+  </div>
+  <div class="right-panel">
+    <div class="content">
+      <div class="panel-menu-box">
+        <div class="panel-menu nowrap">
+          <ul>
+            <li routerLink="researchGuide" routerLinkActive="active">企业调研向导</li>
+            <li routerLink="contactLookup" routerLinkActive="active">联系人查找</li>
+            <li routerLink="dataOutput" routerLinkActive="active">数据输出</li>
+            <li routerLink="qualityRecommend" routerLinkActive="active">优质企业推荐</li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel-menu-right">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

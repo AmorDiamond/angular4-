@@ -1,0 +1,6 @@
+.quality-recommend-box .data-search-item{
+    cursor: text;
+}
+.quality-recommend-box .data-search-item .name{
+    cursor: pointer;
+}

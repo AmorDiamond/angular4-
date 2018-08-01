@@ -1,9 +1,22 @@
 <perfect-scrollbar>
   <div class="focus-business-con">
-    <ul>
-      <li routerLink="/mic/companyDetail/basic"><div class="item name fl">公司名称</div><div class="item industry-type fl">企业类型</div></li>
-      <li routerLink="/mic/companyDetail/basic"><div class="item name fl">公司名称</div><div class="item industry-type fl">企业类型</div></li>
-      <li routerLink="/mic/companyDetail/basic"><div class="item name fl">公司名称</div><div class="item industry-type fl">企业类型</div></li>
-    </ul>
+    <div [hidden]="focusBusinessList.length<1">
+      <div class="focus-business-item" *ngFor="let item of focusBusinessList" [routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: item.name}">
+        <div class="logo">
+          <img src="../../../../../assets/images/company_logo.png" alt="">
+        </div>
+        <div class="column-item">
+          <div class="name">{{item.name}}</div>
+          <div class="other">
+            <span>注册类型：<i>{{item.registrationType ? item.registrationType : '未知'}}</i></span>
+            <span>行业类型：<i>{{item.industryType ? item.industryType : '未知'}}</i></span>
+            <span>通讯地址：<i>{{item.address ? item.address : '未知'}}</i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="no-data-tips" *ngIf="focusBusinessList.length<1">
+      {{focusBusinessListTips}}
+    </div>
   </div>
 </perfect-scrollbar>

@@ -3,6 +3,19 @@
 @import '~font-awesome/css/font-awesome.min.css';
 @import '~ng2-toasty/style.css';
 @import '~ng2-toasty/style-material.css';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/omega/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@font-face{
+  font-family:'Glyphicons Halflings';
+  src:url(/assets/fonts/glyphicons-halflings-regular.eot);
+  src:url(/assets/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),
+  url(/assets/fonts/glyphicons-halflings-regular.woff2) format('woff2'),
+  url(/assets/fonts/glyphicons-halflings-regular.woff) format('woff'),
+  url(/assets/fonts/glyphicons-halflings-regular.ttf) format('truetype'),
+  url(/assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
+}
 .fl {
   float: left
 }
@@ -893,4 +906,126 @@ a:focus, a:hover {
 }
 .m-b-20 {
   margin-bottom: 20px;
+}
+.text-c th{
+  text-align: center;
+}
+.panel-content .table.text-c tr td{
+  text-align: center;
+}
+.public-panel-title{
+  height: 50px;
+  position: relative;
+  background-color: #22211d;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  border-radius: 6px;
+}
+.public-panel-title:before{
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  -o-box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: inset -3px -3px 3px 0 rgba(0, 0, 0, 0.9), inset 3px 3px 3px 0 rgba(255, 255, 255, 0.4);
+  background: -webkit-gradient(linear, left top, right top, from(rgba(34, 33, 29, 0.5)), to(rgba(58, 57, 52, 0.5)));
+  background: linear-gradient(to right, rgba(34, 33, 29, 0.5), rgba(58, 57, 52, 0.5));
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -o-border-radius: 6px;
+  -ms-border-radius: 6px;
+  border-radius: 6px;
+}
+.public-panel-title h3{
+  position: relative;
+  float: left;
+  margin: 0;
+  z-index: 9;
+  padding: 0 20px;
+  margin-left: 10px;
+  outline: none;
+  color: #f9b620;
+  line-height: 50px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.flex-column .flex-cell{
+  flex: 1;
+  overflow: hidden;
+}
+.data-application-box .panel-content{
+  height: 100%;
+}
+.data-application-box .data-search-con{
+  margin: 20px 0;
+}
+.data-application-box .data-search-con select,.data-application-box .data-search-con input{
+  border-color: #f9b620;
+  background: none;
+  color: #fff;
+}
+.data-application-box .data-search-con input{
+  width: 30%;
+}
+.data-application-box .data-search-con option{
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari 和 Chrome */
+  appearance: none;
+  background: #151411;
+  color: #fff;
+}
+.data-application-box .data-search-list .data-search-item{
+  width: 90%;
+  height: 100px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f9b620;
+  cursor: pointer;
+  margin-top: 15px;
+}
+.data-application-box .data-search-list .data-search-item .column-item{
+  height: inherit;
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.data-application-box .data-search-list .data-search-item .logo{
+  width: 100px;
+  float: left;
+  height: inherit;
+  padding: 10px;
+}
+.data-application-box .data-search-list .data-search-item .name{
+  font-size: 20px;
+  margin-bottom: 10px;
+  line-height: 40px;
+  color: #fff;
+}
+.data-application-box .data-search-list .data-search-item .other{
+  font-size: 14px;
+}
+.data-application-box .data-search-list .data-search-item .other span{
+  margin-right: 20px;
+}
+.data-application-box .data-search-list .data-search-item .other i{
+  font-style: normal;
+  color: #fff;
+}
+.data-application-box .data-search-list .data-search-item .logo img{
+  height: 100%;
+}
+.data-application-box .data-search-list .no-data-tips{
+  margin-top: 40px;
+  font-size: 16px;
 }

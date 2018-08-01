@@ -34,8 +34,8 @@ export class TrackComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.getContractData();
-    this.getNewsData();
+    // this.getContractData();
+    // this.getNewsData();
   }
 
   // 合同情况

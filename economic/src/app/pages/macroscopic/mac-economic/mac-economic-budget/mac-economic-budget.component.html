@@ -1,10 +1,10 @@
 <!-- 公共性预算 -->
-<perfect-scrollbar style="height: 100%">
+<perfect-scrollbar>
   <div class="animated">
     <div class="chose-time flex">
       <div class="chose-time-left flex-cell">
-        <div class="input-group date fl" id="datetimepicker" data-date="" data-date-format="yyyy">
-          <input class="form-control" size="16" type="text" value="" readonly>
+        <div class="input-group date fl" id="datetimepicker-maceco" data-date="" data-date-format="yyyy">
+          <input class="form-control" size="16" type="text" [ngModel]="revenueTime" readonly>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -29,31 +29,19 @@
     </div>
     <div class="flex">
       <div class="flex-cell">
-        <table class="table table-bordered" id="table1">
+        <table class="table table-bordered text-c" id="table1">
           <tr>
-            <td>季度</td>
-            <td>金额</td>
-            <td>同比增速</td>
+            <th>季度</th>
+            <th>金额</th>
+            <th>同比增速</th>
           </tr>
-          <tr>
-            <td>一季度</td>
-            <td>318亿元</td>
-            <td>4%</td>
+          <tr [hidden]="budgetDataList.length<1" *ngFor="let item of budgetDataList">
+            <td>{{item.quarterInfo}}</td>
+            <td>{{item.budget}}千万</td>
+            <td>{{item.addSpeed}}%</td>
           </tr>
-          <tr>
-            <td>二季度</td>
-            <td>397亿元</td>
-            <td>4.5%</td>
-          </tr>
-          <tr>
-            <td>三季度</td>
-            <td>417亿元</td>
-            <td>5.23%</td>
-          </tr>
-          <tr>
-            <td>四季度</td>
-            <td>423亿元</td>
-            <td>5.47%</td>
+          <tr *ngIf="budgetDataList.length<1">
+            <td colspan="3">暂无信息！</td>
           </tr>
         </table>
       </div>

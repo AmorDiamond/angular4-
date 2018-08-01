@@ -31,16 +31,34 @@ export class MessagePushComponent implements OnInit, OnDestroy {
     private trackService: EventNoticeService,
     private loadingService: LoadingService
   ) { }
-
+  newsInfo = [];
+  newsInfoTips = '加载中...';
+  projectInfo = [];
+  projectInfoTips = '加载中...';
   ngOnInit() {
     const showEventNoticeMenus = {
       track: true
     }
     this.trackService.setEventNoticeMenuControll(showEventNoticeMenus);
-    this.getContractData();
-    this.getNewsData();
+    // this.getContractData();
+    // this.getNewsData();
+    this.getMessagePushInfo();
   }
 
+  /*获取消息推送数据*/
+  getMessagePushInfo() {
+    this.trackService.findListByUrl({}, 'KeyEnterpriseUrl').subscribe(res => {
+      console.log('消息推送数据', res)
+      this.newsInfo = res.data.KETNewsPojo;
+      if(this.newsInfo.length < 1) {
+        this.newsInfoTips = '暂无信息！'
+      }
+      this.projectInfo = res.data.KETProjectDeclarationPojo;
+      if(this.projectInfo.length < 1) {
+        this.projectInfoTips = '暂无信息！'
+      }
+    })
+  }
   // 合同情况
   findContractPage() {
     this.loadingService.loadingStart();

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventNoticeService } from "../event-notice.service";
 
 @Component({
   selector: 'app-focus-business',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FocusBusinessComponent implements OnInit {
 
-  constructor() { }
+  constructor(private eventNoticeService: EventNoticeService) { }
+  focusBusinessList = [];
+  focusBusinessListTips = '加载中...';
 
   ngOnInit() {
+    this.getFocusBusinessInfo();
   }
-
+  /*获取关注企业列表*/
+  getFocusBusinessInfo() {
+    this.eventNoticeService.findListByUrl({}, 'AttentionCompanysUrl').subscribe(res => {
+      console.log('关注企业列表', res)
+      if(res.responseCode === '_200') {
+        this.focusBusinessList = res.data;
+        if(this.focusBusinessList.length < 1) {
+          this.focusBusinessListTips = '暂无信息！';
+        }
+      }
+    })
+  }
 }

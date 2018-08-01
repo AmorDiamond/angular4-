@@ -1,0 +1,51 @@
+<div class="panel-content data-output-box">
+  <div class="flex-column">
+    <div class="data-search-box">
+      <div class="data-search-con form-inline">
+        <input type="text" class="form-control" value="电子信息" disabled>
+        <button class="btn btn-warning" (click)="getList()">搜索</button>
+        <div class="fr">
+          <div class="choose-download-data fl">
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.registerType">注册类型</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.industryType">行业类型</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.registerMoney">注册资金</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.contactPeople">联系人</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.contactPhone">联系电话</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.operatingIncome">营业收入</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.taxPay">税收</label>
+            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.address">通讯地址</label>
+          </div>
+          <div class="fl">
+            <a href="/economicSystem/assets/outputTemplateExcel.xlsx" [download]="downLoadDataExcelName"><button class="btn btn-warning">导出数据</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-cell">
+      <perfect-scrollbar>
+        <div class="data-search-list">
+          <div *ngIf="companyList.length>0">
+            <div class="data-search-item" *ngFor="let item of companyList">
+              <div class="column-item">
+                <div class="name">{{item.name}}</div>
+                <div class="other">
+                  <span class="register-type" *ngIf="downLoadData.registerType">注册类型：<i>{{item.registerType}}</i></span>
+                  <span *ngIf="downLoadData.industryType">行业类型：<i>{{item.industryType}}</i></span>
+                  <span *ngIf="downLoadData.registerMoney">注册资金：<i>{{item.registerMoney}}</i></span>
+                  <span *ngIf="downLoadData.contactPeople">联系人：<i>{{item.contactPeople}}</i></span>
+                  <span *ngIf="downLoadData.contactPhone">联系电话：<i>{{item.contactPhone}}</i></span>
+                  <span *ngIf="downLoadData.operatingIncome">营业收入：<i>{{item.operatingIncome}}</i></span>
+                  <span *ngIf="downLoadData.taxPay">税收：<i>{{item.taxPay}}</i></span>
+                  <span class="contact-address" *ngIf="downLoadData.address">通讯地址：<i>{{item.address}}</i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="no-data-tips text-c" *ngIf="companyList.length<1">
+            请在上方输入您想搜索的信息！
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>

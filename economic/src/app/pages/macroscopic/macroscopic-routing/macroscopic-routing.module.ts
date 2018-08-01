@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MacroscopicComponent } from '../macroscopic.component';
 import { ForecastComponent } from '../forecast/forecast.component';
-import { ForecastResultComponent } from '../forecast/forecast-result/forecast-result.component';
+// import { ForecastResultComponent } from '../forecast/forecast-result/forecast-result.component';
 
 export const routes: Routes = [
   {
@@ -14,7 +14,7 @@ export const routes: Routes = [
         path: 'forecast',
         component: ForecastComponent,
       },
-      {path: 'forecast/result', component: ForecastResultComponent},
+      // {path: 'forecast/result', component: ForecastResultComponent},
       { path: '', redirectTo: 'economic', pathMatch: 'full' }
     ]
   },

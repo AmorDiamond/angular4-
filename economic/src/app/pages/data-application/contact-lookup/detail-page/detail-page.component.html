@@ -1,0 +1,21 @@
+<div class="panel-content">
+  <div class="panel-item-title">企业联系人</div>
+  <table class="table table-bordered text-c">
+    <tr class="company-name">
+      <th colspan="3">{{companyName}}</th>
+    </tr>
+    <tr>
+      <th>姓名</th>
+      <th>职位</th>
+      <th>联系电话</th>
+    </tr>
+    <tr [hidden]="contactDataList.length<1" *ngFor="let item of contactDataList">
+      <td>{{item.name}}</td>
+      <td>{{item.job}}</td>
+      <td>{{item.phone}}</td>
+    </tr>
+    <tr *ngIf="contactDataList.length<1">
+      <td colspan="3">暂无信息！</td>
+    </tr>
+  </table>
+</div>

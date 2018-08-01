@@ -1,10 +1,10 @@
 <!-- 固定投资 -->
-<perfect-scrollbar style="height: 100%">
+<perfect-scrollbar>
   <div class="animated">
     <div class="chose-time flex">
       <div class="chose-time-left flex-cell">
-        <div class="input-group year-month date fl" id="datetimepicker" data-date="" data-date-format="yyyy">
-          <input class="form-control" size="16" type="text" value="" readonly>
+        <div class="input-group year-month date fl" id="datetimepicker-maceco" data-date="" data-date-format="yyyy">
+          <input class="form-control" size="16" type="text" [ngModel]="revenueTime" readonly>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -29,51 +29,19 @@
     </div>
     <div class="flex">
       <div class="flex-cell">
-        <table class="table table-bordered" id="table1">
+        <table class="table table-bordered text-c" id="table1">
           <tr>
-            <td>产业</td>
-            <td>金额</td>
-            <td>同比增速</td>
+            <th>产业</th>
+            <th>金额</th>
+            <th>同比增速</th>
           </tr>
-          <tr>
-            <td>电子信息</td>
-            <td>87亿元</td>
-            <td>2%</td>
+          <tr [hidden]="investDataList.length<1" *ngFor="let item of investDataList">
+            <td>{{item.industryType}}</td>
+            <td>{{item.fixedInverstment}}亿元</td>
+            <td>{{item.addSpeed}}%</td>
           </tr>
-          <tr>
-            <td>生物与新医药</td>
-            <td>97亿元</td>
-            <td>3%</td>
-          </tr>
-          <tr>
-            <td>航空航天</td>
-            <td>105亿元</td>
-            <td>6%</td>
-          </tr>
-          <tr>
-            <td>新材料</td>
-            <td>97亿元</td>
-            <td>4%</td>
-          </tr>
-          <tr>
-            <td>高技术服务也业</td>
-            <td>130亿元</td>
-            <td>5%</td>
-          </tr>
-          <tr>
-            <td>新能源节能</td>
-            <td>124亿元</td>
-            <td>7%</td>
-          </tr>
-          <tr>
-            <td>资源与环境</td>
-            <td>98亿元</td>
-            <td>6%</td>
-          </tr>
-          <tr>
-            <td>高新技术改造传统产业专业</td>
-            <td>150亿元</td>
-            <td>5%</td>
+          <tr *ngIf="investDataList.length<1">
+            <td colspan="3">暂无信息！</td>
           </tr>
         </table>
       </div>

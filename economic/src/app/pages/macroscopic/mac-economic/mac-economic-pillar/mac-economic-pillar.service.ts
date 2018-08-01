@@ -1,16 +1,57 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class MacEconomicPillarService {
 
   private subject = new BehaviorSubject<any>(0);
+  private macPillarIndustryUrl = '/v1/macroMainstay/findByYear';
+  constructor(
+    private http: HttpClient,
+  ) {
+    // this.changeData();
+  }
+  findListByParams(findParams, url, type?): Observable<any> {
+    const httpUrl = this[url];
+    const requestType = type ? type : 'get';
+    let params;
+    let paramsString = ``;
+    if(!requestType || requestType === 'get' || requestType === 'delete') {
+      for(let item in findParams) {
+        if(item) {
+          paramsString += findParams[item] ? `${item}=${findParams[item]}&` : '';
+        }
+      }
+      params = {params: new HttpParams({ fromString: paramsString })};
+    }
 
-  constructor() {
-    this.changeData();
+    return this.http[requestType](httpUrl, params);
   }
 
-  changeData() {
+  /*通过多个请求获取数据*/
+  getRequestByForkJoin(options: Array<any>): Observable<any> {
+    const data = options;
+    const forkJoinArr = [];
+    if (data.length > 0) {
+      for (let i = 0; i < data.length; i++) {
+        let paramsString = '';
+        const findParams = data[i].findParams;
+        const http = data[i].http;
+        for (const key in findParams) {
+          if (findParams.hasOwnProperty(key)) {
+            paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
+          }
+        }
+        const params = new HttpParams({ fromString: paramsString });
+        let post = this.http.get(`${this[http]}`, {params});
+        forkJoinArr.push(post);
+      }
+    }
+    return Observable.forkJoin(forkJoinArr);
+  }
+/*  changeData() {
     const echartsTitleAlign = 'center';
     const optionCycz = [
       { value: 201, name: '集成电路' },
@@ -158,7 +199,7 @@ export class MacEconomicPillarService {
       pillarOutputValueOptions: pillarOutputValueOptions,
       pillarGrowthRateOptions: pillarGrowthRateOptions
     });
-  }
+  }*/
 
   getData() {
     return this.subject.asObservable();

@@ -22,7 +22,8 @@ export class CompanyProfileComponent implements OnInit {
   ) { }
   keyWord: any;
   baseInfo: any;
-  contactPeopleInfo: any = {};
+  contactPeopleInfo: any = [];
+  contactPeopleInfoIndex: any;
   changeContactPeopleInfo: any = {};
   CompanyProfile = '加载中...';
   CompanyIntroductionTips = '加载中...';
@@ -30,6 +31,7 @@ export class CompanyProfileComponent implements OnInit {
   changeContactPeopleConfirmTips = '确定修改该公司联系人信息吗？';
   changeContactPeopleStatus = false;
   dataRowkey: any;
+  oldContactInfo: any = {};
   ngOnInit() {
 
     this.keyWord = this.microcomicService.getUrlParams('name');
@@ -62,16 +64,30 @@ export class CompanyProfileComponent implements OnInit {
     this.companyBasicService.findListByUrl({companyName: company}, 'companyContactPeopleUrl').subscribe(res => {
       console.log('企业联系人', res)
 
-      if (!res.data.eIIRelationPojo[0]) {
+      if (res.data.eIIRelationPojo.length < 1) {
         this.CompanyContactPeopleTips = '暂无信息！';
       }
-      this.contactPeopleInfo = res.data.eIIRelationPojo[0];
-      this.changeContactPeopleInfo = {contactsName: this.contactPeopleInfo.contactsName, duties: this.contactPeopleInfo.duties, contactInfo: this.contactPeopleInfo.contactInfo};
+      this.contactPeopleInfo = res.data.eIIRelationPojo;
     })
+  }
+
+  /*点击纠错获取原始值*/
+  getChangeContactInfo(index, rowkey) {
+    this.changeContactPeopleStatus = true;
+    this.dataRowkey = rowkey;
+    this.contactPeopleInfoIndex = index;
+    this.oldContactInfo = {
+      contactsName: this.contactPeopleInfo[index].contactsName,
+      duties: this.contactPeopleInfo[index].duties,
+      contactInfo: this.contactPeopleInfo[index].contactInfo
+    };
+    this.changeContactPeopleInfo = {contactsName: this.oldContactInfo.contactsName, duties: this.oldContactInfo.duties, contactInfo: this.oldContactInfo.contactInfo};
   }
   /*取消纠错*/
   cancelChangeContactPeople() {
-    this.changeContactPeopleInfo = {contactsName: this.contactPeopleInfo.contactsName, duties: this.contactPeopleInfo.duties, contactInfo: this.contactPeopleInfo.contactInfo};
+    this.dataRowkey = null;
+    this.changeContactPeopleStatus = false;
+    this.changeContactPeopleInfo = {contactsName: '', duties: '', contactInfo: ''};
   }
   /*提交修改联系人*/
   submitChangeContactPeople(template, rowkey) {
@@ -81,74 +97,30 @@ export class CompanyProfileComponent implements OnInit {
   /*确认提交修改*/
   saveChangeInfo() {
     this.toastModalService.hideModal();
-    const requestArr = [];
     const dataId = this.dataRowkey;
-    const modifierId = sessionStorage.getItem('userId');
-    const changeNameParams = {
+    const index = this.contactPeopleInfoIndex;
+    const changeParams = {
       dataId: dataId,
-      contactsName: 'contactsName',
-      premodifiedValues: this.contactPeopleInfo.contactsName,
-      modifiedValues: this.changeContactPeopleInfo.contactsName,
-      modifierId: modifierId
+      contactsName: this.changeContactPeopleInfo.contactsName,
+      duties: this.changeContactPeopleInfo.duties,
+      contactInfo: this.changeContactPeopleInfo.contactInfo,
     };
-    const changeJobParams = {
-      dataId: dataId,
-      duties: 'duties',
-      premodifiedValues: this.contactPeopleInfo.duties,
-      modifiedValues: this.changeContactPeopleInfo.duties,
-      modifierId: modifierId
-    };
-    const changePhoneParams = {
-      dataId: dataId,
-      contactInfo: 'contactInfo',
-      premodifiedValues: this.contactPeopleInfo.contactInfo,
-      modifiedValues: this.changeContactPeopleInfo.contactInfo,
-      modifierId: modifierId
-    };
-    /*修改姓名*/
-    if (this.changeContactPeopleInfo.contactsName !== this.contactPeopleInfo.contactsName) {
-      /*this.companyBasicService.findListByUrl({dataId: changeNameParams.dataId, contactsName: 'contactsName', premodifiedValues: changeNameParams.premodifiedValues, modifiedValues: changeNameParams.modifiedValues, modifierId: modifierId}, 'changeContactPeopleNameUrl').subscribe(res => {
-        console.log('修改联系人姓名', res)
+    if(changeParams.contactsName === this.oldContactInfo.contactsName && changeParams.duties === this.oldContactInfo.duties && changeParams.contactInfo === this.oldContactInfo.contactInfo) {
+      this.toastModalService.addToasts({tipsMsg: '无数据更新！', type: 'warning'});
+      return;
+    }
+    // this.companyBasicService.findListHasNullByUrl(changeParams, 'changeContactPeopleAllUrl').subscribe(res => {
+    this.companyBasicService.changeCompanyConactPeopleUrl(changeParams, 'changeContactPeopleAllUrl', 'post').subscribe(res => {
         if (res.responseCode === '_200') {
-          this.toastModalService.showSuccessToast({tipsMsg: '修改成功！'});
+          this.toastModalService.addToasts({tipsMsg: '已提交纠错信息！', type: 'success'});
+          this.changeContactPeopleStatus = false;
+          this.dataRowkey = null;
+          this.changeContactPeopleInfo = {contactsName: '', duties: '', contactInfo: ''};
+          this.getContactPeopleInfo(this.keyWord);
         }else {
-          this.toastModalService.showErrorToast({errorMsg: res.errorMsg ? res.errorMsg : '未知错误'});
+          this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误', type: 'error'});
         }
-      });*/
-      requestArr.push({findParams: changeNameParams, http: 'changeContactPeopleNameUrl'});
-    }
-    /*修改职位*/
-    if (this.changeContactPeopleInfo.duties !== this.contactPeopleInfo.duties) {
-      /*this.companyBasicService.findListByUrl({dataId: changeJobParams.dataId, duties: 'duties', premodifiedValues: changeJobParams.premodifiedValues, modifiedValues: changeJobParams.modifiedValues, modifierId: modifierId}, 'changeContactPeopleJobUrl').subscribe(res => {
-        console.log('修改联系人职位', res)
-        if (res.responseCode === '_200') {
-          this.toastModalService.showSuccessToast({tipsMsg: '修改成功！'});
-        }else {
-          this.toastModalService.showErrorToast({errorMsg: res.errorMsg ? res.errorMsg : '未知错误'});
-        }
-      });*/
-      requestArr.push({findParams: changeJobParams, http: 'changeContactPeopleJobUrl'});
-    }
-    /*修改联系方式*/
-    if (this.changeContactPeopleInfo.contactInfo !== this.contactPeopleInfo.contactInfo) {
-      requestArr.push({findParams: changePhoneParams, http: 'changeContactPeoplePhoneUrl'});
-    }
-    this.companyBasicService.getRequestByForkJoin(requestArr).subscribe(res => {
-      console.log(res);
-      let success = true;
-      for (let i = 0; i < res.length; i++) {
-        if (res[i].responseCode !== '_200') {
-          success = false
-        }
-      }
-      if (success){
-        this.toastModalService.showSuccessToast({tipsMsg: '修改成功！'});
-      }else {
-        this.toastModalService.showErrorToast({errorMsg: res.errorMsg ? res.errorMsg : '未知错误'});
-      }
-      this.changeContactPeopleStatus = false;
-      this.getContactPeopleInfo(this.keyWord);
-    })
+      });
   }
   /*撤销提交操作*/
   declineSaveChangeInfo() {

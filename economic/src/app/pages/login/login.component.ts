@@ -43,6 +43,30 @@ export class LoginComponent implements OnInit {
         if (res.responseCode === '_200') {
           sessionStorage.setItem('hasLogin', 'YES');
           sessionStorage.setItem('userId', res.data.id);
+          /*登录跳转偏好设置页面*/
+          if(res.data.preferenceType) {
+            let defaultPage = res.data.preferenceType;
+            let viewPage;
+            switch (defaultPage) {
+              case 'MICROSCOPIC':
+                viewPage = 'mic'; // 微观
+                break;
+              case 'MESO':
+                viewPage = 'int'; // 中观
+                break;
+              case 'Macro':
+                viewPage = 'mac'; // 宏观
+                break;
+              case 'MANAGEMENT':
+                viewPage = 'admin'; // 管理端
+                break;
+              default:
+                viewPage = 'mic';
+            }
+
+            this.router.navigate([viewPage]);
+            return;
+          }
           this.router.navigate(['mic']);
           // this.noty.alert({
           //   text: 'welcome!'

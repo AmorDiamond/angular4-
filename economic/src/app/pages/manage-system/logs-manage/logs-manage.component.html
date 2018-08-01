@@ -1,0 +1,74 @@
+<div class="logs-manage-box">
+  <div class="filter">
+    <form class="form-inline" autocomplete="off">
+      <div class="form-group">
+        <label>操作动作:</label>
+        <select class="form-control" required name="actionType" [(ngModel)]="searchParams.actionType">
+          <option value="">请选择操作动作</option>
+          <option *ngFor="let item of actionTypes" [value]="item.name">{{item.desc}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>操作业务对象:</label>
+        <select class="form-control" required name="entityType" [(ngModel)]="searchParams.entityType">
+          <option value="">请选择业务对象</option>
+          <option *ngFor="let item of entityTypes" [value]="item.name">{{item.desc}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>开始时间:</label>
+          <input type="text" name="beginTime" placeholder="开始时间" class="form-control" bsDatepicker [(ngModel)]="chooseTime.beginCreateTime" [bsConfig]="bsConfig">
+      </div>
+      <div class="form-group">
+        <label>截至时间:</label>
+          <input type="text" name="endTime" placeholder="截至时间" class="form-control" bsDatepicker [(ngModel)]="chooseTime.endCreateTime" [bsConfig]="bsConfig">
+      </div>
+      <!--<div class="form-group">
+        <label>类型:</label>
+        <select class="form-control" id="nodeType" required [(ngModel)]="ldapUserListParams.nodeType" name="nodeType">
+          <option *ngFor="let nodeType of ldapNodeTypes" [value]="nodeType.value">{{nodeType.label}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>状态:</label>
+        <select class="form-control" id="method" required [(ngModel)]="ldapUserListParams.status" name="method">
+          <option *ngFor="let statu of ldapUserStatus" [value]="statu.value">{{statu.label}}</option>
+        </select>
+      </div>-->
+      <div class="filter-bt">
+        <button class="btn search-btn" (click)="getLogsList()">搜索</button>
+        <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="content-bd">
+  <table class="table table-bordered table-hover table-s table-overflow-x">
+    <thead>
+    <tr class="text-c">
+      <th>ID</th>
+      <th>操作者</th>
+      <th>动作</th>
+      <th>操作业务对象</th>
+      <th>操作对象编号</th>
+      <th>操作时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-c ng-scope" *ngFor="let item of logsLists">
+      <td class="nowrap">{{item.id | slice:0:6}}***</td>
+      <td class="nowrap">{{item.executeUser.ldapName}}</td>
+      <td class="nowrap">{{actionTypesObj[item.actionType]}}</td>
+      <td class="nowrap">{{entityTypesObj[item.entityType]}}</td>
+      <td class="nowrap">{{item.entityId}}</td>
+      <td class="nowrap">{{item.executeDate | date:'yy-MM-dd HH:mm:ss'}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-xs-12 col-12">
+      <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                  [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+  </div>
+</div>

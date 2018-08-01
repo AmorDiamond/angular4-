@@ -5,7 +5,7 @@ import { PaginationModule } from './pagination/pagination.module';
 import { ScrollbarComponent } from './scrollbar.component';
 import { LoadingModule } from './loading/loading.module';
 import { FormsModule } from '@angular/forms';
-import { PopoverModule } from 'ngx-bootstrap';
+import { PopoverModule, BsDatepickerModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -13,6 +13,7 @@ import { PopoverModule } from 'ngx-bootstrap';
     NgxEchartsModule,
     PaginationModule,
     LoadingModule,
+    BsDatepickerModule.forRoot(),
     PopoverModule.forRoot()
   ],
   exports: [
@@ -22,7 +23,8 @@ import { PopoverModule } from 'ngx-bootstrap';
     LoadingModule,
     ScrollbarComponent,
     FormsModule,
-    PopoverModule
+    PopoverModule,
+    BsDatepickerModule
   ],
   declarations: [ScrollbarComponent]
 })

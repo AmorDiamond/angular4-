@@ -13,6 +13,7 @@ export const routes: Routes = [
       {path: 'mic', loadChildren: '../pages/microcosmic/microcosmic.module#MicrocosmicModule', data: {title: 'Home-Liu'}},
       {path: 'int', loadChildren: '../pages/intermediate/intermediate.module#IntermediateModule'},
       {path: 'mac', loadChildren: '../pages/macroscopic/macroscopic.module#MacroscopicModule'},
+      {path: 'dataApplication', loadChildren: '../pages/data-application/data-application.module#DataApplicationModule'},
       {path: '', redirectTo: 'mic', pathMatch: 'full'}
     ],
     canActivate: [CanAuthProvide]

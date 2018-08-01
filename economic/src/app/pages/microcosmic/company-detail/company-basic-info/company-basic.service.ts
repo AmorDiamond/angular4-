@@ -16,12 +16,10 @@ export class CompanyBasicService {
   private companySocialSecurityUrl = '/v1/InsuranceInformationPojo';
   /*获取企业联系人姓名、电话、职位*/
   private companyContactPeopleUrl = '/v1/eIIRelationPojo/findGobernmentContactsByCompanyName';
-  /*纠错企业联系人姓名*/
-  private changeContactPeopleNameUrl = '/v1/errorInfo/findcontactsName';
-  /*纠错企业联系人职位*/
-  private changeContactPeopleJobUrl = '/v1/errorInfo/findduties';
-  /*纠错企业联系人联系方式*/
-  private changeContactPeoplePhoneUrl = '/v1/errorInfo/findcontactInfo';
+  /*纠错企业联系人姓名、职位、联系方式*/
+  private changeContactPeopleAllUrl = '/v1/errorInfo/findnameAndphone';
+  /*纠错企业通讯地址和联系方式*/
+  private changeAdressAndContactUrl = '/v1/errorInfo/findepTelAndAdress';
   /*获取企业自定义标签*/
   private companyCustomLabelUrl = '/v1/iabels/findByName';
   /*添加企业自定义标签*/
@@ -55,6 +53,35 @@ export class CompanyBasicService {
   addCompanyCustomLabel(company, userid): Observable<any> {
     return this.http.get(`${this.addCompanyCustomLabelUrl}?companyName=${company}&userId=${userid}`);
   }
+  changeCompanyConactPeopleUrl(findParams, http, type?): Observable<any> {
+    let paramsString = '';
+    const url = this[http];
+    const requestType = type ? type : 'get';
+    let params;
+    if(requestType === 'get' || requestType === 'delete') {
+      for (const key in findParams) {
+        if (findParams.hasOwnProperty(key)) {
+          paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
+        }
+      }
+      params = {params: new HttpParams({ fromString: paramsString })};
+    }
+    if(requestType === 'post') {
+      let formData: FormData = new FormData();
+      for(let item in findParams) {
+        if(item) {
+          formData.append(`${item}`, findParams[item]);
+        }
+      }
+      // params = new HttpParams().set('companyName', findParams.companyName).set('content', findParams.content);
+      params = formData;
+    }
+    /*if(type === 'delete') {
+      params = {params: new HttpParams().set('iabelID', findParams.iabelID)};
+      console.log(1212, params)
+    }*/
+    return this.http[type](url, params);
+  }
   findListByUrl(findParams, type): Observable<any> {
     let paramsString = '';
     const url = this[type];
@@ -65,6 +92,38 @@ export class CompanyBasicService {
     }
     const params = new HttpParams({ fromString: paramsString });
     return this.http.get(url, { params });
+  }
+  findListHasNullByUrl(findParams, type): Observable<any> {
+    let paramsString = '';
+    const url = this[type];
+    for (const key in findParams) {
+      if (findParams.hasOwnProperty(key)) {
+        paramsString += `${key}=${findParams[key]}&`;
+      }
+    }
+    const params = new HttpParams({ fromString: paramsString });
+    return this.http.get(url, { params });
+  }
+  findListByTypeAndUrl(findParams, http, type): Observable<any> {
+    let paramsString = '';
+    const url = this[http];
+    let params;
+    if(type === 'get' || type === 'delete') {
+      for (const key in findParams) {
+        if (findParams.hasOwnProperty(key)) {
+          paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
+        }
+      }
+      params = {params: new HttpParams({ fromString: paramsString })};
+    }
+    if(type === 'post') {
+      params = new HttpParams().set('companyName', findParams.companyName).set('content', findParams.content);
+    }
+    /*if(type === 'delete') {
+      params = {params: new HttpParams().set('iabelID', findParams.iabelID)};
+      console.log(1212, params)
+    }*/
+    return this.http[type](url, params);
   }
   /*通过多个请求获取数据*/
   getRequestByForkJoin(options: Array<any>): Observable<any> {

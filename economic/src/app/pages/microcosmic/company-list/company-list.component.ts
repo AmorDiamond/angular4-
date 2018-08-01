@@ -47,6 +47,13 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    /*避免五搜索记录从数据应用过来的返回*/
+    if(!localStorage.getItem('searchName')) {
+      this.routerInfo.params.subscribe((params: Params) => {
+        this.searchParams.keyWord = params['name'];
+        this.search();
+      });
+    }
     this.subscription = this.layoutService.getSubject()
       .subscribe((res) => {
         if (!res) {

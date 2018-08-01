@@ -41,9 +41,34 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
         width: '60%'
       }
     });
+    /*避免刷新不展开一级菜单*/
+    const visitUrl = this.router.url.slice(this.router.url.indexOf('companyDetail/') + 'companyDetail/'.length);
+    let nowVisitPage;
+    nowVisitPage = visitUrl.indexOf('/') > 0 ? visitUrl.slice(0, visitUrl.indexOf('/')) : visitUrl.slice(0, visitUrl.indexOf('?'));
+    console.log(nowVisitPage);
+    switch (nowVisitPage) {
+      case 'basic':
+        this.showIndustryMenusControl = 'basic';
+        break;
+      case 'qualifications':
+        this.showIndustryMenusControl = 'qualifications';
+        break;
+      case 'credit':
+        this.showIndustryMenusControl = 'credit';
+        break;
+      case 'assets':
+        this.showIndustryMenusControl = 'assets';
+        break;
+      case 'economicIndicators':
+        this.showIndustryMenusControl = 'economicIndicators';
+        break;
+      case 'overview':
+        this.showIndustryMenusControl = 'overview';
+        break;
+    }
+    this.rowKey = this.microcomicService.getUrlParams('name');
     /*获取储存的搜索关键字用于从详情返回*/
     this.searchName = localStorage.getItem('searchName') ? localStorage.getItem('searchName') : this.rowKey;
-    this.rowKey = this.microcomicService.getUrlParams('name');
     this.getBaseInfo(this.rowKey);
     /*this.subscription = this.microcomicService.getCompanyName()
       .subscribe(res => {
@@ -81,7 +106,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
   getBaseInfo(name) {
     this.companyBasicService.getCompanyDetail(name)
       .subscribe(res => {
-        this.isFollow = res.data.concernedPeople && res.data.concernedPeople !== 'false' ? res.data.concernedPeople : false;
+        this.isFollow = (res.data.concernedPeople && res.data.concernedPeople !== 'false') && res.data.focusOfAttention ? true: false;
       });
   }
 

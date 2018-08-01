@@ -1,0 +1,43 @@
+.data-output-box .column-item{
+    white-space: normal;
+}
+.data-output-box .data-search-item .name{
+    line-height: 30px;
+}
+.data-output-box .data-search-item .other{
+    line-height: 20px;
+}
+.data-output-box .data-search-item{
+    cursor: text;
+}
+.data-output-box .other span{
+    margin-right: 10px;
+    width: 30%;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.data-output-box .other .register-type{
+    width: 100%;
+}
+.data-output-box .other .contact-address{
+    width: 100%;
+}
+.data-output-box .data-search-item .column-item{
+    padding: 30px 10px;
+}
+.data-output-box .data-search-list .data-search-item{
+    width: 100%;
+    height: 200px;
+    margin-top: 0;
+}
+.data-output-box .data-search-list .data-search-item:nth-child(2n+1){
+    background: #3e3e3e33;
+}
+.choose-download-data{
+    max-width: 260px;
+}
+.choose-download-data label{
+    margin: 0 5px;
+    width: 70px;
+}

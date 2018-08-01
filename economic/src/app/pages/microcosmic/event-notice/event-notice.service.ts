@@ -41,6 +41,12 @@ export class EventNoticeService {
     // 规上企业推荐
     SmartRecommendation: '/v1/epBaseInfoPojo/findAllSmartRecommendation',
   };
+  /*获取关注企业列表*/
+  private AttentionCompanysUrl = '/v1/attentionEvent/findAttentionCompanys';
+  /*获取关注企业信用预警事件*/
+  private CorporateCreditEventUrl = '/v1/attentionEvent/findCorporateCreditEvent';
+  /*获取关注的重点企业消息*/
+  private KeyEnterpriseUrl = '/v1/attentionEvent/getKeyEnterprise';
 
   constructor(private http: HttpClient) { }
 
@@ -51,6 +57,18 @@ export class EventNoticeService {
       .set('pageSize', data.pageSize ? data.pageSize.toString() : '');
 
     return this.http.get<EventNoticeResponse>(this.URLS[data.type], { params });
+  }
+
+  findListByUrl(findParams, type): Observable<any> {
+    let paramsString = '';
+    const url = this[type];
+    for (const key in findParams) {
+      if (findParams.hasOwnProperty(key)) {
+        paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
+      }
+    }
+    const params = new HttpParams({ fromString: paramsString });
+    return this.http.get(url, { params });
   }
   getEventNoticeMenuControll(): Observable<any> {
     return this.subjectEventNoticeMenus.asObservable();

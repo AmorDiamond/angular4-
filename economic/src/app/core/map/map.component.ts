@@ -69,8 +69,9 @@ export class MapComponent implements OnInit {
               content: `<div class="mapMarker"><span>${item.name}</span></div>`
             });
             marker.on('click', () => {
-              console.log(marker.F.title);
-              this.microcosmicService.changeData(marker.F.title);
+              console.log(marker.getTitle());
+              // console.log(marker.F.title);
+              this.microcosmicService.changeData(marker.getTitle());
             });
           });
           map.setFitView();

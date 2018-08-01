@@ -1,39 +1,227 @@
 <!-- 企业事件预警 -->
-<div class="panel-content">
-  <div class="panel-item-title">企业信用事件预警：</div>
-  <div class="flex">
-    <div class="flex-cell">
-      <div class="flex-item" style="width: 100%;">
-        <div class="flex-head notice-company-name">成都亚盛胶业制造有限公司</div>
-        <ul>
-          <li class="title">事件</li>
-          <li>百度搜索排名虚假事件</li>
-          <li class="title">事件时间</li>
-          <li>2017/11/20</li>
-        </ul>
+<perfect-scrollbar>
+  <div class="panel-content">
+    <div class="panel-item-title">政府表彰：</div>
+    <perfect-scrollbar data-scroll="X">
+      <div class="flex" *ngIf="governmentRecognitionList.length>0">
+      <div class="flex-cell" *ngFor="let item of governmentRecognitionList">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head notice-company-name">{{item.enterpriseName}}</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>{{item.honorName}}</li>
+            <li class="title">事件时间</li>
+            <li>{{item.evaluationDate | date:'yyyy-MM-dd'}}</li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="flex-cell" style="padding-left:12px;">
-      <div class="flex-item" style="width: 100%;">
-        <div class="flex-head">乐视科技有限责任公司</div>
-        <ul>
-          <li class="title">事件</li>
-          <li>拖欠经销商货款</li>
-          <li class="title">事件时间</li>
-          <li>2017/11/21</li>
-        </ul>
+      <!--<div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head notice-company-name">成都亚盛胶业制造有限公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>百度搜索排名虚假事件</li>
+            <li class="title">事件时间</li>
+            <li>2017/11/20</li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <div class="flex-cell" style="padding-left:12px;">
-      <div class="flex-item" style="width: 100%;">
-        <div class="flex-head">杭州阿里巴巴有限责任公司</div>
-        <ul>
-          <li class="title">事件</li>
-          <li>阿里巴巴高层辞职事件</li>
-          <li class="title">事件事件</li>
-          <li>2017/11/22</li>
-        </ul>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">乐视科技有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>拖欠经销商货款</li>
+            <li class="title">事件时间</li>
+            <li>2017/11/21</li>
+          </ul>
+        </div>
       </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>-->
     </div>
+      <div class="no-data-tips" *ngIf="governmentRecognitionList.length<1">
+        {{governmentRecognitionTips}}
+      </div>
+    </perfect-scrollbar>
+    <div class="panel-item-title">黑名单：</div>
+    <perfect-scrollbar data-scroll="X">
+      <div class="flex" *ngIf="blackList.length>0">
+      <div class="flex-cell" *ngFor="let item of blackList">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head notice-company-name">{{item.enterpriseName}}</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>{{item.caseReason}}</li>
+            <li class="title">事件时间</li>
+            <li>{{item.filingTime | date:'yyyy-MM-dd'}}</li>
+          </ul>
+        </div>
+      </div>
+      <!--<div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head notice-company-name">成都亚盛胶业制造有限公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>百度搜索排名虚假事件</li>
+            <li class="title">事件时间</li>
+            <li>2017/11/20</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">乐视科技有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>拖欠经销商货款</li>
+            <li class="title">事件时间</li>
+            <li>2017/11/21</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>-->
+    </div>
+    <div class="no-data-tips" *ngIf="blackList.length<1">
+      {{blackListTips}}
+    </div>
+    </perfect-scrollbar>
+    <div class="panel-item-title">履约缴费：</div>
+    <perfect-scrollbar data-scroll="X">
+      <div class="flex" *ngIf="performancePaymentList.length>0">
+      <div class="flex-cell" *ngFor="let item of performancePaymentList">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head notice-company-name">{{item.enterpriseName}}</div>
+          <ul>
+            <li class="title">拖欠状态</li>
+            <li>{{item.arrears}}</li>
+            <li class="title">最近缴存时间</li>
+            <li>{{item.lastDepositTime | date:'yyyy-MM-dd'}}</li>
+          </ul>
+        </div>
+      </div>
+      <!--<div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head notice-company-name">成都亚盛胶业制造有限公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>百度搜索排名虚假事件</li>
+            <li class="title">事件时间</li>
+            <li>2017/11/20</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">乐视科技有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>拖欠经销商货款</li>
+            <li class="title">事件时间</li>
+            <li>2017/11/21</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="flex-item" style="width: 100%;">
+          <div class="flex-head">杭州阿里巴巴有限责任公司</div>
+          <ul>
+            <li class="title">事件</li>
+            <li>阿里巴巴高层辞职事件</li>
+            <li class="title">事件事件</li>
+            <li>2017/11/22</li>
+          </ul>
+        </div>
+      </div>-->
+    </div>
+    <div class="no-data-tips" *ngIf="performancePaymentList.length<1">
+      {{performancePaymentTips}}
+    </div>
+    </perfect-scrollbar>
   </div>
-</div>
+</perfect-scrollbar>

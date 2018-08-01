@@ -1,0 +1,30 @@
+<div class="panel-content m-t-20">
+  <div class="panel-item-title">企业概况</div>
+  <div *ngIf="companyName == '成都国腾实业集团有限公司'">
+    <table class="table table-bordered">
+      <tr>
+        <td class="table-label">企业名称：</td><td colspan="3">成都国腾实业集团有限公司</td>
+        <td class="table-label">注册登记类型：</td><td>民营</td>
+      </tr>
+      <tr>
+        <td class="table-label">经营地址：</td><td colspan="5">成都市高新西区西芯大道3号国腾园2号楼</td>
+      </tr>
+      <tr>
+        <td class="table-label" rowspan="2">主营业务：</td><td rowspan="2" colspan="3">开发、生产、加工、销售电子 器件、集成电路、电子系统及有关电子应用产品、电子计算机软件、硬件、产品及相关技术咨询服务；信息产业投资（不含金融、证券业务）；系统集成等。</td>
+        <td class="table-label">所属行业：</td><td>电子信息</td>
+      </tr>
+      <tr>
+        <td class="table-label">经营场所面积：</td><td>未知</td>
+      </tr>
+      <tr>
+        <td class="table-label">政府事务联系人：</td><td>黄丽洪</td>
+        <td class="table-label">联系电话：</td><td>87827092</td>
+        <td class="table-label">员工数：</td><td>1283</td>
+      </tr>
+    </table>
+  </div>
+  <div  *ngIf="companyName != '成都国腾实业集团有限公司'">
+    暂无信息！
+  </div>
+  <a href="/economicSystem/assets/templateExcel.xlsx" target="_blank" [download]="downLoadName"><button class="btn btn-warning">下载调查问卷</button></a>
+</div>

@@ -1,0 +1,6 @@
+.data-application-box{
+    height: 100%;
+}
+.data-application-box .panel-menu li{
+    margin: 0;
+}

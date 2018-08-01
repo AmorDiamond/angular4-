@@ -18,6 +18,7 @@ import { PaginationModule, TooltipModule, ModalModule } from 'ngx-bootstrap';
 import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { ToastModalService } from '../../shared/toast-modal/toast-modal.service';
+import { LogsManageComponent } from './logs-manage/logs-manage.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { ToastModalService } from '../../shared/toast-modal/toast-modal.service'
     UsersComponent,
     UserListComponent,
     UserManageComponent,
-    EditRoelsComponent
+    EditRoelsComponent,
+    LogsManageComponent
   ],
   providers: [ToastModalService]
 })

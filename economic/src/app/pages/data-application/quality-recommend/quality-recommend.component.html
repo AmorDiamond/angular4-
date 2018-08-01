@@ -1,0 +1,23 @@
+<div class="panel-content quality-recommend-box">
+      <perfect-scrollbar>
+        <div class="data-search-list">
+          <div *ngIf="companyList.length>0">
+            <div class="data-search-item" *ngFor="let item of companyList">
+              <div class="logo">
+                <img src="/economicSystem/assets/images/company_logo.png" alt="">
+              </div>
+              <div class="column-item">
+                <div class="name" [routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: item.name}">{{item.name}}</div>
+                <div class="other">
+                  <span>产业类型：<i>{{item.industryType}}</i></span>
+                  <span>企业地址：<i>{{item.address}}</i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="no-data-tips text-c" *ngIf="companyList.length<1">
+            暂无信息！
+          </div>
+        </div>
+      </perfect-scrollbar>
+</div>

@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { LoadingShow } from '../loading-ngrx/loading.model';
 import { CHANGE } from '../loading-ngrx/loading.action';
 import { Router } from '@angular/router';
+import { ToastModalService } from "../../shared/toast-modal/toast-modal.service";
 
 import 'rxjs/add/operator/do';
 import { finalize, tap } from 'rxjs/operators';
@@ -13,7 +14,7 @@ import { finalize, tap } from 'rxjs/operators';
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
 
-    constructor(private store: Store<LoadingShow>, private router: Router) {
+    constructor(private store: Store<LoadingShow>, private router: Router, private toastModalService: ToastModalService) {
         this.store.select('loading');
     }
   httpRequestCount: number = 0;
@@ -54,6 +55,11 @@ export class LoadingInterceptor implements HttpInterceptor {
                     }
                 }
                 return event;
+            }, err => {
+              console.log('拦截器失败', err.error);
+              if(err.error.message === 'url Access Denied or login fail!' && err.error.path == '/ldap/security/loginFail' && err.status === 500) {
+                this.router.navigate(['/login']);
+              }
             });
         // .pipe(
         //     tap(

@@ -43,6 +43,40 @@ export class ToastModalService {
     // Add see all possible types in one shot
     this.toastyService.error(toastOptions);
   }
+  addToasts(options) {
+    const toastType = options.type;
+    const toastOptions: ToastOptions = {
+      title: options.title ? options.title : '',
+      msg: options.tipsMsg ? options.tipsMsg : '',
+      showClose: true,
+      timeout: 1000,
+      theme: 'default',
+      onAdd: (toast: ToastData) => {
+      },
+      onRemove: (toast: ToastData) => {
+      }
+    };
+    switch(toastType) {
+      case 'default':
+        this.toastyService.default(toastOptions);
+        break;
+      case 'info':
+        this.toastyService.info(toastOptions);
+        break;
+      case 'success':
+        this.toastyService.success(toastOptions);
+        break;
+      case 'wait':
+        this.toastyService.wait(toastOptions);
+        break;
+      case 'error':
+        this.toastyService.error(toastOptions);
+        break;
+      case 'warning':
+        this.toastyService.warning(toastOptions);
+        break;
+    }
+  }
   showModal(template) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   }

@@ -31,7 +31,7 @@ export class CompanyEconomicInfoService {
     /*获取在职人数信息*/
     private companyNumberOfActiveStaffUrl = '/v1/eIIRevenueAndStaffPojo/findNumberOfActiveStaffByCompanyName';
     /*新获取在职人数、学历结构、管理结构、就业情况信息*/
-    private companyNumberOfActiveStaffByYearUrl = '/v1/Employees//findServingOfficers';
+    private companyNumberOfActiveStaffByYearUrl = '/v1/Employees/findServingOfficers';
     /*获取收入同比信息*/
     private companyRevenueYearOnYearUrl = '/v1/eIIRevenueAndStaffPojo/findRevenueYearOnYearByCompanyName';
     /*取园区人数占比信息*/
