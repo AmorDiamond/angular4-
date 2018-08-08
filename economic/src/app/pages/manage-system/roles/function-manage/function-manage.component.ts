@@ -14,9 +14,10 @@ export class FunctionManageComponent implements OnInit {
   functionName: string;
   functionMethod: string = 'POST';
   functionDesc: string;
+  editFunctionId: any = '';
   methods = ['POST', 'GET', 'DELETE', 'PATCH'];
-  addPowerHttpParams = {url: '/v1/competence', method: 'post'};
-  getMethodDetailParams = {url: '/v1/competence/', method: 'post'};
+  addPowerHttpParams = {url: '/v1/competence/', method: 'post'};
+  getMethodDetailParams = {url: '/v1/competence/getById', method: 'post'};
   constructor(private http: HttpClient, private routeInfo: ActivatedRoute, private router: Router,
               private toastModalService: ToastModalService) {
   }
@@ -25,6 +26,7 @@ export class FunctionManageComponent implements OnInit {
     this.routeInfo.params.subscribe((params: ParamMap) => {
       if (params['id'] !== '-1') {
         this.getMethodDetail(params['id']);
+        this.editFunctionId = params['id'];
       }
     });
   }
@@ -46,7 +48,7 @@ export class FunctionManageComponent implements OnInit {
   }
   getMethodDetail(id) {
     const url = this.getMethodDetailParams.url;
-    this.http.get(url + '/' + id).subscribe((res: any) => {
+    this.http.get(url + '?id=' + id).subscribe((res: any) => {
       this.functionId = res.data.id;
       this.functionName = res.data.comment;
       this.functionMethod = res.data.methods;
@@ -54,20 +56,43 @@ export class FunctionManageComponent implements OnInit {
     });
   }
   onSubmit() {
-    this.http.post('/v1/competence', {
+    if(!this.editFunctionId) {
+      this.addFunction();
+    }else {
+      this.editFunction();
+    }
+  }
+  /*添加新权限*/
+  addFunction() {
+    this.http.post('/v1/competence/', {
       'comment': this.functionName,
-      'createDate': '',
       'id': this.functionId ? this.functionId : '',
       'methods': this.functionMethod,
-      'modifyDate': '',
       'resource': this.functionDesc,
       'status': null
     }).subscribe((res: any) => {
       if (res.responseCode === '_200') {
 
-        this.toastModalService.showSuccessToast({tipsMsg: '操作成功！', router: 'admin/roles/function'});
+        this.toastModalService.addToasts({tipsMsg: '添加成功！', type: 'success', router: 'admin/roles/function'});
       }else {
-        this.toastModalService.showErrorToast({errorMsg: res.errorMsg});
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
+      }
+    });
+  }
+  /*修改权限信息*/
+  editFunction() {
+    this.http.patch('/v1/competence/', {
+      'comment': this.functionName,
+      'id': this.functionId ? this.functionId : '',
+      'methods': this.functionMethod,
+      'resource': this.functionDesc,
+      'status': null
+    }).subscribe((res: any) => {
+      if (res.responseCode === '_200') {
+
+        this.toastModalService.addToasts({tipsMsg: '修改成功！', type: 'success', router: 'admin/roles/function'});
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
     });
   }

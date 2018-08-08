@@ -1,1 +1,3 @@
-<p-tree [value]="files" selectionMode="checkbox" [(selection)]="selectedFile"></p-tree>
+<div class="mechanism-box">
+    <p-tree [value]="files" (onNodeExpand)="loadNode($event)"></p-tree>
+</div>

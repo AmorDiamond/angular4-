@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IntermediateService } from '../../../intermediate.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { CHANGE } from '../../../../../core/container-ngrx/container.action';
 import { ContainerStyle } from '../../../../../core/container-ngrx/container.model';
 import { CLEAR_MARKER, ADD_POLYGON } from '../../../../../core/amap-ngrx/amap.actions';
@@ -23,19 +23,13 @@ export class LandNatureComponent implements OnInit, OnDestroy {
     '住宅用地': '#ffd041'
   };
   constructor(private intermediateService: IntermediateService, private store: Store<ContainerStyle>, private storeAmap: Store<Amap>) {
-    this.store.select('container');
+    this.store.pipe(select('container'));
   }
   landNatureEchat: any;
 
   ngOnInit() {
     /*显示当前菜单二级菜单*/
     this.intermediateService.showIndustryMenus('LandMenu');
-    this.store.dispatch({
-      type: CHANGE,
-      payload: {
-        width: '60%'
-      }
-    });
     this.intermediateService.getLandNatureEchat()
       .subscribe(res => {
         const conutData = this.conutTypeData(res);

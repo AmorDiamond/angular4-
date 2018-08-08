@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoadingService } from './loading.service';
 import { LoadingShow } from '../../core/loading-ngrx/loading.model';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-loading',
@@ -34,7 +34,7 @@ export class LoadingComponent implements OnInit {
   tagState$: any;
   showLoading = false;
   constructor(private store: Store<LoadingShow>) {
-    this.tagState$ = this.store.select('loading');
+    this.tagState$ = this.store.pipe(select('loading'));
   }
   ngOnInit() {
     this.tagState$.subscribe(res => {

@@ -3,7 +3,7 @@
     <div [hidden]="focusBusinessList.length<1">
       <div class="focus-business-item" *ngFor="let item of focusBusinessList" [routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: item.name}">
         <div class="logo">
-          <img src="../../../../../assets/images/company_logo.png" alt="">
+          <img src="/economicSystem/assets/images/company_logo.png" alt="">
         </div>
         <div class="column-item">
           <div class="name">{{item.name}}</div>

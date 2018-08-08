@@ -31,6 +31,7 @@ export class FunctionListComponent implements OnInit {
     numPages: 0
   };
   competenceStatus = [{label: '全部', value: -1}, {label: '正常', value: 1}, {label: '禁用', value: 2}];
+  competenceMethods = ['POST', 'GET', 'DELETE', 'PATCH'];
   constructor(private http: HttpClient,  private toastModalService: ToastModalService) { }
 
   pageChanged(event: any): void {
@@ -45,9 +46,15 @@ export class FunctionListComponent implements OnInit {
   getMethodList() {
     this.findListByUrl(this.competenceListParams, 'findCompetenceList').subscribe(res => {
       console.log(res);
-      this.methodsList = res.data.content;
-      this.pageParams.bigTotalItems = res.data.totalElements;
-      console.log(this.pageParams);
+      if(res.responseCode === '_200') {
+        this.methodsList = res.data.content;
+        this.pageParams.bigTotalItems = res.data.totalElements;
+        if(this.methodsList.length < 1) {
+          this.toastModalService.addToasts({tipsMsg: '暂无信息！', type: 'info'});
+        }
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
+      }
     });
   }
   disableMethod(id, flag, template: TemplateRef<any>) {

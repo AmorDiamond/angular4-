@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { ContainerStyle } from '../../../core/container-ngrx/container.model';
 import { CHANGE } from '../../../core/container-ngrx/container.action';
 import { LayoutService, SearchResponse, SearchParams } from '../../layout/layout.service';
@@ -43,7 +43,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     private layoutService: LayoutService,
     private microcosmicService: MicrocosmicService,
     private store: Store<ContainerStyle>) {
-    this.store.select('container');
+    this.store.pipe(select('container'));
   }
 
   ngOnInit() {

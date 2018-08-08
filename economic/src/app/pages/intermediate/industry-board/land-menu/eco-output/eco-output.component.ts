@@ -21,12 +21,6 @@ export class EcoOutputComponent implements OnInit, OnDestroy {
     this.revenueTime = this.intermediateService.getInitRevenueTime();
     /*显示当前菜单二级菜单*/
     this.intermediateService.showIndustryMenus('LandMenu');
-    this.store.dispatch({
-      type: CHANGE,
-      payload: {
-        width: '60%'
-      }
-    });
     this.storeAmap.dispatch({
       type: ADD_POLYGON,
       payload: {

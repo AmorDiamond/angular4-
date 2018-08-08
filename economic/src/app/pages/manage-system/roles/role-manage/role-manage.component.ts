@@ -23,12 +23,12 @@ export class RoleManageComponent implements OnInit {
   roleCompetencesBind = {competenceIds: []};
   roleCompetencesUnbind = {competenceIds: []};
   addUserRoleParams = {url: '/v1/roles', method: 'post'};
-  getUserRoleParams = {url: '/v1/roles/', method: 'get'};
+  getUserRoleParams = {url: '/v1/roles/getById', method: 'get'};
   getAllRoleParams = {url: '/v1/competence/findAllNormal', method: 'get'};
   bindCompetenceParams = {url: '/v1/roles/bindRoleForCompetences', method: 'post'};
   unbindCompetenceParams = {url: '/v1/roles/unbindRoleForCompetences', method: 'post'};
-  findHasCompetenceParams = {url: '/v1/competence/findByRoleId/', method: 'get'};
-  editRoleBasicParams = {url: '/v1/roles', method: 'PATCH'};
+  findHasCompetenceParams = {url: '/v1/competence/findByRoleId', method: 'get'};
+  editRoleBasicParams = {url: '/v1/roles/', method: 'PATCH'};
   constructor(private http: HttpClient, private routeInfo: ActivatedRoute, private router: Router,
               private toastModalService: ToastModalService) { }
 
@@ -98,10 +98,10 @@ export class RoleManageComponent implements OnInit {
             if (_that.roleCompetencesBind.competenceIds.length > 0 || _that.roleCompetencesUnbind.competenceIds.length > 0) {
               _that.bindRoleForCompetences(_that.roleCompetencesBind.competenceIds, _that.roleCompetencesUnbind.competenceIds);
             }else {
-              this.toastModalService.showSuccessToast({tipsMsg: '修改成功！', router: 'admin/roles/roleList'});
+              this.toastModalService.addToasts({tipsMsg: '修改成功！', type: 'success', router: 'admin/roles/roleList'});
             }
           }else {
-            this.toastModalService.showErrorToast({errorMsg: res.errorMsg});
+            this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
           }
         });
       }else {
@@ -112,7 +112,7 @@ export class RoleManageComponent implements OnInit {
   getUserDetail(roleId ) {
     const _that = this;
     const url = this.getUserRoleParams.url;
-    this.http.get(url + '/' + roleId ).subscribe((res: any) => {
+    this.http.get(url + '?roleId=' + roleId ).subscribe((res: any) => {
       _that.roleId = res.data.id;
       _that.roleName = res.data.name;
       _that.roleDesc = res.data.comment;
@@ -123,7 +123,7 @@ export class RoleManageComponent implements OnInit {
   findCompetencesByRoleId(roleId) {
     const _that = this;
     const url = this.findHasCompetenceParams.url;
-    this.http.get(url + roleId).subscribe((res: any) => {
+    this.http.get(url + '?roleId=' + roleId).subscribe((res: any) => {
       if (res.responseCode === '_200') {
         _that.allCompetences.forEach(function(x, i) {
           res.data.forEach(function(item, index) {
@@ -134,9 +134,11 @@ export class RoleManageComponent implements OnInit {
             }
           });
         });
+        /*将处理过的所有权限数据用于分组，方便实现权限全有的组全选按钮被选中*/
+        this.getGroups(_that.allCompetences);
         console.log(_that.allCompetences);
       }else {
-        this.toastModalService.showErrorToast({errorMsg: res.errorMsg});
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
     });
   }
@@ -150,11 +152,13 @@ export class RoleManageComponent implements OnInit {
         _that.allCompetences.forEach((item, index) => {
           item.hasChecked = false;
         });
-        this.getGroups(res.data);
         /*判断是否修改*/
         if (_that.roleId) {
           _that.findCompetencesByRoleId(_that.roleId);
+          return;
         }
+        /*新增角色直接将所有权限进行分组处理*/
+        this.getGroups(res.data);
         console.log(_that.allCompetences);
       }else {
         this.toastModalService.showErrorToast({errorMsg: res.errorMsg});

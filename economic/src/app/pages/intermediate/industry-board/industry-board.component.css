@@ -158,3 +158,8 @@
     color: #f9b620;
     border-color: #f9b620;
 }
+.panel-right-box{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}

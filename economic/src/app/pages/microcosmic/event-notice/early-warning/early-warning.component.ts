@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventNoticeService } from "../event-notice.service";
+import { ToastModalService } from "../../../../shared/toast-modal/toast-modal.service";
 
 @Component({
   selector: 'app-early-warning',
@@ -22,7 +23,8 @@ import { EventNoticeService } from "../event-notice.service";
 export class EarlyWarningComponent implements OnInit {
 
   constructor(
-    private eventNoticeService: EventNoticeService
+    private eventNoticeService: EventNoticeService,
+    private toastModalService: ToastModalService
   ) { }
   governmentRecognitionList = [];
   governmentRecognitionTips = '加载中...';
@@ -52,6 +54,12 @@ export class EarlyWarningComponent implements OnInit {
         this.performancePaymentList = res.data.PERPaymentInformationPojo;
         if(this.performancePaymentList.length < 1) {
           this.performancePaymentTips = '暂无信息！';
+        }
+      }else{
+        if(res.errorMsg === 'not found operator'){
+          this.toastModalService.addToasts({tipsMsg: '请重新登录！', type: 'warning', timeOut: 2000, router: '/login'});
+        }else {
+          this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
         }
       }
     })

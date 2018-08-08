@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IntermediateService } from '../intermediate.service';
 import { ADD_MARKER_MID, CLEAR_MARKER } from '../../../core/amap-ngrx/amap.actions';
 import { Amap } from '../../../core/amap-ngrx/amap.model';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { CHANGE } from '../../../core/container-ngrx/container.action';
 import { ContainerStyle } from '../../../core/container-ngrx/container.model';
 
@@ -24,7 +24,7 @@ export class IndexAbstractComponent implements OnInit, OnDestroy {
   optionHeatMap3: any;
   echatsDataFn: any;
   constructor(private intermediateService: IntermediateService, private storeAmap: Store<Amap>, private store: Store<ContainerStyle>) {
-    this.store.select('container');
+    this.store.pipe(select('container'));
   }
 
   ngOnInit() {

@@ -6,6 +6,7 @@ import { NgUploaderModule } from 'ngx-uploader';
 import { RoutingModule } from './routing/routing.module';
 import { ToastyModule } from 'ng2-toasty';
 import { FormsModule } from '@angular/forms';
+import { ProjectDeclarationComponent } from "./project-declaration.component";
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { FormsModule } from '@angular/forms';
     NgUploaderModule,
     ToastyModule
   ],
-  declarations: [ListComponent, UploadComponent]
+  declarations: [ListComponent, UploadComponent, ProjectDeclarationComponent]
 })
 export class ProjectDeclarationModule {}

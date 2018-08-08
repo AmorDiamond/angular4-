@@ -40,7 +40,7 @@ import { PaginationModule, TooltipModule, ModalModule } from 'ngx-bootstrap';
     SharedModule,
     ToastyModule.forRoot(),
     ModalModule.forRoot(),
-    StoreModule.provideStore(
+    StoreModule.forRoot(
       { amap: amapReducer, container: ContainerReducer, loading: LoadingReducer }
     )
   ],

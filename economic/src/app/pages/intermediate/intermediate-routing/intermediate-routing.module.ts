@@ -17,6 +17,7 @@ export const routes: Routes = [
       {path: 'industryBoard', component: IndustryBoardComponent,
           children: [
               {path: '', loadChildren: '../industry-board/industry-menu/industry-menu.module#IndustryMenuModule'},
+              {path: 'streetMenu', loadChildren: '../industry-board/street-menu/street-menu.module#StreetMenuModule'},
               {path: 'parkMenu', loadChildren: '../industry-board/park-menu/park-menu.module#ParkMenuModule'},
               {path: 'landMenu', loadChildren: '../industry-board/land-menu/land-menu.module#LandMenuModule'},
               {path: 'buildMenu', loadChildren: '../industry-board/floor-menu/floor-menu.module#FloorMenuModule'}
@@ -29,7 +30,7 @@ export const routes: Routes = [
       {path: 'industryMap', component: IndustryMapComponent, children: [
           {path: '', loadChildren: '../industry-map/industry-map.module#IndustryMapModule'}
         ]},
-      {path: '', redirectTo: 'indexAbstract', pathMatch: 'full'}
+      {path: '', redirectTo: 'industryBoard', pathMatch: 'full'}
     ]
   },
 ];

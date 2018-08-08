@@ -14,13 +14,22 @@ export class MechanismManageService {
 
   private subject = new BehaviorSubject<any>(0);
 
-  private url = '/assets/files.json';
+  // private url = '/assets/files.json';
+  private ldapTreeUrl = '/manager/v1/ldapTree/findRoot';
   constructor(private http: HttpClient, private router: Router) { }
 
-  getNodes() {
+  getNodes(findParams): Observable<any> {
     // return this.http.get(this.url).toPromise().then(res => <TreeNode[]> res.json().data);
     // return this.http.get(this.url).map(res => <TreeNode[]> res.json().data);
-    return this.http.get(this.url);
+
+    let paramsString = '';
+    for (const key in findParams) {
+      if (findParams.hasOwnProperty(key)) {
+        paramsString += `${key}=${findParams[key]}&`;
+      }
+    }
+    const params = new HttpParams({ fromString: paramsString });
+    return this.http.get(this.ldapTreeUrl, { params });
   }
 
 }

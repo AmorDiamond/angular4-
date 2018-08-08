@@ -44,8 +44,8 @@ import { Observable } from 'rxjs/Observable';
   providers: [EqiHiTechCertificationService]
 })
 export class ListComponent implements OnInit {
-  private getListParams: GetListParams;
-  private list: any[];
+  getListParams: GetListParams;
+  list: any[];
   private downloadUrl: string;
   private exportUrl: string;
   constructor(

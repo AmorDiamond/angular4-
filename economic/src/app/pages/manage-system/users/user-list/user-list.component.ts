@@ -15,12 +15,13 @@ export class UserListComponent implements OnInit {
   disableParams = {id: '', flag: ''};
   usersList = [];
   URLS = {
-    findUsersList: '/v1/ldapNode/findByConditions'
+    findUsersList: '/manager/v1/ldapUser/findUserByParams',
+    disableOrUsableUrl: '/manager/v1/ldapUser/disableOrUsable'
   };
   ldapUserListParams = {
-    ldapName: '',
-    status: -1,
-    nodeType: -1,
+    account: '',
+    status: '',
+    mechanism: '',
     page: 0,
     size: 15
   };
@@ -32,7 +33,7 @@ export class UserListComponent implements OnInit {
     numPages: 0
   };
   ldapNodeTypes = [{label: '全部', value: -1}, {label: '用户', value: 1}, {label: '机构', value: 2}];
-  ldapUserStatus = [{label: '全部', value: -1}, {label: '正常', value: 1}, {label: '禁用', value: 2}];
+  ldapUserStatus = [{label: '全部', value: ''}, {label: '正常', value: 'STATUS_NORMAL'}, {label: '禁用', value: 'STATUS_DISABLE'}];
   ngOnInit() {
     this.getUsersList();
   }
@@ -44,20 +45,29 @@ export class UserListComponent implements OnInit {
   getUsersList() {
     this.findListByUrl(this.ldapUserListParams, 'findUsersList').subscribe(res => {
       console.log(res);
-      this.usersList = res.data.content;
-      this.pageParams.bigTotalItems = res.data.totalElements;
-      console.log(this.pageParams);
+      if(res.responseCode === '_200') {
+        this.usersList = res.data.content;
+        this.pageParams.bigTotalItems = res.data.totalElements;
+        if(this.usersList.length < 1) {
+          this.toastModalService.addToasts({tipsMsg: '暂无信息！', type: 'info'});
+        }
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
+      }
+
     });
   }
-  findListByUrl(findParams, type): Observable<any> {
+  findListByUrl(findParams, url, type?): Observable<any> {
     let paramsString = '';
+    const requestUrl = url;
+    const requestType = type ? type : 'get';
     for (const key in findParams) {
       if (findParams.hasOwnProperty(key)) {
         paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
       }
     }
     const params = new HttpParams({ fromString: paramsString });
-    return this.http.get(this.URLS[type], { params });
+    return this.http[requestType](this.URLS[requestUrl], { params });
   }
   disable(id, flag, template) {
     if (flag === true) {
@@ -71,17 +81,19 @@ export class UserListComponent implements OnInit {
     this.disableParams.flag = flag;
   }
   confirm(): void {
-    const url = '/v1/ldapNode/disableOrUsable';
+    this.toastModalService.hideModal();
+    const url = '/manager/v1/ldapUser/disableOrUsable';
+    const params = {id: this.disableParams.id, flag: this.disableParams.flag};
     this.http.patch(url + '?id=' + this.disableParams.id + '&flag=' + this.disableParams.flag, {}).subscribe((res: any) => {
+    // this.findListByUrl(params, 'disableOrUsableUrl', 'patch').subscribe((res: any) => {
       if (res.responseCode === '_200') {
-        this.toastModalService.showSuccessToast({tipsMsg: '操作成功！'});
+        this.toastModalService.addToasts({tipsMsg: '操作成功！', type: 'success'});
         this.getUsersList();
       }else {
 
-        this.toastModalService.showErrorToast({errorMsg: res.errorMsg});
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
     });
-    this.toastModalService.hideModal();
   }
 
   decline(): void {

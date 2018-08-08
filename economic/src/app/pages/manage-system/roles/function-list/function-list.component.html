@@ -7,7 +7,11 @@
       <label>权限名称:</label> <input type="text" class="form-control" name="comment" [(ngModel)]="competenceListParams.comment" placeholder="权限名称">
     </div>
     <div class="form-group">
-      <label>权限method:</label> <input type="text" class="form-control" name="methods" [(ngModel)]="competenceListParams.methods" placeholder="权限method">
+      <label>权限method:</label>
+      <select class="form-control" name="methods" [(ngModel)]="competenceListParams.methods">
+        <option value="">全部</option>
+        <option *ngFor="let item of competenceMethods" [value]="item">{{item}}</option>
+      </select>
     </div>
     <div class="form-group">
       <label>权限状态:</label>

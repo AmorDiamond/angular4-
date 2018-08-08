@@ -25,7 +25,7 @@
         <div class="roles-all"><label><input type="checkbox" [(ngModel)]="groupItem.hasChecked" [ngModelOptions]="{standalone: true}" (change)="checkAll(groupItem.id,groupItem.hasChecked)" [checked]="groupItem.hasChecked"><i></i>{{groupItem.id}}</label><span class="fa fa-chevron-down roles-all-arrow fr" (click)="groupItem.show = !groupItem.show" [ngClass]="{'active':groupItem.show}"></span></div>
         <div class="role-list" *ngIf="!groupItem.show">
           <!--<div *ngFor="let item of allCompetences" class="item"><label><input type="checkbox" [(ngModel)]="item.hasChecked" [name]="item.id" [checked]="item.hasChecked" (change)="singleClick(item.resource)"><i></i>{{item.resource}}</label></div>-->
-          <div *ngFor="let item of allCompetencesObj[groupItem.id]" class="item"><label><input type="checkbox" [(ngModel)]="item.hasChecked" [name]="item.id" [checked]="item.hasChecked" (change)="singleClick(item.resource)"><i></i>{{item.resource}}</label></div>
+          <div *ngFor="let item of allCompetencesObj[groupItem.id]" class="item"><label><input type="checkbox" [(ngModel)]="item.hasChecked" [name]="item.id" [checked]="item.hasChecked" (change)="singleClick(item.resource)"><i></i>{{item.comment}} {{item.resource}}</label></div>
         </div>
       </div>
     </div>

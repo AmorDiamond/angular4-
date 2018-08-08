@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { ContainerStyle } from '../../core/container-ngrx/container.model';
 import { CHANGE } from '../../core/container-ngrx/container.action';
 
@@ -11,7 +11,7 @@ import { CHANGE } from '../../core/container-ngrx/container.action';
 export class MacroscopicComponent implements OnInit {
 
   constructor(private store: Store<ContainerStyle>) {
-    this.store.select('container');
+    this.store.pipe(select('container'));
   }
 
   ngOnInit() {

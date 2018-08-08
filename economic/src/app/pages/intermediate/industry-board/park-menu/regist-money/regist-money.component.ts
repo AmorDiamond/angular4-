@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IntermediateService } from '../../../intermediate.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { ContainerStyle } from '../../../../../core/container-ngrx/container.model';
 import {CHANGE} from '../../../../../core/container-ngrx/container.action';
 
@@ -25,19 +25,13 @@ export class RegistMoneyComponent implements OnInit {
   conutData= [];
   typeList = [];
   constructor(private intermediateService: IntermediateService, private store: Store<ContainerStyle>) {
-    this.store.select('container');
+    this.store.pipe(select('container'));
   }
 
   ngOnInit() {
     /*显示当前菜单二级菜单*/
     this.intermediateService.showIndustryMenus('ParkMenu');
 
-    this.store.dispatch({
-      type: CHANGE,
-      payload: {
-        width: '60%'
-      }
-    });
       const test = this.intermediateService.getParkRegistMoney('高新西区')
         .subscribe(res => {
           console.log(res);

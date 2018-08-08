@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IntermediateService } from '../../../intermediate.service';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { CHANGE } from '../../../../../core/container-ngrx/container.action';
 import {ContainerStyle} from '../../../../../core/container-ngrx/container.model';
 import {Amap} from '../../../../../core/amap-ngrx/amap.model';
+import { FloorMenuService } from "../floor-menu.service";
 
 @Component({
   selector: 'app-regist-money',
@@ -12,37 +13,50 @@ import {Amap} from '../../../../../core/amap-ngrx/amap.model';
 })
 export class RegistMoneyComponent implements OnInit, OnDestroy {
 
-  constructor(private intermediateService: IntermediateService, private store: Store<ContainerStyle>) {
-    this.store.select('container');
+  constructor(
+    private intermediateService: IntermediateService,
+    private store: Store<ContainerStyle>,
+    private floorMenuService: FloorMenuService
+  ) {
+    this.store.pipe(select('container'));
   }
   getShowHideDataFn: any;
   choseBuildName: any;
   choseBuildId: any;
-  registMoneyData: any;
+  registMoneyData: any = [];
   ngOnInit() {
     /*显示当前菜单二级菜单*/
     this.intermediateService.showIndustryMenus('FloorMenu');
     this.intermediateService.changeShowHideData('isShowParkBuildBar', true);
-    this.store.dispatch({
-      type: CHANGE,
-      payload: {
-        width: '60%'
-      }
-    });
     this.getShowHideDataFn = this.intermediateService.getShowHideData().subscribe(subres => {
       this.choseBuildName = subres.choseBuildName;
       this.choseBuildId = subres.choseBuildId;
     });
-    this.intermediateService.getBuildRegistMoney(this.choseBuildId).subscribe(res => {
+    this.getData();
+    /*this.intermediateService.getBuildRegistMoney(this.choseBuildId).subscribe(res => {
       console.log(res);
       setTimeout(() => {
         this.creatRegistMoneyEchart(res);
       }, 500);
-    });
+    });*/
   }
   ngOnDestroy() {
     this.intermediateService.changeShowHideData('isShowParkBuildBar', false);
     this.intermediateService.changeShowHideData('isShowParkNameList', false);
+  }
+  /*获取数据*/
+  getData(floorName?) {
+    this.choseBuildName = floorName ? floorName : '高新大楼';
+    const params = {dataSupplyTime: new Date().getFullYear(), floor: floorName ? floorName : '高新大楼'}
+    this.floorMenuService.getDataByParams(params,'floorMenuUrl').subscribe(res => {
+      console.log('楼宇数据', res)
+      if(res.responseCode === '_200') {
+        if(res.data.registmap) {
+          this.registMoneyData = res.data.registmap[0];
+          // this.creatRegistMoneyEchart({});
+        }
+      }
+    })
   }
   creatRegistMoneyEchart(options) {
     const colors = {
@@ -92,10 +106,11 @@ export class RegistMoneyComponent implements OnInit, OnDestroy {
     }
     console.log(industryType)
     console.log(legendData)
+    let echartTitle = this.choseBuildName + '企业注册资本占比';
     const option = {
       color : COLORS,
       title : {
-        text: '企业注册资本占比',
+        text: echartTitle,
         x: 'center',
         textStyle: {
           color: '#fff',

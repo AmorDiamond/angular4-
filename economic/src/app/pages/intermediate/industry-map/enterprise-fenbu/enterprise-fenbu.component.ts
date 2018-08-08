@@ -14,8 +14,15 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
 
   constructor(private storeAmap: Store<Amap>, private industryMapFenbuService: IndustryMapFenbuService) { }
   parkProportionEchart: any;
-  parkIndustryProportionEchart: any;
-  selectParkName = '园区产业占比';
+  westparkIndustryProportionEchart: any;
+  southparkIndustryProportionEchart: any;
+  easthparkIndustryProportionEchart: any;
+  biologicalcityIndustryProportionEchart: any;
+  westparkIndustryProportionTips = '加载中...';
+  southparkIndustryProportionTips = '加载中...';
+  easthparkIndustryProportionTips = '加载中...';
+  biologicalcityIndustryProportionTips = '加载中...';
+  selectParkName: any;
   selectParkNameSubscription: Subscription;
   ngOnInit() {
     this.storeAmap.dispatch({
@@ -27,17 +34,61 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
         }
       }
     })
-    this.selectParkNameSubscription = this.industryMapFenbuService.getSelectParkIndustry().subscribe(res => {
-      this.selectParkName = res.options ? res.options : '园区产业占比';
+    /*this.selectParkNameSubscription = this.industryMapFenbuService.getSelectParkIndustry().subscribe(res => {
+      this.selectParkName = res.options ? res.options : '园区产业企业占比';
       this.creatParkIndustryProportionEchart(this.selectParkName);
-    })
-    setTimeout(() => {
-      this.creatParkProportionEchart();
-      this.creatParkIndustryProportionEchart();
-    }, 500);
+    })*/
+    this.getData();
   }
   ngOnDestroy() {
-    this.selectParkNameSubscription.unsubscribe();
+    // this.selectParkNameSubscription.unsubscribe();
+  }
+  /*获取数据*/
+  getData(parkName?) {
+    this.selectParkName = parkName ? parkName : '高新西区';
+    let params = {dataSupplyTime: new Date().getFullYear(), functionalareaindustry: this.selectParkName};
+    let time = new Date().getFullYear();
+    let findParams = [
+      {findParams: {dataSupplyTime: time, functionalareaindustry: '高新西区'}, url: 'industryMapFunctionAreaMenuUrl'},
+      {findParams: {dataSupplyTime: time, functionalareaindustry: '高新南区'}, url: 'industryMapFunctionAreaMenuUrl'},
+      {findParams: {dataSupplyTime: time, functionalareaindustry: '高新东区'}, url: 'industryMapFunctionAreaMenuUrl'},
+      {findParams: {dataSupplyTime: time, functionalareaindustry: '天府国际生物城'}, url: 'industryMapFunctionAreaMenuUrl'},
+    ];
+    this.industryMapFenbuService.getRequestByForkJoin(findParams).subscribe(res => {
+      console.log('功能区数据', res)
+      if(res[0].responseCode === '_200') {
+        let options = res[0].data.registmap;
+        if(options.length < 1) {
+          this.westparkIndustryProportionTips = '暂无信息！';
+        }else {
+          this.creatParkIndustryProportionEchart('westparkIndustryProportionEchart', options);
+        }
+      }
+      if(res[1].responseCode === '_200') {
+        let options = res[1].data.registmap;
+        if(options.length < 1) {
+          this.southparkIndustryProportionTips = '暂无信息！';
+        }else {
+          this.creatParkIndustryProportionEchart('southparkIndustryProportionEchart', options);
+        }
+      }
+      if(res[2].responseCode === '_200') {
+        let options = res[2].data.registmap;
+        if(options.length < 1) {
+          this.easthparkIndustryProportionTips = '暂无信息！';
+        }else{
+          this.creatParkIndustryProportionEchart('easthparkIndustryProportionEchart', options);
+        }
+      }
+      if(res[3].responseCode === '_200') {
+        let options = res[3].data.registmap;
+        if(options.length < 1) {
+          this.biologicalcityIndustryProportionTips = '暂无信息！';
+        }else{
+          this.creatParkIndustryProportionEchart('biologicalcityIndustryProportionEchart', options);
+        }
+      }
+    })
   }
   creatParkProportionEchart() {
     const option_jckze = {
@@ -84,8 +135,8 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
     };
     this.parkProportionEchart = option_jckze;
   }
-  creatParkIndustryProportionEchart(name?) {
-    let data = [
+  creatParkIndustryProportionEchart(dataName, options) {
+    /*let data = [
       {value:680, name:'软件及服务外包'},
       {value:310, name:'精密机械'},
       {value:234, name:'生物医药'},
@@ -129,12 +180,18 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
         {value:170, name:'光电'},
         {value:120, name:'集成电路'}
       ];
-    }
+    }*/
+    let echartTitle = name ?  name + '产业企业占比' : '园区产业企业占比';
+    let legendData = [];
+    let seriesData = [];
+    options.forEach(res => {
+      legendData.push(res[0]);
+      seriesData.push({value: res[2], name: res[0]});
+    });
     const option_cy = {
       title : {
-        show:false,
-        text: '某站点用户访问来源',
-        subtext: '纯属虚构',
+        show: false,
+        text: echartTitle,
         x:'center'
       },
       color:['#f9b621','#9ea8ff','#21cbee','#5f6599','#f43723','#0d4954'],
@@ -143,20 +200,19 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
         formatter: ""
       },
       legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: ['软件及服务外包','精密机械','生物医药','通信','光电','集成电路'],
+        left: 'center',
+        data: legendData,
         textStyle:{
           color:'#bcbdbf'
         }
       },
       series : [
         {
-          name: '访问来源',
+          name: '企业占比',
           type: 'pie',
           radius : '55%',
           center: ['50%', '60%'],
-          data:data,
+          data: seriesData,
           itemStyle: {
             emphasis: {
               shadowBlur: 10,
@@ -167,6 +223,6 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
         }
       ]
     };
-    this.parkIndustryProportionEchart = option_cy;
+    this[dataName] = option_cy;
   }
 }

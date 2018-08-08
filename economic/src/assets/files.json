@@ -6,6 +6,7 @@
       "data": "Documents Folder",
       "expandedIcon": "fa fa-folder-open",
       "collapsedIcon": "fa fa-folder",
+      "leaf": false,
       "children": [{
         "label": "Work",
         "data": "Work Folder",
@@ -18,6 +19,7 @@
           "data": "Home Folder",
           "expandedIcon": "fa fa-folder-open",
           "collapsedIcon": "fa fa-folder",
+          "leaf": false,
           "children": [{"label": "Invoices.txt", "icon": "fa fa-file-word-o", "data": "Invoices for this month"}]
         }]
     },

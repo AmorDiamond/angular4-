@@ -42,9 +42,15 @@ export class RolesListComponent implements OnInit {
   getRolesList() {
     this.findListByUrl(this.rolesListParams, 'findRolesList').subscribe(res => {
       console.log(res);
-      this.rolesList = res.data.content;
-      this.pageParams.bigTotalItems = res.data.totalElements;
-      console.log(this.pageParams);
+      if(res.responseCode === '_200') {
+        this.rolesList = res.data.content;
+        this.pageParams.bigTotalItems = res.data.totalElements;
+        if(this.rolesList.length < 1) {
+          this.toastModalService.addToasts({tipsMsg: '暂无信息！', type: 'info'});
+        }
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
+      }
     });
   }
   findListByUrl(findParams, type): Observable<any> {
@@ -68,22 +74,22 @@ export class RolesListComponent implements OnInit {
     this.disableParams.flag = flag;
   }
   confirm(): void {
+    this.toastModalService.hideModal();
     let url;
     if (this.disableParams.flag) {
-      url = '/v1/roles/enable/';
+      url = '/v1/roles/enable';
     }else {
-      url = '/v1/roles/disable/';
+      url = '/v1/roles/disable';
     }
-    this.http.post(url + this.disableParams.id, {}).subscribe((res: any) => {
+    this.http.post(url + '?roleId=' + this.disableParams.id, {}).subscribe((res: any) => {
       if (res.responseCode === '_200') {
         // alert('操作成功');
-        this.toastModalService.showSuccessToast({tipsMsg: '操作成功！'});
+        this.toastModalService.addToasts({tipsMsg: '操作成功！', type: 'success'});
         this.getRolesList();
       }else {
-        this.toastModalService.showErrorToast({errorMsg: res.errorMsg});
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
     });
-    this.toastModalService.hideModal();
   }
 
   decline(): void {

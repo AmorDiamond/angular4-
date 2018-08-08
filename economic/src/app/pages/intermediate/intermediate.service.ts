@@ -47,7 +47,8 @@ export class IntermediateService {
     isShowParkMenu: false,
     isShowLandMenu: false,
     isShowFloorMenu: false,
-  }
+    isShowStreetMenu: false,
+  };
   showTimeColorControl = {
     isShowColorsBar: false,
     isShowTime: false,
@@ -556,7 +557,13 @@ export class IntermediateService {
   }
   /*中观产业菜单控制*/
   showIndustryMenus(flag) {
-    switch (flag) {
+    for(let item in this.industryMenusControl) {
+      if(this.industryMenusControl[item]) {
+        this.industryMenusControl[item] = false;
+      }
+    }
+    this.industryMenusControl['isShow'+flag] = true;
+    /*switch (flag) {
       case 'IndustryMenu':
         this.industryMenusControl.isShowParkMenu = false;
         this.industryMenusControl.isShowLandMenu = false;
@@ -581,7 +588,7 @@ export class IntermediateService {
         this.industryMenusControl.isShowLandMenu = false;
         this.industryMenusControl.isShowFloorMenu = true;
         break;
-    }
+    }*/
   }
   getIndustryMenusControl() {
     return this.industryMenusControl;

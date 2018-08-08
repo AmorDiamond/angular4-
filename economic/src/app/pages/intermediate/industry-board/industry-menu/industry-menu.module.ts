@@ -7,6 +7,10 @@ import { EnterpriseFenbuComponent } from './enterprise-fenbu/enterprise-fenbu.co
 import { EconomicScaleComponent } from './economic-scale/economic-scale.component';
 import { EnterpriseJiegouComponent } from './enterprise-jiegou/enterprise-jiegou.component';
 import { LeadIndustryComponent } from './lead-industry/lead-industry.component';
+import { AdvancedManufacturingComponent } from './advanced-manufacturing/advanced-manufacturing.component';
+import { MilitaryCivilianIntegrationComponent } from './military-civilian-integration/military-civilian-integration.component';
+import { IndustryMenuComponent } from './industry-menu.component';
+import { IndustryMenuService } from "./industry-menu.service";
 
 @NgModule({
   imports: [
@@ -18,7 +22,11 @@ import { LeadIndustryComponent } from './lead-industry/lead-industry.component';
       EnterpriseFenbuComponent,
       EconomicScaleComponent,
       EnterpriseJiegouComponent,
-      LeadIndustryComponent
-  ]
+      LeadIndustryComponent,
+      AdvancedManufacturingComponent,
+      MilitaryCivilianIntegrationComponent,
+      IndustryMenuComponent
+  ],
+  providers: [IndustryMenuService]
 })
 export class IndustryMenuModule { }

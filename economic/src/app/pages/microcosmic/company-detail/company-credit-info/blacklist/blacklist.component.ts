@@ -234,4 +234,6 @@ export class BlacklistComponent implements OnInit {
         }
       });
   }
+  /*监听滚动到底部*/
+  psYReachEnd(options) {}
 }

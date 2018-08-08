@@ -84,14 +84,14 @@
   </div>
   <div>
     <div class="panel-item-title">
-      <span>政府补贴：</span>
+      <span>政府支持：</span>
       <!--<div class="button-box">
         <span class="fa fa-chevron-circle-left" (click)="contractPre()" [ngClass]="{'is-first': CONTRACTS_PAGE == 1}" style="margin-right: 20px;"></span>
         <span class="fa fa-chevron-circle-right" (click)="contractNext()"></span>
       </div>-->
     </div>
     <perfect-scrollbar data-scroll="X">
-      <div class="project-report" [@side]="side">
+      <div class="project-report" [@side]="side" *ngIf="Contracts.length>0">
         <div class="flex-cell" *ngFor="let item of Contracts">
           <div class="flex-item" style="width: 100%;">
             <div class="flex-head">{{item.name}}</div>
@@ -107,7 +107,7 @@
         </div>
 
 
-        <div class="flex-cell">
+        <!--<div class="flex-cell">
           <div class="flex-item" style="width: 100%;">
             <div class="flex-head">补贴</div>
             <ul>
@@ -158,7 +158,10 @@
               <li>完成</li>
             </ul>
           </div>
-        </div>
+        </div>-->
+      </div>
+      <div class="no-data-tips" *ngIf="Contracts.length<1">
+        暂无信息！
       </div>
     </perfect-scrollbar>
   </div>

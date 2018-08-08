@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpRequest, HttpResponse, HttpHandler, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { LoadingShow } from '../loading-ngrx/loading.model';
 import { CHANGE } from '../loading-ngrx/loading.action';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ import { finalize, tap } from 'rxjs/operators';
 export class LoadingInterceptor implements HttpInterceptor {
 
     constructor(private store: Store<LoadingShow>, private router: Router, private toastModalService: ToastModalService) {
-        this.store.select('loading');
+        this.store.pipe(select('loading'));
     }
   httpRequestCount: number = 0;
 

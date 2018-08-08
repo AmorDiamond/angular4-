@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Amap } from '../../core/amap-ngrx/amap.model';
 import { ViewEncapsulation } from '@angular/core';
 import { MicrocosmicService } from '../../pages/microcosmic/microcosmic.service';
@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
     private intermediateService: IntermediateService,
     private industryMapFenbuService: IndustryMapFenbuService
   ) {
-    this.tagState$ = this.store.select('amap');
+    this.tagState$ = this.store.pipe(select('amap'));
   }
 
   AMAPOBJ: any;
@@ -53,6 +53,20 @@ export class MapComponent implements OnInit {
         features: ['bg', 'road', 'building']
       });
       this.AMAPOBJ = map;
+      this.AMAPOBJ.on('click', e => {
+        let lnglatXY = [e.lnglat.getLng(), e.lnglat.getLat()];
+        const geocoder = new AMap.Geocoder({
+          radius: 1000,
+          extensions: "all"
+        });
+        geocoder.getAddress(lnglatXY, function(status, result) {
+          console.log(lnglatXY, status, result)
+          if (status === 'complete' && result.info === 'OK') {
+            let address = result.regeocode.formattedAddress; //返回地址描述
+            console.log(address);
+          }
+        });
+      });
       this.action = {
         'openInfo': (data) => {
           const infoWindow = new AMap.InfoWindow({

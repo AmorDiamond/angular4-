@@ -151,6 +151,7 @@ export class LeadIndustryFenbuComponent implements OnInit, OnDestroy {
       this.creatImportantEnterpriseEchart(markers);
       this.creatGlobal00Echart(markers);
     });
+    this.getData();
     /*let markers = [];
     if (this.selectIndustryType) {
       this.provinces.forEach((v, i) => {
@@ -170,12 +171,30 @@ export class LeadIndustryFenbuComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.selectLeadIndustrySubscription.unsubscribe();
   }
+  /*获取数据*/
+  getData() {
+    this.industryMapFenbuService.getDataByParams({}, 'industryMapLeadIndustryMenuUrl').subscribe(res => {
+      console.log('主导产业分布', res)
+      if(res.responseCode === '_200'){
+        let formatData = [];
+        let options = res.data.enconomicmap;
+        options.forEach(res => {
+          let year = res[0];
+          if(year){
+            formatData.push(res);
+          }
+        })
+        this.creatTotalOutputValueEchart(formatData)
+      }
+    })
+  }
   creatTotalOutputValueEchart(options) {
     const year = ['2012', '2013', '2014', '2015', '2016'];
-    const serie = [];
+    const series = [];
     const colors = [];
-    const legends = [];
-    options.forEach((v, i) => {
+    const xAxisData = [];
+    const legendData = [];
+    /*options.forEach((v, i) => {
       legends.push(v.name);
       colors.push(v.color);
       const item = {
@@ -184,7 +203,52 @@ export class LeadIndustryFenbuComponent implements OnInit, OnDestroy {
         data: v.GDP
       }
       serie.push(item);
-    })
+    })*/
+
+    let startYear = new Date().getFullYear() - 4;
+    let endYear = startYear + 4;
+    for(let i = startYear; i < endYear; i++){
+      xAxisData.push(i);
+    }
+    let copyObjType = {};
+    let copyObjYear = {};
+    console.log(options)
+    options.forEach(res => {
+      let year = res[0];
+      let type = res[1];
+      if(type && copyObjType[type]){
+        copyObjType[type].push(res);
+      }else if(type){
+        copyObjType[type] = [];
+        copyObjType[type].push(res);
+        legendData.push(type);
+      }
+    });
+    /*将提取出来的按行业类型合并的数据处理成所需的seriesData数据格式*/
+    for(let item in copyObjType) {
+      const itemObj = {
+        name: '行业类型',
+        type: 'line',
+        data: new Array(xAxisData.length) //不存在对应类型的数据时设置为0
+      };
+      for(let i = 0; i< itemObj.data.length; i++) {
+        itemObj.data[i] = 0;
+      }
+      itemObj.name = item;
+      copyObjType[item].forEach(res => {
+        let year = res[0];
+        let money = res[3];
+        if(year){
+          let index = xAxisData.indexOf(Number(year)); // 让series里data的数据位置和x轴坐标类型的数据对应。
+          if(itemObj.data[index]) {
+            itemObj.data[index] += money ? Number(money) : 0;
+          }else {
+            itemObj.data[index] = money ? Number(money) : 0;
+          }
+        }
+      });
+      series.push(itemObj)
+    }
     const option_Zcz = {
       //设置图表与容器的间隔
       grid: {
@@ -212,7 +276,7 @@ export class LeadIndustryFenbuComponent implements OnInit, OnDestroy {
             color: '#999'
           }
         },
-        formatter: '{b} 年<br/>{a}: {c} 亿元'
+        // formatter: '{b} 年<br/>{a}: {c} 亿元'
 //                    + '<br/>{a1}: {c1} 亿元'
 //                    + '<br/>{a2}: {c2} 亿元'
 //                    + '<br/>{a3}: {c3} 亿元'
@@ -231,7 +295,7 @@ export class LeadIndustryFenbuComponent implements OnInit, OnDestroy {
         },
       },
       legend: {
-        data: legends,
+        data: legendData,
         right: '10%',
         textStyle: {
           color: '#fff'
@@ -241,10 +305,10 @@ export class LeadIndustryFenbuComponent implements OnInit, OnDestroy {
 //                    top: 20,
 //                    bottom: 20,
       },
-      color: colors,
+      // color: colors,
       xAxis: [{
         type: 'category',
-        data: year,
+        data: xAxisData,
         splitLine: {
           show: false
         },
@@ -262,8 +326,6 @@ export class LeadIndustryFenbuComponent implements OnInit, OnDestroy {
         type: 'value',
         name: '经济总产值（亿元）',
         min: 0,
-//                    max: 500,
-//                    interval: 50,
         axisLabel: {
           show: true,
           textStyle: {
@@ -280,7 +342,7 @@ export class LeadIndustryFenbuComponent implements OnInit, OnDestroy {
           show: false
         }
       }],
-      series: serie
+      series: series
     };
     this.totalOutputValueEchart = option_Zcz;
   }

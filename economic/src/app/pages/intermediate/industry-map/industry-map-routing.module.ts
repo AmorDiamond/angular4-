@@ -7,10 +7,14 @@ import { LeadIndustryJiegouComponent } from './lead-industry-jiegou/lead-industr
 import { LeadIndustryFenbuComponent } from './lead-industry-fenbu/lead-industry-fenbu.component';
 import { NewIndustryFenbuComponent } from './new-industry-fenbu/new-industry-fenbu.component';
 import { CustomizeIndustryFenbuComponent } from './customize-industry-fenbu/customize-industry-fenbu.component';
+import { RegisterMoneyComponent } from './register-money/register-money.component';
+import { WorkerTotalComponent } from './worker-total/worker-total.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'enterpriseFenbu', pathMatch: 'full'},
   {path: 'enterpriseFenbu', component: EnterpriseFenbuComponent},
+  {path: 'registerMoney', component: RegisterMoneyComponent},
+  {path: 'workerTotal', component: WorkerTotalComponent},
   {path: 'economicScale', component: EconomicScaleComponent},
   {path: 'enterpriseJiegou', component: EnterpriseJiegouComponent},
   {path: 'leadIndustryJiegou', component: LeadIndustryJiegouComponent},

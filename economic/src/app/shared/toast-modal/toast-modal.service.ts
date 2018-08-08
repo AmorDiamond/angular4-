@@ -45,15 +45,20 @@ export class ToastModalService {
   }
   addToasts(options) {
     const toastType = options.type;
+    const goToRouter = options.router ? options.router : '';
+    const timeout = options.timeout ? options.timeout : 1000;
     const toastOptions: ToastOptions = {
       title: options.title ? options.title : '',
       msg: options.tipsMsg ? options.tipsMsg : '',
       showClose: true,
-      timeout: 1000,
+      timeout: timeout,
       theme: 'default',
       onAdd: (toast: ToastData) => {
       },
       onRemove: (toast: ToastData) => {
+        if (goToRouter) {
+          this.router.navigate([goToRouter]);
+        }
       }
     };
     switch(toastType) {

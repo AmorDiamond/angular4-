@@ -35,7 +35,7 @@ export class MicrocosmicComponent implements OnInit, OnDestroy {
     private storeAmap: Store<Amap>,
     private microcosmicService: MicrocosmicService
   ) {
-    this.storeContainer.select('container');
+    // this.storeContainer.select('container');
   }
 
   ngOnInit() {

@@ -21,11 +21,8 @@ export class IndustryMapComponent implements OnInit {
         width: '60%'
       }
     });
-    setTimeout(() => {
-
-    }, 500);
   }
-  showIndustryMapMenus(options) {
+  showIndustryMapMenus(options?) {
     if (options) {
       this.showIndustryMapMenusControl[options] = !this.showIndustryMapMenusControl[options];
     }else {

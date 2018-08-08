@@ -3,6 +3,7 @@ import { EventNoticeService, EventNoticeResponse, RequestParams  } from '../../e
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { bounce, slideOutRight, slideInLeft } from 'ng-animate';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
+import { ToastModalService } from "../../../../../shared/toast-modal/toast-modal.service";
 
 @Component({
   selector: 'app-message-push',
@@ -29,7 +30,8 @@ export class MessagePushComponent implements OnInit, OnDestroy {
   News = [];
   constructor(
     private trackService: EventNoticeService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private toastModalService: ToastModalService,
   ) { }
   newsInfo = [];
   newsInfoTips = '加载中...';
@@ -49,13 +51,21 @@ export class MessagePushComponent implements OnInit, OnDestroy {
   getMessagePushInfo() {
     this.trackService.findListByUrl({}, 'KeyEnterpriseUrl').subscribe(res => {
       console.log('消息推送数据', res)
-      this.newsInfo = res.data.KETNewsPojo;
-      if(this.newsInfo.length < 1) {
-        this.newsInfoTips = '暂无信息！'
-      }
-      this.projectInfo = res.data.KETProjectDeclarationPojo;
-      if(this.projectInfo.length < 1) {
-        this.projectInfoTips = '暂无信息！'
+      if(res.responseCode === '_200'){
+        this.newsInfo = res.data.KETNewsPojo;
+        if(this.newsInfo.length < 1) {
+          this.newsInfoTips = '暂无信息！'
+        }
+        this.projectInfo = res.data.KETProjectDeclarationPojo;
+        if(this.projectInfo.length < 1) {
+          this.projectInfoTips = '暂无信息！'
+        }
+      }else{
+        if(res.errorMsg === 'not found operator'){
+          this.toastModalService.addToasts({tipsMsg: '请重新登录！', type: 'warning', timeOut: 2000, router: '/login'});
+        }else {
+          this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
+        }
       }
     })
   }

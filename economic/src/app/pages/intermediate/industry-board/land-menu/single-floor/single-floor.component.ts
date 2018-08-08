@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { ADD_POLYGON } from '../../../../../core/amap-ngrx/amap.actions';
 import { ContainerStyle } from '../../../../../core/container-ngrx/container.model';
 import { IntermediateService } from '../../../intermediate.service';
@@ -14,19 +14,13 @@ import { CHANGE } from '../../../../../core/container-ngrx/container.action';
 export class SingleFloorComponent implements OnInit, OnDestroy {
 
   constructor(private intermediateService: IntermediateService, private store: Store<ContainerStyle>, private storeAmap: Store<Amap>) {
-    this.store.select('container');
+    this.store.pipe(select('container'));
   }
   singleFloorEchart: any;
 
   ngOnInit() {
     /*显示当前菜单二级菜单*/
     this.intermediateService.showIndustryMenus('LandMenu');
-    this.store.dispatch({
-      type: CHANGE,
-      payload: {
-        width: '60%'
-      }
-    });
     this.storeAmap.dispatch({
       type: ADD_POLYGON,
       payload: {

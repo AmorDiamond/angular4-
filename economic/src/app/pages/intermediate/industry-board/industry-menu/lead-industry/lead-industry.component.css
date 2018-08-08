@@ -1,0 +1,7 @@
+.rank-number{
+    font-size: 16px;
+    color: #f9b620;
+}
+.panel-content .table tr td{
+    vertical-align: middle;
+}

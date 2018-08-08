@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Amap } from '../../../core/amap-ngrx/amap.model';
 import { CHANGE } from '../../../core/container-ngrx/container.action';
 import { EventNoticeService } from './event-notice.service';
@@ -17,7 +17,7 @@ export class EventNoticeComponent implements OnInit {
     private store: Store<Amap>,
     private trackService: EventNoticeService,
   ) {
-    this.store.select('amap');
+    this.store.pipe(select('amap'));
   }
   showEventNoticeMenus = {
     track: true

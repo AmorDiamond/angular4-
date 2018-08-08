@@ -1,15 +1,23 @@
-<div class="animated">
-  <div class="m-b-10">
-    <div class="flex">
-      <div class="flex-cell">
-        <table class="table table-bordered">
-          <tr><td>园区</td><td>主导产业</td><td>数量</td></tr>
-          <tr><td>天府生命科技园</td><td>生物医药</td><td>320家</td></tr>
-          <tr><td>天府新谷</td><td>光电/通信</td><td>光电:232家/通信232家</td></tr>
-          <tr><td>成都高新孵化园</td><td>光电/集成电路</td><td>光电:201家/集成电路:201家</td></tr>
-          <tr><td>天府软件园</td><td>软件及服务外包</td><td>334家</td></tr>
-        </table>
-      </div>
+<perfect-scrollbar>
+  <div class="panel-content m-t-20">
+    <div class="">
+      <table class="table table-bordered text-c">
+          <tr>
+              <th>营收排名</th>
+              <th>企业名称</th>
+              <th>营业收入</th>
+          </tr>
+          <tr [hidden]="leadIndustryTopList.length<1" *ngFor="let item of leadIndustryTopList;index as index">
+              <td class="rank-number">{{index + 1}}</td>
+              <td>{{item[0]}}</td>
+              <td>{{item[1]}}</td>
+          </tr>
+          <tr *ngIf="leadIndustryTopList.length<1">
+              <td colspan="3">
+                  暂无信息！
+              </td>
+          </tr>
+      </table>
     </div>
   </div>
-</div>
+</perfect-scrollbar>

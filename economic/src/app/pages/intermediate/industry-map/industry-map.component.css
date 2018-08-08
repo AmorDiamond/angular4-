@@ -1,6 +1,10 @@
 .industry-map-panel,.industry-map-con{
     height: 100%;
 }
+.industry-map-con{
+    position: absolute;
+    width: 100%;
+}
 .industry-map-panel .right-panel .content{
     height: 100%;
 }

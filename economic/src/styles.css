@@ -4,9 +4,6 @@
 @import '~ng2-toasty/style.css';
 @import '~ng2-toasty/style-material.css';
 @import '~ngx-bootstrap/datepicker/bs-datepicker.css';
-@import '~primeicons/primeicons.css';
-@import '~primeng/resources/themes/omega/theme.css';
-@import '~primeng/resources/primeng.min.css';
 @font-face{
   font-family:'Glyphicons Halflings';
   src:url(/assets/fonts/glyphicons-halflings-regular.eot);
@@ -1028,4 +1025,10 @@ a:focus, a:hover {
 .data-application-box .data-search-list .no-data-tips{
   margin-top: 40px;
   font-size: 16px;
+}
+.mechanism-box .ui-tree{
+  width: auto;
+}
+.panel-content .flex-item.single-echart{
+  height: 3rem;
 }

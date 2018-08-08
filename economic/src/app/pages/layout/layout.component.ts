@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ItemAnimate, CircleAnimate, ItemPositionAnimate } from '../../shared/animations';
 import { Router, NavigationEnd } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { ContainerStyle } from '../../core/container-ngrx/container.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/retryWhen';
@@ -121,7 +121,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     private microcosmicService: MicrocosmicService,
     private store: Store<ContainerStyle>,
     private storeAmap: Store<Amap>) {
-    this.tagState$ = this.store.select('container');
+    this.tagState$ = this.store.pipe(select('container'));
   }
 
   search() {

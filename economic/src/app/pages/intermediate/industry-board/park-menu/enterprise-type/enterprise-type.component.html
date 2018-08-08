@@ -1,22 +1,26 @@
-<div class="animated">
-  <div class="m-b-10">
-    <div class="flex">
-      <div class="flex-cell">
-        <div class="flex-item" echarts [options]="companyTypeNum" id="industry-type-main"></div>
+<perfect-scrollbar>
+  <div class="panel-content">
+    <div class="animated">
+    <div class="m-b-10">
+      <div class="flex">
+        <div class="flex-cell">
+          <div class="flex-item" echarts [options]="companyTypeNum" id="industry-type-main"></div>
+        </div>
       </div>
-    </div>
-    <div class="flex">
-      <div class="chose-time-left flex-cell">
-        <div class="input-group date fl" id="datetimepicker" data-date="" data-date-format="yyyy">
-          <input class="form-control" size="16" type="text" value="" readonly>
-          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      <div class="flex">
+        <div class="chose-time-left flex-cell">
+          <div class="input-group date fl" id="datetimepicker" data-date="" data-date-format="yyyy">
+            <input class="form-control" size="16" type="text" value="" readonly>
+            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="flex-cell">
+          <div class="flex-item" echarts [options]="companyTypeIncome" id="industry-type-income"></div>
         </div>
       </div>
     </div>
-    <div class="flex">
-      <div class="flex-cell">
-        <div class="flex-item" echarts [options]="companyTypeIncome" id="industry-type-income"></div>
-      </div>
-    </div>
   </div>
-</div>
+  </div>
+</perfect-scrollbar>
