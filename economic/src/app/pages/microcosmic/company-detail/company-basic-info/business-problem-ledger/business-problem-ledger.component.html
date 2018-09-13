@@ -1,6 +1,25 @@
 <div class="panel-content">
   <div class="panel-item-title">企业问题台账：</div>
-  <div class="no-data-tips">
-    暂无信息！
+  <div *ngIf="problemList.length>0">
+    <table class="table table-bordered text-c">
+      <tr>
+        <th class="nowrap">问题标题</th>
+        <th class="nowrap">问题类型</th>
+        <th class="nowrap">问题描述</th>
+        <th class="nowrap">问题回答</th>
+      </tr>
+      <tr *ngFor="let item of problemList" class="list">
+        <td class="table-label text-l">{{item.questionTitle}}</td>
+        <td class="nowrap">{{item.questionType}}</td>
+        <td class="text-l">{{item.questionDescription}}</td>
+        <td class="text-l">{{item.questionReply}}</td>
+      </tr>
+    </table>
+    <div class="load-more-info text-c" *ngIf="problemParams.lastRowKey">
+      <div class="load-more-con" (click)="getBusinessProblem()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+    </div>
+  </div>
+  <div class="no-data-tips" *ngIf="problemList.length<1">
+    {{problemTipsMsg}}
   </div>
 </div>

@@ -41,3 +41,173 @@
     margin: 0 5px;
     width: 70px;
 }
+/*new page style*/
+.data-output-box{
+    padding: 30px 0 20px;
+}
+.data-output-box .data-output-hd{
+    color: #7d85cb;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+.data-output-hd .left{
+    width: 50px;
+}
+.data-output-hd .right{
+    text-indent: 20px;
+}
+.border{
+    border: 1px solid #f9b62066;
+    border-radius: 6px;
+}
+.all-select-column{
+    width: 50px;
+    height: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+.select-con{
+    position: relative;
+    width: 26px;
+    height: 26px;
+    border: 1px solid #f9b62066;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+.active .select-con:after,.select-con.active:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../../../assets/images/checkbox_arrow.png") no-repeat center;
+    background-size: 70%;
+}
+.data-output-bd .select-box{
+    padding: 0 10px;
+    border-right: 1px solid #f9b62066;
+}
+.row-right{
+    float: left;
+    border-left: 1px solid #f9b62066;
+    width: calc(100% - 50px);
+}
+.output-item{
+    width: 50%;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+    border-left: 1px solid #f9b62066;
+    border-bottom: 1px solid #f9b62066;
+    margin-bottom: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.output-item:nth-child(2n){
+    border-left: none;
+}
+.row-box{
+    overflow: hidden;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.row-box .select-label{
+    padding-left: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.row-box .row-title{
+    padding: 0 20px;
+    border-bottom: 1px solid #f9b62066;
+    height: 46px;
+    line-height: 46px;
+}
+.row-box .row-title.active{
+    border-bottom: none;
+}
+.data-output-ft{
+    margin-top: 10px;
+    font-size: 14px;
+}
+.data-output-ft .select-con{
+    margin: 0 10px;
+}
+.data-output-ft .download-btn{
+    border: none;
+    background: #f9b620;
+    border-radius: 4px;
+    color: #33363f;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    outline: none;
+}
+.data-output-ft .download-btn:focus{
+    background: #f9b620cc;
+}
+.table-label{
+    width: 80px;
+    padding: 20px 8px;
+}
+.data-output-ft .back-btn{
+    cursor: pointer;
+    color: #f9b620;
+    vertical-align: middle;
+    margin-left: 20px;
+}
+.data-output-ft .back-btn i{
+    margin-right: 5px;
+}
+.data-output-ft .left-column{
+    display: inline-block;
+    margin-top: 18px;
+}
+.table .company-info{
+    text-align: left;
+    padding: 20px;
+}
+.company-list tr:nth-child(2n){
+    background: #ffffff1a;
+}
+.table .company-info .name{
+    font-size: 18px;
+    font-weight: bold;
+    color: #f9b620;
+}
+.table .company-info .type-item{
+    margin-right: 10px;
+}
+.table .company-info .address{
+    margin: 5px 0;
+}
+.table .selected-td{
+    width: 80px;
+    text-align: center;
+}
+.reset-selected{
+    color: #f9b620;
+    cursor: pointer;
+    font-weight: bold;
+}
+.reset-selected i{
+    margin-right: 5px;
+}
+.company-list .selected-td{
+    position: relative;
+}
+.company-list .selected-td .select-con{
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.company-list .info-label{
+    color: #e2e2e2;
+    font-weight: bold;
+}

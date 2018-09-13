@@ -1,0 +1,53 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-praise'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/eCIHonorPojo/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-praise'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/eCIHonorPojo/exportExcelForm?companyName={{getListParams.enterpriseName}}" download="政府表彰.xlsx">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-praise'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="政府表彰模板.xlsx">EXCEL模板下载</a>
+  </button>
+  
+
+  <!-- <button class="excel-export">EXCEL模板下载</button> -->
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>公司名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
+    </div>
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>企业名称</th>
+    <th>荣誉名称</th>
+    <th>评(认)定/发证机关</th>
+    <th>评(认)定/发证日期</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-c ng-scope" *ngFor="let item of list">
+    <td class="nowrap">{{item.enterpriseName}}</td>
+    <td class="nowrap">{{item.honorName}}</td>
+    <td class="nowrap">{{item.evaluationInstitution}}</td>
+    <td class="nowrap">{{item.evaluationDate | date:'yyyy-MM-dd'}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row rowkey-pagination">
+  <div class="col-xs-12 col-12">
+    <nav aria-label="Page navigation">
+      <ul class="pager">
+        <li [ngClass]="{'disabled' : nowPagesNum < 1}"><a href="javascript:void(0)" (click)="pageChanged(-1)">上一页</a></li>
+        <li [ngClass]="{'disabled' : !getListParams.lastRowKey}"><a href="javascript:void(0)" (click)="pageChanged(1)">下一页</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-product'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/eQIFamousProductPojo/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-product'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/eQIFamousProductPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}" download="{{getListParams.enterpriseName+'-'+'名优产品.xlsx'}}">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-product'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="名优产品模板.xlsx">EXCEL模板下载</a>
+  </button>
+  
+
+  <!-- <button class="excel-export">EXCEL模板下载</button> -->
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>公司名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
+    </div>
+    <div class="form-group">
+      <label>申报产品名称:</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="getListParams.name" placeholder="申报产品名称">
+    </div>
+    <div class="form-group">
+      <label>名优名录分类:</label>
+      <input type="text" class="form-control" name="category" [(ngModel)]="getListParams.category" placeholder="名优名录分类">
+    </div>
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>企业名称</th>
+    <th class="nowrap">名优名录分类</th>
+    <th>申报产品名称</th>
+    <th class="nowrap">采购所需主要原材料</th>
+    <!-- <th>配套产品</th> -->
+    <th>质量标准</th>
+    <th>强制性认证情况</th>
+    <th>获奖情况</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td class="table-label">{{item.enterpriseName}}</td>
+    <td class="nowrap">{{item.category}}</td>
+    <td>{{item.name}}</td>
+    <td>{{item.rawMaterial}}</td>
+    <!-- <td class="nowrap">{{item.}}</td> -->
+    <td>{{item.qualityStandard}}</td>
+    <td>{{item.certificationStatus}}</td>
+    <td class="table-label">{{item.awards}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row rowkey-pagination">
+  <div class="col-xs-12 col-12">
+    <nav aria-label="Page navigation">
+      <ul class="pager">
+        <li [ngClass]="{'disabled' : nowPagesNum < 1}"><a href="javascript:void(0)" (click)="pageChanged(-1)">上一页</a></li>
+        <li [ngClass]="{'disabled' : !getListParams.lastRowKey}"><a href="javascript:void(0)" (click)="pageChanged(1)">下一页</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.me_container {
+
+}
+
+.me_container ul {
+
+}
+
+.me_container li {
+    border-left:1px solid #ededed;
+}
+
+.me_container li span {
+    display: block;
+    line-height: 32px;
+    font-size:14px;
+}
+
+.me_container li li {
+    padding-left: 20px;
+}

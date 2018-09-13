@@ -1,23 +1,29 @@
 <div class="con-hd">
-  <button class="excel-import" routerLink="../upload">EXCEL导入</button>
-  <button class="excel-export">
-    <a href="">EXCEL模板下载
+  <!--<button appAccessControl [accessData]="'manager-edit-function'" class="excel-import" routerLink="../upload">EXCEL导入</button>-->
+  <button appAccessControl [accessData]="'manager-export-project'" class="excel-import">
+    <a target="_blank" href="{{'/manager/v1/kETProjectDeclarationPojo/exportExcelForm?companyName='+getListParams.companyName}}"
+       download="{{getListParams.companyName+'-项目申报.xlsx'}}">
+      导出
     </a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-project'" class="excel-export">
+    <a target="_blank" href="/manager/v1/kETProjectDeclarationPojo/downloadExcelForm" download="'项目申报模板.xlsx'">EXCEL模板下载</a>
   </button>
 </div>
 <div class="filter">
   <form class="form-inline">
     <div class="form-group">
       <label>公司名称:</label>
-      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.companyName" placeholder="公司名称">
+      <input type="text" class="form-control" name="companyName" [(ngModel)]="getListParams.companyName" placeholder="公司名称">
     </div>
     <div class="form-group">
       <label>项目名称:</label>
-      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.projectName" placeholder="公司名称">
+      <input type="text" class="form-control" name="projectName" [(ngModel)]="getListParams.projectName" placeholder="公司名称">
     </div>
     <div class="filter-bt" style="margin: 10px 0;">
       <button class="btn search-btn" (click)="getList()">搜索</button>
-      <a *ngIf="list.length > 0" class="btn export-btn" href="{{'http://127.0.0.1:5080/v1/kETProjectDeclarationPojo/exportExcelForm?companyName='+getListParams.companyName}}"
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <a appAccessControl [accessData]="'manager-export-project'" *ngIf="list.length > 0" class="btn export-btn" href="{{'http://127.0.0.1:5080/v1/kETProjectDeclarationPojo/exportExcelForm?companyName='+getListParams.companyName}}"
         download="{{getListParams.companyName+'-项目申报.xlsx'}}">
         导出
       </a>

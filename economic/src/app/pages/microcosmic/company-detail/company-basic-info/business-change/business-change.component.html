@@ -1,22 +1,26 @@
 <!-- <div class="panel-bd pop-index-0 animated active"> -->
+<script src="business-change.component.ts"></script>
 <div class="panel-content">
   <div class="panel-item-title">工商变更信息：</div>
-
-  <table class="table table-bordered table-align-c" id="businessChangeInfo" *ngIf="companyChangeList.length>0">
-    <tr>
-      <th class="nowrap">变更事项</th>
-      <th class="nowrap">变更前内容</th>
-      <th class="nowrap">变更后内容</th>
-      <th class="nowrap">变更日期</th>
-    </tr>
-    <tr *ngFor="let data of companyChangeList">
-      <td>{{data.changeType}}</td>
-      <td style="max-width: 200px">{{data.changeAfterContent}}</td>
-      <td style="max-width: 200px">{{data.changeBeforeContent}}</td>
-      <td class="nowrap">{{data.changeDate | date:'yyyy-MM--dd'}}</td>
-    </tr>
-  </table>
-
+  <div *ngIf="companyChangeList.length>0">
+    <table class="table table-bordered text-c" id="businessChangeInfo">
+      <tr>
+        <th class="nowrap">变更事项</th>
+        <th class="nowrap">变更前内容</th>
+        <th class="nowrap">变更后内容</th>
+        <th class="nowrap">变更日期</th>
+      </tr>
+      <tr *ngFor="let data of companyChangeList">
+        <td>{{data.changeType}}</td>
+        <td style="max-width: 200px;text-align: left">{{data.changeBeforeContent}}</td>
+        <td style="max-width: 200px;text-align: left">{{data.changeAfterContent}}</td>
+        <td class="nowrap">{{data.changeDate | date:'yyyy-MM--dd'}}</td>
+      </tr>
+    </table>
+    <div class="load-more-info text-c" *ngIf="changeInfoParams.lastRowKey">
+      <div class="load-more-con" (click)="getCompanyChangeInfo()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+    </div>
+  </div>
   <div class="no-data-tips" *ngIf="companyChangeList.length<1">
     {{CompanyChangeInfoTips}}
   </div>

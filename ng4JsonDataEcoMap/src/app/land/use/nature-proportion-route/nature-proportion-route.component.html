@@ -1,0 +1,60 @@
+<!--面板数据-->
+<div class="microcosmic_container animated middle-view" [ngClass]="{'slideInRight': showRightPanel, 'slideOutRight': !showRightPanel}">
+  <div class="back-arrow"><span class="back-arrow-btn" [ngClass]="{'active': !showRightPanel}" (click)="changeRightPanelShow()"></span></div>
+  <div class="land-panel-con">
+    <div class="item land-use-proportion">
+      <div class="public-title"><span class="title">用途占比</span></div>
+      <div class="land-use-purpose-con">
+        <app-scrollbar>
+          <div class="land-use-purpose-scroll">
+            <div class="land-use-purpose-con">
+              <div class="text-c"><span>工业用地：</span>{{totalGongyeLandNum}}<span>低效用地：</span>{{totalInefficientLandNum}}</div>
+              <div class="item" *ngIf="natureLandTypeProporData.gongyeLand.proporEcharts">
+                <div class="use-purpose-bd" echarts [options]="natureLandTypeProporData.gongyeLand.proporEcharts" style="width: 540px;height: 250px"></div>
+                <div class="use-purpose-bt text-c">
+                  <span class="type-proportion-all">其他：{{natureLandTypeProporData.gongyeLand.otherTypePropor}}%</span>
+                  <span class="type-proportion-now">工业用地：{{natureLandTypeProporData.gongyeLand.nowTypePropor}}%</span>
+                </div>
+              </div>
+              <div class="item" *ngIf="natureLandTypeProporData.qitaLand.proporEcharts">
+                <div class="use-purpose-bd" echarts [options]="natureLandTypeProporData.qitaLand.proporEcharts" style="width: 540px;height: 250px"></div>
+                <div class="use-purpose-bt text-c">
+                  <span class="type-proportion-all">其他：{{natureLandTypeProporData.qitaLand.otherTypePropor}}%</span>
+                  <span class="type-proportion-now">公共设施及其他：{{natureLandTypeProporData.qitaLand.nowTypePropor}}%</span>
+                </div>
+              </div>
+              <div class="item" *ngIf="natureLandTypeProporData.keyanLand.proporEcharts">
+                <div class="use-purpose-bd" echarts [options]="natureLandTypeProporData.keyanLand.proporEcharts" style="width: 540px;height: 250px"></div>
+                <div class="use-purpose-bt text-c">
+                  <span class="type-proportion-all">其他：{{natureLandTypeProporData.keyanLand.otherTypePropor}}%</span>
+                  <span class="type-proportion-now">科研用地：{{natureLandTypeProporData.keyanLand.nowTypePropor}}%</span>
+                </div>
+              </div>
+              <div class="item" *ngIf="natureLandTypeProporData.shangfuLand.proporEcharts">
+                <div class="use-purpose-bd" echarts [options]="natureLandTypeProporData.shangfuLand.proporEcharts" style="width: 540px;height: 250px"></div>
+                <div class="use-purpose-bt text-c">
+                  <span class="type-proportion-all">其他：{{natureLandTypeProporData.shangfuLand.otherTypePropor}}%</span>
+                  <span class="type-proportion-now">商服用地：{{natureLandTypeProporData.shangfuLand.nowTypePropor}}%</span>
+                </div>
+              </div>
+              <div class="item" *ngIf="natureLandTypeProporData.zhuzhaiLand.proporEcharts">
+                <div class="use-purpose-bd" echarts [options]="natureLandTypeProporData.zhuzhaiLand.proporEcharts" style="width: 540px;height: 250px"></div>
+                <div class="use-purpose-bt text-c">
+                  <span class="type-proportion-all">其他：{{natureLandTypeProporData.zhuzhaiLand.otherTypePropor}}%</span>
+                  <span class="type-proportion-now">住宅用地：{{natureLandTypeProporData.zhuzhaiLand.nowTypePropor}}%</span>
+                </div>
+              </div>
+              <div class="item" *ngIf="natureLandTypeProporData.chubeiLand.proporEcharts">
+                <div class="use-purpose-bd" echarts [options]="natureLandTypeProporData.chubeiLand.proporEcharts" style="width: 540px;height: 250px"></div>
+                <div class="use-purpose-bt text-c">
+                  <span class="type-proportion-all">其他：{{natureLandTypeProporData.chubeiLand.otherTypePropor}}%</span>
+                  <span class="type-proportion-now">储备用地：{{natureLandTypeProporData.chubeiLand.nowTypePropor}}%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </app-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>

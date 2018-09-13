@@ -1,0 +1,50 @@
+<div class="time-colors-panel"[ngStyle]="{'right': colorListRight}">
+  <div class="land-colors-box">
+    <div class="land-colors-list" id="land-colors-list">
+      <div class="use-nouse-color">
+        <div class="color-list-title">使用情况</div>
+        <div class="color-list-bd">
+          <div class="color-item"><span class="color-blank industry-land" data-catname="工业用地"></span>工业用地</div>
+          <div class="color-item"><span class="color-blank other-land" data-catname="公共设施及其他用地"></span>公共设施及其他用地</div>
+          <div class="color-item"><span class="color-blank teach-land" data-catname="科研用地"></span>科研用地</div>
+          <div class="color-item"><span class="color-blank bsiness-land" data-catname="商服用地"></span>商服用地</div>
+          <div class="color-item"><span class="color-blank  house-land" data-catname="住宅用地"></span>住宅用地</div>
+          <div class="color-item"><span class="color-blank  reserve-land" data-catname="储备用地"></span>储备用地</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--地块模块概况面板-->
+<div class="icon-ctrl-panel right-top-land-infowindow land-infowindow-cj animated slideInRight" [ngClass]="{'my-hide': !panelControl.overviewShow}">
+  <div class="icon-ctrl-head">
+    <div class="title">低效用地概况</div>
+  </div>
+  <div class="icon-ctrl-body">
+    <app-scrollbar>
+      <div class="icon-ctrl-scroll">
+        <div class="icon-ctrl-scroll-con">
+          <div class="item-infowindow echarts" echarts [options]="dixiaoforgongyeEcharts" id="dixiaoforgongye-land-area-proportion"></div>
+          <table class="table table-bordered">
+            <tr><th>类型</th><th>面积(亩)</th><th>占比(%)</th></tr>
+            <tr><td>未开发用地</td><td>{{dixiaoforgongyeData.unDevelop.area}}</td><td>{{dixiaoforgongyeData.unDevelop.propor}}</td></tr>
+            <tr><td>已开发工业用地</td><td>{{dixiaoforgongyeData.develop.area}}</td><td>{{dixiaoforgongyeData.develop.propor}}</td></tr>
+          </table>
+          <div class="item-infowindow echarts" echarts [options]="dixiaoforwestEcharts" id="dixiaoforwest-land-area-proportion"></div>
+          <table class="table table-bordered">
+            <tr><th>类型</th><th>面积(亩)</th><th>占比(%)</th></tr>
+            <tr><td>未开发用地</td><td>{{dixiaoforwestData.unDevelop.area}}</td><td>{{dixiaoforwestData.unDevelop.propor}}</td></tr>
+            <tr><td>已开发西区用地</td><td>{{dixiaoforwestData.develop.area}}</td><td>{{dixiaoforwestData.develop.propor}}</td></tr>
+          </table>
+          <div class="">
+              <div class="item">低效用地占西区总面积占比:{{dixiaoAreaforwestAreaPropor}}%</div>
+          </div>
+          <div class="">
+            <div class="item">低效工业用地占工业用地占比:{{dixiaoAreaforgongyeAreaPropor}}%</div>
+          </div>
+        </div>
+      </div>
+    </app-scrollbar>
+  </div>
+</div>
+<router-outlet></router-outlet>

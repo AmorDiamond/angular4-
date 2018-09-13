@@ -1,0 +1,41 @@
+<div class="industry-manage-box">
+  <div class="filter">
+    <form class="form-inline" autocomplete="off">
+      <div class="form-group">
+        <label>企业名称:</label>
+        <input class="form-control" type="text" name="companyName" [(ngModel)]="searchParams.companyName" placeholder="企业名称">
+      </div>
+      <div class="filter-bt">
+        <button class="btn search-btn" (click)="search()">搜索</button>
+        <button class="btn search-btn" (click)="resetSearch()">重置</button>
+        <button appAccessControl [accessData]="'manager-upload-industry'" class="btn search-btn fr" routerLink="../uploadIndustry">上传</button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="content-bd">
+  <table class="table table-bordered table-hover table-s table-overflow-x">
+    <thead>
+    <tr class="text-c">
+      <th>企业名称</th>
+      <th>产业类型</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="text-c" *ngFor="let item of dataList">
+      <td class="nowrap name">{{item.name}}</td>
+      <td class="table-label types"><span *ngFor="let type of item.industryClassType">{{type.name}}</span></td>
+      <td class="nowrap table-handle">
+        <span appAccessControl [accessData]="'manager-edit-industry'" class="fa fa-pencil-square-o" routerLink="../editIndustry/{{item.name}}" tooltip="编辑"></span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div class="col-xs-12 col-12">
+      <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                  [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+  </div>
+</div>

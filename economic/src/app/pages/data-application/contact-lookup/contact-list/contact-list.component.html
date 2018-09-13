@@ -1,0 +1,89 @@
+<div class="research-content">
+  <div class="data-search-info">
+    <div class="column-search flex-column text-c">
+      <div class="search-hd column-hd"><span class="icon" [routerLink]="['/dataApplication/contactLookup']"></span>搜索</div>
+      <div class="type-list flex-cell">
+        <perfect-scrollbar>
+          <div class="type-list-item active" [ngClass]="{'active': !searchIndustryType}" (click)="changeIndustryType()">
+            全部
+          </div>
+          <div class="type-list-item" *ngFor="let item of industryTypeList"
+               [ngClass]="{'active': item.industryType == searchIndustryType}"
+               (click)="changeIndustryType(item.industryType)">
+            <div class="type-item-label">{{item.industryType}}</div>({{item.number}})
+          </div>
+        </perfect-scrollbar>
+      </div>
+    </div>
+    <div class="column-company flex-column">
+      <div class="column-hd">
+        <div class="company-info">
+          <div class="company fl">企业列表(<span class="number">{{pageParams.bigTotalItems}}</span>)</div>
+          <div class="address fl">联系人 <span class="all-select fr"><div class="select-con" [ngClass]="{'active': allSelectStatus}" (click)="handleAllSelected()"></div>全选</span></div>
+        </div>
+        <div class="select fr">选择</div>
+      </div>
+      <div class="company-list flex-cell">
+        <perfect-scrollbar *ngIf="companyList.length>0">
+          <div class="company-item" *ngFor="let item of companyList; index as listIndex">
+            <div class="company-info fl">
+              <div class="info-left">
+                <div class="p-20">
+                  <div class="name" [innerHTML]="item.company.hilightName"></div>
+                  <div class="industry" [innerHTML]="item.company.industryType"></div>
+                </div>
+              </div>
+              <div class="info-right">
+                <div class="contact-box" *ngIf="editContactId != item.company.rowKey">
+                  <div class="column-con" *ngFor="let contact of item.contacts; index as contactIndex">{{contact.name}}{{contact.duties ? '--' + contact.duties : ''}}({{contact.phone}})<span appAccessControl [accessData]="'contact-edit-contact'" class="edit-address" (click)="editContact(item.company.rowKey,listIndex,contactIndex, contact.rowKey)">完善</span></div>
+                  <div class="column-con" *ngIf="item.contacts && editContactId != item.company.rowKey"><span appAccessControl [accessData]="'contact-create-contact'" class="edit-address" (click)="editContact(item.company.rowKey)">添加联系人</span></div>
+                </div>
+                <div class="add-contact" *ngIf="!item.contacts && editContactId != item.company.rowKey"><button appAccessControl [accessData]="'contact-create-contact'" [buttonAccess]="true" (click)="editContact(item.company.rowKey)">添加联系人</button></div>
+                <div class="edit-box" *ngIf="editContactStatus && editContactId == item.company.rowKey">
+                  <label>姓名<input type="text" placeholder="请输入姓名" [(ngModel)]="editContactInfo.name"></label>
+                  <label>职位<input type="text" placeholder="请输入职位" [(ngModel)]="editContactInfo.duties"></label>
+                  <label>手机号<input type="text" placeholder="请输入手机号" [(ngModel)]="editContactInfo.phone"></label>
+                  <div class="submit-con">
+                    <button appAccessControl [accessData]="['contact-edit-contact','contact-create-contact']" [buttonAccess]="true" (click)="saveEditContact(item.company.rowKey,listIndex,editContactIndex,editContactRowKey ? editContactRowKey : '')">保存</button>
+                    <button class="edit-btn edit-border" (click)="editContactStatus = false;editContactId = ''">取消</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="select-box fr">
+              <div class="select-con" [ngClass]="{'active': item.hasSelected}" (click)="item.hasSelected = !item.hasSelected;handleSelectedCompany(item.company.rowKey,listIndex)"></div>
+            </div>
+          </div>
+        </perfect-scrollbar>
+        <div class="no-data-tips" *ngIf="companyList.length<1">
+          暂无信息！
+        </div>
+      </div>
+      <div class="pages-box">
+        <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                    [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+    </div>
+    <!--已选择列表-->
+    <div class="column-selected flex-column">
+      <div class="selected-hd column-hd">
+        已选企业(<span class="number">{{selectedCompanyList.length}}</span>)<span *ngIf="selectedCompanyList.length > 0" class="remove-selected fr" (click)="removeAllSelected()">清空</span>
+      </div>
+      <div class="selected-bd flex-cell">
+        <perfect-scrollbar *ngIf="selectedCompanyList.length>0">
+          <div class="selected-item border" *ngFor="let item of selectedCompanyList">
+            <div class="name">{{item.company.name}}</div>
+            <div class="industry" [innerHTML]="item.company.industryType"></div>
+            <span class="remove-single-selected" (click)="removeSingleSelected(index)"><i class="fa fa-close"></i></span>
+          </div>
+        </perfect-scrollbar>
+        <div class="no-data-tips" *ngIf="selectedCompanyList.length<1">
+          暂无信息！
+        </div>
+      </div>
+      <div class="selected-ft">
+        <button appAccessControl [accessData]="'contact-detail'" [buttonAccess]="true" class="next-step-btn" (click)="nextStep()">下一步</button>
+      </div>
+    </div>
+  </div>
+</div>

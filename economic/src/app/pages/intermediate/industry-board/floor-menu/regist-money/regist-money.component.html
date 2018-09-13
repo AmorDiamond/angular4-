@@ -1,10 +1,12 @@
 <perfect-scrollbar>
   <div class="panel-content">
-    <div class="panel-item-title">{{choseBuildName}}注册资本</div>
-    <div *ngIf="registMoneyData">
-      <div>{{registMoneyData[1] ? registMoneyData[1] : '未知'}}</div>
+    <div class="flex" *ngIf="registerMoneyData">
+      <div class="flex-cell">
+        <div class="flex-item single-echart" echarts [options]="registerMoneyData">
+        </div>
+      </div>
     </div>
-    <div class="no-data-tips" *ngIf="!registMoneyData">
+    <div class="no-data-tips" *ngIf="!registerMoneyData">
       暂无信息！
     </div>
   </div>

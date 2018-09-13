@@ -40,9 +40,9 @@ export class CompanyEconomicInfoService {
     private companyRelationPeopleUrl = '/v1/eIIRelationPojo/findListByCompanyName';
     /*政企对接联系人信息*/
     private companyGobernmentContactsUrl = '/v1/eIIRelationPojo/findGobernmentContactsByCompanyName';
-    /*政府项目申报信息*/
+    /*政府支持、补贴信息*/
     // private companyProjectDeclarationUrl = '/v1/eETProjectDeclarationPojo/findListByCompanyName';
-    private companyProjectDeclarationUrl = '/v1/kETProjectDeclarationPojo/findCompanyName';
+    private companyProjectDeclarationUrl = '/v1/Governmentsupportpojo/findListByCompanyNameAndYear';
     /*招中标信息*/
     private WinningBidUrl = '/v1/EIIWinningBid/findWinningBidPage';
     /*公司公告列表信息*/
@@ -58,7 +58,7 @@ export class CompanyEconomicInfoService {
     /*科技创新 机构数据经费支出信息*/
     private OrganizationExpenditureUrl = '/v1/DomesticDevelopment/findMechanism';
     /*科技创新 知识产权信息*/
-    private IntellectualPropertyUrl = '/v1/STAOtherSituation/findKnowHow';
+    private IntellectualPropertyUrl = '/v1/STAOtherSituation/findAllScienceAndTechnology';
     /*单独获取专利数据接口*/
     private PatentUrl = '/v1/IATrademarkAndPatent/findPatentPage';
     constructor(private http: HttpClient) { }

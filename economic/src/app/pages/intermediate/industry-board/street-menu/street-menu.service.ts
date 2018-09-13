@@ -11,6 +11,8 @@ export class StreetMenuService{
   constructor(private http: HttpClient) { }
   /*根据年份和街道名称搜索企业当年的注册资本和当年的企业数量*/
   private streetMenuUrl = '/v1/IndustrydepController/findstreet';
+  /*查询街道企业类型信息*/
+  private streetEnterpriseTypeUrl = '/v1/IndustrydepController/findEnterpriseTypeGroupByStreetOffice';
 
   getDataByParams(findParams, url, type?): Observable<any> {
     let paramsString = '';

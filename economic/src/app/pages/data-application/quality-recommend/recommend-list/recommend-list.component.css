@@ -1,0 +1,99 @@
+.data-application-box{
+    height: 100%;
+    color: #bcbdbf;
+}
+.right-panel{
+    height: calc(100% - 50px);
+}
+.data-application-box .panel-content{
+    font-size: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.back-box {
+    line-height: 50px;
+    margin-left: 16px;
+    height: inherit;
+    position: relative;
+    outline: none;
+}
+.back-box .back-btn {
+    display: inline-block;
+    width: 30px;
+    height: 24px;
+    vertical-align: middle;
+    color: #f9b620;
+    background: url("../../../../../assets/images/back_arrow.png") center no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+.data-application-box{
+    -webkit-border-radius:  10px 10px 6px 6px;
+    -moz-border-radius:  10px 10px 6px 6px;
+    -o-border-radius:  10px 10px 6px 6px;
+    -ms-border-radius:  10px 10px 6px 6px;
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(30%, #151411), color-stop(50%, #151816), to(#162c2e));
+    background: linear-gradient(to bottom right, #151411 30%, #151816 50%, #162c2e);
+}
+.recommend-list-hd{
+    color: #7d85cb;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+.border{
+    border: 1px solid #f9b62066;
+    border-radius: 6px;
+}
+.recommend-list-bd .recommend-row{
+    height: 90px;
+    line-height: 90px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.recommend-list-bd .recommend-cell{
+    float: left;
+    padding: 0 20px;
+    border-right: 1px solid #f9b62066;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.recommend-list-bd .column-index.recommend-cell{
+    padding: 0;
+}
+.recommend-list-bd .recommend-cell:last-child{
+    border-right: none;
+}
+.column-index .sort-con{
+    width: 60px;
+    height: 60px;
+    background: #f9b6201a;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 60px;
+    font-size: 26px;
+    font-weight: bold;
+    color: #f9b620;
+}
+.column-index{
+    width: 10%;
+    text-align: center;
+}
+.column-company{
+    width: 30%;
+}
+.column-industry{
+    width: 20%;
+    text-align: center;
+}
+.column-add{
+    width: 40%;
+}
+.recommend-list-hd .column-company,.recommend-list-hd .column-add{
+    text-indent: 20px;
+}
+.no-data-tips{
+    margin-top: 40px;
+    font-size: 16px;
+}

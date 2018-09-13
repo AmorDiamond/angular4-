@@ -1,5 +1,5 @@
 <div class="con-hd">
-  <button class="btn add-btn" routerLink="/admin/roles/roleManage/-1">新增角色</button>
+  <button appAccessControl [accessData]="'manager-create-roles'" class="btn add-btn" routerLink="/admin/roles/roleManage/-1">新增角色</button>
 </div>
 <div class="filter">
   <form class="form-inline">
@@ -13,7 +13,8 @@
       </select>
     </div>
     <div class="filter-bt">
-      <button class="btn search-btn" (click)="getRolesList()">搜索</button>
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
     </div>
   </form>
 </div>
@@ -22,9 +23,7 @@
   <tr class="text-c">
     <th>ID</th>
     <th>角色名称</th>
-    <th>创建人</th>
     <th>创建时间</th>
-    <th>修改人</th>
     <th>修改时间</th>
     <th>状态</th>
     <th>备注</th>
@@ -35,17 +34,15 @@
   <tr class="text-c ng-scope" *ngFor="let item of rolesList">
     <td class="nowrap">{{item.id | slice:0:6}}***</td>
     <td class="nowrap">{{item.name}}</td>
-    <td class="ng-binding">无创建人</td>
     <td class="nowrap">{{item.createDate | date:'yy-MM-dd HH:mm:ss'}}</td>
-    <td class="ng-binding">无修改人</td>
     <td class="nowrap">{{item.modifyDate | date:'yy-MM-dd HH:mm:ss'}}</td>
     <td class="nowrap"><span *ngIf="item.status == 'STATUS_NORMAL'" class="green">正常</span><span *ngIf="item.status == 'STATUS_DISABLE'" class="red">禁用</span></td>
     <td class="nowrap">{{item.comment}}</td>
     <td class="f-14">
       <div class="nowrap">
-        <a tooltip="编辑" routerLink="/admin/roles/roleManage/{{item.id}}"><i class="fa fa-pencil"></i></a>
-        <a tooltip="禁用" *ngIf="item.status == 'STATUS_NORMAL'" href="javascript:void(0)" (click)="disableRole(item.id, false,template)"><i class="fa fa-ban"></i></a>
-        <a tooltip="启用" *ngIf="item.status == 'STATUS_DISABLE'" href="javascript:void(0)" (click)="disableRole(item.id, true,template)"><i class="fa fa-check-square"></i></a>
+        <a appAccessControl [accessData]="'manager-edit-roles'" tooltip="编辑" routerLink="/admin/roles/roleManage/{{item.id}}"><i class="fa fa-pencil"></i></a>
+        <a appAccessControl [accessData]="'manager-disable-roles'" tooltip="禁用" *ngIf="item.status == 'STATUS_NORMAL'" href="javascript:void(0)" (click)="disableRole(item.id, false,template)"><i class="fa fa-ban"></i></a>
+        <a appAccessControl [accessData]="'manager-disable-roles'" tooltip="启用" *ngIf="item.status == 'STATUS_DISABLE'" href="javascript:void(0)" (click)="disableRole(item.id, true,template)"><i class="fa fa-check-square"></i></a>
       </div>
     </td>
   </tr>

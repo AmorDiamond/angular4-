@@ -24,7 +24,7 @@ export class CompanyQualificationsInfoComponent implements OnInit, OnDestroy {
   // 名优产品
   FamousProduct = [];
 
-  getCertificationParamas: RequestParams = { companyName: 'test1', pageSize: 3, lastRowKey: '', type: 'Certification' };
+  getCertificationParamas = { enterpriseName: 'test1', pageSize: 3, lastRowKey: '', type: 'Certification' };
   getHiTechCertificationParamas = { rowkey: 'test1', pageSize: 3, lastRowKey: '', type: 'HiTechCertification' };
   getStandardSettingParamas: RequestParams = { companyName: 'test1', pageSize: 3, lastRowKey: '', type: 'StandardSetting' };
   getFamousProductParamas: RequestParams = { companyName: 'test1', pageSize: 3, lastRowKey: '', type: 'FamousProduct' };
@@ -48,14 +48,14 @@ export class CompanyQualificationsInfoComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.keyWord = this.microcomicService.getUrlParams('name');
     this.microcomicService.setCompanyName(this.keyWord);
-    this.getCertificationParamas.companyName = this.keyWord;
+    this.getCertificationParamas.enterpriseName = this.keyWord;
     this.getHiTechCertificationParamas.rowkey = this.keyWord;
     this.getStandardSettingParamas.companyName = this.keyWord;
     this.getFamousProductParamas.companyName = this.keyWord;
     this.getCertification();
-    this.getHiTechCertification();
+    // this.getHiTechCertification();
     // this.getStandardSetting();
-    this.getFamousProduct();
+    // this.getFamousProduct();
   }
 
   // 行业资质证书

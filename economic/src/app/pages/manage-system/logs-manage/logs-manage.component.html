@@ -36,7 +36,7 @@
         </select>
       </div>-->
       <div class="filter-bt">
-        <button class="btn search-btn" (click)="getLogsList()">搜索</button>
+        <button class="btn search-btn" (click)="search()">搜索</button>
         <button class="btn search-btn" (click)="resetSearch()">重置</button>
       </div>
     </form>
@@ -57,7 +57,7 @@
     <tbody>
     <tr class="text-c ng-scope" *ngFor="let item of logsLists">
       <td class="nowrap">{{item.id | slice:0:6}}***</td>
-      <td class="nowrap">{{item.executeUser.ldapName}}</td>
+      <td class="nowrap">{{item.executeUser?.account}}</td>
       <td class="nowrap">{{actionTypesObj[item.actionType]}}</td>
       <td class="nowrap">{{entityTypesObj[item.entityType]}}</td>
       <td class="nowrap">{{item.entityId}}</td>
@@ -67,8 +67,8 @@
   </table>
   <div class="row">
     <div class="col-xs-12 col-12">
-      <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
-                  [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+       <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                   [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
     </div>
   </div>
 </div>

@@ -14,24 +14,42 @@ export class GovernmentFundsComponent implements OnInit {
     private companyEconomicInfoService: CompanyEconomicInfoService
   ) { }
   companyName: any;
+  findParams = {
+    enterpriseName: '',
+    page: 0,
+    size: 15
+  };
+  pageParams = {
+    maxSize: 5,
+    itemsPerPage: this.findParams.size,
+    bigTotalItems: 10,
+    bigCurrentPage: 1,
+    numPages: 0,
+    totalPages: 0
+  };
   //   项目申报
   ProjectDeclarations = [];
+  totalMoney = 0;
   GovernmentProjectTips = '加载中...';
   ngOnInit() {
     this.companyName = this.microcomicService.getUrlParams('name');
     this.microcomicService.setCompanyName(this.companyName);
+    this.findParams.enterpriseName = this.companyName;
     /*获取政府项目申报信息*/
     this.getGovernmentProject();
   }
   /*获取政府项目申报信息*/
   getGovernmentProject() {
-    this.companyEconomicInfoService.getProjectDeclaration(this.companyName).subscribe(res => {
-      console.log('政府项目申报', res);
+    this.companyEconomicInfoService.findListByUrl(this.findParams, 'companyProjectDeclarationUrl').subscribe(res => {
+      console.log('政府支持信息', res);
       if (res.responseCode === '_200') {
-        if (res.data.kETProjectDeclarationPojo.length < 1) {
+        this.ProjectDeclarations = [...this.ProjectDeclarations, ...res.data.governmentsupports.content];
+        this.pageParams.totalPages = res.data.governmentsupports.totalPages;
+        this.findParams.page = res.data.governmentsupports.number + 1;
+        this.totalMoney = res.data.total;
+        if (this.ProjectDeclarations.length < 1) {
           this.GovernmentProjectTips = '暂无信息！';
         }
-        this.ProjectDeclarations = res.data.kETProjectDeclarationPojo;
       }
     });
   }

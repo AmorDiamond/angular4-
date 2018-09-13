@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MacEconomicExpendService } from './mac-economic-expend.service';
 import { Subscription } from 'rxjs/Subscription';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { ToastModalService } from '../../../../shared/toast-modal/toast-modal.service';
 declare var $: any;
 
 @Component({
@@ -20,30 +21,34 @@ export class MacEconomicExpendComponent implements OnInit, OnDestroy {
   expendDetailOptions: any;
   revenueTime = new Date().getFullYear() - 1;
   expendDataList = [];
+  expendAddSpeedList = [];
+  yearTotalOutput = 0;
+  yearTotalAddspeed = 0;
   constructor(
-    private macEconomicExpendService: MacEconomicExpendService
+    private macEconomicExpendService: MacEconomicExpendService,
+    private toastModalService: ToastModalService
   ) { }
 
   ngOnInit() {
 
     /*时间控制*/
-    $("#datetimepicker-maceco").datetimepicker({
+    $('#datetimepicker-maceco').datetimepicker({
       autoclose: 1,
       startView: 4,
       minView: 4,
       forceParse: 0,
       startDate: 2015,
-      endDate: new Date().getFullYear() - 1,
+      endDate: new Date().getFullYear(),
       initialDate: new Date().getFullYear() - 1
     }).on('changeYear', (ev) => {
       const chooseTime = new Date(ev.date.valueOf()).getFullYear();
       this.revenueTime = chooseTime;
       this.getExpendInfo(this.revenueTime);
-      this.getExpendRateInfo(this.revenueTime);
+      this.getExpendAreaSpeddInfo(this.revenueTime);
     });
 
     this.getExpendInfo(this.revenueTime);
-    this.getExpendRateInfo(this.revenueTime);
+    this.getExpendAreaSpeddInfo(this.revenueTime);
 
   }
 
@@ -53,27 +58,63 @@ export class MacEconomicExpendComponent implements OnInit, OnDestroy {
     const time = year;
     this.macEconomicExpendService.findListByParams({year: time}, 'macExpendUrl').subscribe(res => {
       console.log('公共性支出', res)
-      this.expendDataList = res.data;
-      const formatData = {xAxis: [], series: {expend: [], addSpeed: []}};
-      this.expendDataList.forEach(res => {
-        formatData.xAxis.push(res.quarterInfo);
-        formatData.series.expend.push(res.expend);
-        formatData.series.addSpeed.push(res.addSpeed);
-      });
-      this.creatExpendAndSpeedEchart(formatData);
+      if (res.responseCode === '_200') {
+        this.yearTotalOutput = 0;
+        this.yearTotalAddspeed = 0;
+        this.expendDataList = res.data.sort(this.stringCompareFn('quarterInfo')); // 按照季度处理排序
+        console.log(this.expendDataList)
+        const formatData = {xAxis: [], series: {expend: [], addSpeed: []}};
+        this.expendDataList.forEach(item => {
+          formatData.xAxis.push(item.quarterInfo);
+          formatData.series.expend.push(item.expend);
+          formatData.series.addSpeed.push(item.addSpeed);
+          this.yearTotalOutput += item.expend;
+          this.yearTotalAddspeed += item.addSpeed;
+        });
+        this.creatExpendAndSpeedEchart(formatData);
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
+      }
 
     });
   }
-  /*获取公共性支出占比数据*/
-  getExpendRateInfo(year) {
+  /*获取各地区公共性支出增速*/
+  getExpendAreaSpeddInfo(year) {
     const time = year;
-    this.macEconomicExpendService.findListByParams({year: time}, 'macExpendRateUrl').subscribe(res => {
-      console.log('支出占比', res)
-      if(res.responseCode === '_200') {
-        const options = res.data;
-        this.creatExpendDetailEchart(options);
+    this.macEconomicExpendService.findListByParams({year: time}, 'macExpendAreaSpeedUrl').subscribe(res => {
+      console.log('支出增速', res)
+      if (res.responseCode === '_200') {
+        this.expendAddSpeedList = [];
+        const options  = res.data;
+        const formatData = {yAxisData: [], seriseData: []};
+        const copyObjType = {};
+        options.forEach(item => {
+          const areaRange = item.areaRange;
+          if (areaRange && copyObjType[areaRange]) {
+            /*返回的数据是各个地区四个季度的数据，需要相加获取一年增速*/
+            copyObjType[areaRange].addSpeed += item.addSpeed;
+            copyObjType[areaRange].quarterNum += 1;
+          }else if (areaRange) {
+            copyObjType[areaRange] = {};
+            copyObjType[areaRange]['addSpeed'] = 0;
+            copyObjType[areaRange]['quarterNum'] = 1;
+            copyObjType[areaRange]['addSpeed'] += item.addSpeed;
+          }
+        });
+        console.log(copyObjType)
+        for (const item in copyObjType) {
+          formatData.yAxisData.push(item);
+          const yearAddSpeed = (copyObjType[item].addSpeed / copyObjType[item].quarterNum).toFixed(2);
+          formatData.seriseData.push(yearAddSpeed);
+          this.expendAddSpeedList.push({areaRange: item, addSpeed: yearAddSpeed});
+        }
+
+        const data = formatData;
+        this.creatExpendSpeedEchart(data);
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
-    })
+    });
   }
   /*绘制公共性支出和增速图表*/
   creatExpendAndSpeedEchart(options) {
@@ -86,7 +127,7 @@ export class MacEconomicExpendComponent implements OnInit, OnDestroy {
       color: ['#1eb5d4', '#f9b621', '#675bba'],
       title: {
         show: true,
-        text: '公共性支出',
+        text: '高新区公共性支出',
         left: echartsTitleAlign,
         textStyle: {
           color: '#bcbdbf'
@@ -112,14 +153,15 @@ export class MacEconomicExpendComponent implements OnInit, OnDestroy {
         }
       }],
       yAxis: [{
-        name: '千万',
+        name: '亿元',
         nameTextStyle: {
           color: '#bcbdbf'
         },
         min: 0,
         type: 'value',
+        splitLine: { show: false },
         axisLabel: {
-          formatter: '{value} 千万',
+          formatter: '{value} 亿元',
           textStyle: {
             color: '#bcbdbf'
           }
@@ -134,6 +176,7 @@ export class MacEconomicExpendComponent implements OnInit, OnDestroy {
           },
           min: 0,
           position: 'right',
+          splitLine: { show: false },
           axisLine: {
             show: true
           },
@@ -148,6 +191,7 @@ export class MacEconomicExpendComponent implements OnInit, OnDestroy {
       series: [{
         name: '总金额',
         type: 'bar',
+        barMaxWidth: '50%',
         stack: '产业',
         data: expendData
       },
@@ -161,144 +205,85 @@ export class MacEconomicExpendComponent implements OnInit, OnDestroy {
     };
     this.expendOptions = expendOptions;
   }
-  /*绘制公共性支出详情图表*/
-  creatExpendDetailEchart(options) {
 
-    const expendDetailOptions = {
+  /*绘制宏观各区域支出增速图表*/
+  creatExpendSpeedEchart(options) {
+    const seriseData = options.seriseData;
+    const yAxisData = options.yAxisData;
+    const colors7 = ['#8e97e6', '#d14a61', '#675bba'];
+    const gdpGrowthRateOptions = {
       title: {
-        text: '公共性支出详情',
+        text: '公共支出增速',
+        left: 'center',
         textStyle: {
           color: '#bcbdbf'
-        },
-        left: 'center'
+        }
       },
       tooltip: {
-        trigger: 'item',
-        formatter: '公共支出 <br/>{b} : {c} ({d}%)'
-      },
-      legend: {
-        top: '8%',
-        left: 'center',
-        data: ['环保', '公共交通建设', '民生', '社保医疗'],
-        textStyle: {
-          color: '#bcbdbf'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
         }
       },
-      series: [{
-        type: 'pie',
-        radius: '65%',
-        center: ['50%', '55%'],
-        selectedMode: 'single',
-        data: [{
-          value: 849,
-          name: '环保',
+      grid: {
+        left: '15%',
+        right: '13%'
+      },
+      color: colors7,
+      xAxis: {
+        name: '增速(%)',
+        nameTextStyle: {
+          color: '#bcbdbf'
+        },
+        type: 'value',
+        axisTick: {
+          alignWithLabel: true
+        },
+        boundaryGap: [0, 0.1],
+        axisLabel: {
+          textStyle: {
+            color: '#bcbdbf',
+          }
+        }
+      },
+      yAxis: {
+        type: 'category',
+        data: yAxisData,
+        boundaryGap: ['20%', '20%'],
+        axisLabel: {
+          textStyle: {
+            color: '#bcbdbf',
+          }
+        }
+      },
+      series: [
+        {
+          name: '公共支出增速',
+          type: 'bar',
+          data: seriseData,
+          barMaxWidth: '40%',
           label: {
             normal: {
-              /*formatter: [
-                '{title|{b}}{abg|}',
-                '  {weatherHead|}{valueHead|PM2.5}{rateHead|占比}',
-                '{hr|}',
-                '  {Sunny|}{value|202万}{rate|55.3%}',
-                '  {Cloudy|}{value|142万}{rate|38.9%}',
-                '  {Showers|}{value|21万}{rate|5.8%}'
-              ].join('\n'),
-              backgroundColor: '#eee',
-              borderColor: '#777',
-              borderWidth: 1,
-              borderRadius: 4,
-              rich: {
-                title: {
-                  color: '#eee',
-                  align: 'center'
-                },
-                abg: {
-                  backgroundColor: '#333',
-                  width: '100%',
-                  align: 'right',
-                  height: 25,
-                  borderRadius: [4, 4, 0, 0]
-                },
-                Sunny: {
-                  height: 30,
-                  align: 'left',
-                  backgroundColor: {
-                    image: weatherIcons.Sunny
-                  }
-                },
-                Cloudy: {
-                  height: 30,
-                  align: 'left',
-                  backgroundColor: {
-                    image: weatherIcons.Cloudy
-                  }
-                },
-                Showers: {
-                  height: 30,
-                  align: 'left',
-                  backgroundColor: {
-                    image: weatherIcons.Showers
-                  }
-                },
-                weatherHead: {
-                  color: '#333',
-                  height: 24,
-                  align: 'left'
-                },
-                hr: {
-                  borderColor: '#777',
-                  width: '100%',
-                  borderWidth: 0.5,
-                  height: 0
-                },
-                value: {
-                  width: 20,
-                  padding: [0, 20, 0, 30],
-                  align: 'left'
-                },
-                valueHead: {
-                  color: '#333',
-                  width: 20,
-                  padding: [0, 20, 0, 30],
-                  align: 'center'
-                },
-                rate: {
-                  width: 40,
-                  align: 'right',
-                  padding: [0, 10, 0, 0]
-                },
-                rateHead: {
-                  color: '#333',
-                  width: 40,
-                  align: 'center',
-                  padding: [0, 10, 0, 0]
-                }
-              }*/
+              show: true,
+              color: '#8e97e6',
+              position: 'right',
+              formatter: function (param) {
+                return param.data + '%';
+              }
             }
           }
-        },
-          {
-            value: 425,
-            name: '公共交通建设'
-          },
-          {
-            value: 318,
-            name: '民生'
-          },
-          {
-            value: 425,
-            name: '社保医疗'
-          }
-        ],
-        itemStyle: {
-          emphasis: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
         }
-      }]
+      ]
     };
-    this.expendDetailOptions = expendDetailOptions;
+    this.expendDetailOptions = gdpGrowthRateOptions;
+  }
+  /*格式化排序*/
+  stringCompareFn(prop, type?) {
+    return function (obj1, obj2) {
+      const val1 = obj1[prop];
+      const val2 = obj2[prop];
+      return val1.localeCompare(val2);
+    };
   }
 
 }

@@ -9,9 +9,18 @@ import 'rxjs/add/observable/forkJoin';
 @Injectable()
 export class IndustryMenuService {
   constructor(private http: HttpClient) { }
-  private enterpriseFenbuUrl = '/v1/IndustrydepController/findcounts';
-  private enterpriseScaleUrl = '/v1/IndustrydepController/findcounts';
-  private enterpriseJiegouUrl = '/v1/IndustrydepController/findindustry';
+  /*企业分布*/
+  private enterpriseFenbuUrl = '/v1/IndustrydepController/findBusinessDistribution';
+  /*经济规模*/
+  private enterpriseScaleUrl = '/v1/IndustrydepController/findEconomic';
+  /*企业结构-企业数量*/
+  private enterpriseJiegouUrl = '/v1/IndustrydepController/findCompanycountmap';
+  /*企业结构-企业流失量*/
+  private enterpriseJiegouLoseRateUrl = '/v1/IndustrydepController/findLossRateMap';
+  /*主导服务业100*/
+  private enterpriseLeadIndustry100Url = '/v1/IndustrydepController/findServiceIndustryTop';
+  /*先进制造业*/
+  private enterpriseAdvancedManufacturingUrl = '/v1/IndustrydepController/findIncomemap';
 
   getDataByParams(findParams, url, type?): Observable<any> {
     let paramsString = '';

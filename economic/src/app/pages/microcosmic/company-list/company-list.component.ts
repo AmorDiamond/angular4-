@@ -7,6 +7,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MicrocosmicService } from '../microcosmic.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Amap } from '../../../core/amap-ngrx/amap.model';
+import { ADD_COMPANY_ADDRESS } from '../../../core/amap-ngrx/amap.actions';
 
 @Component({
   selector: 'app-company-list',
@@ -19,7 +22,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   keyWord = '';
   companys: any;
-  enterpriseTypes = [];
+  industryTypeList = [];
   // 分页参数
   pageParam: any;
   // 当前分类是否选中
@@ -33,32 +36,49 @@ export class CompanyListComponent implements OnInit, OnDestroy {
   // 搜索的参数
   searchParams: SearchParams = {
     keyWord: '',
-    enterpriseType: '',
+    industryType: '',
     page: 0,
     size: 20
   };
+  private searchUrl = '/v1/epBaseInfoPojo/listCompanysPage';
   constructor(
     private domSanitizer: DomSanitizer,
     private routerInfo: ActivatedRoute,
     private layoutService: LayoutService,
     private microcosmicService: MicrocosmicService,
-    private store: Store<ContainerStyle>) {
+    private http: HttpClient,
+    private store: Store<ContainerStyle>,
+    private storeAmap: Store<Amap>,
+    ) {
     this.store.pipe(select('container'));
+    this.storeAmap.pipe(select('amap'));
   }
 
   ngOnInit() {
     /*避免五搜索记录从数据应用过来的返回*/
-    if(!localStorage.getItem('searchName')) {
+    if (!localStorage.getItem('searchName')) {
       this.routerInfo.params.subscribe((params: Params) => {
         this.searchParams.keyWord = params['name'];
+        this.keyWord = this.searchParams.keyWord;
+        this.searchParams.page = 0;
+        this.searchParams.industryType = '';
+        this.search(true);
+      });
+    }else {
+      this.routerInfo.params.subscribe((params: Params) => {
+        this.searchParams.keyWord = params['name'];
+        this.keyWord = this.searchParams.keyWord;
+        this.searchParams.page = 0;
+        this.searchParams.industryType = '';
         this.search();
       });
     }
-    this.subscription = this.layoutService.getSubject()
+    /*this.subscription = this.layoutService.getSubject()
       .subscribe((res) => {
         if (!res) {
           this.routerInfo.params.subscribe((params: Params) => {
             this.searchParams.keyWord = params['name'];
+            this.companys = [];
             this.search();
           });
           return false;
@@ -73,8 +93,8 @@ export class CompanyListComponent implements OnInit, OnDestroy {
         this.keyWord = res.data.keyWord;
         this.searchParams.keyWord = this.keyWord;
         this.companys = res.data.companys;
-        this.selectType = res.data.ohterSearchMap.enterpriseType;
-        /*while (this.canPushEnterpriseTypes) {
+        this.selectType = res.data.ohterSearchMap.industryType;
+        /!*while (this.canPushEnterpriseTypes) {
             console.log(123, this.canPushEnterpriseTypes)
           const Types = res.data.enterpriseTypes;
           this.enterpriseTypesNumber = Types;
@@ -84,8 +104,13 @@ export class CompanyListComponent implements OnInit, OnDestroy {
             }
           }
           this.canPushEnterpriseTypes = false;
-        }*/
-      });
+        }*!/
+        this.companys.forEach(item => {
+          if (item.coordinate) {
+            console.log('搜索列表监听', item);
+          }
+        });
+      });*/
     this.store.dispatch({
       type: CHANGE,
       payload: {
@@ -94,9 +119,49 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     });
   }
 
-  search() {
+  search(typeSearch?) {
+    if (!typeSearch) {
+      this.industryTypeList = [];
+    }
     console.log('searchParams==========>\n', this.searchParams);
-    this.layoutService.search(this.searchParams);
+    let paramsString = '';
+    const SearchParams = this.searchParams;
+    for (const key in SearchParams) {
+      if (SearchParams.hasOwnProperty(key)) {
+        paramsString += SearchParams[key] ? `${key}=${SearchParams[key]}&` : '';
+      }
+    }
+    const params = new HttpParams({ fromString: paramsString });
+    this.http.get(this.searchUrl, { params }).subscribe((res: any) => {
+      console.log(res)
+      if (res.responseCode === '_200') {
+        const data = res.data;
+        if (this.industryTypeList.length < 1) {
+          for (const item in data.industryType) {
+            if (item) {
+              this.industryTypeList.push({industryType: item, number: data.industryType[item]});
+            }
+          }
+        }
+        this.companys = data.companys && data.companys.length > 0 ? data.companys : [];
+        this.selectType = data.ohterSearchMap.industryType;
+        this.pageParam = data.pageParam;
+        const companysAddress = [];
+        this.companys.forEach(item => {
+          if (item.company.coordinate && item.company.coordinate.split(',')[1]) {
+            companysAddress.push({id: item.company.rowKey, company: item.company.name, address: item.company.coordinate})
+          }
+        });
+        this.storeAmap.dispatch({
+          type: ADD_COMPANY_ADDRESS,
+          payload: {
+            action: 'ADD_COMPANY_ADDRESS',
+            data: companysAddress
+          }
+        })
+      }
+    });
+    // this.layoutService.search(this.searchParams);
   }
 
   setCompanyName(companyName: string) {
@@ -110,22 +175,31 @@ export class CompanyListComponent implements OnInit, OnDestroy {
       }
     }
     this.enterpriseTypeActive[enterpriseType] = true;
-    this.searchParams.enterpriseType = enterpriseType;
+    this.searchParams.industryType = enterpriseType;
     this.searchParams.page = 0;
-    this.search();
+    this.search(true);
   }
 
   consolePage(page: number) {
     console.log(`from pagination component =========> ${page}`);
+    this.companys = [];
     this.searchParams.page = page - 1;
-    this.search();
+    this.search(true);
   }
 
   ngOnDestroy() {
     // Called once, before the instance is destroyed.
     // Add 'implements OnDestroy' to the class.
     console.log('COMPANY LIST ON DESTROY++++++++++++');
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
+
+    this.storeAmap.dispatch({
+      type: ADD_COMPANY_ADDRESS,
+      payload: {
+        action: 'ADD_COMPANY_ADDRESS',
+        data: []
+      }
+    })
   }
 
 }

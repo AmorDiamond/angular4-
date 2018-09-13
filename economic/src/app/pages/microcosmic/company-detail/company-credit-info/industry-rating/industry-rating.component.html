@@ -2,24 +2,18 @@
   <div>
     <div class="panel-item-title">行业评级：</div>
     <div class="con" *ngIf="IndustryRating.length>0">
-      <table class="table table-bordered">
+      <table class="table table-bordered text-c">
         <tr>
           <th>信用等级</th>
           <th>评定年度</th>
-          <th>评级单位</th>
-          <th>抽监管等级</th>
-          <th>监管等级类型</th>
           <th>数据提供单位</th>
           <th>数据提供时间</th>
         </tr>
         <tr *ngFor="let item of IndustryRating">
           <td>{{item.creditRating}}</td>
           <td>{{item.year}}</td>
-          <td>{{item.ratingUnit}}</td>
-          <td>{{item.pumpingSupervisionLevel}}</td>
-          <td>{{item.regulatoryLevelType}}</td>
           <td>{{item.dataProvider}}</td>
-          <td>{{item.dataSupplyTime}}</td>
+          <td>{{item.dataSupplyTime | date:'yyyy-MM-dd'}}</td>
         </tr>
       </table>
     </div>

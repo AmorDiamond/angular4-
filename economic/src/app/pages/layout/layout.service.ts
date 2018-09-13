@@ -6,11 +6,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 export interface SearchParams {
   keyWord?: string;
-  enterpriseType?: string;
+  industryType?: string;
   page?: number;
   size?: number;
 }
@@ -18,7 +18,7 @@ export interface SearchParams {
 export interface SearchResponse {
   data: {
     companys: any;
-    enterpriseTypes: any;
+    industryType: any;
     keyWord: string;
     pageParam: {
       currentpage: number;
@@ -39,6 +39,12 @@ export class LayoutService {
   public connectionStatus: Observable<number>;
 
   private subject = new BehaviorSubject<any>(0);
+  private accessControlData: any = [];
+  private accessControlSubject = new BehaviorSubject<any>(this.accessControlData);
+  SearchStatus = {
+    isSearchActive: false
+  };
+  private searchStatusSubject = new BehaviorSubject<any>(this.SearchStatus);
   typesList = [];
   enterpriseTypesNumber: any;
 
@@ -47,7 +53,56 @@ export class LayoutService {
 
   private searchUrl = '/v1/epBaseInfoPojo/listCompanysPage';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private routerInfo: ActivatedRoute) {
+    const loginRole = sessionStorage.getItem('userRole');
+    const accessControlDataUrl = '../../../assets/accessControlData.json';
+    /*判断是否超级管理员登录*/
+    if (loginRole === 'ADMIN') {
+      this.http.get(accessControlDataUrl).subscribe(result => {
+        this.accessControlData = result;
+        const len = this.accessControlData.length;
+        /*给超级管理员处理所有权限*/
+        for (let i = 0; i < len; i++) {
+          const hasAccess = true;
+          this.accessControlData[i].hasAccess = hasAccess;
+        }
+        this.changeAccessControlSubject();
+      });
+    }else {
+      this.http.get('/v1/competence/findByCurrentUser').subscribe((res: any) => {
+        console.log('获取所有权限', res);
+        if (res.responseCode === '_200') {
+          this.http.get(accessControlDataUrl).subscribe(result => {
+            this.accessControlData = result;
+            const requstData = [];
+            res.data.forEach(item => {
+              // requstData.push(item.id);
+              requstData.push(item.resource + '&' + item.methods);
+            });
+            const len = this.accessControlData.length;
+            for (let i = 0; i < len; i++) {
+              let hasAccess = true;
+              /*const idsLen = this.accessControlData[i].ids.length;
+              for (let j = 0; j < idsLen; j++) {
+                if (requstData.indexOf(this.accessControlData[i].ids[j]) < 0) {
+                  hasAccess = false;
+                }
+              }*/
+              const resourcesLen = this.accessControlData[i].resources.length;
+              for (let j = 0; j < resourcesLen; j++) {
+                if (requstData.indexOf(this.accessControlData[i].resources[j]) < 0) {
+                  hasAccess = false;
+                }
+              }
+              this.accessControlData[i].hasAccess = hasAccess;
+            }
+            console.log('处理后的权限数据', this.accessControlData);
+            this.changeAccessControlSubject();
+          });
+        }
+      });
+    }
+  }
 
   public connect() {
     if (this.messages) {
@@ -88,8 +143,8 @@ export class LayoutService {
         if (res.responseCode === '_200') {
           console.log(1111, res)
           if (this.typesList.length < 1) {
-              const Types = res.data.enterpriseTypes;
-              this.enterpriseTypesNumber = res.data.enterpriseTypes;
+              const Types = res.data.industryType;
+              this.enterpriseTypesNumber = res.data.industryType;
               for (const key in Types) {
                   if (Types.hasOwnProperty(key)) {
                       this.typesList.push(key);
@@ -112,6 +167,27 @@ export class LayoutService {
   }
   getTypeList() {
     return {list: this.typesList, num: this.enterpriseTypesNumber};
+  }
+  /*改变保存的权限控制数据*/
+  changeAccessControlSubject() {
+    this.accessControlSubject.next(this.accessControlData);
+  }
+  /*监听搜索的状态*/
+  getAccessControlSubject() {
+    return this.accessControlSubject.asObservable();
+  }
+  /*改变搜索的状态*/
+  changeSearchStatusSubject(flag) {
+    this.SearchStatus.isSearchActive = flag;
+    this.searchStatusSubject.next(this.SearchStatus);
+  }
+  /*监听搜索的状态*/
+  getSearchStatusSubject() {
+    return this.searchStatusSubject.asObservable();
+  }
+  /*获取url参数*/
+  getUrlParams(option) {
+    return this.routerInfo.snapshot.queryParams[option];
   }
 
 }

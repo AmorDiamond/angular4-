@@ -26,7 +26,7 @@ export interface GetListResponse {
 
 @Injectable()
 export class ProjectDeclarationService {
-  private url = '/v1/kETProjectDeclarationPojo/findListByCompanyName';
+  private url = '/manager/v1/kETProjectDeclarationPojo/findListByCompanyName';
 
   constructor(private http: HttpClient) {}
 

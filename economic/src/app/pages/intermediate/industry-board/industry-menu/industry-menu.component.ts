@@ -21,12 +21,12 @@ export class IndustryMenuComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy() {
-    this.store.dispatch({
+    /*this.store.dispatch({
       type: CHANGE,
       payload: {
         width: '60%'
       }
-    });
+    });*/
 
   }
 

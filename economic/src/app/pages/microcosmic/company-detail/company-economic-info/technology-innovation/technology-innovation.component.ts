@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MicrocosmicService } from '../../../microcosmic.service';
 import { CompanyEconomicInfoService } from '../company-economic-info.service';
+import { ToastModalService } from '../../../../../shared/toast-modal/toast-modal.service';
 
 @Component({
   selector: 'app-technology-innovation',
@@ -11,6 +12,7 @@ export class TechnologyInnovationComponent implements OnInit {
 
   constructor(
     private microcomicService: MicrocosmicService,
+    private toastModalService: ToastModalService,
     private companyEconomicInfoService: CompanyEconomicInfoService
   ) { }
   companyName: any;
@@ -35,59 +37,71 @@ export class TechnologyInnovationComponent implements OnInit {
     this.companyEconomicInfoService.findListByUrl({name: this.companyName, year: time}, 'OrganizationExpenditureUrl').subscribe(res => {
       console.log('机构数据', res)
       if (res.responseCode === '_200') {
-        if (res.data[0]) {
-          // const options = { xAxis: [2013, 2014, 2015, 2016, 2017], number: [100, 120, 130, 180, 190], people: [1000, 2000, 2500, 3200, 5000] };
-          const number = res.data[0].numberOfInstitutions;
-          const people = res.data[0].totalAgencyStaff;
-          const money = res.data[0].institutionalExpenditures;
-          const options = { xAxis: [], number: [number], people: [people], money: [money] };
-          /*绘制机构数据图表*/
-          this.creatOrganizationEchart(options);
-          /*绘制机构人数图表*/
-          this.creatOrganizationPeopleEchart(options);
-          /*绘制经费支出数据图表*/
-          this.creatExpenditureEchart(money);
-          // this.creatOrganizationEchartOld(options);
-        }
+        // const options = { xAxis: [2013, 2014, 2015, 2016, 2017], number: [100, 120, 130, 180, 190], people: [1000, 2000, 2500, 3200, 5000] };
+        const number = res.data[0] ? res.data[0].numberOfInstitutions : 0;
+        const people = res.data[0] ? res.data[0].totalAgencyStaff : 0;
+        const money = res.data[0] ? res.data[0].institutionalExpenditures : 0;
+        const options = { xAxis: [], number: [number], people: [people], money: [money] };
+        /*绘制机构数据图表*/
+        this.creatOrganizationEchart(options);
+        /*绘制机构人数图表*/
+        this.creatOrganizationPeopleEchart(options);
+        /*绘制经费支出数据图表*/
+        this.creatExpenditureEchart(money);
+        // this.creatOrganizationEchartOld(options);
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
-    })
+    });
   }
   /*获取知识产权数据*/
   getIntellectualPropertyData() {
     const time = new Date().getFullYear() - 1;
-    /*this.companyEconomicInfoService.findListByUrl({name: this.companyName, year: time}, 'IntellectualPropertyUrl').subscribe(res => {
-      console.log('知识产权数据', res)
+    const params = {name: this.companyName};
+    this.companyEconomicInfoService.findListByUrl(params, 'IntellectualPropertyUrl').subscribe(res => {
       if (res.responseCode === '_200') {
-        if (res.data[0]) {
-          const data = res.data[0];
-          const options = {
-            xAxis: ['商标数', '专利数', '软件著作权数', '集成电路布图数', '国家科技奖励数', '国际标准数', '国内或行业标准数'],
-            number: [data.trademarkTotal, 40, data.softwareCopyright, data.integratedCircuitLayout, data.technologyAward, data.internationalStandard, data.industryStandard]
-          };
-          /!*绘制知识产权数据图表*!/
-          this.creatIntellectualPropertyEchart(options);
-        }
+        const data = res.data;
+        const options = {
+          xAxis: ['商标数', '专利数', '软件著作权数', '集成电路布图数', '国家科技奖励数', '国际标准数', '国内或行业标准数'],
+          number: [
+            data.trademarkTotal ? data.trademarkTotal : 0,
+            data.effectivePatent ? data.effectivePatent : 0,
+            data.softwareCopyright ? data.softwareCopyright : 0,
+            data.integratedCircuitLayout ? data.integratedCircuitLayout : 0,
+            data.technologyAward ? data.technologyAward : 0,
+            data.internationalStandard ? data.internationalStandard : 0,
+            data.industryStandard ? data.industryStandard : 0
+          ]
+        };
+        /*绘制知识产权数据图表*/
+        this.creatIntellectualPropertyEchart(options);
       }
-    })*/
-    this.companyEconomicInfoService.getRequestByForkJoin(this.companyName, time, ['IntellectualPropertyUrl', 'PatentUrl']).subscribe(res => {
+    });
+    /*this.companyEconomicInfoService.getRequestByForkJoin(this.companyName, time, ['IntellectualPropertyUrl', 'PatentUrl']).subscribe(res => {
       console.log('知识产权和专利数据', res)
       let options;
       if (res[0].responseCode === '_200') {
-        if (res[0].data[0]) {
-          const data = res[0].data[0];
-          options = {
-            xAxis: ['商标数', '专利数', '软件著作权数', '集成电路布图数', '国家科技奖励数', '国际标准数', '国内或行业标准数'],
-            number: [data.trademarkTotal, 0, data.softwareCopyright, data.integratedCircuitLayout, data.technologyAward, data.internationalStandard, data.industryStandard]
-          };
-        }
+        const data = res[0].data[0];
+        options = {
+          xAxis: ['商标数', '专利数', '软件著作权数', '集成电路布图数', '国家科技奖励数', '国际标准数', '国内或行业标准数'],
+          number: [
+            data ? data.trademarkTotal : 0,
+            0,
+            data ? data.softwareCopyright : 0,
+            data ? data.integratedCircuitLayout : 0,
+            data ? data.technologyAward : 0,
+            data ? data.internationalStandard : 0,
+            data ? data.industryStandard : 0
+          ]
+        };
       }
-      /*单独获取专利数*/
+      /!*单独获取专利数*!/
       if (res[1].responseCode === '_200') {
-        options.number[1] = res[1].data.patentPojos.length;
+        options.number[1] = res[1].data.patentPojos.length ? res[1].data.patentPojos.length : 0;
       }
-      /*绘制知识产权数据图表*/
+      /!*绘制知识产权数据图表*!/
       this.creatIntellectualPropertyEchart(options);
-    })
+    });*/
   }
   /*绘制机构数据图表数据*/
   creatOrganizationEchartOld(options) {
@@ -269,7 +283,6 @@ export class TechnologyInnovationComponent implements OnInit {
         containLabel: true
       },
       legend: {
-        data: ['机构数', '机构人员', '经费支出'],
         textStyle: {
           color: '#bcbdbf'
         },
@@ -386,7 +399,6 @@ export class TechnologyInnovationComponent implements OnInit {
         containLabel: true
       },
       legend: {
-        data: ['机构数', '机构人员', '经费支出'],
         textStyle: {
           color: '#bcbdbf'
         },
@@ -465,7 +477,6 @@ export class TechnologyInnovationComponent implements OnInit {
         containLabel: true
       },
       legend: {
-        data: ['机构数', '机构人员', '经费支出'],
         textStyle: {
           color: '#bcbdbf'
         },

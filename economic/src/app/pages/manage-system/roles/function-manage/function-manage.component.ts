@@ -16,8 +16,8 @@ export class FunctionManageComponent implements OnInit {
   functionDesc: string;
   editFunctionId: any = '';
   methods = ['POST', 'GET', 'DELETE', 'PATCH'];
-  addPowerHttpParams = {url: '/v1/competence/', method: 'post'};
-  getMethodDetailParams = {url: '/v1/competence/getById', method: 'post'};
+  addPowerHttpParams = {url: '/manager/v1/competence/', method: 'post'};
+  getMethodDetailParams = {url: '/manager/v1/competence/getById', method: 'post'};
   constructor(private http: HttpClient, private routeInfo: ActivatedRoute, private router: Router,
               private toastModalService: ToastModalService) {
   }
@@ -64,7 +64,7 @@ export class FunctionManageComponent implements OnInit {
   }
   /*添加新权限*/
   addFunction() {
-    this.http.post('/v1/competence/', {
+    this.http.post('/manager/v1/competence/', {
       'comment': this.functionName,
       'id': this.functionId ? this.functionId : '',
       'methods': this.functionMethod,
@@ -81,7 +81,7 @@ export class FunctionManageComponent implements OnInit {
   }
   /*修改权限信息*/
   editFunction() {
-    this.http.patch('/v1/competence/', {
+    this.http.patch('/manager/v1/competence/', {
       'comment': this.functionName,
       'id': this.functionId ? this.functionId : '',
       'methods': this.functionMethod,

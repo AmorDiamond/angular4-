@@ -1,0 +1,126 @@
+<div class="time-colors-panel"[ngStyle]="{'right': colorListRight}">
+  <div class="colors-row">
+    <!--产业分布二级分类图列-->
+    <div class="industry-breakdown-color-panel" [ngClass]="{'slideInRight': showBreakdownType, 'my-hide slideOutRight': !showBreakdownType}">
+      <div class="land-colors-list">
+        <div class="color-list-title">二级分类</div>
+        <div class="color-list-bd">
+          <div class="color-item"><span class="color-blank network-land"></span>网络通信</div>
+          <div class="color-item"><span class="color-blank circuit-land"></span>集成电路</div>
+          <div class="color-item"><span class="color-blank intelligent-land"></span>智能终端</div>
+          <div class="color-item"><span class="color-blank newtype-land"></span>新型显示</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="colors-row">
+    <div class="land-colors-time-con">
+      <div class="land-colors-list" id="land-colors-list">
+        <div class="industry-color">
+          <div class="color-list-title">产业分布</div>
+          <div class="color-list-bd">
+            <div class="color-item"><span class="color-blank living-land" data-category="生物医药"></span>生物医药</div>
+            <div class="color-item"><span class="color-blank electron-land" data-category="电子信息" (click)="creatChooseTypeLand('电子信息')"></span>电子信息</div>
+            <div class="color-item"><span class="color-blank make-land" data-category="先进制造"></span>先进制造</div>
+            <div class="color-item"><span class="color-blank other-land" data-category="其他"></span>其他</div>
+          </div>
+          <div class="industry-fenbu-search"><button class="search-btn" (click)="showSearchLayer = true"></button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--产业分布模块概况面板-->
+<div class="icon-ctrl-panel industry-land-infowindow animated" [ngClass]="{'my-hide': !panelControl.overviewShow}">
+  <div class="icon-ctrl-head">
+    <div class="title">产业分布概况</div>
+  </div>
+  <div class="icon-ctrl-body">
+    <div class="icon-ctrl-scroll">
+      <div class="icon-ctrl-scroll-con">
+        <div class="echarts" id="chanye-fenbu-Proportion" echarts [options]="overviewData.proportionEcharts"></div>
+        <div class="con">
+          <table class="table table-bordered">
+            <tr><th>类型</th><th>面积(亩)</th><th>占比(%)</th></tr>
+            <tr><td>生物总面积</td><td>{{overviewData.livingArea.area}}</td><td>{{overviewData.livingArea.proportion}}%</td></tr>
+            <tr><td>电子信息总面积</td><td>{{overviewData.electronArea.area}}</td><td>{{overviewData.electronArea.proportion}}%</td></tr>
+            <tr><td>先进制造总面积</td><td>{{overviewData.makeArea.area}}</td><td>{{overviewData.makeArea.proportion}}%</td></tr>
+            <tr><td>其他总面积</td><td>{{overviewData.otherArea.area}}</td><td>{{overviewData.otherArea.proportion}}%</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--产业分布概况企业列表-->
+<div class="industry-company-list-panel industry-company-list animated" [ngClass]="{'my-hide': !panelControl.overviewShow}">
+  <div class="industry-company-list">
+    <div class="industry-company-hd">
+      <div class="time-item active" data-time="2017" data-type="生物医药">2017</div>
+      <div class="time-item" data-time="2016" data-type="生物医药">2016</div>
+      <div class="time-item" data-time="2015" data-type="生物医药">2015</div>
+    </div>
+    <div class="industry-company-bd">
+      <div class="company-con">
+        <div class="public-title">
+          <span class="title">生物医药</span>
+          <div class="type-tab flex">
+            <div class="type-tab-item active" data-type="生物医药">生物医药</div>
+            <div class="type-tab-item" data-type="电子信息">电子信息</div>
+            <div class="type-tab-item" data-type="先进制造">先进制造</div>
+            <div class="type-tab-item" data-type="所有产业">所有产业</div>
+          </div>
+        </div>
+        <div class="land-company-list-box">
+          <app-scrollbar>
+            <div class="company-list land-company-list">
+              <div class="company-list land-company-scroll-con">
+                <div class="land-company-row company-item flex" *ngFor="let data of HighQualityEnterpriseListData;let i = index" (click)="goEnterpriseInfo(data.companyName)">
+                  <div class="logo">
+                    {{i+1}}
+                  </div>
+                  <div class="item name flex-cell"><div class="top-label">{{data.companyName}}</div></div>
+                  <div class="quality-num"><div class="top-label">{{data.highQuality.toFixed(2)}}</div></div>
+                </div>
+              </div>
+            </div>
+          </app-scrollbar>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--搜索遮罩层-->
+<div class="search-cover-mask" *ngIf="showSearchLayer" (click)="showSearchLayer = !showSearchLayer"></div>
+<div class="search_input_box" [ngClass]="{'active': showSearchLayer}">
+  <input type="text" class="search_input" [(ngModel)]="searchName" (keydown)="getEnterCode($event)">
+  <button class="search_btn" id="searchBtn" (click)="searchCompanyList()"></button>
+</div>
+<!--展示搜索企业列表面板-->
+<div class="microcosmic_container animated middle-view" id="microcosmic_container" [ngClass]="{'slideInRight': showRightPanel, 'slideOutRight': !showRightPanel, 'my-hide': hideRightPanel}">
+  <div class="back-arrow"><span class="back-arrow-btn" [ngClass]="{'active': !showRightPanel}" (click)="changeRightPanelShow()"></span></div>
+  <div class="land-panel-con">
+    <div class="search-company-con">
+      <div class="search-company-hd"><div class="title">{{searchNameTitle}}</div></div>
+      <div class="search-company-bd">
+        <app-scrollbar>
+          <div class="search-company-scroll">
+            <div class="company-list land-company-list">
+              <div class="search-company-item company-item flex" *ngFor="let data of searchEnterpriseLists" (click)="markLandForCompany(data.name)" [ngClass]="{'active': data.name == chooseSearchEnterpriseName}">
+                <div class="logo">
+                  <img [src]="data.companyIcon ? data.companyIcon : 'assets/images/company_list_logo.png'">
+                </div>
+                <div class="item name flex-cell"><div class="top-label">{{data.name}}</div></div>
+                <div class="item shouru flex-cell"><div class="top-label">{{data.industryType ? data.industryType : '未知产业'}}</div></div>
+              </div>
+              <div class="no-data-info" *ngIf="searchEnterpriseLists.length<1">
+
+              </div>
+            </div>
+          </div>
+        </app-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

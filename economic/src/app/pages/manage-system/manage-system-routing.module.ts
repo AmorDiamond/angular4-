@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '',
     component: ManageSystemComponent,
     children: [
-      { path: '', redirectTo: 'import', pathMatch: 'full' },
+      { path: '', redirectTo: 'users', pathMatch: 'full' },
       { path: 'import', component: ExcelImportComponent },
       {
         path: 'roles',
@@ -44,8 +44,9 @@ const routes: Routes = [
         ]
       },
       {path: 'mechanismManege', loadChildren: './mechanism-manage/mechanism-manage.module#MechanismManageModule'},
+      {path: 'category', loadChildren: './register-trade-category/register-trade-category.module#RegisterTradeCategoryModule'},
       {path: 'logsManage', component: LogsManageComponent},
-      {
+      /*{
         path: 'project-declaration',
         loadChildren:
           './project-declaration/project-declaration.module#ProjectDeclarationModule'
@@ -58,7 +59,9 @@ const routes: Routes = [
       {
         path: 'scale-library',
         loadChildren: './scale-library/scale-library.module#ScaleLibraryModule'
-      }
+      },*/
+      {path: 'formManager', loadChildren: './form-managers/form-managers.module#FormManagersModule'},
+      {path: 'industryManage', loadChildren: './industry-manage/industry-manage.module#IndustryManageModule'}
     ]
   }
 ];

@@ -1,0 +1,35 @@
+<div class="data-application-box">
+  <div class="public-panel-title">
+    <div class="back-box fl" routerLink="/dataApplication/qualityRecommend">
+      <span class="back-btn"></span>
+    </div>
+    <h3>潜在优质企业列表信息</h3>
+  </div>
+  <div class="right-panel">
+    <perfect-scrollbar>
+      <div class="panel-content" *ngIf="dataList.length>0">
+        <div class="recommend-list-hd">
+          <div class="column-index fl text-c">分数</div>
+          <div class="column-company fl">已选企业</div>
+          <div class="column-industry fl text-c">行业类型</div>
+          <div class="column-add fl">通讯地址</div>
+        </div>
+        <div class="recommend-list-bd">
+          <div class="recommend-row border" *ngFor="let item of dataList">
+            <div class="recommend-cell column-index">
+              <div class="sort-con">{{item.sort}}</div>
+            </div>
+            <div class="recommend-cell column-company">{{item.name}}</div>
+            <div class="recommend-cell column-industry">{{item.industryType}}</div>
+            <div class="recommend-cell column-add">{{item.add}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-content" *ngIf="dataList.length<1">
+        <div class="no-data-tips text-c">
+          暂无信息！
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>

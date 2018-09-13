@@ -1,33 +1,31 @@
 <!-- <div class="panel-bd pop-index-0 animated active"> -->
 <div class="panel-content">
   <div class="panel-item-title">税务登记信息：</div>
-  <div id="taxationsDiv"> </div>
-  <table class="table table-bordered table-align-c" id="taxations" *ngIf="companyTaxationList.length>0">
-    <tr>
-      <th>登记注册类型</th>
-      <th>核算方式</th>
-      <th>发证日期</th>
-      <th>国税信用等级</th>
-      <th>地税信息</th>
-      <!--<th>国地税共管户</th>-->
-      <th>纳税人状态</th>
-      <th>主管税务机关</th>
-      <th>数据提供单位</th>
-      <th>数据提供时间</th>
-    </tr>
-    <tr *ngFor="let companyTaxation of companyTaxationList">
-      <td>{{companyTaxation.regType}}</td>
-      <td>{{companyTaxation.accountingMethod}}</td>
-      <td>{{companyTaxation.issuingDate}}</td>
-      <td>{{companyTaxation.creditRating}}</td>
-      <td>{{companyTaxation.landTaxInfo}}</td>
-      <!--<td>{{companyTaxation.isCondominium}}</td>-->
-      <td>{{companyTaxation.taxpayerStatus}}</td>
-      <td>{{companyTaxation.taxOrganization}}</td>
-      <td>{{companyTaxation.dataSource}}</td>
-      <td>{{companyTaxation.dataProvisionTime | date:'yyyy-MM-dd'}}</td>
-    </tr>
-  </table>
+  <div *ngIf="companyTaxationList.length>0">
+    <table class="table table-bordered table-align-c" id="taxations">
+      <tr>
+        <th>登记注册类型</th>
+        <th>核算方式</th>
+        <th>发证日期</th>
+        <th>纳税人状态</th>
+        <th>主管税务机关</th>
+        <th>数据提供单位</th>
+        <th>数据提供时间</th>
+      </tr>
+      <tr *ngFor="let companyTaxation of companyTaxationList">
+        <td>{{companyTaxation.regType}}</td>
+        <td>{{companyTaxation.accountingMethod}}</td>
+        <td>{{companyTaxation.issuingDate | date:'yyyy-MM-dd'}}</td>
+        <td>{{companyTaxation.taxpayerStatus}}</td>
+        <td>{{companyTaxation.taxOrganization}}</td>
+        <td>{{companyTaxation.dataSource}}</td>
+        <td>{{companyTaxation.dataProvisionTime | date:'yyyy-MM-dd'}}</td>
+      </tr>
+    </table>
+    <div class="load-more-info text-c" *ngIf="companyTaxationParams.lastRowKey">
+      <div class="load-more-con" (click)="getCompanyTaxation()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+    </div>
+  </div>
   <div class="no-data-tips" *ngIf="companyTaxationList.length<1">
     {{CompanyTaxationTips}}
   </div>

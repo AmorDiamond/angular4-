@@ -1,12 +1,12 @@
-<perfect-scrollbar>
+<perfect-scrollbar appAccessControl [accessData]="'track-messagePush'">
 <div class="panel-content">
-  <div>
+  <!--<div>
     <div class="panel-item-title">
       <span>项目申报：</span>
-      <!--<div class="button-box">
+      &lt;!&ndash;<div class="button-box">
         <span class="fa fa-chevron-circle-left" (click)="contractPre()" [ngClass]="{'is-first': CONTRACTS_PAGE == 1}" style="margin-right: 20px;"></span>
         <span class="fa fa-chevron-circle-right" (click)="contractNext()"></span>
-      </div>-->
+      </div>&ndash;&gt;
     </div>
     <perfect-scrollbar data-scroll="X">
       <div class="project-report" [@side]="side" *ngIf="projectInfo.length>0">
@@ -24,7 +24,7 @@
           </div>
         </div>
 
-        <!--<div class="flex-cell">
+        &lt;!&ndash;<div class="flex-cell">
           <div class="flex-item" style="width: 100%;">
             <div class="flex-head">申报名称</div>
             <ul>
@@ -75,13 +75,13 @@
               <li>完成</li>
             </ul>
           </div>
-        </div>-->
+        </div>&ndash;&gt;
       </div>
       <div class="no-data-tips" *ngIf="projectInfo.length<1">
         {{projectInfoTips}}
       </div>
     </perfect-scrollbar>
-  </div>
+  </div>-->
   <div>
     <div class="panel-item-title">
       <span>政府支持：</span>
@@ -91,17 +91,19 @@
       </div>-->
     </div>
     <perfect-scrollbar data-scroll="X">
-      <div class="project-report" [@side]="side" *ngIf="Contracts.length>0">
+      <div class="project-report" [@side]="side" *ngIf="governmentsupportInfo.length>0">
         <div class="flex-cell" *ngFor="let item of Contracts">
           <div class="flex-item" style="width: 100%;">
-            <div class="flex-head">{{item.name}}</div>
+            <div class="flex-head">{{item.policydocumentName}}</div>
             <ul>
-              <li class="title">协议名称</li>
-              <li>{{item.protocol}}</li>
-              <li class="title">签订时间</li>
-              <li>{{item.signTime | date: 'yyyy-MM-dd'}}</li>
-              <li class="title">签订情况</li>
-              <li>{{item.signSituation}}</li>
+              <li class="title">条款名称/专项名称</li>
+              <li>{{item.termName}}</li>
+              <li class="title">总金额(万元)</li>
+              <li>{{item.support_totalamount}}</li>
+              <li class="title">实施部门</li>
+              <li>{{item.department}}</li>
+              <li class="title">年份</li>
+              <li>{{item.year}}</li>
             </ul>
           </div>
         </div>
@@ -160,18 +162,18 @@
           </div>
         </div>-->
       </div>
-      <div class="no-data-tips" *ngIf="Contracts.length<1">
-        暂无信息！
+      <div class="no-data-tips" *ngIf="governmentsupportInfo.length<1">
+        {{governmentsupportInfoTips}}
       </div>
     </perfect-scrollbar>
   </div>
-  <div>
+  <!--<div>
     <div class="panel-item-title">
       <span>新闻事件：</span>
-      <!--<div class="button-box">
+      &lt;!&ndash;<div class="button-box">
         <span class="fa fa-chevron-circle-left" (click)="newsPre()" [ngClass]="{'is-first': NEWS_PAGE == 1}" style="margin-right: 20px;"></span>
         <span class="fa fa-chevron-circle-right" (click)="newsNext()"></span>
-      </div>-->
+      </div>&ndash;&gt;
     </div>
     <perfect-scrollbar data-scroll="X">
       <div class="project-report" *ngIf="newsInfo.length>0">
@@ -186,56 +188,11 @@
             </ul>
           </div>
         </div>
-
-        <!--<div class="flex-cell">
-          <div class="flex-item" style="width: 100%;">
-            <div class="flex-head">企业名称</div>
-            <ul>
-              <li class="title">新闻标题</li>
-              <li>XXXX事件</li>
-              <li class="title">时间</li>
-              <li>2018-09-09</li>
-            </ul>
-          </div>
-        </div>
-        <div class="flex-cell">
-          <div class="flex-item" style="width: 100%;">
-            <div class="flex-head">企业名称</div>
-            <ul>
-              <li class="title">新闻标题</li>
-              <li>XXXX事件</li>
-              <li class="title">时间</li>
-              <li>2018-09-09</li>
-            </ul>
-          </div>
-        </div>
-        <div class="flex-cell">
-          <div class="flex-item" style="width: 100%;">
-            <div class="flex-head">企业名称</div>
-            <ul>
-              <li class="title">新闻标题</li>
-              <li>XXXX事件</li>
-              <li class="title">时间</li>
-              <li>2018-09-09</li>
-            </ul>
-          </div>
-        </div>
-        <div class="flex-cell">
-          <div class="flex-item" style="width: 100%;">
-            <div class="flex-head">企业名称</div>
-            <ul>
-              <li class="title">新闻标题</li>
-              <li>XXXX事件</li>
-              <li class="title">时间</li>
-              <li>2018-09-09</li>
-            </ul>
-          </div>
-        </div>-->
       </div>
       <div class="no-data-tips" *ngIf="newsInfo.length<1">
         {{newsInfoTips}}
       </div>
     </perfect-scrollbar>
-  </div>
+  </div>-->
 </div>
 </perfect-scrollbar>

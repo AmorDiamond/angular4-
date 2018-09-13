@@ -15,7 +15,7 @@ export class CompanyBasicService {
   private companyProfileUrl = '/v1/epBaseInfoPojo/findNameAllEpBaseInfo';
   private companySocialSecurityUrl = '/v1/InsuranceInformationPojo';
   /*获取企业联系人姓名、电话、职位*/
-  private companyContactPeopleUrl = '/v1/eIIRelationPojo/findGobernmentContactsByCompanyName';
+  private companyContactPeopleUrl = '/v1/eIIRelationPojo/findListByCompanyName';
   /*纠错企业联系人姓名、职位、联系方式*/
   private changeContactPeopleAllUrl = '/v1/errorInfo/findnameAndphone';
   /*纠错企业通讯地址和联系方式*/
@@ -26,6 +26,10 @@ export class CompanyBasicService {
   private addCompanyCustomLabelUrl = '/v1/iabels/add';
   /*删除企业自定义标签*/
   private deleteCompanyCustomLabelUrl = '/v1/iabels/del';
+  // 名优产品
+  private FamousProduct = '/v1/eQIFamousProductPojo/getEQICertificationPojoByCompany';
+  /*根据公司名称,获取企业问题*/
+  private companyProblemesUrl = '/v1/businessProblemLedger/findListByCompanyName';
   constructor(private http: HttpClient) {}
 
   getCompanyDetail(rowkey): Observable<any> {
@@ -58,7 +62,7 @@ export class CompanyBasicService {
     const url = this[http];
     const requestType = type ? type : 'get';
     let params;
-    if(requestType === 'get' || requestType === 'delete') {
+    if (requestType === 'get' || requestType === 'delete') {
       for (const key in findParams) {
         if (findParams.hasOwnProperty(key)) {
           paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
@@ -66,10 +70,10 @@ export class CompanyBasicService {
       }
       params = {params: new HttpParams({ fromString: paramsString })};
     }
-    if(requestType === 'post') {
+    if (requestType === 'post') {
       let formData: FormData = new FormData();
-      for(let item in findParams) {
-        if(item) {
+      for (let item in findParams) {
+        if (item) {
           formData.append(`${item}`, findParams[item]);
         }
       }
@@ -108,7 +112,7 @@ export class CompanyBasicService {
     let paramsString = '';
     const url = this[http];
     let params;
-    if(type === 'get' || type === 'delete') {
+    if (type === 'get' || type === 'delete') {
       for (const key in findParams) {
         if (findParams.hasOwnProperty(key)) {
           paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
@@ -116,7 +120,7 @@ export class CompanyBasicService {
       }
       params = {params: new HttpParams({ fromString: paramsString })};
     }
-    if(type === 'post') {
+    if (type === 'post') {
       params = new HttpParams().set('companyName', findParams.companyName).set('content', findParams.content);
     }
     /*if(type === 'delete') {

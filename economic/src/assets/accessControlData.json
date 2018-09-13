@@ -1,0 +1,933 @@
+[
+  {
+    "type": "company-profile",
+    "text": "企业概况",
+    "ids": [],
+    "resources": [
+      "/v1/epBaseInfoPojo/{param}&GET",
+      "/v1/epBaseInfoPojo/findNameAllEpBaseInfo&GET",
+      "/v1/eIIRelationPojo/findListByCompanyName&GET",
+      "/v1/eQIFamousProductPojo/getEQICertificationPojoByCompany&GET"
+    ]
+  },
+  {
+    "type": "business-registration",
+    "text": "工商注册信息",
+    "ids": [],
+    "resources": [
+      "/v1/epBaseInfoPojo/{param}&GET"
+    ]
+  },
+  {
+    "type": "business-change",
+    "text": "工商变更信息",
+    "ids": [],
+    "resources": [
+      "/v1/epChangeInfo/findListByCompanyNameec&GET"
+    ]
+  },
+  {
+    "type": "tax-tegistration",
+    "text": "税务登记信息",
+    "ids": [],
+    "resources": [
+      "/v1/epTaxationPojo/findListByCompanyName&GET"
+    ]
+  },
+  {
+    "type": "social-security",
+    "text": "社会保障信息",
+    "ids": [],
+    "resources": [
+      "/v1/InsuranceInformationPojo&GET"
+    ]
+  },
+  {
+    "type": "business-problem-ledger",
+    "text": "企业问题台账",
+    "ids": [],
+    "resources": ["/v1/businessProblemLedger/findListByCompanyName&GET"]
+  },
+  {
+    "type": "custom-label",
+    "text": "自定义标签",
+    "ids": [],
+    "resources": [
+      "/v1/iabels/findByName&GET"
+    ]
+  },
+  {
+    "type": "add-custom-label",
+    "text": "添加自定义标签",
+    "ids": [],
+    "resources": [
+      "/v1/iabels/add&POST"
+    ]
+  },
+  {
+    "type": "del-custom-label",
+    "text": "删除自定义标签",
+    "ids": [],
+    "resources": [
+      "/v1/iabels/del&DELETE"
+    ]
+  },
+  {
+    "type": "qualifications",
+    "text": "企业资质信息",
+    "ids": [],
+    "resources": [
+      "/v1/eQICertificationPojo/findListByCompanyName&GET"
+    ]
+  },
+  {
+    "type": "honor",
+    "text": "企业荣誉",
+    "ids": [],
+    "resources": [
+      "/v1/eCIHonorPojo/getGOVERNMENTByCompanys&GET",
+      "/v1/eCIHonorPojo/getADMINISTRATIVEByCompanys&GET",
+      "/v1/eCIHonorPojo/getRECOGNIZEByCompanys&GET"
+    ]
+  },
+  {
+    "type": "blacklist",
+    "text": "黑名单",
+    "ids": [],
+    "resources": [
+      "/v1/ECIAdministrativePenalty/findAdministrativePenaltyPage&GET",
+      "/v1/ECIJudicialDecision/findJudicialDecisionPages&GET",
+      "/v1/ECIJudicialDecision/findJudicialDecisionPage&GET",
+      "/v1/ECIDebtorInfo/findDebtorInfoPage&GET",
+      "/v1/EAdminsupervisionController/findEIIApAssets&GET"
+    ]
+  },
+  {
+    "type": "performance-payment",
+    "text": "履约缴费",
+    "ids": [],
+    "resources": [
+      "/v1/PERPaymentInformationController/&GET"
+    ]
+  },
+  {
+    "type": "industry-rating",
+    "text": "行业评级",
+    "ids": [],
+    "resources": [
+      "/v1/IndustryRatingInformationController/findIndustryRating&GET"
+    ]
+  },
+  {
+    "type": "trademark",
+    "text": "企业商标信息",
+    "ids": [],
+    "resources": [
+      "/v1/IATrademarkAndPatent/findTrademarkPage&GET"
+    ]
+  },
+  {
+    "type": "patent",
+    "text": "企业专利信息",
+    "ids": [],
+    "resources": [
+      "/v1/IATrademarkAndPatent/findPatentPage&GET"
+    ]
+  },
+  {
+    "type": "icp",
+    "text": "ICP备案信息",
+    "ids": [],
+    "resources": [
+      "/v1/IAIcp/findICPPage&GET"
+    ]
+  },
+  {
+    "type": "operatingIncome",
+    "text": "经济概况",
+    "ids": [],
+    "resources": [
+      "/v1/eIIApAssets/findOperatingIncome&GET"
+    ]
+  },
+  {
+    "type": "incumbentPeople",
+    "text": "人员概况",
+    "ids": [],
+    "resources": [
+      "/v1/Employees/findServingOfficers&GET"
+    ]
+  },
+  {
+    "type": "technologyInnovation",
+    "text": "科技创新概况",
+    "ids": [],
+    "resources": [
+      "/v1/DomesticDevelopment/findMechanism&GET",
+      "/v1/STAOtherSituation/findKnowHow&GET",
+      "/v1/IATrademarkAndPatent/findPatentPage&GET"
+    ]
+  },
+  {
+    "type": "governmentFunds",
+    "text": "政府支持情况",
+    "ids": [],
+    "resources": [
+      "/v1/Governmentsupportpojo/findListByCompanyNameAndYear&GET"
+    ]
+  },
+  {
+    "type": "annualReport",
+    "text": "企业年报",
+    "ids": [],
+    "resources": [
+      "/v1/cgecultivation/findSharePage&GET",
+      "/v1/eIIApStockChange/findStockPage&GET",
+      "/v1/cgecultivation/findEIIApInvestment&GET"
+    ]
+  },
+  {
+    "type": "jobOffers",
+    "text": "招聘信息",
+    "ids": [],
+    "resources": [
+      "/v1/EIIRecruit/findEIIRecruitPage&GET"
+    ]
+  },
+  {
+    "type": "overview",
+    "text": "企业综合评价",
+    "ids": [],
+    "resources": [
+      "/v1/EAEvaluation/findScore&GET",
+      "/v1/EAEvaluation/findEvaluation&GET",
+      "/v1/EAEvaluation/findDisadvantaged&GET"
+    ]
+  },
+  {
+    "type": "edit-contactinfo",
+    "text": "修改企业联系人",
+    "ids": [],
+    "resources": [
+      "/v1/errorInfo/findnameAndphone&POST"
+    ]
+  },
+  {
+    "type": "edit-address-phone",
+    "text": "修改企业联系电话、通讯地址",
+    "ids": [],
+    "resources": [
+      "/v1/errorInfo/findepTelAndAdress&POST"
+    ]
+  },
+  {
+    "type": "track-messagePush",
+    "text": "重点企业追踪",
+    "ids": [],
+    "resources": [
+      "/v1/attentionEvent/getKeyEnterprise&GET"
+    ]
+  },
+  {
+    "type": "early-warning",
+    "text": "企业信用事件预警",
+    "ids": [],
+    "resources": [
+      "/v1/attentionEvent/findCorporateCreditEvent&GET"
+    ]
+  },
+  {
+    "type": "recommend",
+    "text": "拟规上企业推荐",
+    "ids": [],
+    "resources": [
+      "/v1/epBaseInfoPojo/findAllSmartRecommendation&GET"
+    ]
+  },
+  {
+    "type": "focus-business",
+    "text": "关注企业列表",
+    "ids": [],
+    "resources": [
+      "/v1/attentionEvent/findAttentionCompanys&GET"
+    ]
+  },
+  {
+    "type": "personal-preference",
+    "text": "个人偏好设置",
+    "ids": [],
+    "resources": [
+      "/v1/attentionEvent/choicePreference&POST"
+    ]
+  },
+  {
+    "type": "research-guide",
+    "text": "企业调研向导",
+    "ids": [],
+    "resources": [
+      "/v1/epBaseInfoPojo/listCompanysPage&GET"
+    ]
+  },
+  {
+    "type": "contact-lookup",
+    "text": "联系人查找",
+    "ids": [],
+    "resources": [
+      "/v1/epBaseInfoPojo/listCompanysPage&GET"
+    ]
+  },
+  {
+    "type": "data-output",
+    "text": "系统数据导出",
+    "ids": [],
+    "resources": [
+      "/v1/dataApplication/download&GET"
+    ]
+  },
+  {
+    "type": "quality-recommend",
+    "text": "优质企业推荐",
+    "ids": [],
+    "resources": []
+  },
+  {
+    "type": "edit-research-address",
+    "text": "修改调研的企业地址",
+    "ids": [],
+    "resources": [
+      "/v1/researchPlan/updateCompanyAddress&POST"
+    ]
+  },
+  {
+    "type": "research-detail",
+    "text": "获取调研路线计划",
+    "ids": [],
+    "resources": [
+      "/v1/researchPlan/callMapAPI&POST"
+    ]
+  },
+  {
+    "type": "down-research-detail",
+    "text": "下载调研路线计划",
+    "ids": [],
+    "resources": [
+      "/v1/researchPlan/add&POST"
+    ]
+  },
+  {
+    "type": "contact-edit-contact",
+    "text": "修改联系人查找的联系人",
+    "ids": [],
+    "resources": [
+      "/v1/eIIRelationlistController/update&POST"
+    ]
+  },
+  {
+    "type": "contact-create-contact",
+    "text": "创建联系人查找的联系人",
+    "ids": [],
+    "resources": [
+      "/v1/eIIRelationlistController/create&POST"
+    ]
+  },
+  {
+    "type": "contact-detail",
+    "text": "给企业联系人发送短信",
+    "ids": [],
+    "resources": [
+      "/v1/eIIRelationlistController/sendMessage&POST"
+    ]
+  },
+  {
+    "type": "search-enterprise",
+    "text": "搜索企业列表",
+    "ids": [],
+    "resources": [
+      "/v1/epBaseInfoPojo/listCompanysPage&GET"
+    ]
+  },
+  {
+    "type": "manager-userlist",
+    "text": "后台用户列表",
+    "ids": [],
+    "resources": [
+      "/manager/v1/ldapUser/findUserByParams&GET"
+    ]
+  },
+  {
+    "type": "manager-set-roles",
+    "text": "后台用户设置角色",
+    "ids": [],
+    "resources": [
+      "/manager/v1/ldapUser/findById&GET",
+      "/manager/v1/roles/findLdapRolesById&GET",
+      "/manager/v1/roles/all&GET"
+    ]
+  },
+  {
+    "type": "manager-bind-roles",
+    "text": "后台用户绑定、解绑角色",
+    "ids": [],
+    "resources": [
+      "/manager/v1/roles/bindRolesForLdapNode&POST",
+      "/manager/v1/roles/unbindRolesForLdapNode&POST"
+    ]
+  },
+  {
+    "type": "manager-disable-user",
+    "text": "后台用户禁用、启用",
+    "ids": [],
+    "resources": [
+      "/manager/v1/ldapUser/disableOrUsable&PATCH"
+    ]
+  },
+  {
+    "type": "manager-roleslist",
+    "text": "后台权限-角色列表",
+    "ids": [],
+    "resources": [
+      "/manager/v1/roles/findByConditions&GET"
+    ]
+  },
+  {
+    "type": "manager-edit-roles",
+    "text": "修改角色",
+    "ids": [],
+    "resources": [
+      "/manager/v1/roles/getById&GET",
+      "/manager/v1/competence/findAllNormal&GET",
+      "/manager/v1/competence/findByRoleId&GET"
+    ]
+  },
+  {
+    "type": "manager-create-roles",
+    "text": "新增角色",
+    "ids": [],
+    "resources": [
+      "/manager/v1/competence/findAllNormal&GET",
+      "/manager/v1/roles/&POST",
+      "/manager/v1/roles/bindRoleForCompetences&POST",
+      "/manager/v1/roles/unbindRoleForCompetences&POST"
+    ]
+  },
+  {
+    "type": "manager-bind-resource",
+    "text": "绑定权限串",
+    "ids": [],
+    "resources": [
+      "/manager/v1/roles/&PATCH",
+      "/manager/v1/roles/bindRoleForCompetences&POST",
+      "/manager/v1/roles/unbindRoleForCompetences&POST"
+    ]
+  },
+  {
+    "type": "manager-disable-roles",
+    "text": "后台角色禁用、启用",
+    "ids": [],
+    "resources": [
+      "/manager/v1/roles/disable&POST",
+      "/manager/v1/roles/enable&POST"
+    ]
+  },
+  {
+    "type": "manager-function-list",
+    "text": "后台权限-功能列表",
+    "ids": [],
+    "resources": [
+      "/manager/v1/competence/findByConditions&GET"
+    ]
+  },
+  {
+    "type": "manager-edit-function",
+    "text": "修改功能",
+    "ids": [],
+    "resources": [
+      "/manager/v1/competence/getById&GET",
+      "/manager/v1/competence/&PATCH"
+    ]
+  },
+  {
+    "type": "manager-create-function",
+    "text": "新增功能",
+    "ids": [],
+    "resources": [
+      "/manager/v1/competence/&POST"
+    ]
+  },
+  {
+    "type": "manager-disable-function",
+    "text": "后台功能禁用、启用",
+    "ids": [],
+    "resources": [
+      "/manager/v1/competence/disableOrUndisable&POST"
+    ]
+  },
+  {
+    "type": "manager-mechanism-manage",
+    "text": "后台机构管理",
+    "ids": [],
+    "resources": [
+      "/manager/v1/ldapTree/findRoot&GET"
+    ]
+  },
+  {
+    "type": "manager-register-category",
+    "text": "后台码表-注册类型、行业类型",
+    "ids": [],
+    "resources": [
+      "/manager/v1/mapTree/getJsTree&GET"
+    ]
+  },
+  {
+    "type": "manager-logs-manage",
+    "text": "后台日志管理",
+    "ids": [],
+    "resources": [
+      "/manager/v1/logRecord/search&GET",
+      "/manager/v1/logRecord/getEnums&GET"
+    ]
+  },
+  {
+    "type": "manager-torch-map",
+    "text": "后台表单-火炬图",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eIIApAssets/findEIIApAssets&GET"
+    ]
+  },
+  {
+    "type": "manager-import-torch",
+    "text": "后台导入火炬图",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eIIApAssets/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-torch",
+    "text": "后台导出火炬图",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eIIApAssets/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-incometax",
+    "text": "后台表单-税务数据",
+    "ids": [],
+    "resources": [
+      "/manager/v1/incometax/getByConditions&GET"
+    ]
+  },
+  {
+    "type": "manager-import-incometax",
+    "text": "后台导入税务数据",
+    "ids": [],
+    "resources": [
+      "/manager/v1/incometax/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-incometax",
+    "text": "后台导出税务数据",
+    "ids": [],
+    "resources": [
+      "/manager/v1/incometax/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-government-praise",
+    "text": "后台表单-政府表彰",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eCIHonorPojo/getGOVERNMENTByCompany&GET"
+    ]
+  },
+  {
+    "type": "manager-import-praise",
+    "text": "后台导入政府表彰",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eCIHonorPojo/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-praise",
+    "text": "后台导出政府表彰",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eCIHonorPojo/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-government-support",
+    "text": "后台表单-政府支持",
+    "ids": [],
+    "resources": [
+      "/manager/v1/Governmentsupportpojo/findListByCompanyNameAndYear&GET"
+    ]
+  },
+  {
+    "type": "manager-import-support",
+    "text": "后台导入政府支持",
+    "ids": [],
+    "resources": [
+      "/manager/v1/Governmentsupportpojo/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-support",
+    "text": "后台导出政府支持",
+    "ids": [],
+    "resources": [
+      "/manager/v1/Governmentsupportpojo/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-building-occupancy",
+    "text": "后台表单-楼宇入驻企业",
+    "ids": [],
+    "resources": [
+      "/manager/v1/floorInfoPojo/findFloors&GET"
+    ]
+  },
+  {
+    "type": "manager-import-building",
+    "text": "后台导入楼宇入驻企业",
+    "ids": [],
+    "resources": [
+      "/manager/v1/floorInfoPojo/uploadExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-building",
+    "text": "后台导出楼宇入驻企业",
+    "ids": [],
+    "resources": [
+      "/manager/v1/floorInfoPojo/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-environmental-pollution",
+    "text": "后台表单-企业环保排污",
+    "ids": [],
+    "resources": [
+      "/manager/v1/Environmental/findByNameAndYear&GET"
+    ]
+  },
+  {
+    "type": "manager-import-pollution",
+    "text": "后台导入企业环保排污",
+    "ids": [],
+    "resources": [
+      "/manager/v1/Environmental/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-pollution",
+    "text": "后台导出企业环保排污",
+    "ids": [],
+    "resources": [
+      "/manager/v1/Environmental/exportExcelFormMK&GET"
+    ]
+  },
+  {
+    "type": "manager-moveout-list",
+    "text": "后台表单-企业迁出名单",
+    "ids": [],
+    "resources": [
+      "/manager/v1/EpBaseInfoPojo/findListByCompanyNameAndDate&GET"
+    ]
+  },
+  {
+    "type": "manager-import-moveout",
+    "text": "后台导入企业迁出名单",
+    "ids": [],
+    "resources": [
+      "/manager/v1/EpBaseInfoPojo/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-moveout",
+    "text": "后台导出企业迁出名单",
+    "ids": [],
+    "resources": [
+      "/manager/v1/EpBaseInfoPojo/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-energy-consumption",
+    "text": "后台表单-企业综合能耗",
+    "ids": [],
+    "resources": [
+      "/manager/v1/EnergyConsumption/findByNameAndYear&GET"
+    ]
+  },
+  {
+    "type": "manager-import-consumption",
+    "text": "后台导入企业综合能耗",
+    "ids": [],
+    "resources": [
+      "/manager/v1/EnergyConsumption/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-consumption",
+    "text": "后台导出企业综合能耗",
+    "ids": [],
+    "resources": [
+      "/manager/v1/EnergyConsumption/exportExcelFormMK&GET"
+    ]
+  },
+  {
+    "type": "manager-famous-product",
+    "text": "后台表单-名优产品",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eQIFamousProductPojo/getEQICertificationPojoByCompany&GET"
+    ]
+  },
+  {
+    "type": "manager-import-product",
+    "text": "后台导入名优产品",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eQIFamousProductPojo/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-product",
+    "text": "后台导出名优产品",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eQIFamousProductPojo/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-upper-certif",
+    "text": "后台表单-其他资格认证",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eQICertificationPojo/findListByCompanyName&GET"
+    ]
+  },
+  {
+    "type": "manager-import-certif",
+    "text": "后台导入其他资格认证",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eQICertificationPojo/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-certif",
+    "text": "后台导出其他资格认证",
+    "ids": [],
+    "resources": [
+      "/manager/v1/eQICertificationPojo/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-upper-scale",
+    "text": "后台表单-上规入库",
+    "ids": [],
+    "resources": [
+      "/manager/v1/epBaseInfoPojo/findListByCondition&GET"
+    ]
+  },
+  {
+    "type": "manager-import-scale",
+    "text": "后台导入上规入库",
+    "ids": [],
+    "resources": [
+      "/manager/v1/epBaseInfoPojo/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-scale",
+    "text": "后台导出上规入库",
+    "ids": [],
+    "resources": [
+      "/manager/v1/epBaseInfoPojo/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-macro-gdp",
+    "text": "后台表单-宏观经济GDP",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroGdp/getGDPByAreaAndYear&GET"
+    ]
+  },
+  {
+    "type": "manager-import-gdp",
+    "text": "后台导入宏观经济GDP",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroGdp/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-gdp",
+    "text": "后台导出宏观经济GDP",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroGdp/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-pillar-industry",
+    "text": "后台表单-支柱产业",
+    "ids": [],
+    "resources": [
+      "/manager/v1/MKPillarIndustry/findByYear&GET"
+    ]
+  },
+  {
+    "type": "manager-import-industry",
+    "text": "后台导入支柱产业",
+    "ids": [],
+    "resources": [
+      "/manager/v1/MKPillarIndustry/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-industry",
+    "text": "后台导出支柱产业",
+    "ids": [],
+    "resources": [
+      "/manager/v1/MKPillarIndustry/exportExcelFormMK&GET"
+    ]
+  },
+  {
+    "type": "manager-fixed-investment",
+    "text": "后台表单-固定投资",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroFixedInverstment/getFixedByYear&GET"
+    ]
+  },
+  {
+    "type": "manager-import-investment",
+    "text": "后台导入固定投资",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroFixedInverstment/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-investment",
+    "text": "后台导出固定投资",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroFixedInverstment/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-public-budget",
+    "text": "后台表单-公共性预算",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicBudget/findByYearAndArea&GET"
+    ]
+  },
+  {
+    "type": "manager-import-budget",
+    "text": "后台导入公共性预算",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicBudget/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-budget",
+    "text": "后台导出公共性预算",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicBudget/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-public-expenditure",
+    "text": "后台表单-公共性支出",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicExpend/getExpendByAreaAndYear&GET"
+    ]
+  },
+  {
+    "type": "manager-import-expenditure",
+    "text": "后台导入公共性支出",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicExpend/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-expenditure",
+    "text": "后台导出公共性支出",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicExpend/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-peopleincome",
+    "text": "后台表单-人均收入",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicAvgincome/findAvgincomeByYear&GET"
+    ]
+  },
+  {
+    "type": "manager-import-peopleincome",
+    "text": "后台导入人均收入",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicAvgincome/importExcel&POST"
+    ]
+  },
+  {
+    "type": "manager-export-peopleincome",
+    "text": "后台导出人均收入",
+    "ids": [],
+    "resources": [
+      "/manager/v1/macroPublicAvgincome/exportExcelForm&GET"
+    ]
+  },
+  {
+    "type": "manager-industry-category",
+    "text": "后台码表管理-产业类型",
+    "ids": [],
+    "resources": [
+      "/manager/v1/epBaseInfoPojo/findIndustryType&GET"
+    ]
+  },
+  {
+    "type": "manager-industry-manage",
+    "text": "后台产业类型管理列表",
+    "ids": [],
+    "resources": [
+      "/manager/v1/epBaseInfoPojo/searchCompany&GET"
+    ]
+  },
+  {
+    "type": "manager-edit-industry",
+    "text": "修改企业产业类型",
+    "ids": [],
+    "resources": [
+      "/manager/v1/epBaseInfoPojo/modifyIndustryClass&PATCH",
+      "/manager/v1/epBaseInfoPojo/findIndustryType&GET",
+      "/manager/v1/epBaseInfoPojo/findCompanyWithIndustryType&GET"
+    ]
+  },
+  {
+    "type": "manager-upload-industry",
+    "text": "导入企业产业类型",
+    "ids": [],
+    "resources": [
+      "/manager/v1/epBaseInfoPojo/importExcelChangeType&POST",
+      "/manager/v1/epBaseInfoPojo/findIndustryType&GET"
+    ]
+  }
+]

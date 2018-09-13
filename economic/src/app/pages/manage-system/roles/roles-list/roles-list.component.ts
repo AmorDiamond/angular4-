@@ -15,7 +15,7 @@ export class RolesListComponent implements OnInit {
   disableParams = {id: '', flag: ''};
   rolesList = [];
   URLS = {
-    findRolesList: '/v1/roles/findByConditions'
+    findRolesList: '/manager/v1/roles/findByConditions'
   };
   rolesListParams = {
     roleName: '',
@@ -24,7 +24,7 @@ export class RolesListComponent implements OnInit {
     size: 15
   };
   pageParams = {
-    maxSize: 5,
+    maxSize: 10,
     itemsPerPage: this.rolesListParams.size,
     bigTotalItems: 10,
     bigCurrentPage: 1,
@@ -77,9 +77,9 @@ export class RolesListComponent implements OnInit {
     this.toastModalService.hideModal();
     let url;
     if (this.disableParams.flag) {
-      url = '/v1/roles/enable';
+      url = '/manager/v1/roles/enable';
     }else {
-      url = '/v1/roles/disable';
+      url = '/manager/v1/roles/disable';
     }
     this.http.post(url + '?roleId=' + this.disableParams.id, {}).subscribe((res: any) => {
       if (res.responseCode === '_200') {
@@ -94,6 +94,23 @@ export class RolesListComponent implements OnInit {
 
   decline(): void {
     this.toastModalService.hideModal();
+  }
+  /*搜索*/
+  search() {
+    this.rolesListParams.page = 0;
+    this.pageParams.bigCurrentPage = 1;
+    this.getRolesList();
+  }
+  /*重置搜索*/
+  resetSearch() {
+    this.rolesListParams = {
+      roleName: '',
+      status: -1,
+      page: 0,
+      size: 15
+    };
+    this.pageParams.bigCurrentPage = 1;
+    this.getRolesList();
   }
 
 }

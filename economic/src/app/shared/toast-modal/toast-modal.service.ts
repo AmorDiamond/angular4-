@@ -11,6 +11,7 @@ export class ToastModalService {
 
   constructor(private router: Router, private toastyService: ToastyService, private modalService: BsModalService) { }
   modalRef: BsModalRef;
+  toasts: any = [];
   showSuccessToast(options) {
     const toastOptions: ToastOptions = {
       title: options.tipsMsg,
@@ -46,7 +47,7 @@ export class ToastModalService {
   addToasts(options) {
     const toastType = options.type;
     const goToRouter = options.router ? options.router : '';
-    const timeout = options.timeout ? options.timeout : 1000;
+    const timeout = options.timeout ?  options.timeout === 'false' ? false : options.timeout : 1000;
     const toastOptions: ToastOptions = {
       title: options.title ? options.title : '',
       msg: options.tipsMsg ? options.tipsMsg : '',
@@ -61,7 +62,7 @@ export class ToastModalService {
         }
       }
     };
-    switch(toastType) {
+    switch (toastType) {
       case 'default':
         this.toastyService.default(toastOptions);
         break;
@@ -81,6 +82,18 @@ export class ToastModalService {
         this.toastyService.warning(toastOptions);
         break;
     }
+  }
+  /**
+   * Clear all toasts
+   */
+  clearAll() {
+    /*this.toasts.forEach((value: any, key: number) => {
+      if (value.onRemove && isFunction(value.onRemove)) {
+        value.onRemove.call(this, value);
+      }
+    });
+    this.toasts = [];*/
+    this.toastyService.clearAll();
   }
   showModal(template) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});

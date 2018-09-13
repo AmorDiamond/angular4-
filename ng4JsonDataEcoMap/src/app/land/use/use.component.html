@@ -1,0 +1,47 @@
+<div class="time-colors-panel" [ngStyle]="{'right': colorListRight}">
+  <div class="land-colors-box">
+    <div class="land-colors-list" id="land-colors-list">
+      <div class="nature-color">
+        <div class="color-list-title">土地用途</div>
+        <div class="color-list-bd">
+          <div class="color-item"><span class="color-blank industry-land" data-catname="工业用地" (click)="goChooseNatureLand('工业用地')" [ngClass]="{'active':colorListChooseStatus['工业用地']}"></span>工业用地</div>
+          <div class="color-item"><span class="color-blank other-land" data-catname="公共设施及其他用地" (click)="goChooseNatureLand('公共设施及其他用地')" [ngClass]="{'active':colorListChooseStatus['公共设施及其他用地']}"></span>公共设施及其他用地</div>
+          <div class="color-item"><span class="color-blank teach-land" data-catname="科研用地" (click)="goChooseNatureLand('科研用地')" [ngClass]="{'active':colorListChooseStatus['科研用地']}"></span>科研用地</div>
+          <div class="color-item"><span class="color-blank bsiness-land" data-catname="商服用地" (click)="goChooseNatureLand('商服用地')" [ngClass]="{'active':colorListChooseStatus['商服用地']}"></span>商服用地</div>
+          <div class="color-item"><span class="color-blank  house-land" data-catname="住宅用地" (click)="goChooseNatureLand('住宅用地')" [ngClass]="{'active':colorListChooseStatus['住宅用地']}"></span>住宅用地</div>
+          <div class="color-item"><span class="color-blank  reserve-land" data-catname="储备用地" (click)="goChooseNatureLand('储备用地')" [ngClass]="{'active':colorListChooseStatus['储备用地']}"></span>储备用地</div>
+        </div>
+        <div class="color-list-bt my-hide" data-tips="删除我的类名就可以看到我啦~~~">
+          <input type="text" id="land-search" placeholder="权利人or坐标(经度,纬度)">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--地块模块概况面板-->
+<div class="icon-ctrl-panel right-top-land-infowindow land-infowindow-cj animated slideInRight" [ngClass]="{'my-hide': !panelControl.overviewShow}">
+  <div class="icon-ctrl-head">
+    <div class="title">土地用途概况</div>
+  </div>
+  <div class="icon-ctrl-body">
+    <div class="icon-ctrl-scroll">
+      <div class="icon-ctrl-scroll-con">
+        <div class="item-infowindow echarts" id="gongye-land-area-proportion" echarts [options]="chartOption"></div>
+        <div class="">
+          <table class="table table-bordered">
+            <tbody><tr><th>类型</th><th>面积(亩)</th><th>占比(%)</th></tr>
+            <tr><td>工业用地</td><td>28365</td><td>47.08</td></tr>
+            <tr><td>公共设施及其他</td><td>17628</td><td>29.26</td></tr>
+            <tr><td>科研用地</td><td>158.5</td><td>0.26</td></tr>
+            <tr><td>商服用地</td><td>1162.6</td><td>1.93</td></tr>
+            <tr><td>住宅用地</td><td>4507</td><td>7.48</td></tr>
+            <tr><td>储备用地</td><td>8427.9</td><td>13.99</td></tr>
+            </tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet>
+  <div routerLink="info/1">去详情</div>
+</router-outlet>

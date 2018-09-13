@@ -6,6 +6,7 @@ import { MicrocosmicService } from './microcosmic.service';
 import { Amap } from '../../core/amap-ngrx/amap.model';
 import { ADD_MARKER } from '../../core/amap-ngrx/amap.actions';
 import { Subscription } from 'rxjs/Subscription';
+import { LayoutService } from '../layout/layout.service';
 
 declare var echarts: any;
 
@@ -33,7 +34,8 @@ export class MicrocosmicComponent implements OnInit, OnDestroy {
   constructor(
     private storeContainer: Store<ContainerStyle>,
     private storeAmap: Store<Amap>,
-    private microcosmicService: MicrocosmicService
+    private microcosmicService: MicrocosmicService,
+    private layoutService: LayoutService,
   ) {
     // this.storeContainer.select('container');
   }
@@ -41,6 +43,8 @@ export class MicrocosmicComponent implements OnInit, OnDestroy {
   ngOnInit() {
     /*临时隐藏微观概况面板*/
     this.microcosmicService.changePanleHide(true);
+    /*进入微观主页就显示搜索框*/
+    this.layoutService.changeSearchStatusSubject(true);
     this.subscription = this.microcosmicService.getData().subscribe(data => {
       // 年产值
       this.annualOutputValue = data.outputValue;
@@ -53,7 +57,7 @@ export class MicrocosmicComponent implements OnInit, OnDestroy {
       // 集群行业
       this.SixMajorIndustries = data.SixMajorIndustries;
     });
-    this.microcosmicService.getMicInformation();
+    // this.microcosmicService.getMicInformation();
     // 改变container的宽度
     this.storeContainer.dispatch({
       type: CHANGE,
@@ -62,7 +66,7 @@ export class MicrocosmicComponent implements OnInit, OnDestroy {
       }
     });
     // 在地图上添加三个标注：高新西区、高新东区、高新南区
-    this.storeAmap.dispatch({
+    /*this.storeAmap.dispatch({
       type: ADD_MARKER,
       payload: {
         action: 'ADD_MARKER',
@@ -87,7 +91,7 @@ export class MicrocosmicComponent implements OnInit, OnDestroy {
           }
         ]
       }
-    });
+    });*/
   }
 
   ngOnDestroy() {

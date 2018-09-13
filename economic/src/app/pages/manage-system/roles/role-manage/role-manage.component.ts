@@ -22,13 +22,13 @@ export class RoleManageComponent implements OnInit {
   beforeModify = {};
   roleCompetencesBind = {competenceIds: []};
   roleCompetencesUnbind = {competenceIds: []};
-  addUserRoleParams = {url: '/v1/roles', method: 'post'};
-  getUserRoleParams = {url: '/v1/roles/getById', method: 'get'};
-  getAllRoleParams = {url: '/v1/competence/findAllNormal', method: 'get'};
-  bindCompetenceParams = {url: '/v1/roles/bindRoleForCompetences', method: 'post'};
-  unbindCompetenceParams = {url: '/v1/roles/unbindRoleForCompetences', method: 'post'};
-  findHasCompetenceParams = {url: '/v1/competence/findByRoleId', method: 'get'};
-  editRoleBasicParams = {url: '/v1/roles/', method: 'PATCH'};
+  addUserRoleParams = {url: '/manager/v1/roles/', method: 'post'};
+  getUserRoleParams = {url: '/manager/v1/roles/getById', method: 'get'};
+  getAllRoleParams = {url: '/manager/v1/competence/findAllNormal', method: 'get'};
+  bindCompetenceParams = {url: '/manager/v1/roles/bindRoleForCompetences', method: 'post'};
+  unbindCompetenceParams = {url: '/manager/v1/roles/unbindRoleForCompetences', method: 'post'};
+  findHasCompetenceParams = {url: '/manager/v1/competence/findByRoleId', method: 'get'};
+  editRoleBasicParams = {url: '/manager/v1/roles/', method: 'PATCH'};
   constructor(private http: HttpClient, private routeInfo: ActivatedRoute, private router: Router,
               private toastModalService: ToastModalService) { }
 
@@ -172,7 +172,8 @@ export class RoleManageComponent implements OnInit {
     const groupObj = {};
     const _that = this;
     res.forEach(function(item, index) {
-      const group = (item.resource.split('/'))[2];
+      /*分别处理前端和后端接口*/
+      const group = item.resource.indexOf('manager/') > -1 ? 'manager/' + (item.resource.split('/'))[3] : (item.resource.split('/'))[2];
       if (!cache[group]) {
         groupObj[group] = {id: group, hasChecked: true, show: false};
         cache[group] = 1;
@@ -194,7 +195,9 @@ export class RoleManageComponent implements OnInit {
   checkAll(resource, flag) {
     console.log(resource, flag);
     this.allCompetences.forEach(function(item, index) {
-      if ((item.resource.split('/'))[2] === resource) {
+      /*分别处理前端和后端接口*/
+      const group = item.resource.indexOf('manager/') > -1 ? 'manager/' + (item.resource.split('/'))[3] : (item.resource.split('/'))[2];
+      if (group === resource) {
         item.hasChecked = flag;
       }
     });
@@ -202,7 +205,8 @@ export class RoleManageComponent implements OnInit {
   // 单击某个功能时
   singleClick(resources) {
     const _that = this;
-    const resource = (resources.split('/'))[2];
+    /*分别处理前端和后端接口*/
+    const resource = resources.indexOf('manager/') > -1 ? 'manager/' + (resources.split('/'))[3] : (resources.split('/'))[2];
     // 初始化分组的组长（暂时这样么称呼）hasChecked为true，然后遍历所有功能，
     // 分组下的某一个的hasChecked为false时，组长的hasChecked置为false
     for (let i = 0; i < this.groups.length; i++) {
@@ -212,7 +216,9 @@ export class RoleManageComponent implements OnInit {
       }
     }
     this.allCompetences.forEach(function(item, index) {
-      if ((item.resource.split('/')[2]) === resource && item.hasChecked === false) {
+      /*分别处理前端和后端接口*/
+      const group = item.resource.indexOf('manager/') > -1 ? 'manager/' + (item.resource.split('/'))[3] : (item.resource.split('/'))[2];
+      if (group === resource && item.hasChecked === false) {
         for (let i = 0; i < _that.groups.length; i++) {
           if ( _that.groups[i].id === resource) {
             _that.groups[i].hasChecked = false;

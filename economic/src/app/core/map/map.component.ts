@@ -42,6 +42,7 @@ export class MapComponent implements OnInit {
   dataPolygonAlls: any;
   nowPolygonType: any;
   pointSimplifierIns: any;
+  companyAddressMarkerList = [];
 
 
   ngOnInit() {
@@ -54,18 +55,42 @@ export class MapComponent implements OnInit {
       });
       this.AMAPOBJ = map;
       this.AMAPOBJ.on('click', e => {
-        let lnglatXY = [e.lnglat.getLng(), e.lnglat.getLat()];
+        const lnglatXY = [e.lnglat.getLng(), e.lnglat.getLat()];
         const geocoder = new AMap.Geocoder({
           radius: 1000,
-          extensions: "all"
+          extensions: 'all'
         });
         geocoder.getAddress(lnglatXY, function(status, result) {
           console.log(lnglatXY, status, result)
           if (status === 'complete' && result.info === 'OK') {
-            let address = result.regeocode.formattedAddress; //返回地址描述
+            const address = result.regeocode.formattedAddress; // 返回地址描述
             console.log(address);
           }
         });
+      });
+      let district;
+      district = new AMap.DistrictSearch({
+        level: 'district',
+        extensions: 'all'
+      });
+      /*先搜索成都市的所有行政区*/
+      district.search('成都市', (status, result) => {
+        if (status === 'complete') {
+          const areaList = result.districtList[0].districtList;
+          areaList.forEach(item => {
+            if (item.name) {
+              /*再通过行政区的adcode区搜索范围*/
+              district.search(item.adcode, (areaStatus, areaResult) => {
+                if (areaStatus === 'complete') {
+                  const areaData = areaResult.districtList[0];
+                  if (areaData.name) {
+                    this.getAreaData(areaData);
+                  }
+                }
+              });
+            }
+          });
+        }
       });
       this.action = {
         'openInfo': (data) => {
@@ -233,6 +258,11 @@ export class MapComponent implements OnInit {
           map.off('zoomend', function (e) {
             console.log(e);
           });
+        },
+        'ADD_COMPANY_ADDRESS': (datas) => {
+          console.log('ADD_COMPANY_ADDRESS', datas);
+          map.remove(this.companyAddressMarkerList)
+          this.creatCompanyAddress(datas);
         },
         'CLEAR_MARKER': (data) => {
           map.clearMap();
@@ -2263,5 +2293,88 @@ export class MapComponent implements OnInit {
     if (callback) {
       return callback(options);
     }
+  }
+  /*绘制行政区*/
+  getAreaData(data, level?) {
+    const polygons = [];
+    const bounds = data.boundaries;
+    const map = this.AMAPOBJ;
+    if (bounds) {
+      const areaText = new AMap.Text({
+        text: data.name,
+        map: map,
+        zIndex: 1,
+        position: data.center,
+        style: {
+          'background': 'none',
+          'border': 'none',
+        }
+      });
+      for (let i = 0, l = bounds.length; i < l; i++) {
+        const polygon = new AMap.Polygon({
+          map: map,
+          strokeWeight: 1,
+          strokeColor: '#CC66CC',
+          fillColor: '#CCF3FF',
+          fillOpacity: 0.5,
+          path: bounds[i]
+        });
+        polygons.push(polygon);
+      }
+      // map.setFitView(); // 地图自适应
+    }
+  }
+  /*绘制企业位置*/
+  creatCompanyAddress(options) {
+    const companyList = [];
+    const map = this.AMAPOBJ;
+    console.log(options)
+    options.forEach(item => {
+      const position = item.address.split(',');
+      const name = item.company;
+      const marker = new AMap.Marker({
+        position: position,
+        // title: name,
+        map: map,
+        zIndex: 999,
+        icon: new AMap.Icon({
+          size: new AMap.Size(40, 50),  // 图标大小
+          image: '../assets/images/build_position_icon.png',
+          // imageOffset: new AMap.Pixel(0, -60),
+          imageSize: new AMap.Size(40, 50)
+        }),
+        extData: {
+          name: item.company
+        }
+      });
+      this.companyAddressMarkerList.push(marker);
+      marker.on('mouseover', (e) => {
+        console.log('over', e)
+        const markerObj = e.target;
+        let name = markerObj.getExtData().name;
+        let position = markerObj.getPosition();
+        console.log('over', name)
+        const infoWindow = new AMap.InfoWindow({
+          autoMove: true,
+          content: name,
+          position: position,
+          offset: new AMap.Pixel(-5 , -20),
+          showShadow: true
+        });
+        infoWindow.open(map);
+      });
+      marker.on('mouseout', () => {
+        map.clearInfoWindow();
+      });
+      marker.on('click', (e) => {
+        map.clearInfoWindow();
+        const markerObj = e.target;
+        let name = markerObj.getExtData().name;
+        this.router.navigate(['/mic/companyDetail/basic/company-profile'], { queryParams: { name: name } });
+      });
+    });
+
+    map.setFitView(); // 地图自适应
+    map.panBy(-300, 40);
   }
 }

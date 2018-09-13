@@ -26,11 +26,11 @@ export class LeadIndustryComponent implements OnInit {
   }
   /*获取数据*/
   getData() {
-    this.industryMenuService.getDataByParams({}, 'enterpriseFenbuUrl').subscribe(res => {
+    this.industryMenuService.getDataByParams({}, 'enterpriseLeadIndustry100Url').subscribe(res => {
       console.log('分布数据', res);
       if(res.responseCode === '_200') {
-        if(res.data.topsortmap) {
-          this.leadIndustryTopList = res.data.topsortmap;
+        if(res.data.length) {
+          this.leadIndustryTopList = res.data;
         }
       }
     });

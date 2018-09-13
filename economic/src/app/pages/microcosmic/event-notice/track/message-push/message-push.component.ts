@@ -35,8 +35,8 @@ export class MessagePushComponent implements OnInit, OnDestroy {
   ) { }
   newsInfo = [];
   newsInfoTips = '加载中...';
-  projectInfo = [];
-  projectInfoTips = '加载中...';
+  governmentsupportInfo = [];
+  governmentsupportInfoTips = '加载中...';
   ngOnInit() {
     const showEventNoticeMenus = {
       track: true
@@ -51,23 +51,23 @@ export class MessagePushComponent implements OnInit, OnDestroy {
   getMessagePushInfo() {
     this.trackService.findListByUrl({}, 'KeyEnterpriseUrl').subscribe(res => {
       console.log('消息推送数据', res)
-      if(res.responseCode === '_200'){
+      if (res.responseCode === '_200') {
         this.newsInfo = res.data.KETNewsPojo;
-        if(this.newsInfo.length < 1) {
-          this.newsInfoTips = '暂无信息！'
+        if (this.newsInfo.length < 1) {
+          this.newsInfoTips = '暂无信息！';
         }
-        this.projectInfo = res.data.KETProjectDeclarationPojo;
-        if(this.projectInfo.length < 1) {
-          this.projectInfoTips = '暂无信息！'
+        this.governmentsupportInfo = res.data.GovernmentsupportPojo;
+        if (this.governmentsupportInfo.length < 1) {
+          this.governmentsupportInfoTips = '暂无信息！';
         }
-      }else{
-        if(res.errorMsg === 'not found operator'){
+      }else {
+        if (res.errorMsg === 'not found operator') {
           this.toastModalService.addToasts({tipsMsg: '请重新登录！', type: 'warning', timeOut: 2000, router: '/login'});
         }else {
           this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
         }
       }
-    })
+    });
   }
   // 合同情况
   findContractPage() {

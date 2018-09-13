@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MicrocosmicService } from '../../../microcosmic.service';
 import { CompanyEconomicInfoService } from '../company-economic-info.service';
+import { ToastModalService } from '../../../../../shared/toast-modal/toast-modal.service';
 
 @Component({
   selector: 'app-incumbent-people',
@@ -11,6 +12,7 @@ export class IncumbentPeopleComponent implements OnInit {
 
   constructor(
     private microcomicService: MicrocosmicService,
+    private toastModalService: ToastModalService,
     private companyEconomicInfoService: CompanyEconomicInfoService
   ) { }
 
@@ -48,13 +50,15 @@ export class IncumbentPeopleComponent implements OnInit {
     this.companyEconomicInfoService.findListByUrl(params, 'companyNumberOfActiveStaffByYearUrl').subscribe(res => {
       console.log('结构人数', res.data);
       const options = res.data[0];
-      if (options) {
+      if (res.responseCode === '_200') {
         /*获取人员构成占比图表*/
         this.creatStaffCompositionRatioEChart(options);
         /*获取管理结构情况图表*/
         this.creatManagementStructureEchart(options);
         /*获取就业情况图表*/
         this.creatEmploymentStatusEchart(options);
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
     });
   }
@@ -240,7 +244,7 @@ export class IncumbentPeopleComponent implements OnInit {
         {type: 'line', seriesLayoutBy: 'row'}
       ]
     };*/
-    const data = options;
+    const data = options ? options : {postgraduate: 0, undergraduate: 0, college: 0};
     const legendData = ['研究生', '本科以上', '大专'];
     // const xAxisData = ['2013', '2014', '2015', '2016', '2017'];
     const xAxisData = ['研究生', '本科以上', '大专'];
@@ -332,7 +336,7 @@ export class IncumbentPeopleComponent implements OnInit {
   }
   /*绘制管理结构情况图表*/
   creatManagementStructureEchart(options) {
-    const data = options;
+    const data = options ? options : {manager: 0, professionalTechnicians: 0, skilledWorker: 0};
     const xAxisData = ['中层管理及以上', '专业技术人员', '技术工人'];
     const seriesData = [data.manager, data.professionalTechnicians, data.skilledWorker];
     const option = {
@@ -404,7 +408,7 @@ export class IncumbentPeopleComponent implements OnInit {
   }
   /*绘制就业情况图表*/
   creatEmploymentStatusEchart(options) {
-    const data = options;
+    const data = options ? options : {newEmployees: 0, graduates: 0};
     const xAxisData = ['新增从业人员', '吸纳高校毕业生'];
     const seriesData = [data.newEmployees, data.graduates];
     const option = {

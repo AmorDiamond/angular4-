@@ -29,3 +29,20 @@
     color: gray;
     border-color: gray;
 }
+.table-label {
+    width: 110px;
+}
+.company-tag span {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #f9b62066;
+    border-radius: 4px;
+    margin: 20px 5px 0;
+}
+.industry-item{
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #f9b62066;
+    border-radius: 4px;
+    margin: 0 5px 10px;
+}

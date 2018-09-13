@@ -13,7 +13,16 @@ export class IndustryMapFenbuService {
   private subjectCustomizeIndustry = new BehaviorSubject<any>(0);
   /*根据年份和功能区名称查询功能区的企业当年的注册资本和当年的企业数量，职工总数*/
   private industryMapFunctionAreaMenuUrl = '/v1/IndustrydepController/findIndustryType';
-  private industryMapLeadIndustryMenuUrl = '/v1/IndustrydepController/findcounts';
+  /*主导产业重点企业、全球100强*/
+  private industryMapLeadIndustryMenuUrl = '/v1/IndustrydepController/findLeadingIndustryDistribution';
+  /*主导产业经济规模*/
+  private industryMapLeadIndustryEcoUrl = '/v1/eIIApAssets/findClassificationOutputValue';
+  /*功能区企业分布*/
+  private industryMapFenbuUrl = '/v1/IndustrydepController/findFunctionalAreaEnterpriseDistribution';
+  /*功能区注册资金*/
+  private industryMapRegistMoneyUrl = '/v1/IndustrydepController/findFunctionalAreafunds';
+  /*功能区职工总数*/
+  private industryMapWorkerTotalUrl = '/v1/IndustrydepController/findFunctionalAreaNumber';
   constructor(private http: HttpClient) { }
 
   changeSelectParkIndustry(options) {

@@ -1,51 +1,128 @@
-<div class="panel-content data-output-box">
+<div class="panel-content data-output-box" *ngIf="!hasSearch && !hasDownload">
   <div class="flex-column">
-    <div class="data-search-box">
-      <div class="data-search-con form-inline">
-        <input type="text" class="form-control" value="电子信息" disabled>
-        <button class="btn btn-warning" (click)="getList()">搜索</button>
-        <div class="fr">
-          <div class="choose-download-data fl">
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.registerType">注册类型</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.industryType">行业类型</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.registerMoney">注册资金</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.contactPeople">联系人</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.contactPhone">联系电话</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.operatingIncome">营业收入</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.taxPay">税收</label>
-            <label class="checkbox-inline"><input type="checkbox" [(ngModel)]="downLoadData.address">通讯地址</label>
-          </div>
-          <div class="fl">
-            <a href="/economicSystem/assets/outputTemplateExcel.xlsx" [download]="downLoadDataExcelName"><button class="btn btn-warning">导出数据</button></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="flex-cell">
+    <div class="data-output-bd flex-cell">
       <perfect-scrollbar>
-        <div class="data-search-list">
-          <div *ngIf="companyList.length>0">
-            <div class="data-search-item" *ngFor="let item of companyList">
-              <div class="column-item">
-                <div class="name">{{item.name}}</div>
-                <div class="other">
-                  <span class="register-type" *ngIf="downLoadData.registerType">注册类型：<i>{{item.registerType}}</i></span>
-                  <span *ngIf="downLoadData.industryType">行业类型：<i>{{item.industryType}}</i></span>
-                  <span *ngIf="downLoadData.registerMoney">注册资金：<i>{{item.registerMoney}}</i></span>
-                  <span *ngIf="downLoadData.contactPeople">联系人：<i>{{item.contactPeople}}</i></span>
-                  <span *ngIf="downLoadData.contactPhone">联系电话：<i>{{item.contactPhone}}</i></span>
-                  <span *ngIf="downLoadData.operatingIncome">营业收入：<i>{{item.operatingIncome}}</i></span>
-                  <span *ngIf="downLoadData.taxPay">税收：<i>{{item.taxPay}}</i></span>
-                  <span class="contact-address" *ngIf="downLoadData.address">通讯地址：<i>{{item.address}}</i></span>
+        <div>
+          <table class="table table-bordered">
+            <tr>
+              <td class="table-label">注册类型</td>
+              <td>
+                <div class="circle-radio-list">
+                  <label *ngFor="let item of registerTypeList" [ngClass]="{'active': item.id == searchParams.enterpriseType}"><span></span><input type="radio" name="enterpriseType" [(ngModel)]="searchParams.enterpriseType" [value]="item.id">{{item.name}}</label>
                 </div>
-              </div>
-            </div>
+              </td>
+            </tr>
+            <tr><td class="table-label">行业类型</td><td></td></tr>
+            <tr>
+              <td class="table-label">产业类型</td>
+              <td>
+                <div class="circle-radio-list">
+                  <label *ngFor="let item of industryTypeList" [ngClass]="{'active': item.name == searchParams.industryType}"><span></span><input type="radio" name="industryType" [(ngModel)]="searchParams.industryType" [value]="item.name">{{item.name}}</label>
+                  <span class="reset-selected" (click)="searchParams.industryType = ''"><i class="fa fa-rotate-left"></i>重置</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-label">是否高企</td>
+              <td>
+                <div class="circle-radio-list">
+                  <label [ngClass]="{'active': searchParams.whetherAuthentication}"><span></span><input type="radio" name="whetherAuthentication" [(ngModel)]="searchParams.whetherAuthentication" [value]="true">是</label>
+                  <label [ngClass]="{'active': !searchParams.whetherAuthentication}"><span></span><input type="radio" name="whetherAuthentication" [(ngModel)]="searchParams.whetherAuthentication" [value]="false">否</label>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="table-label">是否规上</td>
+              <td>
+                <div class="circle-radio-list">
+                  <label [ngClass]="{'active': searchParams.supervisory}"><span></span><input type="radio" name="supervisory" [(ngModel)]="searchParams.supervisory" [value]="true">是</label>
+                  <label [ngClass]="{'active': !searchParams.supervisory}"><span></span><input type="radio" name="supervisory" [(ngModel)]="searchParams.supervisory" [value]="false">否</label>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </perfect-scrollbar>
+    </div>
+    <div class="data-output-ft">
+      <!--<div class="select-box fl" [ngClass]="{'active': allSelectedStatus}">
+        <div class="select-con" (click)="allSelectedStatus = !allSelectedStatus;allSelected()"></div>全选
+      </div>-->
+      <button appAccessControl [accessData]="'data-output'" [buttonAccess]="true" class="download-btn fr" (click)="search()">搜索</button>
+    </div>
+  </div>
+</div>
+<div class="panel-content data-output-box" *ngIf="hasSearch">
+  <div class="flex-column">
+    <div class="data-output-bd flex-cell">
+      <perfect-scrollbar>
+        <div *ngIf="companyList.length>0">
+          <table class="table table-bordered text-c company-list">
+            <tr *ngFor="let item of companyList">
+              <td class="company-info">
+                <div class="name">{{item.name}}</div>
+                <div class="address"><span class="info-label">地址：</span>{{item.address ? item.address : '未知'}}</div>
+                <span class="type-item"><span class="info-label">注册类型：</span>{{item.enterpriseType ? item.enterpriseType : '未知'}}</span>
+                <span class="type-item"><span class="info-label">行业类型：</span>{{item.industryType ? item.industryType : '未知'}}</span>
+                <span class="type-item"><span class="info-label">产业类型：</span><span *ngFor="let type of item.industryClassType;index as index">{{index > 0 ? ',' + type : type}}</span>
+                  <span *ngIf="item.industryClassType.length<1">未知</span></span>
+              </td>
+              <td class="selected-td">
+                <div class="select-con" [ngClass]="{'active': item.hasSelected}" (click)="item.hasSelected = !item.hasSelected;singleSelectedCompany()"></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="no-data-tips" *ngIf="companyList.length<1">
+          暂无信息！
+        </div>
+      </perfect-scrollbar>
+    </div>
+    <div class="data-output-ft">
+      <div class="pages-box">
+        <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                    [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+      <div class="left-column">
+        <div class="select-box fl" [ngClass]="{'active': allSelectedCompanyStatus}">
+          <div class="select-con" (click)="allSelectedCompanyStatus = !allSelectedCompanyStatus;allSelectedCompany()"></div>全选
+        </div>
+        <span class="back-btn" (click)="hasSearch = false"><i class="fa fa-mail-reply-all"></i>返回</span>
+      </div>
+      <button appAccessControl [accessData]="'data-output'" [buttonAccess]="true" class="download-btn fr" (click)="goToDownloadPage()">确定</button>
+    </div>
+  </div>
+</div>
+<div class="panel-content data-output-box" *ngIf="hasDownload">
+  <div class="flex-column">
+    <div class="data-output-hd">
+      <div class="left fl text-c">选择</div>
+      <div class="right fl">业务表单</div>
+    </div>
+    <div class="data-output-bd flex-cell">
+      <perfect-scrollbar>
+        <div class="row-box border" *ngFor="let item of dataList; index as listIndex" [hidden]="!item.hasAccess">
+          <div class="all-select-column fl" [ngClass]="{'active': item.hasSelected}">
+            <div class="select-con" (click)="item.hasSelected = !item.hasSelected;allSelectedGroup(listIndex)"></div>
           </div>
-          <div class="no-data-tips text-c" *ngIf="companyList.length<1">
-            请在上方输入您想搜索的信息！
+          <div class="row-right">
+            <div class="row-title" [ngClass]="{'active': !item.children}">{{item.name}}</div>
+            <div class="output-item" *ngFor="let data of item.children" [hidden]="!data.hasAccess">
+              <div class="select-box fl" [ngClass]="{'active': data.hasSelected}">
+                <div class="select-con" (click)="data.hasSelected = !data.hasSelected;selectedHandle(listIndex)"></div>
+              </div>
+              <div class="select-label">{{data.name}}</div>
+            </div>
           </div>
         </div>
       </perfect-scrollbar>
+    </div>
+    <div class="data-output-ft">
+      <!--<div class="select-box fl" [ngClass]="{'active': allSelectedStatus}">
+        <div class="select-con" (click)="allSelectedStatus = !allSelectedStatus;allSelected()"></div>全选
+      </div>-->
+      <span class="back-btn" (click)="hasSearch = false;hasDownload = false"> <i class="fa fa-mail-reply-all"></i>返回搜索</span>
+      <button appAccessControl [accessData]="'data-output'" [buttonAccess]="true" class="download-btn fr" (click)="downLoadDataFn()">下载</button>
     </div>
   </div>
 </div>

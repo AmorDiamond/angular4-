@@ -8,7 +8,7 @@ export class MacEconomicBudgetService {
 
   private subject = new BehaviorSubject<any>(0);
   private macBudgetUrl = '/v1/macroPublicBudget/findByYear';
-  private macBudgetRateUrl = '/v1/macroPublicBudget/findByTypes';
+  private macBudgetAreaSpeedUrl = '/v1/macroPublicBudget/findAllGroupByArea';
   constructor(private http: HttpClient) {}
 
   findListByParams(findParams, url, type?): Observable<any> {

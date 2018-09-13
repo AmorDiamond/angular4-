@@ -49,12 +49,12 @@ export class BusinessRegistrationComponent implements OnInit {
   /*获取纠错初始数据*/
   getChangeInitInfo(rowKey, statusType) {
     let activeStatus;
-    if(statusType === 'changeTelephoneStatus') {
+    if (statusType === 'changeTelephoneStatus') {
       activeStatus = this.changeAddressStatus;
-    }else if(statusType === 'changeAddressStatus') {
+    }else if (statusType === 'changeAddressStatus') {
       activeStatus = this.changeTelephoneStatus;
     }
-    if(activeStatus) {
+    if (activeStatus) {
       this.toastModalService.addToasts({tipsMsg: '请先提交之前的数据！', type: 'info'});
       return;
     }
@@ -92,7 +92,7 @@ export class BusinessRegistrationComponent implements OnInit {
     }
     this.companyBasicService.findListHasNullByUrl(changeParams, 'changeAdressAndContactUrl').subscribe(res => {
       console.log('提交修改', res)
-      if(res.responseCode === '_200') {
+      if (res.responseCode === '_200') {
         this.toastModalService.addToasts({tipsMsg: '修改成功！', type: 'success'});
         this.changeTelephoneStatus = false;
         this.changeAddressStatus = false;

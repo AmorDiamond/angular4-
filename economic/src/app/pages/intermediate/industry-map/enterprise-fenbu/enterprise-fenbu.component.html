@@ -1,85 +1,95 @@
-<div class="cygmCon">
-  <!--<div class="microcosmic_scroll" id="cygmCon">-->
-  <!--<div class="">
-    <div class="column-box">
-      <div class="panel-chart-box panel-chart-box1 flex-row">
-        <div class="column_title_box">
-          <h3>园区占比</h3>
+<perfect-scrollbar>
+  <div class="panel-content">
+    <div class="cygmCon">
+      <!--<div class="microcosmic_scroll" id="cygmCon">-->
+      <!--<div class="">
+        <div class="column-box">
+          <div class="panel-chart-box panel-chart-box1 flex-row">
+            <div class="column_title_box">
+              <h3>园区占比</h3>
+            </div>
+            <div class="panel-chart flex-cell">
+              <div class="flex-item">
+                <div id="jjgm_jckze" echarts [options]="parkProportionEchart" class="chart_div chart_div_border"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="panel-chart flex-cell">
-          <div class="flex-item">
-            <div id="jjgm_jckze" echarts [options]="parkProportionEchart" class="chart_div chart_div_border"></div>
+      </div>-->
+      <!--<div class="">
+        <div class="column-box">
+          <div class="panel-chart-box panel-chart-box1 flex-row">
+            <div class="column_title_box">
+              <h3 id="name">高新西区</h3>
+            </div>
+            <div class="panel-chart flex-cell">
+              <div class="flex-item">
+                <div id="jjgm_cy" *ngIf="westparkIndustryProportionEchart" echarts [options]="westparkIndustryProportionEchart" class="chart_div chart_div_border"></div>
+                <div class="no-data-tips" *ngIf="!westparkIndustryProportionEchart">
+                  {{westparkIndustryProportionTips}}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>-->
-  <div class="">
-    <div class="column-box">
-      <div class="panel-chart-box panel-chart-box1 flex-row">
-        <div class="column_title_box">
-          <h3 id="name">高新西区</h3>
-        </div>
-        <div class="panel-chart flex-cell">
-          <div class="flex-item">
-            <div id="jjgm_cy" *ngIf="westparkIndustryProportionEchart" echarts [options]="westparkIndustryProportionEchart" class="chart_div chart_div_border"></div>
-            <div class="no-data-tips" *ngIf="!westparkIndustryProportionEchart">
-              {{westparkIndustryProportionTips}}
+      <div class="">
+        <div class="column-box">
+          <div class="panel-chart-box panel-chart-box1 flex-row">
+            <div class="column_title_box">
+              <h3>高新南区</h3>
             </div>
+            <div class="panel-chart flex-cell">
+              <div class="flex-item">
+                <div *ngIf="southparkIndustryProportionEchart" echarts [options]="southparkIndustryProportionEchart" class="chart_div chart_div_border"></div>
+                <div class="no-data-tips" *ngIf="!southparkIndustryProportionEchart">
+                  {{southparkIndustryProportionTips}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="column-box">
+          <div class="panel-chart-box panel-chart-box1 flex-row">
+            <div class="column_title_box">
+              <h3>高新东区</h3>
+            </div>
+            <div class="panel-chart flex-cell">
+              <div class="flex-item">
+                <div *ngIf="easthparkIndustryProportionEchart" echarts [options]="easthparkIndustryProportionEchart" class="chart_div chart_div_border"></div>
+                <div class="no-data-tips" *ngIf="!easthparkIndustryProportionEchart">
+                  {{easthparkIndustryProportionTips}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="column-box">
+          <div class="panel-chart-box panel-chart-box1 flex-row">
+            <div class="column_title_box">
+              <h3>天府国际生物城</h3>
+            </div>
+            <div class="panel-chart flex-cell">
+              <div class="flex-item">
+                <div *ngIf="biologicalcityIndustryProportionEchart" echarts [options]="biologicalcityIndustryProportionEchart" class="chart_div chart_div_border"></div>
+                <div class="no-data-tips" *ngIf="!biologicalcityIndustryProportionEchart">
+                  {{biologicalcityIndustryProportionTips}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+      <div class="flex" *ngIf="enterpriseFenbuEchartData">
+        <div class="flex-cell">
+          <div class="flex-item single-echart" echarts [options]="enterpriseFenbuEchartData">
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="">
-    <div class="column-box">
-      <div class="panel-chart-box panel-chart-box1 flex-row">
-        <div class="column_title_box">
-          <h3>高新南区</h3>
-        </div>
-        <div class="panel-chart flex-cell">
-          <div class="flex-item">
-            <div *ngIf="southparkIndustryProportionEchart" echarts [options]="southparkIndustryProportionEchart" class="chart_div chart_div_border"></div>
-            <div class="no-data-tips" *ngIf="!southparkIndustryProportionEchart">
-              {{southparkIndustryProportionTips}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="">
-    <div class="column-box">
-      <div class="panel-chart-box panel-chart-box1 flex-row">
-        <div class="column_title_box">
-          <h3>高新东区</h3>
-        </div>
-        <div class="panel-chart flex-cell">
-          <div class="flex-item">
-            <div *ngIf="easthparkIndustryProportionEchart" echarts [options]="easthparkIndustryProportionEchart" class="chart_div chart_div_border"></div>
-            <div class="no-data-tips" *ngIf="!easthparkIndustryProportionEchart">
-              {{easthparkIndustryProportionTips}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="">
-    <div class="column-box">
-      <div class="panel-chart-box panel-chart-box1 flex-row">
-        <div class="column_title_box">
-          <h3>天府国际生物城</h3>
-        </div>
-        <div class="panel-chart flex-cell">
-          <div class="flex-item">
-            <div *ngIf="biologicalcityIndustryProportionEchart" echarts [options]="biologicalcityIndustryProportionEchart" class="chart_div chart_div_border"></div>
-            <div class="no-data-tips" *ngIf="!biologicalcityIndustryProportionEchart">
-              {{biologicalcityIndustryProportionTips}}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+</perfect-scrollbar>

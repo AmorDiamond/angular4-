@@ -22,7 +22,7 @@ export class EconomicScaleComponent implements OnInit {
     this.intermediateService.showIndustryMenus('IndustryMenu');
     let startYear = new Date().getFullYear() - 6;
     let endYear = startYear + 6;
-    for(let i = startYear; i < endYear; i++){
+    for (let i = startYear; i < endYear; i++) {
       this.echartxAxisData.push(i);
     }
    this.getData();
@@ -31,14 +31,13 @@ export class EconomicScaleComponent implements OnInit {
   getData() {
     this.industryMenuService.getDataByParams({}, 'enterpriseScaleUrl').subscribe(res => {
       console.log('规模数据', res);
-      if(res.responseCode === '_200') {
-        if(res.data.importputmap.length >0){
+      if (res.responseCode === '_200') {
+        if (res.data.length > 0) {
           let formatData = [];
-          let options = res.data.importputmap;
-          options.forEach((res,i) => {
-            if(res && res.year){
-              console.log(i)
-              formatData.push(res);
+          let options = res.data;
+          options.forEach((item, i) => {
+            if (item && item.year) {
+              formatData.push(item);
             }
           });
           console.log(formatData);
@@ -59,9 +58,9 @@ export class EconomicScaleComponent implements OnInit {
     let legendData = publicEchartData.legendData;
     let series = publicEchartData.series;
     const optionMain1 = {
-      //设置图表与容器的间隔
-      grid:{
-        top: 100,
+      // 设置图表与容器的间隔
+      grid: {
+        // top: 100,
         bottom: '5%',
         left: '3%',
         right: '3%',
@@ -77,6 +76,7 @@ export class EconomicScaleComponent implements OnInit {
       },
       tooltip: {
         show: true,
+        confine: true,
         trigger: 'axis',
         axisPointer: {
           type: 'cross',
@@ -103,6 +103,7 @@ export class EconomicScaleComponent implements OnInit {
         },
       },
       legend : {
+        show: false,
         data : legendData,
         left : 'center',
         top: 25,
@@ -160,9 +161,9 @@ export class EconomicScaleComponent implements OnInit {
     let legendData = publicEchartData.legendData;
     let series = publicEchartData.series;
     const optionMain2 = {
-      //设置图表与容器的间隔
-      grid:{
-        top: 100,
+      // 设置图表与容器的间隔
+      grid: {
+        // top: 100,
         bottom: '5%',
         left: '3%',
         right: '3%',
@@ -177,6 +178,7 @@ export class EconomicScaleComponent implements OnInit {
         x: 'center'
       },
       legend : {
+        show: false,
         data : legendData,
         left : 'center',
         top: 25,
@@ -187,6 +189,7 @@ export class EconomicScaleComponent implements OnInit {
       color: ['red','blue','yellow','white','green','pink'],
       tooltip: {
         show: true,
+        confine: true,
         trigger: 'axis',
         axisPointer: {
           type: 'cross',
@@ -259,9 +262,9 @@ export class EconomicScaleComponent implements OnInit {
     let legendData = publicEchartData.legendData;
     let series = publicEchartData.series;
     const optionMain3 = {
-      //设置图表与容器的间隔
-      grid:{
-        top: 100,
+      // 设置图表与容器的间隔
+      grid: {
+        // top: 100,
         bottom: '5%',
         left: '3%',
         right: '3%',
@@ -276,6 +279,7 @@ export class EconomicScaleComponent implements OnInit {
         x: 'center'
       },
       legend : {
+        show: false,
         data : legendData,
         left : 'center',
         top: 25,
@@ -286,6 +290,7 @@ export class EconomicScaleComponent implements OnInit {
       color: ['red','blue','yellow','white','green','pink'],
       tooltip: {
         show: true,
+        confine: true,
         trigger: 'axis',
         axisPointer: {
           type: 'cross',
@@ -360,9 +365,9 @@ export class EconomicScaleComponent implements OnInit {
     let legendData = publicEchartData.legendData;
     let series = publicEchartData.series;
     const optionMain4 = {
-      //设置图表与容器的间隔
-      grid:{
-        top: 100,
+      // 设置图表与容器的间隔
+      grid: {
+        // top: 100,
         bottom: '5%',
         left: '3%',
         right: '3%',
@@ -377,6 +382,7 @@ export class EconomicScaleComponent implements OnInit {
         x: 'center'
       },
       legend : {
+        show: false,
         data : legendData,
         left : 'center',
         top: 25,
@@ -387,6 +393,7 @@ export class EconomicScaleComponent implements OnInit {
       color: ['red','blue','yellow','white','green','pink'],
       tooltip: {
         show: true,
+        confine: true,
         trigger: 'axis',
         axisPointer: {
           type: 'cross',
@@ -558,9 +565,9 @@ export class EconomicScaleComponent implements OnInit {
     options.forEach(res => {
       let year = res.year;
       let type = res.industry_type;
-      if(type && copyObjType[type]){
+      if (type && copyObjType[type]) {
         copyObjType[type].push(res);
-      }else if(type){
+      }else if (type) {
         copyObjType[type] = [];
         copyObjType[type].push(res);
         legendData.push(type);
@@ -571,23 +578,23 @@ export class EconomicScaleComponent implements OnInit {
       const itemObj = {
         name: '行业类型',
         type: 'line',
-        data: new Array(xAxisData.length) //不存在对应类型的数据时设置为0
+        data: new Array(xAxisData.length) // 不存在对应类型的数据时设置为0
       };
-      for(let i = 0; i< itemObj.data.length; i++) {
+      for (let i = 0; i < itemObj.data.length; i++) {
         itemObj.data[i] = 0;
       }
       itemObj.name = item;
       copyObjType[item].forEach(res => {
-        if(res.year){
+        if (res.year) {
           let index = xAxisData.indexOf(Number(res.year)); // 让series里data的数据位置和x轴坐标类型的数据对应。
-          if(itemObj.data[index]) {
+          if (itemObj.data[index]) {
             itemObj.data[index] += res[type] ? Number(res[type]) : 0;
           }else {
             itemObj.data[index] = res[type] ? Number(res[type]) : 0;
           }
         }
       });
-      series.push(itemObj)
+      series.push(itemObj);
     }
     return {xAxisData: xAxisData, legendData: legendData, series: series};
   }

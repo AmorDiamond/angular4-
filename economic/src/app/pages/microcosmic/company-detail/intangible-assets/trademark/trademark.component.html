@@ -1,7 +1,7 @@
 <!-- 商标信息 -->
 <div class="panel-content">
   <div class="panel-item-title">企业商标信息：</div>
-  <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('getTrademarkList')">
+  <perfect-scrollbar>
     <table class="table table-bordered table-align-c" id="businessChangeInfo" *ngIf="trademarkList.length>0">
       <tr>
         <th>商标名称</th>
@@ -22,6 +22,9 @@
         <td>{{data.process}}</td>
       </tr>
     </table>
+    <div class="load-more-info text-c" *ngIf="trademarkListPramas.lastRowKey">
+      <div class="load-more-con" (click)="getTrademarkList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+    </div>
     <div class="no-data-tips" *ngIf="trademarkList.length<1">
       {{TrademarkListTips}}
     </div>

@@ -18,7 +18,7 @@
         <div class="roles-item" *ngFor="let item of userRoles"><label><input type="checkbox" [(ngModel)]="item.hasChecked" [name]="item.id" [checked]="item.hasChecked"><i></i>{{item.name}}</label></div>
       </div>
     </div>
-    <button type="submit" class="btn btn-save" [disabled]="!userForm.form.valid">确定</button>
+    <button appAccessControl [accessData]="'manager-bind-roles'" [buttonAccess]="true" type="submit" class="btn btn-save" [disabled]="!userForm.form.valid">确定</button>
     <!-- - -->
   </form>
 </div>

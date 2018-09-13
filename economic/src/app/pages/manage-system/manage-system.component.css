@@ -61,7 +61,7 @@ a{
   float: left;
   min-width: 180px;
 }
-.nav_item a:hover, .nav_item a.active {
+.nav_item a:hover, .active .top-menu {
   background-color: #1c202c;
   color: #f9b71c;
 }
@@ -89,6 +89,12 @@ a{
   line-height: 38px;
   text-align: center;
   color: #1c202c;
+}
+.drown-menu{
+  display: none;
+}
+.active .drown-menu{
+  display: block;
 }
 .drown-menu li a{
   cursor: pointer;

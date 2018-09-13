@@ -57,24 +57,53 @@
 
   <!-- ===== 搜索 start ===== ===== ===== ===== ===== -->
   <div class="fast-menu">
-    <div class="menu_box search_menu_box" (click)="$event.stopPropagation();notSearchActive()">
+    <div appAccessControl [accessData]="'search-enterprise'" class="menu_box search_menu_box" (click)="$event.stopPropagation();notSearchActive()">
       <div class="menu_box_hover">搜索</div>
     </div>
-    <div class="menu_box follow_menu_box" routerLink="/mic/eventNotice/track">
+    <div appAccessControl [accessData]="['track-messagePush','early-warning','recommend','focus-business','personal-preference']" class="menu_box follow_menu_box" routerLink="/mic/eventNotice/track" (click)="isSearchActive = false">
       <div class="menu_box_hover">关注</div>
     </div>
-    <div class="menu_box data_application_menu_box" routerLink="/dataApplication" (click)="$event.stopPropagation();">
+    <div appAccessControl [accessData]="['research-guide','contact-lookup','data-output','quality-recommend']" class="menu_box data_application_menu_box" routerLink="/dataApplication" (click)="isSearchActive = false">
       <div class="menu_box_hover">数据应用</div>
     </div>
-    <div class="menu_box manager_menu_box" routerLink="/admin" (click)="$event.stopPropagation();">
+    <div appAccessControl [accessData]="[
+    'manager-userlist',
+    'manager-roleslist',
+    'manager-function-list',
+    'manager-roleslist',
+    'manager-function-list',
+    'manager-mechanism-manage',
+    'manager-register-category',
+    'manager-logs-manage',
+    'manager-industry-manage',
+    'manager-torch-map',
+    'manager-incometax',
+    'manager-government-praise',
+    'manager-government-support',
+    'manager-building-occupancy',
+    'manager-environmental-pollution',
+    'manager-moveout-list',
+    'manager-energy-consumption',
+    'manager-famous-product',
+    'manager-upper-certif',
+    'manager-upper-scale',
+    'manager-macro-gdp',
+    'manager-pillar-industry',
+    'manager-fixed-investment',
+    'manager-public-budget',
+    'manager-public-expenditure',
+    'manager-peopleincome',
+    'manager-industry-category',
+    'manager-industry-manage'
+    ]" class="menu_box manager_menu_box" routerLink="/admin" (click)="isSearchActive = false">
       <div class="menu_box_hover">管理</div>
     </div>
   </div>
-  <div class="search_mask" [ngClass]="{'active': isSearchActive}" (click)="$event.stopPropagation();notSearchActive()">
+  <div appAccessControl [accessData]="'search-enterprise'" class="search_mask" [ngClass]="{'active': isSearchActive}" (click)="$event.stopPropagation();notSearchActive()">
   </div>
-  <div class="search_input_box" [ngClass]="{'active': isSearchActive}">
+  <div appAccessControl [accessData]="'search-enterprise'" class="search_input_box" [ngClass]="{'active': isSearchActive}">
     <input type="text" class="search_input" [(ngModel)]="keyWord" (keyup.enter)="search();notSearchActive()">
-    <button class="search_btn" id="searchBtn" (click)="$event.stopPropagation();search();notSearchActive()"></button>
+    <button appAccessControl [accessData]="'search-enterprise'" [buttonAccess]="true" class="search_btn" id="searchBtn" (click)="$event.stopPropagation();search();notSearchActive()"></button>
   </div>
   <!-- ===== 搜索 the end ===== ===== ===== ===== ===== -->
   <!-- ===== 内容面板 start ===== ===== ===== ===== ===== -->

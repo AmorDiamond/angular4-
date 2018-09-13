@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { LogsManageService } from "./logs-manage.service";
+import { LogsManageService } from './logs-manage.service';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { zhCnLocale } from 'ngx-bootstrap/locale';
-import { ToastModalService } from "../../../shared/toast-modal/toast-modal.service";
+import { ToastModalService } from '../../../shared/toast-modal/toast-modal.service';
 
 defineLocale('zh-cn', zhCnLocale)
 @Component({
@@ -43,7 +43,7 @@ export class LogsManageComponent implements OnInit {
   actionTypesObj = {};
   entityTypesObj = {};
   pageParams = {
-    maxSize: 5,
+    maxSize: 10,
     itemsPerPage: this.searchParams.size,
     bigTotalItems: 10,
     bigCurrentPage: 1,
@@ -65,46 +65,60 @@ export class LogsManageComponent implements OnInit {
 
     this.logsManageService.findListByParams(this.searchParams, 'searchLogsUrl').subscribe(res => {
       console.log('获取日志', res)
-      if(res.responseCode === '_200') {
+      if (res.responseCode === '_200') {
         this.logsLists = res.data.content;
-        if(this.logsLists.length < 1) {
+        this.pageParams.bigTotalItems = res.data.totalElements;
+        if (this.logsLists.length < 1) {
           this.toastModalService.addToasts({type: 'info', tipsMsg: '暂无信息！'});
         }
       }
-    },err => {
-      console.log('获取日志失败',err)
-    })
+    }, err => {
+      console.log('获取日志失败', err);
+    });
   }
   /*获取枚举类型信息*/
   getLogsEnums() {console.log('枚举类型');
-    this.logsManageService.getRequestByForkJoin([{findParams:{enumsName: 'ActionType'}, url: 'searchEnumsUrl'}, {findParams:{enumsName: 'EntityType'}, url: 'searchEnumsUrl'}]).subscribe(res => {
+    this.logsManageService.getRequestByForkJoin([{findParams: {enumsName: 'ActionType'}, url: 'searchEnumsUrl'}, {findParams: {enumsName: 'EntityType'}, url: 'searchEnumsUrl'}]).subscribe(res => {
       console.log('枚举类型', res);
       this.actionTypes = res[0].data;
       this.entityTypes = res[1].data;
       /*将枚举类型保存到对象用于在列表页面渲染中文*/
-      this.actionTypes.forEach(res => {
-        this.actionTypesObj[res.name] = res.desc;
+      this.actionTypes.forEach(item => {
+        this.actionTypesObj[item.name] = item.desc;
       });
-      this.entityTypes.forEach(res => {
-        this.entityTypesObj[res.name] = res.desc;
+      this.entityTypes.forEach(item => {
+        this.entityTypesObj[item.name] = item.desc;
       });
-    },err => {
-      console.log('枚举类型失败', err)
-    })
+    }, err => {
+      console.log('枚举类型失败', err);
+    });
+  }
+  /*搜索*/
+  search() {
+    this.searchParams.page = 0;
+    this.pageParams.bigCurrentPage = 1;
+    this.getLogsList();
   }
   /*重置搜索条件*/
   resetSearch() {
-    this.searchParams.actionType = '';
-    this.searchParams.entityType = '';
+    this.searchParams = {
+      beginCreateTime: null,
+      endCreateTime: null,
+      actionType: '',
+      entityType: '',
+      page: 0,
+      size: 15
+    };
     this.chooseTime = {
       beginCreateTime: null,
       endCreateTime: null
-    }
+    };
+    this.pageParams.bigCurrentPage = 1;
     this.getLogsList();
   }
   /*翻页查询*/
   pageChanged($event) {
-    const pageNumber = $event.page -1;
+    const pageNumber = $event.page - 1;
     this.searchParams.page = pageNumber;
     this.getLogsList();
   }

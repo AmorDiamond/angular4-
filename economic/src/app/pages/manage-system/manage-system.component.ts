@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manage-system',
@@ -6,16 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-system.component.css']
 })
 export class ManageSystemComponent implements OnInit {
-  menusControl = { user: false };
+  menusControl: any = { user: false };
+  routerUrl: string;
+  menusUrl: string;
   loginUserName = sessionStorage.getItem('userName');
-  constructor() {}
+  constructor(
+    private router: Router,
+    private routerInfo: ActivatedRoute
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events
+      .filter(event => event instanceof NavigationEnd)
+      .subscribe(() => {
+        this.routerUrl = this.router.url.split('/')[2];
+        this.menusUrl = this.routerUrl;
+      });
+  }
   changeMenuShow(name?) {
     // tslint:disable-next-line:forin
-    for (const i in this.menusControl) {
-      this.menusControl[i] = false;
-    }
-    this.menusControl[name] = true;
+    this.menusUrl = this.menusUrl === name ? this.routerUrl : name;
   }
 }

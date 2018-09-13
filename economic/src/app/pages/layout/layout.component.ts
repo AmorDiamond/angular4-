@@ -9,7 +9,7 @@ import 'rxjs/add/operator/delay';
 import { Subscription } from 'rxjs/Subscription';
 import { LayoutService } from './layout.service';
 import { IntermediateService } from '../intermediate/intermediate.service';
-import { MicrocosmicService } from "../microcosmic/microcosmic.service";
+import { MicrocosmicService } from '../microcosmic/microcosmic.service';
 import {ADD_MARKER_MID, ADD_POLYGON, ADD_SINGLE_POLYGON, CLEAR_MARKER} from '../../core/amap-ngrx/amap.actions';
 import { Amap } from '../../core/amap-ngrx/amap.model';
 declare var $: any;
@@ -23,7 +23,7 @@ declare var $: any;
     CircleAnimate,
     ItemPositionAnimate
   ],
-  providers: [LayoutService]
+  providers: []
 })
 
 export class LayoutComponent implements OnInit, OnDestroy {
@@ -130,9 +130,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.microcosmicService.changePanleHide(false);
     /*将搜索的关键字储存用于详情页返回列表页*/
     localStorage.setItem('searchName', this.keyWord);
-    this.layoutService.search({
+    /*this.layoutService.search({
       keyWord: this.keyWord
-    });
+    });*/
+
+    this.router.navigate(['/mic/companyList', this.keyWord]);
     /*点击搜索后重置*/
     this.keyWord = '';
   }
@@ -147,6 +149,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
         this.panelHide = false;
       }
     })
+    /*监听搜索状态*/
+    this.layoutService.getSearchStatusSubject().subscribe(res => {
+      console.log('监听搜索', res)
+      this.isSearchActive = res.isSearchActive;
+    });
     /*经济产出地图时间控制*/
     $("#datetimepicker").datetimepicker({
       autoclose: 1,

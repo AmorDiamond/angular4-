@@ -19,6 +19,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ToastyModule } from 'ng2-toasty';
 import { ToastModalService } from '../../shared/toast-modal/toast-modal.service';
 import { LogsManageComponent } from './logs-manage/logs-manage.component';
+import { FormManagersComponent } from './form-managers/form-managers.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { LogsManageComponent } from './logs-manage/logs-manage.component';
     UserListComponent,
     UserManageComponent,
     EditRoelsComponent,
-    LogsManageComponent
+    LogsManageComponent,
+    FormManagersComponent
   ],
   providers: [ToastModalService]
 })

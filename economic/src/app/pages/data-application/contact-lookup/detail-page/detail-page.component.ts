@@ -1,49 +1,80 @@
 import { Component, OnInit } from '@angular/core';
-import { MicrocosmicService } from "../../../microcosmic/microcosmic.service";
+import { MicrocosmicService } from '../../../microcosmic/microcosmic.service';
+import { CHANGE } from '../../../../core/container-ngrx/container.action';
+import { ContainerStyle } from '../../../../core/container-ngrx/container.model';
+import { Store } from '@ngrx/store';
+import { DataApplicationService } from '../../data-application.service';
+import { ToastModalService } from '../../../../shared/toast-modal/toast-modal.service';
 
 @Component({
   selector: 'app-detail-page',
   templateUrl: './detail-page.component.html',
   styleUrls: ['./detail-page.component.css']
 })
-export class DetailPageComponent implements OnInit {
+export class ContactDetailPageComponent implements OnInit {
 
-  constructor(private microcomicService: MicrocosmicService) { }
+  constructor(
+    private microcomicService: MicrocosmicService,
+    private store: Store<ContainerStyle>,
+    private dataApplicationService: DataApplicationService,
+    private toastModalService: ToastModalService,
+  ) { }
   contactDataList = [];
   companyName: any;
+  selectedList: any = [];
+  sendMessageStatus = false;
+  MessagePageTitle = '批量通知';
+  sendMessageContent = '';
+  sendResultList = [];
   ngOnInit() {
+    this.store.dispatch({
+      type: CHANGE,
+      payload: {
+        width: '93%'
+      }
+    });
     this.companyName = this.microcomicService.getUrlParams('name');
-    this.getList()
+    this.selectedList = this.dataApplicationService.getSelectedList();
+    console.log(this.selectedList)
+    this.getList();
   }
   /*获取数据*/
   getList() {
-    let options = [];
-    if(this.companyName === '成都尚作电子商务有限公司') {
-      options = [
-        {name: '陆丙海', job: '经理', phone: '15928740574'},
-        {name: '侯文杰', job: '公共关系总监', phone: '13882105351'}
-      ];
-    }else if(this.companyName === '成都迪康药业有限公司') {
-      options = [
-        {name: '王学明', job: '政府事务', phone: '13308082653'},
-        {name: '蒲太平', job: '总工程师', phone: '13908087572'}
-      ];
-    }else if(this.companyName === '成都恒瑞制药有限公司') {
-      options = [
-        {name: '朱德琪', job: '行政总监', phone: '13540710680'},
-        {name: '王琴', job: '总经理', phone: '13708444761'}
-      ];
-    }else if(this.companyName === '成都维纳软件股份有限公司') {
-      options = [
-        {name: '周密', job: '公司总裁', phone: '13908072069'},
-        {name: '陈铸', job: '总经理', phone: '15982210521'},
-        {name: '张爱民', job: '技术总监', phone: '13654983038'},
-        {name: '宋桂芳', job: '人事总监', phone: '18010520328'}
-      ];
-    }else {
-      options = [];
-    }
-    this.contactDataList = options;
+
+  }
+  /*发送信息*/
+  sendMessage() {
+    const params = {pojo: [], content: this.sendMessageContent};
+    this.selectedList.forEach(res => {
+      params.pojo = [...params.pojo, ...res.relationPojos];
+    });
+    console.log(params);
+    this.dataApplicationService.sendMessage(params, 'sendMessageUrl').subscribe(res => {
+      console.log(res);
+      if (res.responseCode === '_200') {
+        this.sendMessageStatus = true;
+        this.MessagePageTitle = '发送结果';
+        this.store.dispatch({
+          type: CHANGE,
+          payload: {
+            width: '60%'
+          }
+        });
+        if (res.data && res.data.length > 0) {
+          this.sendResultList = res.data;
+          /*给发送失败的企业赋值行业类型*/
+          this.selectedList.forEach(selectItem => {
+            this.sendResultList.forEach(resultItem => {
+              if (resultItem.pojo.enterpriseName === selectItem.company.rowKey && selectItem.company.industryType) {
+                resultItem.industryType = selectItem.company.industryType.replace(/[^\u4e00-\u9fa5]/gi, '');
+              }
+            });
+          });
+        }
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误', type: 'error'});
+      }
+    });
   }
 
 }

@@ -4,8 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class MacEconomicExpendService {
-  private macExpendUrl = '/v1/macroPublicExpend/findByYear';
-  private macExpendRateUrl = '/v1/macroPublicExpend/findByTypes';
+  private macExpendUrl = '/v1/macroPublicExpend/findByGaoXin';
+  private macExpendAreaSpeedUrl = '/v1/macroPublicExpend/findByAll';
   constructor(private http: HttpClient) {}
 
   findListByParams(findParams, url, type?): Observable<any> {

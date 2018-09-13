@@ -1,14 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CHANGE } from '../../../core/container-ngrx/container.action';
+import { Store } from '@ngrx/store';
+import { ContainerStyle } from '../../../core/container-ngrx/container.model';
+import { DataApplicationService } from '../data-application.service';
+import { ToastModalService } from '../../../shared/toast-modal/toast-modal.service';
+import { LayoutService } from '../../layout/layout.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-data-output',
   templateUrl: './data-output.component.html',
   styleUrls: ['./data-output.component.css']
 })
-export class DataOutputComponent implements OnInit {
+export class DataOutputComponent implements OnInit, OnDestroy {
 
-  constructor() { }
-  companyList = [];
+  constructor(
+    private store: Store<ContainerStyle>,
+    private dataApplicationService: DataApplicationService,
+    private toastModalService: ToastModalService,
+    private layoutService: LayoutService,
+  ) { }
+  dataList = [];
+  allSelectedStatus = false;
   downLoadData = {
     registerType: true,
     registerMoney: true,
@@ -20,181 +33,297 @@ export class DataOutputComponent implements OnInit {
     taxPay: true
   };
   downLoadDataExcelName = '数据输出信息表';
+  accessControlSubject: Subscription;
+  hasSearch = false;
+  hasDownload = false;
+  searchParams = {
+    industryType: '',
+    enterpriseType: '',
+    industryClassType: '',
+    supervisory: '',
+    whetherAuthentication: '',
+    page: 0,
+    size: 15,
+  };
+  pageParams = {
+    maxSize: 5,
+    itemsPerPage: this.searchParams.size,
+    bigTotalItems: 10,
+    bigCurrentPage: 1,
+    numPages: 0
+  };
+  /*行业类型*/
+  tradeTypeList = [];
+  /*注册类型*/
+  registerTypeList = [];
+  /*产业类型*/
+  industryTypeList = [];
+  /*搜索的企业列表*/
+  companyList = [];
+  allSelectedCompanyStatus = false;
   ngOnInit() {
+    this.store.dispatch({
+      type: CHANGE,
+      payload: {
+        width: '60%'
+      }
+    });
+    this.getList();
+  }
+  ngOnDestroy() {
+    this.accessControlSubject.unsubscribe();
+  }
+  /*通过条件搜索*/
+  search() {
+    console.log(this.searchParams);
+    this.dataApplicationService.requestByParams(this.searchParams, 'getCompanysByTypesUrl').subscribe(res => {
+      if (res.responseCode === '_200') {
+        this.hasSearch = true;
+        this.companyList = res.data.content;
+        this.pageParams.bigTotalItems = res.data.totalElements;
+        if (this.companyList.length < 1) {
+          this.toastModalService.addToasts({tipsMsg: '暂无信息！', type: 'info'});
+        }
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
+      }
+    });
   }
   /*获取数据*/
   getList() {
-    const options = [
-      {
-        name: '成都天奥集团有限公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '412680',
-        address: '成都市高新西区新业路88号',
-        industryType: '电子信息',
-        contactPeople: '未知',
-        contactPhone: '未知',
-        operatingIncome: '1288047.49',
-        taxPay: '3005.82'
-      },
-      {
-        name: '富通光纤光缆（成都）有限公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '205080',
-        address: '四川省成都高新技术产业开发区（西区）西区大道77号',
-        industryType: '电子信息',
-        contactPeople: '吕友平',
-        contactPhone: '13350868911',
-        operatingIncome: '969783',
-        taxPay: '39583'
-      },
-      {
-        name: '成都富通光通信技术有限公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '14700',
-        address: '成都高新区（西区）百草路78号',
-        industryType: '电子信息',
-        contactPeople: '吕友平',
-        contactPhone: '13350868911',
-        operatingIncome: '699865',
-        taxPay: '19963'
-      },
-      {
-        name: '四川汇源光通信有限公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '108000',
-        address: '成都市高新西区新业路2号',
-        industryType: '电子信息',
-        contactPeople: '龙仕群',
-        contactPhone: '028-87826104',
-        operatingIncome: '193794',
-        taxPay: '11037'
-      },
-      {
-        name: '成都盟升科技有限公司',
-        registerType: '有限责任公司(自然人投资或控股)',
-        registerMoney: '20000',
-        address: '成都市高新西区西芯大道5号(汇都总部园5栋1号楼)',
-        industryType: '电子信息',
-        contactPeople: '袁勇',
-        contactPhone: '13084424059',
-        operatingIncome: '183309',
-        taxPay: '19259'
-      },
-      {
-        name: '成都驰通数码系统有限公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '30000',
-        address: '成都高新区天虹路5号',
-        industryType: '电子信息',
-        contactPeople: '樊勋',
-        contactPhone: '87839922-567',
-        operatingIncome: '56919',
-        taxPay: '6864'
-      },
-      {
-        name: '成都因纳伟盛科技股份有限公司',
-        registerType: '其他股份有限公司（非上市）',
-        registerMoney: '20000',
-        address: '成都高新区西芯大道3号',
-        industryType: '电子信息',
-        contactPeople: '殷海燕',
-        contactPhone: '13438805451',
-        operatingIncome: '44109',
-        taxPay: '780'
-      },
-      {
-        name: '凌阳成芯科技（成都）有限公司',
-        registerType: '有限责任公司(外国自然人独资)',
-        registerMoney: '137650',
-        address: '成都市高新区天府四街117、153号1栋1楼1号',
-        industryType: '电子信息',
-        contactPeople: '未知',
-        contactPhone: '未知',
-        operatingIncome: '44032',
-        taxPay: '1950'
-      },
-      {
-        name: '敦阳泰克科技（成都）有限公司',
-        registerType: '有限责任公司(台港澳合资)',
-        registerMoney: '8000',
-        address: '四川省成都市高新西区天辰路88号2号楼3单元',
-        industryType: '电子信息',
-        contactPeople: '未知',
-        contactPhone: '未知',
-        operatingIncome: '37037',
-        taxPay: '9138'
-      },
-      {
-        name: '成都锐新科技有限公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '10454.54',
-        address: '成都市高新西区西芯大道4号C237',
-        industryType: '电子信息',
-        contactPeople: '周晔',
-        contactPhone: '13438827257',
-        operatingIncome: '31649',
-        taxPay: '4485'
-      },
-      {
-        name: '成都瀚德科技有限公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '15000',
-        address: '成都市高新西区西芯大道5号汇都企业总部园3号楼5楼',
-        industryType: '电子信息',
-        contactPeople: '陈鲜',
-        contactPhone: '028-65300967',
-        operatingIncome: '30539',
-        taxPay: '2778'
-      },
-      {
-        name: '四川省视频电子有限责任公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '20000',
-        address: '成都市高新区新创路12号',
-        industryType: '电子信息',
-        contactPeople: '丁辉',
-        contactPhone: '028-83879234',
-        operatingIncome: '27426',
-        taxPay: '4752'
-      },
-      {
-        name: '成都华光瑞芯微电子股份有限公司',
-        registerType: '其他股份有限公司（非上市）',
-        registerMoney: '20000',
-        address: '成都市高新区天虹路5号',
-        industryType: '电子信息',
-        contactPeople: '董欢',
-        contactPhone: '董欢',
-        operatingIncome: '24849.13',
-        taxPay: '2952.12'
-      },
-      {
-        name: '成都顺康电子有限责任公司',
-        registerType: '有限责任公司(自然人投资或控股)',
-        registerMoney: '18000',
-        address: '成都高新区西部园区新航路4号',
-        industryType: '电子信息',
-        contactPeople: '叶峰',
-        contactPhone: '028-87843536',
-        operatingIncome: '21075',
-        taxPay: '630'
-      },
-      {
-        name: '成都宝利根科技有限公司',
-        registerType: '有限责任公司（非自然人投资或控股的法人独资）',
-        registerMoney: '1000',
-        address: '成都高新西区古楠街315号',
-        industryType: '电子信息',
-        contactPeople: '未知',
-        contactPhone: '未知',
-        operatingIncome: '19399',
-        taxPay: '1467'
+    this.dataApplicationService.requestByParams({}, 'allIndustryTypesUrl').subscribe(res => {
+      if (res.responseCode === '_200') {
+        this.industryTypeList = res.data;
       }
+    });
+    this.accessControlSubject = this.layoutService.getAccessControlSubject().subscribe(res => {
+      const options = [
+        {id: 1, name: '企业基本信息', children: [
+            {id: 11, name: '企业概况', enumerate: 'BASEINFO'},
+            {id: 14, name: '工商变更信息', enumerate: 'EPCHANGEINFO'},
+            {id: 15, name: '税务登记信息', enumerate: 'EPTAXATION'},
+            {id: 16, name: '社会保障信息', enumerate: 'INSURANCELNFORMATION'},
+            {id: 17, name: '企业问题台账', enumerate: 'BUSINESSPROBLEMLEDGER'}
+          ]},
+        {id: 2, name: '企业资质信息', enumerate: 'EQICERTIFICATION'},
+        {id: 3, name: '企业信用信息', children: [
+            {id: 31, name: '企业荣誉', enumerate: 'ECIHONOR'},
+            {id: 32, name: '黑名单', enumerate: 'ECIJUDICIALDECISION'},
+            {id: 33, name: '履约缴费', enumerate: 'PERPAYMENTINFORMATION'},
+            {id: 34, name: '行业评级', enumerate: 'INDUSTRYRATINGINFORMATION'},
+          ]},
+        {id: 4, name: '企业无形资产', children: [
+            {id: 41, name: '企业商标和专利信息', enumerate: 'IATRADEMARKANDPATENT'},
+            {id: 42, name: 'ICP备案信息', enumerate: 'IAICP'},
+          ]},
+        {id: 5, name: '企业经济指标', children: [
+            {id: 51, name: '经济、人员、科技创新概况', enumerate: 'EIIAPASSETS'},
+            {id: 52, name: '政府支持信息', enumerate: 'GOVERNMENTSUPPORT'},
+            {id: 53, name: '招聘信息', enumerate: 'EIIRECRUIT'},
+          ]},
+        {id: 6, name: '企业综合评价', enumerate: ''},
       ];
-    this.companyList = options;
+      for (let i = 0; i < res.length; i++) {
+        if (res[i].hasAccess) {
+          for (let j = 0; j < options.length; j++) {
+            if (options[j].children) {
+              options[j].children.forEach(item => {
+                if (item.name === res[i].text) {
+                  item['hasAccess'] = true;
+                  options[j]['hasAccess'] = true;
+                }
+              });
+            }else if (options[j].name === res[i].text) {
+              options[j]['hasAccess'] = true;
+            }
+          }
+        }
+      }
+      this.dataList = options;
+      console.log(this.dataList);
+    });
+  }
+  /*保存选择的企业去下载数据*/
+  goToDownloadPage() {
+    const selectedCompanys = [];
+    this.companyList.forEach(item => {
+      if (item.hasSelected) {
+        selectedCompanys.push(item);
+      }
+    });
+    if (selectedCompanys.length < 1) {
+      this.toastModalService.addToasts({tipsMsg: '请选择需要导出数据的企业！', type: 'warning', timeout: 2000});
+      return;
+    }
+    this.hasSearch = false;
+    this.hasDownload = true;
+  }
+
+  /*翻页搜索*/
+  pageChanged($event) {
+    this.searchParams.page = $event.page - 1;
+    this.search();
+  }
+  /*单独选中企业后处理事件*/
+  singleSelectedCompany() {
+    let allSelectedCompany = true;
+    for (let i = 0; i < this.companyList.length; i++) {
+      if (!this.companyList[i].hasSelected) {
+        allSelectedCompany = false;
+        break;
+      }
+    }
+    this.allSelectedCompanyStatus = allSelectedCompany;
+  }
+  /*全选企业列表操作*/
+  allSelectedCompany() {
+    if (this.allSelectedCompanyStatus) {
+      this.companyList.forEach(item => {
+        if (!item.hasSelected) {
+          item.hasSelected = true;
+        }
+      });
+    }else {
+      this.companyList.forEach(item => {
+        if (item.hasSelected) {
+          item.hasSelected = false;
+        }
+      });
+    }
+
+  }
+  /*组装所需格式数据*/
+  formatOutputData() {}
+  /*单独选中后处理事件*/
+  selectedHandle(index) {
+    const children = this.dataList[index].children;
+    if (children) {
+      const len = children.length;
+      let allSelectedGroup = true;
+      for (let i = 0; i < len; i++) {
+        if (!children[i].hasSelected) {
+          allSelectedGroup = false;
+        }
+      }
+      this.dataList[index].hasSelected = allSelectedGroup;
+      /*判断所选项目数目*/
+      this.countSelected();
+      /*if (allSelectedGroup) {
+
+        /!*判断是否全选*!/
+        let allSelected = true;
+        const dataLen = this.dataList.length;
+        for (let i = 0; i < dataLen; i++) {
+          if (!this.dataList[i].hasSelected) {
+            allSelected = false;
+            break;
+          }
+        }
+        if (allSelected) {
+          this.allSelectedStatus = true;
+        }
+      }else {
+        this.allSelectedStatus = false;
+      }*/
+    }
+  }
+  /*全选获取的组别*/
+  allSelectedGroup(index) {
+    const children = this.dataList[index].children;
+    if (children) {
+      if (this.dataList[index].hasSelected) {
+        children.forEach(res => {
+          res.hasSelected = true;
+        });
+      }else {
+        children.forEach(res => {
+          res.hasSelected = false;
+        });
+      }
+    }
+    /*判断所选项目数目*/
+    this.countSelected();
+    /*判断是否全选*/
+    /*let allSelected = true;
+    const dataLen = this.dataList.length;
+    for (let i = 0; i < dataLen; i++) {
+      if (!this.dataList[i].hasSelected) {
+        allSelected = false;
+        break;
+      }
+    }
+    this.allSelectedStatus = allSelected;*/
+  }
+  /*全选操作*/
+  allSelected() {
+    if (this.allSelectedStatus) {
+      this.dataList.forEach(res => {
+        res.hasSelected = true;
+      });
+      this.dataList.forEach((res, i) => {
+        this.allSelectedGroup(i);
+      });
+    }else {
+      this.dataList.forEach(res => {
+        res.hasSelected = false;
+      });
+      this.dataList.forEach((res, i) => {
+        this.allSelectedGroup(i);
+      });
+    }
   }
   /*导出数据*/
   downLoadDataFn() {
-    console.log(this.downLoadData)
+    const params = {moduleType: [], companyNames: []};
+    // let params = '';
+    this.dataList.forEach(res => {
+      if (res.children) {
+        res.children.forEach(childItem => {
+          if (childItem.hasSelected) {
+            // params += childItem.enumerate ? childItem.enumerate + ',' : '';
+            params.moduleType.push(childItem.enumerate);
+          }
+        });
+      }else if (res.hasSelected) {
+        // params += res.enumerate ? res.enumerate + ',' : '';
+        params.moduleType.push(res.enumerate);
+      }
+    });
+    // const countSelected = params.split(',');
+    if (params.moduleType.length > 5) {
+      this.toastModalService.addToasts({tipsMsg: '所选项目超过5个！', type: 'warning', timeout: 2000});
+      return;
+    }
+    this.companyList.forEach(item => {
+      if (item.hasSelected) {
+        params.companyNames.push(item.name);
+      }
+    });
+    if (params.companyNames.length < 1) {
+      this.toastModalService.addToasts({tipsMsg: '请选择需要导出数据的企业！', type: 'warning', timeout: 2000});
+      return;
+    }
+    const todayTime = new Date();
+    const todayDate = todayTime.getFullYear() + '-' + (todayTime.getMonth() + 1) + '-' + todayTime.getDate();
+    console.log(params);
+    this.dataApplicationService.exportZip(params, '系统数据导出' + todayDate, 'application/zip');
+  }
+  /*统计获取已选*/
+  countSelected() {
+    const list = [];
+    this.dataList.forEach(res => {
+      if (res.children) {
+        res.children.forEach(childItem => {
+          if (childItem.hasSelected) {
+            list.push(childItem);
+          }
+        });
+      }else if (res.hasSelected && res.enumerate) {
+        list.push(res);
+      }
+    });
+    if (list.length > 5) {
+      this.toastModalService.addToasts({tipsMsg: '所选项目超过5个！', type: 'warning', timeout: 2000});
+    }
   }
 }

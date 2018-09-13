@@ -1,0 +1,463 @@
+<!--面板数据-->
+<div class="microcosmic_container animated middle-view" [ngClass]="{'slideInRight': showRightPanel, 'slideOutRight': !showRightPanel}">
+  <div class="back-arrow"><span class="back-arrow-btn" [ngClass]="{'active': !showRightPanel}" (click)="changeRightPanelShow()"></span></div>
+  <div class="land-panel-con">
+    <app-scrollbar>
+      <div class="land-use-purpose-scroll">
+        <div class="land-use-purpose-box">
+        <div class="item land-use-purpose">
+          <div class="use-purpose-title"><span class="title">用途占比</span></div>
+          <div class="use-purpose-bd fl" id="land-proportion2" style="width: 50%;" echarts [options]="landUsePurposeData.aboutNowType.landEcharts"></div>
+          <div class="use-purpose-bd fl" id="land-proportion" style="width: 50%;" echarts [options]="landUsePurposeData.aboutWestLand.landEcharts"></div>
+          <div class="use-purpose-bt">
+            <div class="item">
+              <div class="pie-name">{{landUsePurposeData.aboutNowType.title}}</div>
+              <span class="single-proportion-now">其他：{{landUsePurposeData.aboutNowType.otherProportion}}</span>
+              <span class="single-proportion">{{landUsePurposeData.chooseLandTypeName}}：{{landUsePurposeData.aboutNowType.nowProportion}}</span>
+            </div>
+            <div class="item">
+              <div class="pie-name">{{landUsePurposeData.aboutWestLand.title}}</div>
+              <span class="type-proportion-all">其他：{{landUsePurposeData.aboutWestLand.otherProportion}}</span>
+              <span class="type-proportion-now">{{landUsePurposeData.chooseLandTypeName}}：{{landUsePurposeData.aboutWestLand.nowProportion}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="item land-info-con">
+          <div class="use-purpose-title"><span class="title">土地信息</span></div>
+          <div class="land-info-bd">
+            <table class="table table-bordered" id="land-basic-data" *ngIf="landData">
+              <tr>
+                <td class="nowrap land-row-title">土地证号:</td><td colspan="3">{{landData.landCardNumber}}</td>
+              </tr>
+              <tr>
+                <td class="nowrap land-row-title">权利人:</td><td colspan="3">{{landData.rightHolder}}</td>
+              </tr>
+              <tr>
+                <td class="nowrap land-row-title">实测面积:</td><td colspan="3">{{landData.landArea}}</td>
+              </tr>
+              <!--<tr>
+                  <td class="nowrap land-row-title">土地坐落:</td><td colspan="3">landData.landIsLocated}</td>
+              </tr>-->
+              <tr>
+                <td class="nowrap land-row-title">使用全面积:</td><td colspan="3">{{landData.usageArea}}</td>
+              </tr>
+              <tr>
+                <td class="nowrap land-row-title">用地性质:</td><td colspan="3">{{landData.landUsrNature}}</td>
+              </tr>
+              <!--<tr>
+                  <td class="nowrap land-row-title">规划用途:</td><td colspan="3">landData.landUsrNature}</td>
+              </tr>
+              <tr>
+                  <td class="nowrap land-row-title">实际用途:</td><td colspan="3">landData.theRealFunction}</td>
+              </tr>-->
+              <tr>
+                <td class="nowrap land-row-title">用地单位:</td><td colspan="3"><a href="javascript:void(0)" class="land-unit-detail" (click)="getCompanyInfo(landData.actualUsers)" data-company="landData.actualUsers">{{landData.actualUsers ? landData.actualUsers : '未知'}}</a></td>
+              </tr>
+              <tr>
+                <td class="nowrap land-row-title">地块政府投入:</td><td colspan="3">{{landData.governmentInvestment && landData.landArea ? ((landData.governmentInvestment) * (landData.landArea)/10000) + '万元' : '未知'}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+          <div class="item land-info-con" *ngIf="inefficientLandData">
+            <div class="use-purpose-title"><span class="title">低效土地信息</span></div>
+            <div class="land-info-bd">
+              <table class="table table-bordered">
+                <tbody>
+                <tr>
+                  <td class="nowrap land-row-title">土地面积:</td><td class="two-row">{{inefficientLandData[3]}}亩</td>
+                </tr>
+                <!--<tr>
+                    <td class="nowrap land-row-title">已开发土地面积:</td><td>{{inefficientLandData[4]}}亩</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">未开发土地面积:</td><td class="two-row">{{inefficientLandData[5]}}亩</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">协议签订时间:</td><td>{{inefficientLandData[7] && inefficientLandData[7] != '/' ? inefficientLandData[7] : '未知'}}</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">项目总投资或固定资产:</td><td class="two-row">{{inefficientLandData[8] && inefficientLandData[8] != '/' ? inefficientLandData[8] : '未知'}}</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">协议约定建设规模（亩）:</td><td>{{inefficientLandData[9] && inefficientLandData[9] != '/' ? inefficientLandData[9] : '未知'}}</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">约定动工时间（年月日）:</td><td class="two-row">{{inefficientLandData[10] && inefficientLandData[10] != '/' ? inefficientLandData[10] : '未知'}}</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">约定竣工时间（年月日）:</td><td>{{inefficientLandData[11] && inefficientLandData[11] != '/' ? inefficientLandData[11] : '未知'}}</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">项目首期建成时间（年月日）:</td><td class="two-row">{{inefficientLandData[12] && inefficientLandData[12] != '/' ? inefficientLandData[12] : '未知'}}</td>
+                </tr>-->
+                <tr>
+                  <td class="nowrap land-row-title">实际建成规模（亩）:</td><td>{{inefficientLandData[13] && inefficientLandData[13] != '/' ? (inefficientLandData[13]/666).toFixed(2) : '未知'}}</td>
+                </tr>
+                <tr>
+                  <td class="nowrap land-row-title">未建成面积（亩）:</td><td class="two-row">{{inefficientLandData[14] && inefficientLandData[14] != '/' ? (inefficientLandData[14]/666).toFixed(2) : '未知'}}</td>
+                </tr>
+                <!--<tr>
+                    <td class="nowrap land-row-title">企业2015年年产值（万元）:</td><td>{{inefficientLandData[15] && inefficientLandData[15] != '/' ? inefficientLandData[15] : '未知'}}</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">企业2015年年销售收入（万元）:</td><td class="two-row">{{inefficientLandData[16] && inefficientLandData[16] != '/' ? inefficientLandData[16] : '未知'}}</td>
+                </tr>
+                <tr>
+                    <td class="nowrap land-row-title">是否有下一步用地需求:</td><td>{{inefficientLandData[17] && inefficientLandData[17] != '/' ? inefficientLandData[17] : '未知'}}</td>
+                </tr>-->
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+    </div>
+  </app-scrollbar>
+  </div>
+</div>
+<!--企业详情面板-->
+<div class="land-company-detail-box animated" [ngClass]="{'my-hide slideOutRight': !showCompanyDetail, 'slideInRight': showCompanyDetail}">
+  <!--<div class="company-detail-back-arrow"><span class="company-detail-back-arrow-btn"></span></div>-->
+  <div class="land-company-detail" *ngIf="companyData">
+    <div class="land-company-detail-hd">
+      <div class="company-detail-title"><img [src]="companyData.companyIcon ? companyData.companyIcon : '../../../../assets/images/company_list_logo.png'" class="logo" alt=""><span class="title">{{companyData.name}}</span></div>
+      <span class="close-company-detail" (click)="restPanelShowControl()"></span>
+    </div>
+    <div class="land-company-detail-bd">
+      <div class="land-company-detail-tab">
+        <ul class="flex">
+          <li class="detail-tab-item company-detail-basic" [ngClass]="{'active': showCompanyDetailTab == 1}" (click)="showCompanyDetailTab = 1">企业基本信息</li>
+          <li class="detail-tab-item company-detail-aptitude" [ngClass]="{'active': showCompanyDetailTab == 2}" (click)="showCompanyDetailTab = 2">企业综合评价</li>
+          <li class="detail-tab-item company-detail-credit" [ngClass]="{'active': showCompanyDetailTab == 3}" (click)="showCompanyDetailTab = 3">其他信息</li>
+        </ul>
+      </div>
+      <div class="land-company-detail-tab-con">
+        <app-scrollbar [ngClass]="{'my-hide': showCompanyDetailTab !== 1}">
+          <div class="land-company-detail-con">
+            <div class="company-detail-label">工商登记信息:</div>
+            <div class="company-detail-register">
+              <table class="table table-bordered">
+                <tr><td class="nowrap">地址(住所)</td><td>{{companyData.address ? companyData.address : '未知'}}</td><td class="nowrap">统一社会信用代码</td><td>{{companyData.creditCode ? companyData.creditCode : '未知'}}</td></tr>
+                <tr><td class="nowrap">组织机构代码</td><td>{{companyData.organizationCode ? companyData.organizationCode : '未知'}}</td><td class="nowrap">企业类型</td><td>{{companyData.enterpriseType ? companyData.enterpriseType : '未知'}}</td></tr>
+                <tr><td class="nowrap">行业类型</td><td>{{companyData.industryType ? companyData.industryType : '未知'}}</td><td class="nowrap">注册资本</td><td>{{companyData.funds ? companyData.funds : '未知'}}</td></tr>
+                <tr><td class="nowrap">注册资本币种</td><td>{{companyData.currencyType ? companyData.currencyType : "未知"}}</td><td class="nowrap">成立时间</td><td>{{companyData.establishTime | date:'yyyy-MM-dd'}}</td></tr>
+                <tr><td class="nowrap">营业期限自</td><td>{{companyData.operatingPeriodStrat | date:'yyyy-MM-dd'}}</td><td class="nowrap">营业期限至</td><td>{{companyData.operatingPeriodEnd | date:'yyyy-MM-dd'}}</td></tr>
+                <tr><td class="nowrap">经营范围</td><td colspan="3">{{companyData.range}}</td></tr>
+                <tr><td class="nowrap">登记机关</td><td colspan="3">{{companyData.registrationAuthority ? companyData.registrationAuthority : "未知"}}</td></tr>
+                <tr><td class="nowrap">登记状态</td><td>{{companyData.registrationType ? companyData.registrationType : "未知"}}</td><td class="nowrap">核准日期</td><td>{{companyData.approvedTime | date:'yyyy-MM-dd'}}</td></tr>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+            <div class="company-detail-label">企业所属机构:</div>
+            <div class="company-own-mechanism">
+              <table class="table table-bordered">
+                <tbody>
+                <tr>
+                  <th class="nowrap">名称</th>
+                  <th class="nowrap">地址</th>
+                  <th class="nowrap">获批时间</th>
+                  <th class="nowrap">类别</th>
+                  <th class="nowrap">依托单位</th>
+                  <!--<th>概况</th>-->
+                  <th class="nowrap">级别</th>
+                </tr>
+                <tr *ngFor="let data of companyData.CompanyRelyUnit">
+                  <td>{{data.name ? data.name : '未知'}}</td>
+                  <td>{{data.address ? data.address : '未知'}}</td>
+                  <td>{{data.approvalTime ? (data.approvalTime | date:'yyyy-MM-dd HH:mm:ss') : '未知'}}</td>
+                  <td>{{data.type ? data.type : '未知'}}</td>
+                  <td>{{data.relyUnit ? data.relyUnit : '未知'}}</td>
+                  <!--<td>${v.generalSituation ? v.generalSituation : '未知'}</td>-->
+                  <td>{{data.level ? data.level : '未知'}}</td>
+                </tr>
+                <tr *ngIf="!companyData.CompanyRelyUnit">
+                  <td colspan="6">暂无数据</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+            <div class="company-detail-label">土地补贴:<span id="land-subsidy">338923.94万元</span></div>
+            <!--<div id="land-subsidy">土地补贴</div>-->
+            <div class="company-detail-line"></div>
+            <div class="company-detail-label">规上/规下:<span id="scale-type">{{companyData.regulatoryCompanies ? companyData.regulatoryCompanies : '未知'}}</span></div>
+            <div class="company-detail-line"></div>
+            <div class="company-detail-label">是否有土地:<span id="has-land">{{companyData.isHasLand ? companyData.isHasLand : '未知'}}</span></div>
+            <div class="company-detail-line"></div>
+          </div>
+        </app-scrollbar>
+        <app-scrollbar [ngClass]="{'my-hide': showCompanyDetailTab !== 2}">
+          <div class="land-company-detail-con">
+            <div class="company-detail-overview-con">
+              <div class="company-detail-label">企业综合评价:</div>
+              <div id="evaluate" style="width: 500px;height: 300px;" echarts [options]="companyEvaluateEcharts"></div>
+              <div class="company-detail-line"></div>
+              <div class="company-detail-label">企业从业人员:</div>
+              <div id="personnel">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>年份</th>
+                    <th>人数(人)</th>
+                  </tr>
+                  <tr *ngFor="let data of companyData.chains">
+                    <td>{{data.year}}</td>
+                    <td>{{data.numberOfEmployees ? data.numberOfEmployees : "未知"}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="company-detail-line"></div>
+              <div class="company-detail-label">经济与能耗:</div>
+              <div id="business-income" style="width: 500px;height: 300px;" echarts [options]="companyChanzhiEnergyEcharts"></div>
+              <div class="company-detail-line"></div>
+              <div class="company-detail-label">产品:</div>
+              <div id="product">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>年份</th>
+                    <th>产品</th>
+                  </tr>
+                  <tr *ngFor="let data of companyData.chains">
+                    <td>{{data.year}}</td>
+                    <td>{{data.product ? data.product : "未知"}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="company-detail-line"></div>
+              <div class="company-detail-label">排污:</div>
+              <div id="foul-water">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>年份</th>
+                    <th>排污(kg)</th>
+                  </tr>
+                  <tr *ngFor="let data of companyData.chains">
+                    <td>{{data.year}}</td>
+                    <td>{{data.emissionsRights ? data.emissionsRights : "未知"}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="company-detail-line"></div>
+              <div class="company-detail-label">税收:</div>
+              <div id="tax-revenue">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>年份</th>
+                    <th>税收(千元)</th>
+                  </tr>
+                  <tr *ngFor="let data of companyData.chains">
+                    <td>{{data.year}}</td>
+                    <td>{{data.actualTax ? data.actualTax : "未知"}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="company-detail-line"></div>
+              <div class="company-detail-label">企业补贴:</div>
+              <div id="enterprise-subsidy">
+                <table class="table table-bordered">
+                  <tr>
+                    <th>年份</th>
+                    <th>补贴(千元)</th>
+                  </tr>
+                  <tr *ngFor="let data of companyData.chains">
+                    <td>{{data.year}}</td>
+                    <td>{{data.supportAmount ? data.supportAmount : "未知"}}</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="company-detail-line"></div>
+            </div>
+          </div>
+        </app-scrollbar>
+        <app-scrollbar [ngClass]="{'my-hide': showCompanyDetailTab !== 3}">
+          <div class="land-company-detail-con">
+            <div class="company-detail-label">企业资质信息</div>
+            <div class="company-detail-aptitude-con">
+              <table class="table table-bordered">
+                <tr><th>许可事项/证书名称</th><th>许可内容/范围</th><th>有效期至</th></tr>
+                <tr *ngFor="let data of companyData.certifications">
+                  <td>{{data.name}}</td>
+                  <td>{{data.content}}</td>
+                  <td class="nowrap">{{data.validityEnd ? (data.validityEnd | date:'yyyy-MM-dd') : '未知'}}</td>
+                </tr>
+                <tr *ngIf="companyData.certifications.length < 1">
+                  <td colspan="3">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+            <div class="company-detail-label">企业信用信息</div>
+            <div class="company-detail-credit-con">
+              <table class="table table-bordered">
+                <tr><th>正面类型</th><th>奖励事项/荣誉名称</th><th>表彰奖励内容</th><th>奖励级别/评级</th><th>年度</th></tr>
+                <tr *ngFor="let data of companyData.positiveCredit">
+                  <td>{{data.positiveCreditType ? data.positiveCreditType : '未知'}}</td>
+                  <td>{{data.name}}</td>
+                  <td>{{data.content ? data.content : '未知'}}</td>
+                  <td>{{data.validityEnd ? (data.validityEnd | date:'yyyy-MM-dd HH:mm:ss') : '未知'}}</td>
+                  <td class="nowrap">{{data.year}}</td>
+                </tr>
+                <tr *ngIf="companyData.positiveCredit.length < 1">
+                  <td colspan="5">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-badcredit-con">
+              <table class="table table-bordered">
+                <tr><th>负面类型</th><th>立案日期/决定日期</th><th>违法行为类型</th><th>处罚类型</th><th>行政处罚内容/原因</th></tr>
+                <tr *ngFor="let data of companyData.negativeCredit">
+                  <td>{{data.negativeCreditType}}</td>
+                  <td>{{data.date | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                  <td>{{data.illegalTypes}}</td>
+                  <td>{{data.punishmentType}}</td>
+                  <td>{{data.content}}</td>
+                </tr>
+                <tr *ngIf="companyData.negativeCredit.length < 1">
+                  <td colspan="5">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+            <!--税务登记-->
+            <div class="company-detail-label">税务登记信息</div>
+            <div class="company-detail-taxations-con">
+              <table class="table table-bordered">
+                <tr><th>注册类型</th><th>发证日期</th><th>主管税务机关</th><th>创建时间</th><th>修改时间</th></tr>
+                <tr *ngFor="let data of companyData.taxations">
+                  <td>{{data.registrationType ? data.registrationType : '未知'}}</td>
+                  <td>{{data.certificationDate ? (data.certificationDate | date:'yyyy-MM-dd HH:mm:ss') : '未知'}}</td>
+                  <td>{{data.taxAuthority ? data.taxAuthority : '未知'}}</td>
+                  <td class="nowrap">{{data.createDate ? (data.createDate | date:'yyyy-MM-dd HH:mm:ss') : '未知'}}</td>
+                  <td class="nowrap">{{data.modifyDate ? (data.modifyDate | date:'yyyy-MM-dd HH:mm:ss') : '未知'}}</td>
+                </tr>
+                <tr *ngIf="companyData.taxations.length < 1">
+                  <td colspan="5">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+            <!--商标-->
+            <div class="company-detail-label">企业商标信息</div>
+            <div class="company-detail-trademark-con">
+              <table class="table table-bordered">
+                <tr>
+                  <th>商标名称</th>
+                  <th>注册号</th>
+                  <th>分类码</th>
+                  <th>分类名</th>
+                  <th>申请日期</th>
+                  <th>商标链接</th>
+                  <th>流程日期</th>
+                  <th>流程内容</th>
+                </tr>
+                <tr *ngIf="trademarkName">
+                  <td>{{data.trademarkName ? data.trademarkName : '未知'}}</td>
+                  <td>{{data.regCode ? data.regCode : '未知'}}</td>
+                  <td>{{data.classificationCode ? data.classificationCode : '未知'}}</td>
+                  <td>{{data.classification ? data.classification : '未知'}}</td>
+                  <td>{{data.applicationDate ? data.applicationDate : '未知'}}</td>
+                  <td>{{data.pictureLink ? data.pictureLink : '未知'}}</td>
+                  <td>{{data.proccessDate ? data.proccessDate : '未知'}}</td>
+                  <td>{{data.processContent ? data.processContent : '未知'}}</td>
+                </tr>
+                <tr *ngIf="!trademarkName">
+                  <td colspan="8">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+            <!--专利-->
+            <div class="company-detail-label">企业专利信息</div>
+            <div class="company-detail-patent-con">
+              <table class="table table-bordered">
+                <tr>
+                  <th>专利名称</th>
+                  <th>类型</th>
+                  <th>申请日期</th>
+                  <th>专利号</th>
+                </tr>
+                <tr *ngFor="let data of companyData.patentsInfo">
+                  <td>{{data.patentName ? data.patentName : '未知'}}</td>
+                  <td>{{data.patentType ? data.patentType : '未知'}}</td>
+                  <td class="nowrap">{{data.applicationDate ? (data.applicationDate | date:'yyyy-MM-dd HH:mm:ss') : '未知'}}</td>
+                  <td>{{data.patentCode ? data.patentCode : '未知'}}</td>
+                </tr>
+                <tr *ngIf="!companyData.patentsInfo">
+                  <td colspan="4">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+            <!--著作权-->
+            <div class="company-detail-label">著作权信息</div>
+            <div class="company-detail-copyright-con">
+              <table class="table table-bordered">
+                <tr>
+                  <th>企业名称</th>
+                  <th>软件全称</th>
+                  <th>软件简称</th>
+                  <th>登记日期</th>
+                </tr>
+                <tr *ngIf="softwareName">
+                  <td>{{data.enterpriseName ? data.enterpriseName : '未知'}}</td>
+                  <td>{{data.softwareName ? data.softwareName : '未知'}}</td>
+                  <td>{{data.SoftwareAbbreviated ? data.SoftwareAbbreviated : '未知'}}</td>
+                  <td>{{data.regDate ? data.regDate : '未知'}}</td>
+                </tr>
+                <tr *ngIf="!softwareName">
+                  <td colspan="4">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-workscopyright-con">
+              <table class="table table-bordered">
+                <tr>
+                  <th>企业名称</th>
+                  <th>作品名称</th>
+                  <th>类别</th>
+                  <th>完成日期</th>
+                </tr>
+                <tr *ngIf="worksName">
+                  <td>{{data.enterpriseName ? data.enterpriseName : '未知'}}</td>
+                  <td>{{data.worksName ? data.worksName : '未知'}}</td>
+                  <td>{{data.worksType ? data.worksType : '未知'}}</td>
+                  <td>{{data.completedDate ? data.completedDate : '未知'}}</td>
+                </tr>
+                <tr *ngIf="!worksName">
+                  <td colspan="4">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+            <!--ICP备案-->
+            <div class="company-detail-label">ICP备案信息</div>
+            <div class="company-detail-icp-con">
+              <table class="table table-bordered">
+                <tr>
+                  <th>公司名称</th>
+                  <th>主页 URL</th>
+                  <th>备案许可号</th>
+                  <th>网站名称</th>
+                  <th>核查日期</th>
+                  <th>域名</th>
+                  <th>最后更新时间</th>
+                </tr>
+                <tr *ngIf="homepageURL">
+                  <td>{{data.enterpriseName ? data.enterpriseName : '未知'}}</td>
+                  <td>{{data.homepageURL ? data.homepageURL : '未知'}}</td>
+                  <td>{{data.websiteName ? data.websiteName : '未知'}}</td>
+                  <td>{{data.auditDate ? data.auditDate : '未知'}}</td>
+                  <td>{{data.domainName ? data.domainName : '未知'}}</td>
+                  <td>{{data.newestDate ? data.newestDate : '未知'}}</td>
+                </tr>
+                <tr *ngIf="!homepageURL">
+                  <td colspan="6">暂无数据</td>
+                </tr>
+              </table>
+            </div>
+            <div class="company-detail-line"></div>
+          </div>
+        </app-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>

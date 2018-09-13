@@ -14,9 +14,14 @@ import { MicrocosmicService } from '../../../microcosmic.service';
 })
 export class SocialSecurityComponent implements OnInit {
 
-  companyDetail: any;
+  companyDetailList: any = [];
   keyWord: any;
   CompanyDetailTips = '加载中...';
+  securityParams = {
+    companyName: '',
+    pageSize: 15,
+    lastRowKey: ''
+  };
   constructor(
     private companyBasicService: CompanyBasicService, private routerInfo: ActivatedRoute, private microcomicService: MicrocosmicService
   ) { }
@@ -24,6 +29,7 @@ export class SocialSecurityComponent implements OnInit {
   ngOnInit() {
     this.keyWord = this.microcomicService.getUrlParams('name');
     this.microcomicService.setCompanyName(this.keyWord);
+    this.securityParams.companyName = this.keyWord;
     this.getCompanyDetail();
   }
 
@@ -33,13 +39,14 @@ export class SocialSecurityComponent implements OnInit {
     /*this.companyBasicService.getCompanyDetail(this.keyWord).subscribe(res => {
       this.companyDetail = res.data;
     });*/
-    this.companyBasicService.getCompanySocialSecurity(this.keyWord).subscribe(res => {
+    this.companyBasicService.findListByUrl(this.securityParams, 'companySocialSecurityUrl').subscribe(res => {
       console.log('社会保障信息', res)
       if (res.responseCode === '_200') {
-        if (!res.data.informationPojo[0]) {
+        if (res.data.informationPojo.length < 1) {
           this.CompanyDetailTips = '暂无信息！';
         }
-        this.companyDetail = res.data.informationPojo[0];
+        this.companyDetailList = [...this.companyDetailList, ...res.data.informationPojo];
+        this.securityParams.lastRowKey = res.data.pagination.lastRowKey;
       }
     });
   }

@@ -1,26 +1,3 @@
-<div class='zdy-cover-mask' *ngIf="hasLoading">
-  <div class='zdy-big-mask'></div>
-  <div class="zdy-mask-con spinner">
-    <div class="spinner-container container1">
-      <div class="circle1"></div>
-      <div class="circle2"></div>
-      <div class="circle3"></div>
-      <div class="circle4"></div>
-    </div>
-    <div class="spinner-container container2">
-      <div class="circle1"></div>
-      <div class="circle2"></div>
-      <div class="circle3"></div>
-      <div class="circle4"></div>
-    </div>
-    <div class="spinner-container container3">
-      <div class="circle1"></div>
-      <div class="circle2"></div>
-      <div class="circle3"></div>
-      <div class="circle4"></div>
-    </div>
-  </div>
-</div>
 <div class="right-panel company-list animated slideInRight">
   <div class="panel-hd">
     <div class="title">
@@ -39,7 +16,8 @@
       <ul class="panel-menu" id="filterMenu">
         <perfect-scrollbar style="height: 100%">
           <li class="" (click)="enterpriseTypeClick()">全部</li>
-          <li *ngFor="let enterpriseType of enterpriseTypes" [ngClass]="{'active': enterpriseTypeActive[enterpriseType] || (selectType == enterpriseType && !enterpriseTypeActive[enterpriseType])}" (click)="enterpriseTypeClick(enterpriseType)">{{enterpriseType.length>6 ? enterpriseType.slice(0,6) + '...' : enterpriseType}}（{{enterpriseTypesNumber[enterpriseType]}}）</li>
+          <!--<li *ngFor="let enterpriseType of industryTypeList" [ngClass]="{'active': enterpriseTypeActive[enterpriseType] || (selectType == enterpriseType && !enterpriseTypeActive[enterpriseType])}" (click)="enterpriseTypeClick(enterpriseType)">{{enterpriseType.length>6 ? enterpriseType.slice(0,6) + '...' : enterpriseType}}（{{enterpriseTypesNumber[enterpriseType]}}）</li>-->
+          <li *ngFor="let industryType of industryTypeList" [ngClass]="{'active': selectType == industryType.industryType}" (click)="enterpriseTypeClick(industryType.industryType)">{{industryType.industryType.length>6 ? industryType.industryType.slice(0,6) + '...' : industryType.industryType}}（{{industryType.number}}）</li>
         </perfect-scrollbar>
       </ul>
     </div>
@@ -52,10 +30,10 @@
                 <div class="company-logo">
                   <img src="assets/images/company_logo.png" alt="">
                 </div>
-                <div class="info"[routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: company.rowKey}"> <!-- [routerLink]="['/mic/companyDetail', company?.rowKey]" -->
-                  <div class="name" [innerHTML]="company?.hilightName ? company?.hilightName : company?.name"></div>
-                  <span [innerHTML]="company?.enterpriseType"></span>
-                  <span class="num">{{company?.id}}</span>
+                <div class="info"[routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: company.company.rowKey}"> <!-- [routerLink]="['/mic/companyDetail', company?.rowKey]" -->
+                  <div class="name" [innerHTML]="company.company?.hilightName ? company.company?.hilightName : company.company?.name"></div>
+                  <span [innerHTML]="company.company?.industryType"></span>
+                  <span class="num">{{company.company?.id}}</span>
                 </div>
               </div>
             </div>

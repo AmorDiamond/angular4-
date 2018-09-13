@@ -1,95 +1,86 @@
-<div class="cygmCon">
-  <!--<div class="microcosmic_scroll" id="cygmCon">-->
-  <div class="flex flex-row">
-    <div class="column-box flex-cell">
-      <div class="panel-chart-box panel-chart-box1">
-        <div class="column_title_box">
-          <h3>总产值</h3>
-        </div>
-        <div class="panel-chart flex">
-          <div class="flex-cell">
-            <div class="flex-item">
-              <div id="jjgm_zcz" echarts [options]="totalOutputValueEchart" class="chart_div chart_div_border"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="column-box flex-cell">
-      <div class="panel-chart-box panel-chart-box2">
-        <div class="column_title_box">
-          <h3>企业规模</h3>
-        </div>
-        <div class="panel-chart flex">
-          <div class="flex-cell">
-            <div class="flex-item">
-              <div id="jjgm_qygm" echarts [options]="enterpriseScaleEchart" class="chart_div chart_div_border"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-row">
-    <div class="column-box flex-cell">
-      <div class="panel-chart-box panel-chart-box1">
-        <div class="column_title_box">
-          <h3>国家级基地</h3>
-        </div>
-        <div class="panel-chart flex">
-          <div class="flex-cell">
-            <div class="flex-item">
-              <div id="jjgm_gjjjd" echarts [options]="countryBaseEchart" class="chart_div chart_div_border"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="column-box flex-cell">
-      <div class="panel-chart-box panel-chart-box2">
-        <div class="column_title_box">
-          <h3>重点企业</h3>
-        </div>
-        <div class="panel-chart flex">
-          <div class="flex-cell">
-            <div class="flex-item">
-              <div id="jjgm_zdqy" echarts [options]="importantEnterpriseEchart" class="chart_div chart_div_border"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-row">
-    <div class="column-box flex-cell">
-      <div class="panel-chart-box panel-chart-box1">
-        <div class="column_title_box">
-          <h3>全球百强入住</h3>
-        </div>
-        <div class="panel-chart flex">
-          <div class="flex-cell">
-            <div class="flex-item">
-              <div id="jjgm_qqbqrz" echarts [options]="global00Echart" class="chart_div chart_div_border"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--<div class="column-box flex-cell">
-        <div class="panel-chart-box panel-chart-box1">
+<perfect-scrollbar>
+  <div class="panel-content">
+    <div class="cygmCon">
+      <!--<div class="microcosmic_scroll" id="cygmCon">-->
+      <div class="flex flex-row">
+        <div class="column-box flex-cell">
+          <div class="panel-chart-box panel-chart-box1">
             <div class="column_title_box">
-                <h3>公共性预算</h3>
+              <h3>总产值</h3>
             </div>
             <div class="panel-chart flex">
-                <div class="flex-cell">
-                    <div class="flex-item">
-                        <div id="jjgm_ggxys" class="chart_div chart_div_border"></div>
-                    </div>
+              <div class="flex-cell">
+                <div class="flex-item">
+                  <div id="jjgm_zcz" echarts [options]="totalOutputValueEchart" class="chart_div chart_div_border"></div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>-->
+
+        <!--<div class="column-box flex-cell">
+          <div class="panel-chart-box panel-chart-box2">
+            <div class="column_title_box">
+              <h3>企业规模</h3>
+            </div>
+            <div class="panel-chart flex">
+              <div class="flex-cell">
+                <div class="flex-item">
+                  <div id="jjgm_qygm" echarts [options]="enterpriseScaleEchart" class="chart_div chart_div_border"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>-->
+      </div>
+      <div class="flex flex-row">
+        <div class="column-box flex-cell">
+          <div class="panel-chart-box">
+            <div class="column_title_box">
+              <h3>重点企业</h3>
+            </div>
+            <div class="panel-chart flex">
+              <div class="flex-cell">
+                <div class="flex-item">
+                  <div id="jjgm_zdqy" echarts [options]="importantEnterpriseEchart" class="chart_div chart_div_border"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-row">
+        <div class="column-box flex-cell">
+          <div class="panel-chart-box">
+            <div class="column_title_box">
+              <h3>全球百强入住</h3>
+            </div>
+            <div class="panel-chart flex">
+              <div class="flex-cell">
+                <div class="flex-item">
+                  <div echarts [options]="global00Echart" class="chart_div chart_div_border"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-row">
+        <div class="column-box flex-cell">
+          <div class="panel-chart-box">
+            <div class="column_title_box">
+              <h3>企业数量</h3>
+            </div>
+            <div class="panel-chart flex">
+              <div class="flex-cell">
+                <div class="flex-item">
+                  <div echarts [options]="industryEnterpriseEchartData" class="chart_div chart_div_border"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</perfect-scrollbar>

@@ -20,42 +20,54 @@ export class EnterpriseTypeComponent implements OnInit {
   getData(streetName?) {
     this.streetName = streetName ? streetName : '东街';
     const params = {dataSupplyTime: new Date().getFullYear(), streetOffice: streetName? streetName : '东街'};
-    this.streetMenuService.getDataByParams(params, 'streetMenuUrl').subscribe(res => {
+    this.streetMenuService.getDataByParams({}, 'streetEnterpriseTypeUrl').subscribe(res => {
       console.log('街道数据', res)
-      if(res.responseCode === '_200') {
-        if(res.data.streetmap) {
-          this.creatEnterpriseTypeEchart(res.data.streetmap);
-        }
+      if (res.responseCode === '_200') {
+        this.creatEnterpriseTypeEchart(res.data);
       }
-    })
+    });
   }
   /*绘制企业类型图表*/
   creatEnterpriseTypeEchart(options) {
-    let xAxisData = [];
+    /*let xAxisData = [];
     let seriesData = [];
     options.forEach(res => {
-      xAxisData.push(res[0]);
-      seriesData.push(res[1]);
-    });
-    let echartTitle = this.streetName + '各登记类型的企业数量';
+      if (res[2] && res[0]) {
+        xAxisData.push(res[2]);
+        seriesData.push(res[1]);
+      }
+    });*/
+    const echartData = this.getPublicEchartData(options);
+    const xAxisData = echartData.xAxisData;
+    const series = echartData.series;
+    const legendData = echartData.legendData;
+    let echartTitle = '各登记类型的企业数量';
     const option = {
-      color:['#21cbee','#168aa1'],
-      title:{
+      // color:['#21cbee','#168aa1'],
+      title: {
         text: echartTitle,
-        textStyle:{
-          color:'#bcbdbf'
+        textStyle: {
+          color: '#bcbdbf'
         },
-        left:'center'
+        left: 'center'
+      },
+      grid: {
+        left: '3%',
+        right: '5%',
+        bottom: '5%',
+        containLabel: true
       },
       legend: {
-        data: ['登记类型'],
-        textStyle:{
-          color: "#bcbdbf"
+        show: false,
+        data: legendData,
+        textStyle: {
+          color: '#bcbdbf'
         },
         top: 30
       },
       tooltip: {
         trigger: 'axis',
+        confine: true,
         axisPointer: {
           type: 'shadow'
         }
@@ -63,7 +75,7 @@ export class EnterpriseTypeComponent implements OnInit {
       calculable: true,
       xAxis: [
         {
-          name:'类型',
+          name: '街道',
           nameTextStyle : {
             color : '#bcbdbf',
           },
@@ -91,7 +103,11 @@ export class EnterpriseTypeComponent implements OnInit {
           }
         }
       ],
-      series: [
+      dataZoom: [
+        {type: 'inside'}
+      ],
+      series: series
+        /*[
         {
           name: '登记数量',
           type: 'bar',
@@ -104,8 +120,63 @@ export class EnterpriseTypeComponent implements OnInit {
           },
           data: seriesData
         }
-      ]
+      ]*/
     };
     this.enterpriseTypeEchartData = option;
+  }
+
+  /*提取公共图表数据*/
+  getPublicEchartData(options, type?) {
+    const xAxisData = [];
+    const legendData = [];
+    const series = [];
+
+    const copyObjStreet = {};
+    const copyObjType = {};
+    options.forEach(res => {
+      if (res[2] && res[0]) {
+        const enterpriseType = res[0];
+        const street = res[2];
+        if (enterpriseType && copyObjType[enterpriseType]) {
+          copyObjType[enterpriseType].push(res);
+        }else if (enterpriseType) {
+          copyObjType[enterpriseType] = [];
+          copyObjType[enterpriseType].push(res);
+          legendData.push(enterpriseType);
+        }
+        if (street && !copyObjStreet[street]) {
+          copyObjStreet[street] = true;
+          xAxisData.push(street);
+        }
+      }
+    });
+    console.log(legendData, xAxisData)
+    /*将提取出来的按行业类型合并的数据处理成所需的seriesData数据格式*/
+    for (const item in copyObjType) {
+      const itemObj = {
+        name: '企业类型',
+        type: 'bar',
+        barMaxWidth: '30%',
+        data: new Array(xAxisData.length) // 不存在对应类型的数据时设置为0
+      };
+      for (let i = 0; i < itemObj.data.length; i++) {
+        itemObj.data[i] = 0;
+      }
+      itemObj.name = item;
+      copyObjType[item].forEach(res => {
+        const xAxisLabel = res[2];
+        if (xAxisLabel) {
+          const needData = res[1];
+          const index = xAxisData.indexOf(xAxisLabel); // 让series里data的数据位置和x轴坐标类型的数据对应。
+          if (itemObj.data[index]) {
+            itemObj.data[index] += needData ? Number(needData) : 0;
+          }else {
+            itemObj.data[index] = needData ? Number(needData) : 0;
+          }
+        }
+      });
+      series.push(itemObj);
+    }
+    return {xAxisData: xAxisData, legendData: legendData, series: series};
   }
 }

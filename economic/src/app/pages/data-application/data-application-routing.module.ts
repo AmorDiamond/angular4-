@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DataApplicationComponent } from "./data-application.component";
+import { DataApplicationComponent } from './data-application.component';
+import { DetailPageComponent } from './research-guide/detail-page/detail-page.component';
+import { ContactDetailPageComponent } from './contact-lookup/detail-page/detail-page.component';
+import { RecommendListComponent } from './quality-recommend/recommend-list/recommend-list.component';
 
 const routes: Routes = [
   {path: '', component: DataApplicationComponent, children: [
@@ -9,7 +12,10 @@ const routes: Routes = [
       {path: 'contactLookup', loadChildren: './contact-lookup/contact-lookup.module#ContactLookupModule'},
       {path: 'dataOutput', loadChildren: './data-output/data-output.module#DataOutputModule'},
       {path: 'qualityRecommend', loadChildren: './quality-recommend/quality-recommend.module#QualityRecommendModule'}
-    ]}
+    ]},
+  {path: 'researchDetail', component: DetailPageComponent},
+  {path: 'contactDetail', component: ContactDetailPageComponent},
+  {path: 'recommendList', component: RecommendListComponent},
 ];
 
 @NgModule({

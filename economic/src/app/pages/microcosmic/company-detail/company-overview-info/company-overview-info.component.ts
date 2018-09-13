@@ -28,6 +28,7 @@ export class CompanyOverviewInfoComponent implements OnInit {
   ) { }
   radarMapEchartData: any;
   inferiorityLists = [];
+  showTagData = false;
   echartsParams = { enterpriseName: 'test1', currentPage: 0, pageSize: 20, lastRowKey: '' };
   keyWord: any;
   ngOnInit() {
@@ -57,8 +58,11 @@ export class CompanyOverviewInfoComponent implements OnInit {
           this.creatRadarMap(indicator);
         }
         if (results[1].data.eAEvaluationPojos.length > 0) {
+          this.showTagData = true;
           this.creat3DcloudTag(results[1].data.eAEvaluationPojos);
-        }else {
+        }
+        /*else {
+          this.showTagData = true;
           const options = [
             {label: '测试数据'},
             {label: '测试数据'},
@@ -71,7 +75,7 @@ export class CompanyOverviewInfoComponent implements OnInit {
             {label: '测试数据'}
             ]
           this.creat3DcloudTag(options);
-        }
+        }*/
         if (results[2].data.eAEvaluationPojos.length > 0) {
           this.inferiorityLists = results[2].data.eAEvaluationPojos;
         }else {

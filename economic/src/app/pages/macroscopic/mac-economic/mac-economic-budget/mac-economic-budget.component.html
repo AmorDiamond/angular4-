@@ -24,7 +24,7 @@
         <div class="flex-item" echarts [options]="budgetOptions"></div>
       </div>
       <div class="flex-cell">
-        <div class="flex-item" echarts [options]="budgetDetailOptions"></div>
+        <div class="flex-item" echarts [options]="budgetAreaSpeedOptions"></div>
       </div>
     </div>
     <div class="flex">
@@ -37,8 +37,13 @@
           </tr>
           <tr [hidden]="budgetDataList.length<1" *ngFor="let item of budgetDataList">
             <td>{{item.quarterInfo}}</td>
-            <td>{{item.budget}}千万</td>
-            <td>{{item.addSpeed}}%</td>
+            <td>{{item.budget ? item.budget + '千万' : ''}}</td>
+            <td>{{item.addSpeed ? item.addSpeed + '%' : ''}}</td>
+          </tr>
+          <tr *ngIf="budgetDataList.length>0">
+            <td>总计</td>
+            <td>{{yearTotalOutput ? (yearTotalOutput).toFixed(2) + '千万' : ''}}</td>
+            <td>{{yearTotalAddspeed ? (yearTotalAddspeed / budgetDataList.length).toFixed(2) + '%' : ''}}</td>
           </tr>
           <tr *ngIf="budgetDataList.length<1">
             <td colspan="3">暂无信息！</td>
@@ -46,26 +51,17 @@
         </table>
       </div>
       <div class="flex-cell">
-        <table class="table table-bordered" id="table2">
+        <table class="table table-bordered text-c" id="table2">
           <tr>
-            <td>类型</td>
-            <td>金额</td>
+            <th>类型</th>
+            <th>金额</th>
           </tr>
-          <tr>
-            <td>环保</td>
-            <td>849万元</td>
+          <tr *ngFor="let item of budgetAreaAddSpeedList">
+            <td>{{item.areaRange}}</td>
+            <td>{{item.addSpeed}}%</td>
           </tr>
-          <tr>
-            <td>公共交通建设</td>
-            <td>425万元</td>
-          </tr>
-          <tr>
-            <td>民生</td>
-            <td>318万元</td>
-          </tr>
-          <tr>
-            <td>社保医疗</td>
-            <td>425万元</td>
+          <tr *ngIf="budgetAreaAddSpeedList.length<1">
+            <td colspan="2">暂无信息！</td>
           </tr>
         </table>
       </div>

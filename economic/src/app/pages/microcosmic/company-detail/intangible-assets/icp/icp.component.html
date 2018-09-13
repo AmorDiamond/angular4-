@@ -20,6 +20,9 @@
       <td>{{data.expirationDate | date:'yyyy-MM-dd'}}</td>
     </tr>
   </table>
+  <div class="load-more-info text-c" *ngIf="icpListPramas.lastRowKey">
+    <div class="load-more-con" (click)="getIcpList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+  </div>
   <div class="no-data-tips" *ngIf="icpList.length<1">
     {{IcpListTips}}
   </div>

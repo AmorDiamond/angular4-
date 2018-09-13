@@ -1,3 +1,250 @@
 .table-label{
     width: 120px;
 }
+.data-application-box{
+    height: 100%;
+    color: #bcbdbf;
+}
+.right-panel{
+    height: calc(100% - 50px);
+}
+.data-application-box .panel-content{
+    font-size: 16px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.back-box {
+    line-height: 50px;
+    margin-left: 16px;
+    height: inherit;
+    position: relative;
+    outline: none;
+}
+.back-box .back-btn {
+    display: inline-block;
+    width: 30px;
+    height: 24px;
+    vertical-align: middle;
+    color: #f9b620;
+    background: url("../../../../../assets/images/back_arrow.png") center no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+.data-application-box{
+    -webkit-border-radius:  10px 10px 6px 6px;
+    -moz-border-radius:  10px 10px 6px 6px;
+    -o-border-radius:  10px 10px 6px 6px;
+    -ms-border-radius:  10px 10px 6px 6px;
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(30%, #151411), color-stop(50%, #151816), to(#162c2e));
+    background: linear-gradient(to bottom right, #151411 30%, #151816 50%, #162c2e);
+}
+.research-detail-hd{
+    color: #7d85cb;
+    margin-bottom: 20px;
+}
+.border{
+    border: 1px solid #f9b62066;
+    border-radius: 6px;
+}
+.time{
+    display: inline-block;
+    color: #bcbdbf;
+    min-width: 234px;
+    padding: 10px;
+    margin-left: 20px;
+}
+.time .icon{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url("../../../../../assets/images/time_icon.png") no-repeat center;
+    background-size: contain;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.research-list-hd .column-company,.research-list-hd .column-add{
+    text-indent: 20px;
+}
+.column-index{
+    width: 5%;
+}
+.column-company{
+    width: 20%;
+}
+.column-add{
+    width: 25%;
+}
+.column-start,.column-end{
+    width: 15%;
+}
+.column-time{
+    width: 10%;
+}
+.column-move,.column-remove{
+    width: 5%;
+}
+.research-list-hd{
+    color: #7d85cb;
+    overflow: hidden;
+    height: 36px;
+    white-space: nowrap;
+}
+.research-list-item .column-index{
+    color: #f9b620;
+    font-size: 24px;
+    font-weight: bold;
+}
+.research-list-item .name{
+    font-size: 18px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.research-list-item .column-start .icon,.research-list-item .column-end .icon{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    background: url("../../../../../assets/images/list_time_icon.png") no-repeat center;
+    background-size: contain;
+    vertical-align: middle;
+}
+.research-list-item .column-move .prev-move:hover,.research-list-item .column-move .next-move:hover,.research-list-item .column-remove .icon-remove:hover{
+    opacity: .6;
+}
+.research-list-item .column-move .prev-move{
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url("../../../../../assets/images/prev_move_icon.png") no-repeat center;
+    background-size: contain;
+    margin: 0 auto 20px;
+    cursor: pointer;
+    transition: opacity .3s;
+}
+.research-list-item .column-move .next-move{
+    display: block;
+    width: 24px;
+    height: 24px;
+    background: url("../../../../../assets/images/next_move_icon.png") no-repeat center;
+    background-size: contain;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: opacity .3s;
+}
+.research-list-item .column-remove .icon-remove{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: url("../../../../../assets/images/remove_icon.png") no-repeat center;
+    background-size: contain;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: opacity .3s;
+}
+.research-list-item .column-con{
+    padding: 20px;
+    height: 90px;
+    line-height: 45px;
+}
+.research-list-item .column-company .column-con,.research-list-item .column-add .column-con{
+    line-height: normal;
+}
+.research-list-item .column-move .column-con{
+    padding: 10px 0;
+}
+.research-list-item .column-start .column-con,.research-list-item .column-end .column-con{
+    padding: 20px 10px;
+}
+.research-list-item{
+    overflow: hidden;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.research-list-item .industry{
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.research-list-item .list-column{
+    border-right: 1px solid #f9b62066;
+}
+.research-list-item .edit-address{
+    margin-left: 10px;
+    border: 1px solid #7d85cb;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    color: #7d85cb;
+    padding: 2px 4px;
+    cursor: pointer;
+}
+.research-list-item .warning-icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("../../../../../assets/images/warning_tips_icon.png") no-repeat center;
+    background-size: contain;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.download-btn{
+    color: #33363f;
+    padding: 10px 60px;
+    border: none;
+    border-radius: 4px;
+    background: #f9b620;
+    line-height: normal;
+    margin-left: 10px;
+    outline: none;
+}
+.download-btn:focus {
+    background: #f9b620cc;
+}
+.research-list-ft{
+    overflow: hidden;
+    line-height: 42px;
+    margin-top: 35px;
+}
+.column-add .icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("../../../../../assets/images/warning_tips_icon.png") no-repeat center;
+    background-size: contain;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.column-add .tips{
+    font-size: 14px;
+}
+.column-add .edit-input{
+    padding: 4px;
+    width: 64%;
+    background: none;
+    outline: none;
+}
+.column-add .edit-btn{
+    margin-left: 5px;
+    padding: 4px;
+    background: none;
+}
+.edit-border{
+    border: 1px solid #7d85cb;
+    border-radius: 4px;
+}
+/*.list-column input{
+    width: 50%;
+    background: none;
+    border: none;
+}*/
+.list-column .input-group-addon,.research-detail-hd .input-group-addon{
+    border: none;
+}
+.list-column .form_datetime,.research-detail-hd .form_datetime{
+    padding-bottom: 12px;
+}

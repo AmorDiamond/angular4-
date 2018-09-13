@@ -1,0 +1,62 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-support'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/Governmentsupportpojo/importExcel'}">EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-support'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/Governmentsupportpojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}&year={{getListParams.year}}"
+     download="{{getListParams.enterpriseName+'-'+ getListParams.year +'-'+'政府支持.xlsx'}}">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-support'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="政府支持模板.xlsx">EXCEL模板下载</a>
+  </button>
+  
+
+  <!-- <button class="excel-export">EXCEL模板下载</button> -->
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>企业名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="企业名称">
+    </div>
+    <div class="form-group">
+      <label>年度:</label>
+      <input type="text" class="form-control" name="dataSupplyTime" [(ngModel)]="getListParams.year" placeholder="年度">
+    </div>
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>企业名称</th>
+    <th>政策文件名称</th>
+    <th>享受政策条款名称/专项名称</th>
+    <th>扶持/补贴总金额（万元）</th>
+    <th>年份</th>
+    <th>实施部门</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of list">
+    <td class="nowrap">{{item.enterpriseName}}</td>
+    <td>{{item.policydocumentName}}</td>
+    <td>{{item.termName}}</td>
+    <td class="text-c nowrap">{{item.support_totalamount}}</td>
+    <td class="text-c nowrap">{{item.year}}</td>
+    <td class="text-c nowrap">{{item.department}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="row rowkey-pagination">
+  <div class="col-xs-12 col-12">
+    <nav aria-label="Page navigation">
+      <ul class="pager">
+        <li [ngClass]="{'disabled' : nowPagesNum < 1}"><a href="javascript:void(0)" (click)="pageChanged(-1)">上一页</a></li>
+        <li [ngClass]="{'disabled' : !getListParams.lastRowKey}"><a href="javascript:void(0)" (click)="pageChanged(1)">下一页</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

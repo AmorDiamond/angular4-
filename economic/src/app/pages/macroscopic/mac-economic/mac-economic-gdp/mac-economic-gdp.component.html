@@ -28,16 +28,15 @@
               <table class="table table-bordered text-c" id="GDP-info">
                   <tr><th>季度</th><th>金额</th></tr>
                   <tr *ngFor="let item of gdpDataList" [hidden]="gdpDataList.length<1"><td>{{item.quarterInfo}}</td><td>{{item.economicOutput}}亿元</td></tr>
+                  <tr *ngIf="yearTotalOutput"><td>总计</td><td>{{yearTotalOutput.toFixed(2)}}亿元</td></tr>
                   <tr *ngIf="gdpDataList.length<1"><td colspan="2">暂无信息！</td></tr>
               </table>
           </div>
           <div class="flex-cell">
-              <table class="table table-bordered" id="GDP-change-info">
-                  <tr><td>地区</td><td>增速</td></tr>
-                  <tr><td>中国</td><td>6.7%</td></tr>
-                  <tr><td>四川省</td><td>7.7%</td></tr>
-                  <tr><td>成都</td><td>7.7%</td></tr>
-                  <tr><td>高新区</td><td>8.5%</td></tr>
+              <table class="table table-bordered text-c" id="GDP-change-info">
+                  <tr><th>地区</th><th>增速</th></tr>
+                  <tr *ngFor="let item of gdpAddSpeedList" [hidden]="gdpAddSpeedList.length<1"><td>{{item.areaRange}}</td><td>{{item.addSpeed}}%</td></tr>
+                  <tr *ngIf="gdpAddSpeedList.length<1"><td colspan="2">暂无信息！</td></tr>
               </table>
           </div>
       </div>

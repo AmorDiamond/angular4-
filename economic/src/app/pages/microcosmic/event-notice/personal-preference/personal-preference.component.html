@@ -1,9 +1,9 @@
 <div class="personal-set-con">
   <div class="preference-con">
-    <div class="item" [ngClass]="{'active': preference.weiguan}" (click)="changePreference('weiguan')"><em></em>微观</div>
-    <div class="item" [ngClass]="{'active': preference.zhongguan}" (click)="changePreference('zhongguan')"><em></em>中观</div>
-    <div class="item" [ngClass]="{'active': preference.hongguan}" (click)="changePreference('hongguan')"><em></em>宏观</div>
-    <div class="item" [ngClass]="{'active': preference.manage}" (click)="changePreference('manage')"><em></em>管理端</div>
+    <div class="item" [ngClass]="{'active': preference.MICROSCOPIC}" (click)="changePreference('MICROSCOPIC')"><em></em>微观</div>
+    <div class="item" [ngClass]="{'active': preference.MESO}" (click)="changePreference('MESO')"><em></em>中观</div>
+    <div class="item" [ngClass]="{'active': preference.Macro}" (click)="changePreference('Macro')"><em></em>宏观</div>
+    <div class="item" [ngClass]="{'active': preference.MANAGEMENT}" (click)="changePreference('MANAGEMENT')"><em></em>管理端</div>
   </div>
   <div class="submit-con">
     <div class="btn" (click)="savePreference()">确认设置</div>

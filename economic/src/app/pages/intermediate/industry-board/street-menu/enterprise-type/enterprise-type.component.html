@@ -2,7 +2,7 @@
   <div class="panel-content m-t-20">
     <div class="flex">
       <div class="flex-cell">
-        <div *ngIf="enterpriseTypeEchartData" class="flex-item" echarts [options]="enterpriseTypeEchartData"></div>
+        <div *ngIf="enterpriseTypeEchartData" class="flex-item single-echart" echarts [options]="enterpriseTypeEchartData"></div>
         <div class="no-data-tips" *ngIf="!enterpriseTypeEchartData">
           暂无信息！
         </div>

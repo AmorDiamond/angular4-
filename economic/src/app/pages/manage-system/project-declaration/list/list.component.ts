@@ -52,7 +52,7 @@ export class ListComponent implements OnInit {
     private service: ProjectDeclarationService
   ) {
     this.getListParams = {
-      companyName: 'test1',
+      companyName: '',
       projectName: ''
     };
     this.list = [];
@@ -70,13 +70,22 @@ export class ListComponent implements OnInit {
         if (res.responseCode === '_200') {
           // console.log('获取项目申报列表', res.data.kETProjectDeclarationPojo);
           this.list = res.data.kETProjectDeclarationPojo;
+          if (this.list.length < 1) {
+            this.toastModalService.addToasts({ tipsMsg: '暂无信息！', type: 'info' });
+          }
         } else {
-          this.toastModalService.showErrorToast({ errorMsg: res.errorMsg });
+          this.toastModalService.addToasts({ tipsMsg: res.errorMsg, type: 'error' });
         }
       },
       err => {
-        this.toastModalService.showErrorToast({ errorMsg: err });
+        this.toastModalService.addToasts({ errorMsg: err, type: 'error' });
       }
     );
+  }
+  /*重置搜索*/
+  resetSearch() {
+    this.getListParams.companyName = '';
+    this.getListParams.projectName = '';
+    this.getList();
   }
 }

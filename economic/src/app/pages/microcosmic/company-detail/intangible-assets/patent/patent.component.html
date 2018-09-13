@@ -15,6 +15,9 @@
       <td class="nowrap">{{data.patentCode}}</td>
     </tr>
   </table>
+  <div class="load-more-info text-c" *ngIf="patentListPramas.lastRowKey">
+    <div class="load-more-con" (click)="getPatentList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+  </div>
   <div class="no-data-tips" *ngIf="patenList.length<1">
     {{PatentListTips}}
   </div>

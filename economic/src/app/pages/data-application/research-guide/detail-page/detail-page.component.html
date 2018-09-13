@@ -1,4 +1,94 @@
-<div class="panel-content m-t-20">
+<div class="data-application-box">
+  <div class="public-panel-title">
+    <div class="back-box fl" routerLink="/dataApplication">
+      <span class="back-btn"></span>
+    </div>
+    <h3>调研计划</h3>
+  </div>
+  <div class="right-panel">
+    <perfect-scrollbar>
+      <div class="panel-content">
+        <div class="research-detail-hd">
+            <span>从管委会中庭集中乘车出发</span>
+            <div class="time border">
+                <!--<span class="icon"></span><span>{{startResearchTime | date:'yyyy/MM/dd HH:mm'}}</span>-->
+                <span appTimepicker [startDate]="startResearchTime" [initDate]="startResearchTime" class="form_datetime" (changeTime)="changeStartResearchTime($event)">
+                  <span class="icon input-group-addon"></span>{{startResearchTime | date:'yyyy/MM/dd HH:mm'}}
+                </span>
+            </div>
+        </div>
+        <div class="research-list-hd">
+          <div class="column-index fl text-c">最优顺序</div>
+          <div class="column-company fl">已选企业</div>
+          <div class="column-add fl">地址<span class="icon"></span><span class="tips">以下地址不能识别，可点击修改</span></div>
+          <div class="column-start fl text-c">开始时间</div>
+          <div class="column-end fl text-c">结束时间</div>
+          <div class="column-time fl text-c">行车参考时长</div>
+          <div class="column-move fl text-c">移动</div>
+          <div class="column-remove fl text-c">移除</div>
+        </div>
+        <div class="research-list-con" *ngIf="!changeResearchTimeStatus">
+          <div class="research-list-item border" *ngFor="let item of selectedList;index as index">
+            <div class="list-column column-index fl">
+              <div class="column-con text-c">{{item.order}}</div>
+            </div>
+            <div class="list-column column-company fl">
+              <div class="column-con">
+                <div class="name">{{item.name}}</div>
+                <div class="industry" [innerHTML]="item.industryType"></div>
+              </div>
+            </div>
+            <div class="list-column column-add fl">
+              <div class="column-con" *ngIf="editAddressId != item.name">
+                <span class="warning-icon" *ngIf="item.errorAddress"></span>{{item.address}}<span appAccessControl [accessData]="'edit-research-address'" class="edit-address" *ngIf="item.errorAddress" (click)="editAddress(item.name,index)">修改</span>
+              </div>
+              <div class="column-con edit-address-con text-c" *ngIf="editAddressStatus && editAddressId == item.name">
+                <input type="text" [(ngModel)]="editAddressInfo" class="edit-input edit-border"><button appAccessControl [accessData]="'edit-research-address'" [buttonAccess]="true" class="edit-btn edit-border" (click)="saveAddress(index)">保存</button><button class="edit-btn edit-border" (click)="editAddressStatus = false;editAddressId = ''">取消</button>
+              </div>
+            </div>
+            <div class="list-column column-start fl">
+              <div class="column-con text-c">
+                <!--<span class="icon"></span>{{item.startDate | date:'yyyy/MM/dd HH:mm'}}-->
+                  <span appTimepicker [startDate]="startResearchTime" [endDate]="endWorkerTime" [maxView]="1" [initDate]="item.startDate" class="form_datetime" (changeTime)="changeTime($event,index, 'startDate')">
+                      <span class="icon input-group-addon"></span>{{item.startDate | date:'yyyy/MM/dd HH:mm'}}
+                  </span>
+              </div>
+            </div>
+            <div class="list-column column-end fl">
+              <div class="column-con text-c">
+                <!--<span class="icon"></span>{{item.endDate | date:'yyyy/MM/dd HH:mm'}}-->
+                  <span appTimepicker [startDate]="startResearchTime" [endDate]="endWorkerTime" [maxView]="1" [initDate]="item.endDate" class="form_datetime" (changeTime)="changeTime($event,index, 'endDate')">
+                      <span class="icon input-group-addon"></span>{{item.endDate | date:'yyyy/MM/dd HH:mm'}}
+                  </span>
+              </div>
+            </div>
+            <div class="list-column column-time fl">
+              <div class="column-con text-c">{{item.referenceTime}}分钟</div>
+            </div>
+            <div class="list-column column-move fl">
+              <div class="column-con text-c">
+                <div class="move-icon-con">
+                  <span class="prev-move" (click)="prevNextMove('prev',index)"></span>
+                  <span class="next-move" (click)="prevNextMove('next',index)"></span>
+                </div>
+              </div>
+            </div>
+            <div class="column-remove fl">
+              <div class="column-con text-c">
+                <span class="icon-remove" (click)="removeCompany(index)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="research-list-ft">
+          <button appAccessControl [accessData]="'down-research-detail'" [buttonAccess]="true" class="download-btn fr" (click)="downLoad()">下载</button><span class="fr">调研时间：{{startResearchTime | date:'yyyy年MM月dd日 HH:mm'}}-{{endResearchTime | date:'HH:mm'}}</span>
+        </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+</div>
+
+<!--<div class="panel-content m-t-20">
   <div class="panel-item-title">企业概况</div>
   <div *ngIf="companyName == '成都国腾实业集团有限公司'">
     <table class="table table-bordered">
@@ -27,4 +117,4 @@
     暂无信息！
   </div>
   <a href="/economicSystem/assets/templateExcel.xlsx" target="_blank" [download]="downLoadName"><button class="btn btn-warning">下载调查问卷</button></a>
-</div>
+</div>-->

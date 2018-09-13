@@ -5,7 +5,7 @@ import { CHANGE } from '../../../../../core/container-ngrx/container.action';
 import { IntermediateService } from '../../../intermediate.service';
 import { IndustryMenuService } from "../industry-menu.service";
 
-declare var echarts: any;
+declare var $: any;
 @Component({
   selector: 'app-enterprise-fenbu',
   templateUrl: './enterprise-fenbu.component.html',
@@ -20,7 +20,7 @@ export class EnterpriseFenbuComponent implements OnInit {
   ) {
     this.store.pipe(select('container'));
   }
-
+  revenueTime = new Date().getFullYear() - 1;
   ngOnInit() {
       /*显示当前菜单二级菜单*/
       this.intermediateService.showIndustryMenus('IndustryMenu');
@@ -31,25 +31,38 @@ export class EnterpriseFenbuComponent implements OnInit {
           }
       });
       setTimeout(() => {
-        this.getData();
+        this.getData(this.revenueTime);
       }, 500);
+    /*时间控制*/
+    $('#datetimepicker-enterprise-fenbu').datetimepicker({
+      autoclose: 1,
+      startView: 4,
+      minView: 4,
+      forceParse: 0,
+      startDate: 2015,
+      endDate: new Date().getFullYear(),
+      initialDate: new Date().getFullYear() - 1
+    }).on('changeYear', (ev) => {
+      const chooseTime = new Date(ev.date.valueOf()).getFullYear();
+      this.revenueTime = chooseTime;
+      this.getData(this.revenueTime);
+    });
 
   }
   /*获取数据*/
-  getData() {
-    this.industryMenuService.getDataByParams({}, 'enterpriseFenbuUrl').subscribe(res => {
+  getData(year) {
+    const pramas = {year: year};
+    this.industryMenuService.getDataByParams(pramas, 'enterpriseFenbuUrl').subscribe(res => {
       console.log('分布数据', res);
-      if(res.responseCode === '_200') {
-        if(res.data.importputmap) {
-          let formatData = [];
-          let options = res.data.importputmap;
-          options.forEach(res => {
-            if(res && res.industry_type){
-              formatData.push(res);
-            }
-          });
-          this.creatEnterpriseEchart(formatData)
-        }
+      if (res.responseCode === '_200') {
+        let formatData = [];
+        let options = res.data;
+        options.forEach(res => {
+          if (res && res[2]) {
+            formatData.push(res);
+          }
+        });
+        this.creatEnterpriseEchart(formatData)
       }
     });
   }
@@ -58,7 +71,12 @@ export class EnterpriseFenbuComponent implements OnInit {
     let legendData = [];
     let xAxisData = [];
     let series = [];
-    const labelOption = {
+    let seriesData = [];
+    options.forEach(res => {
+      xAxisData.push(res[2]);
+      seriesData.push(res[0]);
+    });
+    /*const labelOption = {
       normal: {
         rotate: 90,
         align: 'left',
@@ -71,48 +89,51 @@ export class EnterpriseFenbuComponent implements OnInit {
     let copyObjType = {};
     options.forEach(res => {
       let year = res.year;
-      let type = res.industry_type;
-      if(type && copyObjType[type]){
+      let type = res[2];
+      if (type && copyObjType[type]) {
         copyObjType[type].push(res);
-      }else if(type){
+      }else if (type) {
         copyObjType[type] = [];
         copyObjType[type].push(res);
         legendData.push(type);
       }
     });
-    /*x轴年份包含为近4年*/
+    /!*x轴年份包含为近4年*!/
     let startYear = new Date().getFullYear() - 4;
     let endYear = startYear + 4;
-    for(let i = startYear; i < endYear; i++){
-      xAxisData.push(i)
+    for (let i = startYear; i < endYear; i++) {
+      xAxisData.push(i);
     }
 
-    /*将提取出来的按行业类型合并的数据处理成所需的seriesData数据格式*/
-    for(let item in copyObjType) {
+    /!*将提取出来的按行业类型合并的数据处理成所需的seriesData数据格式*!/
+    for (let item in copyObjType) {
       const itemObj = {
         name: '行业类型',
         type: 'bar',
         label: labelOption,
-        data: new Array(xAxisData.length) //不存在对应类型的数据时设置为0
+        data: new Array(xAxisData.length) // 不存在对应类型的数据时设置为0
       };
-      for(let i = 0; i< itemObj.data.length; i++) {
+      for (let i = 0; i < itemObj.data.length; i++) {
         itemObj.data[i] = 0;
       }
       itemObj.name = item;
       copyObjType[item].forEach(res => {
-        if(res.year){
-          let index = xAxisData.indexOf(Number(res.year)); // 让series里data的数据位置和x轴坐标类型的数据对应。
-          if(itemObj.data[index]) {
-            itemObj.data[index] += res.count;
+        const year = res[1];
+        const needData = res[0];
+        if (year) {
+          let index = xAxisData.indexOf(Number(year)); // 让series里data的数据位置和x轴坐标类型的数据对应。
+          if (itemObj.data[index]) {
+            itemObj.data[index] += Number(needData);
           }else {
-            itemObj.data[index] = res.count;
+            itemObj.data[index] = Number(needData);
           }
         }
       });
-      series.push(itemObj)
-    }
+      series.push(itemObj);
+    }*/
     const option = {
       // color: ['#9ea8ff', '#6f75b3', '#414469', '#21cbee', '#168aa1', '#0d4954'],
+      color: ['#1eb5d4'],
       tooltip: {
         trigger: 'axis',
         confine: true,
@@ -121,13 +142,14 @@ export class EnterpriseFenbuComponent implements OnInit {
         }
       },
       grid: {
-        top: 80,
+        // top: 80,
         left: '3%',
-        right: '3%',
+        right: '5%',
         bottom: '5%',
         containLabel: true
       },
       legend: {
+        show: false,
         data: legendData,
         textStyle: {
           color: '#bcbdbf'
@@ -137,7 +159,7 @@ export class EnterpriseFenbuComponent implements OnInit {
       calculable: true,
       xAxis: [
         {
-          name: '年',
+          name: '类型',
           nameTextStyle: {
             color: '#bcbdbf'
           },
@@ -166,7 +188,14 @@ export class EnterpriseFenbuComponent implements OnInit {
           }
         }
       ,
-      series: series
+      dataZoom: [
+        {type: 'inside'}
+        ],
+      series: {
+        name: '企业数量',
+        type: 'bar',
+        data: seriesData
+      }
     };
     this.enterpriseData = option;
   }

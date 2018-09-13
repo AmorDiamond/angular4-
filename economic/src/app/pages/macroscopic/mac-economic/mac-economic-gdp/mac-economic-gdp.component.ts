@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MacEconomicGdpService } from './mac-economic-gdp.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ToastModalService } from '../../../../shared/toast-modal/toast-modal.service';
 declare var $: any;
 
 @Component({
@@ -16,20 +17,23 @@ export class MacEconomicGdpComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   revenueTime = new Date().getFullYear() - 1;
   gdpDataList = [];
+  gdpAddSpeedList = [];
+  yearTotalOutput = 0;
   constructor(
-    private macEconomicGdpService: MacEconomicGdpService
+    private macEconomicGdpService: MacEconomicGdpService,
+    private toastModalService: ToastModalService
   ) { }
 
   ngOnInit() {
 
     /*时间控制*/
-    $("#datetimepicker-maceco").datetimepicker({
+    $('#datetimepicker-maceco').datetimepicker({
       autoclose: 1,
       startView: 4,
       minView: 4,
       forceParse: 0,
       startDate: 2015,
-      endDate: new Date().getFullYear() - 1,
+      endDate: new Date().getFullYear(),
       initialDate: new Date().getFullYear() - 1
     }).on('changeYear', (ev) => {
       const chooseTime = new Date(ev.date.valueOf()).getFullYear();
@@ -49,15 +53,18 @@ export class MacEconomicGdpComponent implements OnInit, OnDestroy {
     const time = year;
     this.macEconomicGdpService.findListByParams({year: time}, 'macGdpByYearUrl').subscribe(res => {
       console.log('GDP数据', res);
-      if(res.responseCode === '_200') {
-       this.gdpDataList = res.data;
-
+      if (res.responseCode === '_200') {
+       this.gdpDataList = res.data.sort(this.stringCompareFn('quarterInfo'));
+        this.yearTotalOutput = 0;
         const formatData = {xAxis: [], series: []};
-        this.gdpDataList.forEach(res => {
-          formatData.xAxis.push(res.quarterInfo);
-          formatData.series.push(res.economicOutput);
+        this.gdpDataList.forEach(item => {
+          formatData.xAxis.push(item.quarterInfo);
+          formatData.series.push(item.economicOutput);
+          this.yearTotalOutput += item.economicOutput;
         });
-        this.creatGdpEcahrt(formatData)
+        this.creatGdpEcahrt(formatData);
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
     });
   }
@@ -94,7 +101,7 @@ export class MacEconomicGdpComponent implements OnInit, OnDestroy {
           axisTick: {
             alignWithLabel: true
           },
-          data: ['一季度', '二季度', '三季度', '四季度'],
+          data: xAxisData,
           axisLabel: {
             textStyle: {
               color: '#bcbdbf',
@@ -146,18 +153,43 @@ export class MacEconomicGdpComponent implements OnInit, OnDestroy {
     const time = year;
     this.macEconomicGdpService.findListByParams({year: time}, 'macGdpSpeedByYearUrl').subscribe(res => {
       console.log('GDP增速数据', res);
-      if(res.responseCode === '_200') {
+      if (res.responseCode === '_200') {
+        this.gdpAddSpeedList = [];
         const options  = res.data;
+        const formatData = {yAxisData: [], seriseData: []};
+        const copyObjType = {};
+        options.forEach(item => {
+          const areaRange = item.areaRange;
+          if (areaRange && copyObjType[areaRange]) {
+            /*返回的数据是各个地区四个季度的数据，需要相加获取一年增速*/
+            copyObjType[areaRange].addSpeed += item.addSpeed;
+            copyObjType[areaRange].quarterNum += 1;
+          }else if (areaRange) {
+            copyObjType[areaRange] = {};
+            copyObjType[areaRange]['addSpeed'] = 0;
+            copyObjType[areaRange]['quarterNum'] = 1;
+            copyObjType[areaRange]['addSpeed'] += item.addSpeed;
+          }
+        });
+        console.log(copyObjType)
+        for (const item in copyObjType) {
+          formatData.yAxisData.push(item);
+          const yearAddSpeed = (copyObjType[item].addSpeed / copyObjType[item].quarterNum).toFixed(2);
+          formatData.seriseData.push(yearAddSpeed);
+          this.gdpAddSpeedList.push({areaRange: item, addSpeed: yearAddSpeed});
+        }
+
+        const data = formatData;
+        this.creatGdpSpeedEchart(data);
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
     });
-    const optionsZs17 = [8.0, 9.32, 8.1, 6.9];
-
-    const options = {data: optionsZs17};
-    this.creatGdpSpeedEchart(options);
   }
   /*绘制宏观GDP增速图表*/
   creatGdpSpeedEchart(options) {
-    const seriseData = options.data;
+    const seriseData = options.seriseData;
+    const yAxisData = options.yAxisData;
     const colors7 = ['#8e97e6', '#d14a61', '#675bba'];
     const gdpGrowthRateOptions = {
       title: {
@@ -196,7 +228,7 @@ export class MacEconomicGdpComponent implements OnInit, OnDestroy {
       },
       yAxis: {
         type: 'category',
-        data: ['高新区', '成都', '四川省', '中国'],
+        data: yAxisData,
         boundaryGap: ['20%', '20%'],
         axisLabel: {
           textStyle: {
@@ -224,6 +256,14 @@ export class MacEconomicGdpComponent implements OnInit, OnDestroy {
       ]
     };
     this.gdpGrowthRateOptions = gdpGrowthRateOptions;
+  }
+  /*格式化排序*/
+  stringCompareFn(prop, type?) {
+    return function (obj1, obj2) {
+      const val1 = obj1[prop];
+      const val2 = obj2[prop];
+      return val1.localeCompare(val2);
+    };
   }
 
 }

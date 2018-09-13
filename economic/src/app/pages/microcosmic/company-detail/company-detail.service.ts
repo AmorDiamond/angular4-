@@ -77,6 +77,18 @@ export class CompanyDetailService {
 
     return this.http.get<CompanyDetailResponse>(this.URLS[data.type], { params });
   }
+
+  findListByUrl(findParams, type): Observable<any> {
+    let paramsString = '';
+    const url = this[type];
+    for (const key in findParams) {
+      if (findParams.hasOwnProperty(key)) {
+        paramsString += findParams[key] ? `${key}=${findParams[key]}&` : '';
+      }
+    }
+    const params = new HttpParams({ fromString: paramsString });
+    return this.http.get(url, { params });
+  }
   getHiTechCertification(rowkey): Observable<any> {
     return this.http.get(`${this.URLS.HiTechCertification + rowkey}`);
   }

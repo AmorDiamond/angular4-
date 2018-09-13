@@ -21,31 +21,39 @@
     </div>
     <div class="flex">
       <div class="flex-cell">
-        <div class="flex-item" echarts [options]="incomeOptions"></div>
+        <div class="flex-item single-echart" echarts [options]="incomeOptions"></div>
       </div>
-      <div class="flex-cell">
+      <!--<div class="flex-cell">
         <div class="flex-item" echarts [options]="incomeTypeOptions"></div>
-      </div>
+      </div>-->
     </div>
     <div class="flex">
       <div class="flex-cell">
         <table class="table table-bordered text-c" id="table1">
           <tr>
             <th>季度</th>
-            <th>金额</th>
-            <th>同比增速</th>
+            <th>城乡人均收入</th>
+            <th>城乡增速</th>
+            <th>城镇人均收入</th>
+            <th>城镇增速</th>
+            <th>农村人均收入</th>
+            <th>农村增速</th>
           </tr>
           <tr [hidden]="peopleIncomeDataList.length<1" *ngFor="let item of peopleIncomeDataList">
             <td>{{item.quarterInfo}}</td>
-            <td>{{item.avgincome}}元</td>
-            <td>{{item.addSpeed}}%</td>
+            <td>{{item.urbanAndRuralAverageIncome ? item.urbanAndRuralAverageIncome + '元' : ''}}</td>
+            <td>{{item.urbanAndRuralAverageIncomeRate ? item.urbanAndRuralAverageIncomeRate + '%' : ''}}</td>
+            <td>{{item.citizensAverageIncome ? item.citizensAverageIncome + '元' : ''}}</td>
+            <td>{{item.citizensAverageIncomeRate ? item.citizensAverageIncomeRate + '%' : ''}}</td>
+            <td>{{item.ruralAverageIncome ? item.ruralAverageIncome + '元' : ''}}</td>
+            <td>{{item.ruralAverageIncomeRate ? item.ruralAverageIncomeRate + '%' : ''}}</td>
           </tr>
           <tr *ngIf="peopleIncomeDataList.length<1">
-            <td colspan="3">暂无信息！</td>
+            <td colspan="7">暂无信息！</td>
           </tr>
         </table>
       </div>
-      <div class="flex-cell">
+      <!--<div class="flex-cell">
         <table class="table table-bordered" id="table2">
           <tr>
             <td>类型</td>
@@ -68,7 +76,7 @@
             <td>30%</td>
           </tr>
         </table>
-      </div>
+      </div>-->
     </div>
   </div>
 </perfect-scrollbar>

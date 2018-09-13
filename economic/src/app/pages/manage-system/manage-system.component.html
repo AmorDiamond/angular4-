@@ -7,64 +7,177 @@
 </header>
 <div class="admin-container">
   <div class="left-bar">
-    <ul class="nav-list">
-      <li class="nav_item">
-        <a routerLink="import" routerLinkActive="active" (click)="changeMenuShow()">
+    <perfect-scrollbar>
+      <ul class="nav-list">
+      <!--<li class="nav_item" routerLinkActive="active">
+        <a class="top-menu" routerLink="import">
           <i class="fa fa-handshake-o  fa-fw"></i>EXCEL导入
           <i class="arrow fa fa-angle-right"></i>
         </a>
-      </li>
-      <li class="nav_item">
-        <a routerLink="users" routerLinkActive="active" (click)="changeMenuShow()">
+      </li>-->
+      <li appAccessControl [accessData]="'manager-userlist'" class="nav_item" routerLinkActive="active">
+        <a class="top-menu" routerLink="users">
           <i class="fa fa-user-o fa-fw"></i>用户管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
-      <li class="nav_item">
-        <a routerLink="roles" routerLinkActive="active" (click)="changeMenuShow('user')">
+      <li appAccessControl [accessData]="['manager-roleslist','manager-function-list']" class="nav_item" routerLinkActive="active" [ngClass]="{'active': routerUrl == 'roles' || menusUrl == 'roles'}">
+        <a class="top-menu" (click)="changeMenuShow('roles')">
           <i class="fa fa-vcard-o fa-fw"></i>权限管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
+        <ul class="drown-menu">
+          <li appAccessControl [accessData]="'manager-roleslist'">
+            <a routerLink="roles/rolesList" routerLinkActive="active">角色管理</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-function-list'">
+            <a routerLink="roles/function" routerLinkActive="active">功能管理</a>
+          </li>
+        </ul>
       </li>
-      <ul class="drown-menu" *ngIf="menusControl.user">
-        <li>
-          <a routerLink="roles/rolesList" routerLinkActive="active">角色管理</a>
-        </li>
-        <li>
-          <a routerLink="roles/function" routerLinkActive="active">功能管理</a>
-        </li>
-      </ul>
-      <li class="nav_item">
-        <a routerLink="mechanismManege" routerLinkActive="active" (click)="changeMenuShow()">
-          <i class="fa fa-book fa-fw"></i>机构管理
+      <li appAccessControl [accessData]="'manager-mechanism-manage'" class="nav_item" routerLinkActive="active">
+        <a class="top-menu" routerLink="mechanismManege">
+          <i class="fa fa-institution fa-fw"></i>机构管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
-      <li class="nav_item">
-        <a routerLink="logsManage" routerLinkActive="active" (click)="changeMenuShow()">
+      <li appAccessControl [accessData]="['manager-register-category','manager-industry-category']" class="nav_item" routerLinkActive="active" [ngClass]="{'active': routerUrl == 'category' || menusUrl == 'category'}">
+        <a class="top-menu" (click)="changeMenuShow('category')">
+          <i class="fa fa-sitemap fa-fw"></i>码表管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+        <ul class="drown-menu">
+          <li appAccessControl [accessData]="'manager-register-category'">
+            <a routerLink="category/registerCategory" routerLinkActive="active">注册类型</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-register-category'">
+            <a routerLink="category/TradeCategory" routerLinkActive="active">行业类别</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-industry-category'">
+            <a routerLink="category/industryCategory" routerLinkActive="active">产业类别</a>
+          </li>
+        </ul>
+      </li>
+      <li appAccessControl [accessData]="'manager-logs-manage'" class="nav_item" routerLinkActive="active">
+        <a class="top-menu" routerLink="logsManage">
           <i class="fa fa-book fa-fw"></i>日志管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
-      <li class="nav_item">
-        <a routerLink="project-declaration" routerLinkActive="active" (click)="changeMenuShow()">
+      <li appAccessControl [accessData]="'manager-industry-manage'" class="nav_item" routerLinkActive="active">
+        <a class="top-menu" routerLink="industryManage">
+          <i class="fa fa-industry fa-fw"></i>产业管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+      </li>
+      <!--<li appAccessControl [accessData]="'manager-project-declaration'" class="nav_item" routerLinkActive="active">
+        <a class="top-menu" routerLink="project-declaration">
           <i class="fa fa-pencil-square-o fa-fw"></i>项目申报管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
-      <li class="nav_item">
-        <a routerLink="eqi-hi-tech-certification" routerLinkActive="active" (click)="changeMenuShow()">
+      <li appAccessControl [accessData]="'manager-high-enterprise'" class="nav_item" routerLinkActive="active">
+        <a class="top-menu" routerLink="eqi-hi-tech-certification">
           <i class="fa fa-gavel fa-fw"></i>高企认证管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
-      <li class="nav_item">
-        <a routerLink="scale-library" routerLinkActive="active" (click)="changeMenuShow()">
+      <li class="nav_item" routerLinkActive="active">
+        <a class="top-menu" routerLink="scale-library">
           <i class="fa fa-rocket fa-fw"></i>上规入库管理
           <i class="arrow fa fa-angle-right"></i>
         </a>
+      </li>-->
+
+        <li appAccessControl [accessData]="[
+        'manager-torch-map',
+        'manager-incometax',
+        'manager-government-praise',
+        'manager-government-support',
+        'manager-building-occupancy',
+        'manager-environmental-pollution',
+        'manager-moveout-list',
+        'manager-energy-consumption',
+        'manager-famous-product',
+        'manager-upper-certif',
+        'manager-upper-scale',
+        'manager-macro-gdp',
+        'manager-pillar-industry',
+        'manager-fixed-investment',
+        'manager-public-budget',
+        'manager-public-expenditure',
+        'manager-peopleincome'
+        ]" class="nav_item" routerLinkActive="active" [ngClass]="{'active': routerUrl == 'formManager' || menusUrl == 'formManager'}">
+        <a class="top-menu"  (click)="changeMenuShow('formManager')">
+          <i class="fa fa-folder-open-o fa-fw"></i>表单管理
+          <i class="arrow fa fa-angle-right"></i>
+        </a>
+        <ul class="drown-menu">
+          <li appAccessControl [accessData]="'manager-torch-map'">
+            <a routerLink="formManager/torch" routerLinkActive="active">火炬表</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-incometax'">
+            <a routerLink="formManager/taxData" routerLinkActive="active">税务数据</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-government-praise'">
+            <a routerLink="formManager/praise" routerLinkActive="active">政府表彰</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-government-support'">
+            <a routerLink="formManager/stansBy" routerLinkActive="active">政府支持</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-building-occupancy'">
+            <a routerLink="formManager/buildingEnterprise" routerLinkActive="active">楼宇入驻企业</a>
+          </li>
+
+          <li appAccessControl [accessData]="'manager-environmental-pollution'">
+            <a routerLink="formManager/environmentalProtection" routerLinkActive="active">企业环保排污</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-moveout-list'">
+            <a routerLink="formManager/moveOut" routerLinkActive="active">企业迁出名单</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-energy-consumption'">
+            <a routerLink="formManager/energyConsumption" routerLinkActive="active">企业综合能耗</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-famous-product'">
+            <a routerLink="formManager/famousExcellent" routerLinkActive="active">名优产品</a>
+          </li>
+          <li appAccessControl [accessData]="'manager-upper-certif'">
+            <a routerLink="formManager/otherQualifications" routerLinkActive="active">其他资质</a>
+          </li>
+          
+          <li appAccessControl [accessData]="'manager-upper-scale'">
+            <a routerLink="formManager/upperScale" routerLinkActive="active">上规入库企业</a>
+          </li>
+          
+          <li appAccessControl [accessData]="'manager-macro-gdp'">
+            <a routerLink="formManager/macroEconomy" routerLinkActive="active">宏观经济GDP</a>
+          </li>
+          
+          <li appAccessControl [accessData]="'manager-pillar-industry'">
+            <a routerLink="formManager/pillarIndustry" routerLinkActive="active">支柱产业</a>
+          </li>
+          
+          <li appAccessControl [accessData]="'manager-fixed-investment'">
+            <a routerLink="formManager/fixedInvestment" routerLinkActive="active">固定投资</a>
+          </li>
+          
+          <li appAccessControl [accessData]="'manager-public-budget'">
+            <a routerLink="formManager/publicBudget" routerLinkActive="active">公共性预算</a>
+          </li>
+          
+          <li appAccessControl [accessData]="'manager-public-expenditure'">
+            <a routerLink="formManager/publicExpenditure" routerLinkActive="active">公共性支出</a>
+          </li>
+          
+          <li appAccessControl [accessData]="'manager-peopleincome'">
+            <a routerLink="formManager/peopleIncome" routerLinkActive="active">人均收入</a>
+          </li>
+          
+        </ul>
       </li>
+
     </ul>
+    </perfect-scrollbar>
   </div>
   <div class="right-con">
     <perfect-scrollbar>

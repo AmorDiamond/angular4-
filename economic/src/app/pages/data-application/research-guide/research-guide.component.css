@@ -1,0 +1,264 @@
+.research-content{
+    height: 100%;
+    padding: 0 20px 20px 0;
+}
+.data-search-box{
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.data-search-con{
+    height: 90px;
+    width: 100%;
+    margin-top: -100px;
+    text-align: center;
+}
+.data-search-con input,.data-search-con button{
+    height: 100%;
+    vertical-align: middle;
+    outline: none;
+}
+.data-search-con input{
+    width: 40%;
+    padding: 0 30px;
+    font-size: 24px;
+    border: 1px solid #f9b620;
+    -webkit-border-radius: 45px 0 0 45px;
+    -moz-border-radius: 45px 0 0 45px;
+    -o-border-radius: 45px 0 0 45px;
+    -ms-border-radius: 45px 0 0 45px;
+    border-radius: 45px 0 0 45px;
+}
+.data-search-con button{
+    width: 12%;
+    -webkit-border-radius: 0 50px 50px 0;
+    -moz-border-radius: 0 50px 50px 0;
+    -ms-border-radius: 0 50px 50px 0;
+    -o-border-radius: 0 50px 50px 0;
+    border-radius: 0 50px 50px 0;
+    border: none;
+    background: #f9b620 url('../../../../assets/images/xcj_search.png') no-repeat center;
+    cursor: pointer;
+}
+.data-search-info{
+    display: flex;
+}
+.data-search-info .data-search-list{
+    flex: auto;
+}
+.data-search-list{
+    height: 100%;
+}
+.selected-list{
+    width: 200px;
+}
+.data-search-hd .column-search,.data-search-bd .type-list{
+    width: 150px;
+}
+.select,.select-box{
+    text-align: center;
+    width: 60px;
+}
+.company-item .select-box{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.flex-layout{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.flex-layout>.flex-cell{
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    /* flex: 1; */
+    flex: auto;
+    width: 100%;
+}
+.column-company,.company-info .info-left{
+    width: 30%;
+    float: left;
+}
+.column-add,.company-info .info-right{
+    width: 65%;
+    float: left;
+}
+.data-search-info{
+    height: 100%;
+}
+.column-search{
+    width: 15%;
+}
+.column-company{
+    width: 60%;
+    margin-right: 5%;
+}
+.column-selected{
+    width: 20%;
+}
+.company-info{
+    width: calc(100% - 60px);
+}
+.company{
+    width: 30%;
+}
+.address{
+    width: 70%;
+}
+.search-hd .icon{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url("../../../../assets/images/data_aplication_search_icon.png") no-repeat center;
+    background-size: contain;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+.column-hd{
+    height: 30px;
+    line-height: 30px;
+    margin: 20px 0 10px;
+    font-size: 16px;
+    color: #7d85cb;
+}
+.selected-hd .number{
+    color: #f9b620;
+}
+.search-hd{
+    font-size: 12px;
+}
+.select-con{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #f9b62099;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.select-con:before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("../../../../assets/images/checkbox_arrow.png") no-repeat center;
+    background-size: 80%;
+    display: none;
+}
+.select-con.active:before{
+    display: block;
+}
+.all-select .select-con{
+    margin-right: 5px;
+}
+.type-list{
+    margin: 0 20px;
+    border: 1px solid #f9b62099;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+}
+.type-list .type-list-item{
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+}
+.type-list .type-list-item.active{
+    color: #f9b620;
+}
+.company-item .company-info{
+    border: 1px solid #f9b62099;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+}
+.company-item .company-info .name,.selected-item .name{
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+.company-item .company-info .info-left{
+    border-right: 1px solid #f9b62099;
+}
+.company-item .company-info .info-left{
+    border-right: 1px solid #f9b62099;
+}
+.p-20{
+    padding: 20px;
+    padding-right: 0;
+}
+.info-right .edit-address{
+    margin-left: 10px;
+    border: 1px solid #7d85cb;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+    color: #7d85cb;
+    padding: 2px 4px;
+    cursor: pointer;
+}
+.all-select{
+    margin-right: 10%;
+}
+.border{
+    border: 1px solid #f9b62099;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
+}
+.selected-item{
+    padding: 20px;
+}
+.column-hd .company-info,.column-hd .address{
+    text-indent: 20px;
+}
+.column-selected .selected-hd{
+    text-indent: 20px;
+}
+.company-list .company-item,.column-selected .selected-item{
+    position: relative;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.selected-ft{
+    text-align: center;
+    margin-top: 10px;
+}
+.next-step-btn{
+    display: inline-block;
+    border-radius: 4px;
+    background: #f9b620;
+    padding: 10px 60px;
+    font-size: 20px;
+    color: #33363f;
+    cursor: pointer;
+}
+@media (max-width: 1366px) {
+    .data-search-con{
+        height: 70px;
+    }
+    .data-search-con input{
+        width: 50%;
+    }
+}
+

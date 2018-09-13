@@ -1,17 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~font-awesome/css/font-awesome.min.css';
+/*@import '~font-awesome/css/font-awesome.min.css';
 @import '~ng2-toasty/style.css';
 @import '~ng2-toasty/style-material.css';
-@import '~ngx-bootstrap/datepicker/bs-datepicker.css';
+@import '~ngx-bootstrap/datepicker/bs-datepicker.css';*/
 @font-face{
   font-family:'Glyphicons Halflings';
-  src:url(/assets/fonts/glyphicons-halflings-regular.eot);
-  src:url(/assets/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),
-  url(/assets/fonts/glyphicons-halflings-regular.woff2) format('woff2'),
-  url(/assets/fonts/glyphicons-halflings-regular.woff) format('woff'),
-  url(/assets/fonts/glyphicons-halflings-regular.ttf) format('truetype'),
-  url(/assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')
+  src:url('./assets/fonts/glyphicons-halflings-regular.eot');
+  src:url('./assets/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+  url('./assets/fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+  url('./assets/fonts/glyphicons-halflings-regular.woff') format('woff'),
+  url('./assets/fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+  url('./assets/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg')
 }
 .fl {
   float: left
@@ -66,7 +66,9 @@ span {
   -moz-box-flex: 1;
   -ms-flex: 1;
   -webkit-flex: 1;
-  flex: 1;
+  /*flex: 1;*/
+  flex: auto;
+  width: 100%;
 }
 
 .red {
@@ -1032,3 +1034,112 @@ a:focus, a:hover {
 .panel-content .flex-item.single-echart{
   height: 3rem;
 }
+/*重写数据输出模块的分页样式*/
+.data-application-box .pagination{
+  margin: 10px 0 0;
+}
+.data-application-box .pagination li a{
+  border-radius: 3px;
+  margin-right: 10px;
+}
+/*不能选择样式*/
+.data-application-box .pagination>.disabled>a,
+.data-application-box .pagination>.disabled>a:focus,
+.data-application-box .pagination>.disabled>a:hover,
+.data-application-box .pagination>.disabled>span,
+.data-application-box .pagination>.disabled>span:focus,
+.data-application-box .pagination>.disabled>span:hover{
+  color: #777;
+  cursor: not-allowed;
+  background-color: unset;
+  border-color: #f9b62066;
+}
+/*已选中样式*/
+.data-application-box .pagination>.active>a,
+.data-application-box .pagination>.active>a:focus,
+.data-application-box .pagination>.active>a:hover,
+.data-application-box .pagination>.active>span,
+.data-application-box .pagination>.active>span:focus,
+.data-application-box .pagination>.active>span:hover{
+  z-index: 3;
+  color: #f9b620;
+  cursor: default;
+  background-color: unset;
+  border-color: #f9b620;
+}
+/*能选择样式*/
+.data-application-box .pagination>li>a:focus,
+.data-application-box .pagination>li>a:hover,
+.data-application-box .pagination>li>span:focus,
+.data-application-box .pagination>li>span:hover {
+  z-index: 2;
+  color: #f9b620;
+  background-color: unset;
+  border-color: #f9b62066;
+}
+/*默认样式*/
+.data-application-box .pagination>li>a, .data-application-box .pagination>li>span{
+  color: #bcbdbf;
+  background-color: unset;
+  border: 1px solid #f9b62066;
+}
+/*重写分页End*/
+.company-detail .load-more-info .load-more-con span{
+  vertical-align: middle;
+  margin-right: 5px;
+}
+.company-detail .load-more-info .load-more-con {
+  display: inline-block;
+  cursor: pointer;
+}
+/*添加时间控件样式Start*/
+.glyphicon.icon-arrow-right:before {
+  content: "\e092";
+}
+.glyphicon.icon-arrow-left:before {
+  content: "\e091";
+}
+/*添加时间控件样式End*/
+/*后台导出下载按钮样式*/
+.admin-container .con-hd button a{
+  color: #333;
+}
+.rowkey-pagination .pager{
+  text-align: left;
+}
+/*自定义的radio样式*/
+.circle-radio-list label{
+  margin: 10px;
+}
+.circle-radio-list label span{
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #f9b620;
+  border-radius: 8px;
+  margin-right: 5px;
+  top: 2px;
+  cursor: pointer;
+}
+.circle-radio-list label span:after{
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #f9b620;
+  border-radius: 4px;
+  left: 2px;
+  top: 2px;
+  transform: scale(0);
+  transition: all .3s cubic-bezier(.78,.14,.15,.86);
+}
+.circle-radio-list label.active span:after{
+  transform: scale(1);
+}
+.circle-radio-list label input{
+  opacity: 0;
+  vertical-align: top;
+  position: absolute;
+}
+/*自定义的radio样式End*/

@@ -188,11 +188,11 @@
 }
 
 .circle-menu .item.active .circle {
-  width: 0.5052083333333334rem;
+  /*width: 0.5052083333333334rem;
   height: 0.4947916666666667rem;
   left: 0.0625rem;
   top: 0.0625rem;
-  visibility: visible;
+  visibility: visible;*/
 }
 
 .circle-menu .item.active .menu-bot {
@@ -448,7 +448,7 @@
   width: .37rem;
   height: .37rem;
   border-radius: .22rem;
-  background: url(../../../assets/images/lingdang.png) no-repeat;
+  background: url("../../../assets/images/lingdang.png") no-repeat;
   background-size: .24rem .24rem;
   background-position: .05rem .08rem;
   background-color: #7d85cb;
@@ -530,5 +530,5 @@
 .menu_box.data_application_menu_box {
   margin-top: 50%;
   background: #f9b620 url("../../../assets/images/data_application_menu.png") no-repeat center;
-  background-size: 55%;
+  background-size: 66%;
 }

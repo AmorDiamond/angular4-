@@ -23,6 +23,7 @@ export class JobOffersComponent implements OnInit {
   ngOnInit() {
     this.companyName = this.microcomicService.getUrlParams('name');
     this.microcomicService.setCompanyName(this.companyName);
+    this.EIIRecruitParams.enterpriseName = this.companyName;
     /*招聘信息*/
     this.findEIIRecruitPage();
   }

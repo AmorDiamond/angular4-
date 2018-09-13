@@ -26,7 +26,7 @@ export class UserListComponent implements OnInit {
     size: 15
   };
   pageParams = {
-    maxSize: 5,
+    maxSize: 10,
     itemsPerPage: this.ldapUserListParams.size,
     bigTotalItems: 10,
     bigCurrentPage: 1,
@@ -45,10 +45,10 @@ export class UserListComponent implements OnInit {
   getUsersList() {
     this.findListByUrl(this.ldapUserListParams, 'findUsersList').subscribe(res => {
       console.log(res);
-      if(res.responseCode === '_200') {
+      if (res.responseCode === '_200') {
         this.usersList = res.data.content;
         this.pageParams.bigTotalItems = res.data.totalElements;
-        if(this.usersList.length < 1) {
+        if (this.usersList.length < 1) {
           this.toastModalService.addToasts({tipsMsg: '暂无信息！', type: 'info'});
         }
       }else {
@@ -117,6 +117,24 @@ export class UserListComponent implements OnInit {
       }
     });
     this.toastModalService.hideModal();
+  }
+  /*搜索*/
+  search() {
+    this.ldapUserListParams.page = 0;
+    this.pageParams.bigCurrentPage = 1;
+    this.getUsersList();
+  }
+  /*重置搜索*/
+  resetSearch() {
+    this.ldapUserListParams = {
+      account: '',
+      status: '',
+      mechanism: '',
+      page: 0,
+      size: 15
+    };
+    this.pageParams.bigCurrentPage = 1;
+    this.getUsersList();
   }
 
 }

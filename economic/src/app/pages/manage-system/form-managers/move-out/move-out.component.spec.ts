@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailPageComponent } from './detail-page.component';
+import { MoveOutComponent } from './move-out.component';
 
-describe('DetailPageComponent', () => {
-  let component: DetailPageComponent;
-  let fixture: ComponentFixture<DetailPageComponent>;
+describe('MoveOutComponent', () => {
+  let component: MoveOutComponent;
+  let fixture: ComponentFixture<MoveOutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailPageComponent ]
+      declarations: [ MoveOutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DetailPageComponent);
+    fixture = TestBed.createComponent(MoveOutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

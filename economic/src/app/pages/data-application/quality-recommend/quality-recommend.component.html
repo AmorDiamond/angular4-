@@ -1,23 +1,32 @@
 <div class="panel-content quality-recommend-box">
-      <perfect-scrollbar>
-        <div class="data-search-list">
-          <div *ngIf="companyList.length>0">
-            <div class="data-search-item" *ngFor="let item of companyList">
-              <div class="logo">
-                <img src="/economicSystem/assets/images/company_logo.png" alt="">
-              </div>
-              <div class="column-item">
-                <div class="name" [routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: item.name}">{{item.name}}</div>
-                <div class="other">
-                  <span>产业类型：<i>{{item.industryType}}</i></span>
-                  <span>企业地址：<i>{{item.address}}</i></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="no-data-tips text-c" *ngIf="companyList.length<1">
-            暂无信息！
+  <div class="quality-recommend-con">
+    <div class="quality-recommend-desc border">
+      <div class="quality-recommend-content">
+        <div class="recommend-desc-hd">算法说明：</div>
+        <p>目前的推荐算法为：企业综合评分达到80分及以上。</p>
+      </div>
+    </div>
+    <div class="quality-recommend-ft">
+      <button routerLink="/dataApplication/recommendList">查询</button>
+    </div>
+  </div>
+  <!--<div class="data-search-list">
+    <div *ngIf="companyList.length>0">
+      <div class="data-search-item" *ngFor="let item of companyList">
+        <div class="logo">
+          <img src="/economicSystem/assets/images/company_logo.png" alt="">
+        </div>
+        <div class="column-item">
+          <div class="name" [routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: item.name}">{{item.name}}</div>
+          <div class="other">
+            <span>产业类型：<i>{{item.industryType}}</i></span>
+            <span>企业地址：<i>{{item.address}}</i></span>
           </div>
         </div>
-      </perfect-scrollbar>
+      </div>
+    </div>
+    <div class="no-data-tips text-c" *ngIf="companyList.length<1">
+      暂无信息！
+    </div>
+  </div>-->
 </div>

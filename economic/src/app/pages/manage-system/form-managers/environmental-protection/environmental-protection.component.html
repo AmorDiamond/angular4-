@@ -1,0 +1,53 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-pollution'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/Environmental/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-pollution'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/Environmental/exportExcelFormMK?enterpriseName={{getListParams.enterpriseName}}&year={{getListParams.year}}" download="{{getListParams.enterpriseName+'-'+getListParams.year+'-'+'环保排污.xlsx'}}">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-pollution'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="环保排污模板.xlsx">EXCEL模板下载</a>
+  </button>
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>公司名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
+    </div>
+    <div class="form-group">
+      <label>年度:</label>
+      <input type="text" class="form-control" name="dataSupplyTime" [(ngModel)]="getListParams.year" placeholder="年度">
+    </div>
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>企业名称</th>
+    <th>年份</th>
+    <th>COD含量（吨/年）</th>
+    <th>氨氮含量（吨/年）</th>
+    <th>SO2（吨/年）</th>
+    <th>NOX（吨/年）</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-c ng-scope" *ngFor="let item of list">
+    <td class="nowrap">{{item.company?.name}}</td>
+    <td class="nowrap">{{item.year}}</td>
+    <td class="nowrap">{{item.cod}}</td>
+    <td class="nowrap">{{item.ammoniaNitrogen}}</td>
+    <td class="nowrap">{{item.so2}}</td>
+    <td class="nowrap">{{item.nox}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-xs-12 col-12">
+    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+</div>

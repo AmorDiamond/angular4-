@@ -1,0 +1,37 @@
+<app-map></app-map>
+<div class="build-switch">
+  <div class="item item1 nature-land" routerLinkActive="active">
+    <span>土地</span>
+    <ul class="sub-menu">
+      <li class="use-purpose" routerLink="land/use" routerLinkActive="active">用途</li>
+      <li class="use-situation" routerLink="land/inefficient" routerLinkActive="active">低效用地</li>
+    </ul>
+  </div>
+  <div class="item item2 cy-land" routerLinkActive="active">
+    <span class="span">产业</span>
+    <ul class="sub-menu">
+      <li class="use-purpose-xh" routerLink="industry/distributed" routerLinkActive="active">分布</li>
+      <li class="industry-orkwshop" routerLink="industry/workshop" routerLinkActive="active">标准厂房</li>
+      <li class="high-quality" routerLink="industry/enterprise" routerLinkActive="active">高质量企业</li>
+    </ul>
+  </div>
+  <div class="item item3 life-land">
+    <span>生活</span>
+    <ul class="sub-menu">
+      <li class="house">住宅</li>
+      <li class="hospital">医院</li>
+    </ul>
+  </div>
+  <div class="item item4 function-land">
+    <span>功能</span>
+    <ul class="sub-menu">
+      <li class="electric-station">变电站</li>
+      <li class="foul-water">污水处理厂</li>
+      <li class="research-organ">科研机构</li>
+    </ul>
+  </div>
+</div>
+<div class="right-panel">
+  <router-outlet></router-outlet>
+</div>
+<app-loading-layer *ngIf="showLoading"></app-loading-layer>

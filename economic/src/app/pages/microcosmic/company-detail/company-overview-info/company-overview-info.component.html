@@ -2,7 +2,7 @@
 <div class="panel-bd pop-index-7 animated company-evaluate">
   <div class="panel-content">
     <div id="score-main" echarts [options]="radarMapEchartData" style="width: 3.645833rem;height:500px;"></div>
-    <div id="holder" style="width: 3.645833rem;height:300px;text-align: center;"></div>
+    <div [hidden]="!showTagData" id="holder" style="width: 3.645833rem;height:300px;text-align: center;"></div>
     <table class="table table-bordered" id="lie">
       <tr *ngFor="let data of inferiorityLists">
         <td class="nowrap" width="110">{{data.inferiorityType}}</td>

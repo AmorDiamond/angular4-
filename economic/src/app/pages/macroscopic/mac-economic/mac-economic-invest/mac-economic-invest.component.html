@@ -23,8 +23,8 @@
       <div class="flex-cell">
         <div class="flex-item" echarts [options]="investOptions"></div>
       </div>
-      <div class="flex-cell" style="display:none">
-        <div class="flex-item" id="investment-change"></div>
+      <div class="flex-cell">
+        <div class="flex-item" echarts [options]="investAreaSpeedOptions"></div>
       </div>
     </div>
     <div class="flex">
@@ -36,41 +36,32 @@
             <th>同比增速</th>
           </tr>
           <tr [hidden]="investDataList.length<1" *ngFor="let item of investDataList">
-            <td>{{item.industryType}}</td>
-            <td>{{item.fixedInverstment}}亿元</td>
-            <td>{{item.addSpeed}}%</td>
+            <td>{{item.month}}</td>
+            <td>{{item.fixedInverstment ? item.fixedInverstment + '亿元' : ''}}</td>
+            <td>{{item.addSpeed ? item.addSpeed + '%' : ''}}</td>
+          </tr>
+          <tr *ngIf="investDataList.length>0">
+            <td>总计</td>
+            <td>{{yearTotalOutput ? yearTotalOutput.toFixed(2) + '亿元' : ''}}</td>
+            <td>{{yearTotalAddspeed ? (yearTotalAddspeed / investDataList.length).toFixed(2) + '%' : ''}}</td>
           </tr>
           <tr *ngIf="investDataList.length<1">
             <td colspan="3">暂无信息！</td>
           </tr>
         </table>
       </div>
-      <div class="flex-cell" style="display:none">
-        <table class="table table-bordered" id="table2">
+      <div class="flex-cell">
+        <table class="table table-bordered text-c" id="table2">
           <tr>
-            <td>类型</td>
-            <td>金额</td>
-            <td>增速</td>
+            <th>地区</th>
+            <th>增速</th>
           </tr>
-          <tr>
-            <td>房地产</td>
-            <td>4300亿元</td>
-            <td>17%</td>
+          <tr *ngFor="let item of investAreaAddSpeedList">
+            <td>{{item.areaRange}}</td>
+            <td>{{item.addSpeed}}%</td>
           </tr>
-          <tr>
-            <td>互联网</td>
-            <td>6500亿元</td>
-            <td>16%</td>
-          </tr>
-          <tr>
-            <td>工业</td>
-            <td>8800亿元</td>
-            <td>32%</td>
-          </tr>
-          <tr>
-            <td>其他</td>
-            <td>7840亿元</td>
-            <td>35%</td>
+          <tr *ngIf="investAreaAddSpeedList.length<1">
+            <td colspan="2">暂无信息！</td>
           </tr>
         </table>
       </div>

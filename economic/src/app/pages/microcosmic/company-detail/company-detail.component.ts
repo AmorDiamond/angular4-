@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { CompanyDetailService, AttentionParams } from './company-detail.service';
 import { CompanyBasicService } from './company-basic-info/company-basic.service';
 import { ToastModalService } from "../../../shared/toast-modal/toast-modal.service";
+import { ADD_COMPANY_ADDRESS } from '../../../core/amap-ngrx/amap.actions';
+import { ContainerStyle } from '../../../core/container-ngrx/container.model';
 
 @Component({
   selector: 'app-company-detail',
@@ -31,7 +33,8 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     private companyBasicService: CompanyBasicService,
     private microcomicService: MicrocosmicService,
     private toastModalService: ToastModalService,
-    private store: Store<Amap>
+    private store: Store<ContainerStyle>,
+    private storeAmap: Store<Amap>
   ) { }
 
   ngOnInit() {
@@ -104,9 +107,30 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
   }
 
   getBaseInfo(name) {
+    const loginUserId = sessionStorage.getItem('userId');
     this.companyBasicService.getCompanyDetail(name)
       .subscribe(res => {
-        this.isFollow = (res.data.concernedPeople && res.data.concernedPeople !== 'false') && res.data.focusOfAttention ? true: false;
+        console.log('获取关注人', res);
+        if (res.responseCode === '_200') {
+          /*获取关注人列表里是否存在当前登录的用户*/
+          const hasFollow = res.data.concernedPeople && res.data.concernedPeople.split(',').indexOf('|' + loginUserId + '|') > -1 ? true : false;
+          this.isFollow = res.data.concernedPeople && hasFollow ? true : false;
+
+          const company = res.data;
+          const companysAddress = [];
+          if (company.coordinate && company.coordinate.split(',')[1]) {
+            companysAddress.push({id: company.rowKey, company: company.name, address: company.coordinate})
+          }
+          this.storeAmap.dispatch({
+            type: ADD_COMPANY_ADDRESS,
+            payload: {
+              action: 'ADD_COMPANY_ADDRESS',
+              data: companysAddress
+            }
+          });
+        }else {
+          this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误', type: 'error'});
+        }
       });
   }
 
@@ -116,6 +140,14 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // this.subscription.unsubscribe();
+
+    this.storeAmap.dispatch({
+      type: ADD_COMPANY_ADDRESS,
+      payload: {
+        action: 'ADD_COMPANY_ADDRESS',
+        data: []
+      }
+    })
   }
 
 }

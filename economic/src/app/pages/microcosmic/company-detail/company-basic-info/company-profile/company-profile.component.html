@@ -1,4 +1,4 @@
-<div class="panel-content">
+<div appAccessControl [accessData]="'company-profile'" class="panel-content">
   <div class="panel-item-title">企业简介：</div>
   <div class="company-profile-con">
     <div class="company-profile" *ngIf="baseInfo?.introduction">
@@ -6,6 +6,30 @@
     </div>
     <div class="no-data-tips" *ngIf="!baseInfo?.introduction">
       {{CompanyIntroductionTips}}
+    </div>
+    <div class="company-tag">
+      <span *ngIf="baseInfo?.whetherAuthentication == 1">高企</span>
+      <span *ngIf="baseInfo?.isSupervisory == '是'">上规</span>
+      <span *ngIf="baseInfo?.isKeyEnterprise == '是'">重点企业</span>
+      <span *ngIf="baseInfo?.isTopCompanies == '是'">全球百强入驻</span>
+    </div>
+  </div>
+  <div class="panel-item-title">企业行业类型：</div>
+  <div class="company-profile-con">
+    <div *ngIf="baseInfo?.industryType">
+      {{baseInfo?.industryType}}
+    </div>
+    <div class="no-data-tips" *ngIf="!baseInfo?.industryType">
+      暂无信息！
+    </div>
+  </div>
+  <div class="panel-item-title">企业产业类型：</div>
+  <div class="company-profile-con">
+    <div *ngIf="baseInfo?.industryClassification">
+      <span *ngFor="let item of baseInfo?.industryClassification.split(',')" class="industry-item">{{item}}</span>
+    </div>
+    <div class="no-data-tips" *ngIf="!baseInfo?.industryClassification">
+      暂无信息！
     </div>
   </div>
   <div class="panel-item-title">企业联系人：</div>
@@ -37,7 +61,7 @@
               <button (click)="submitChangeContactPeople(changeContactPeopleTemplate,item.rowKey)">提交</button>
               <button (click)="cancelChangeContactPeople()">取消</button>
             </div>
-            <button *ngIf="dataRowkey !== item.rowKey" [disabled]="changeContactPeopleStatus && dataRowkey" (click)="getChangeContactInfo(index,item.rowKey)">纠错</button>
+            <button appAccessControl [accessData]="'edit-contactinfo'" *ngIf="dataRowkey !== item.rowKey" [disabled]="changeContactPeopleStatus && dataRowkey" (click)="getChangeContactInfo(index,item.rowKey)">纠错</button>
           </td>
         </tr>
       </table>
@@ -56,6 +80,37 @@
       {{CompanyProfile}}
     </div>
   </div>
+
+  <div class="panel-item-title">名优产品目录：</div>
+  <perfect-scrollbar style="max-height: 366px" *ngIf="FamousProduct.length>0">
+    <table class="table table-bordered" *ngFor="let item of FamousProduct">
+      <tr>
+        <td class="nowrap table-label">产品名:</td>
+        <td name="name">{{item.name}}</td>
+        <td class="nowrap table-label">产品类别:</td>
+        <td name="number">{{item.category}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap table-label">质量标准认证:</td>
+        <td name="name" colspan="3">{{item.qualityStandard}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap table-label">获奖信息:</td>
+        <td colspan="3" name="office">{{item.awards}}</td>
+      </tr>
+      <tr>
+        <td class="nowrap table-label">主要原材料:</td>
+        <td name="validityStart" colspan="3">{{item.rawMaterial}}</td>
+      </tr>
+    </table>
+    <div class="load-more-info text-c" *ngIf="getFamousProductParamas.lastRowKey">
+      <div class="load-more-con" (click)="getFamousProduct()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+    </div>
+  </perfect-scrollbar>
+  <div class="no-data-tips" *ngIf="FamousProduct.length<1">
+    {{FamousProductTips}}
+  </div>
+
 </div>
 
 <ng-template #changeContactPeopleTemplate>

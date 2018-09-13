@@ -1,5 +1,189 @@
-.company-name{
-    background: #44444480;
+.data-application-box{
+    height: 100%;
+    color: #bcbdbf;
+}
+.right-panel{
+    height: calc(100% - 50px);
+}
+.data-application-box .panel-content{
     font-size: 16px;
-    color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.back-box {
+    line-height: 50px;
+    margin-left: 16px;
+    height: inherit;
+    position: relative;
+    outline: none;
+}
+.back-box .back-btn {
+    display: inline-block;
+    width: 30px;
+    height: 24px;
+    vertical-align: middle;
+    color: #f9b620;
+    background: url("../../../../../assets/images/back_arrow.png") center no-repeat;
+    background-size: cover;
+    cursor: pointer;
+}
+.data-application-box{
+    -webkit-border-radius:  10px 10px 6px 6px;
+    -moz-border-radius:  10px 10px 6px 6px;
+    -o-border-radius:  10px 10px 6px 6px;
+    -ms-border-radius:  10px 10px 6px 6px;
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(30%, #151411), color-stop(50%, #151816), to(#162c2e));
+    background: linear-gradient(to bottom right, #151411 30%, #151816 50%, #162c2e);
+}
+.research-detail-hd{
+    color: #7d85cb;
+    margin-bottom: 20px;
+}
+.border{
+    border: 1px solid #f9b62066;
+    border-radius: 6px;
+}
+.contact-list-hd .column-company,.contact-list-hd .column-contact{
+    text-indent: 20px;
+}
+.contact-list-hd{
+    color: #7d85cb;
+    overflow: hidden;
+    height: 36px;
+    white-space: nowrap;
+}
+.selected-contact-box{
+    width: 55%;
+    margin-right: 5%;
+    float: left;
+}
+.message-info-box{
+    width: 40%;
+    float: left;
+}
+.message-info{
+    height: 200px;
+}
+.message-info textarea{
+    width: 100%;
+    height: 100%;
+    background: none;
+    outline: none;
+    padding: 10px;
+    resize: none;
+}
+.column-contact .contact-box{
+    padding: 0 5%;
+}
+.column-contact .column-con{
+    width: 50%;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.column-contact .column-con:nth-child(1),.column-contact .column-con:nth-child(2){
+    margin-bottom: 20px;
+}
+.contact-list-item{
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+.contact-list-item .list-column-con{
+    padding: 20px;
+    overflow: hidden;
+}
+.column-company{
+    width: 40%;
+}
+.column-contact{
+    width: 60%;
+}
+.contact-list-item .column-company{
+    border-right: 1px solid #f9b62066;
+    padding-bottom: 999px;
+    margin-bottom: -999px;
+}
+.contact-list-item .column-contact{
+    padding: 10px 5%;
+}
+.column-company .name{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.column-company .industry{
+    font-size: 12px;
+}
+.contact-list-ft{
+    margin-top: 36px;
+    overflow: hidden;
+}
+.download-btn{
+    color: #33363f;
+    background: #f9b620;
+    padding: 10px 60px;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+}
+.download-btn:focus{
+    background: #f9b620cc;
+}
+.contact-list-hd .number{
+    color: #f9b620;
+}
+.send-result .contact-list-hd .column-company{
+    text-indent: 0;
+}
+.send-result .column-result{
+    text-align: center;
+}
+.send-result .column-result{
+    width: 10%;
+}
+.send-result .contact-list-item .column-result{
+    position: relative;
+    overflow: hidden;
+    border-right: 1px solid #f9b62066;
+}
+.send-result .contact-list-item{
+    height: 90px;
+    line-height: 90px;
+}
+.send-result .list-column{
+    height: inherit;
+    line-height: inherit;
+}
+.send-result .contact-list-item .list-column-con{
+    padding: 0;
+}
+.send-result .list-column.column-company{
+    line-height: normal;
+}
+.send-result .contact-list-item .column-company .list-column-con{
+    padding: 20px;
+}
+.send-result .contact-list-item .column-company .list-column-con .name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.send-result .column-reason{
+    text-indent: 40px;
+}
+.no-data-tips{
+    margin-top: 20px;
+}
+@media (max-width: 1366px) {
+    .contact-list-item .column-contact{
+        padding: 10px 2%;
+    }
+    .column-contact .contact-box{
+        padding: 0;
+    }
+}
+@media (max-width: 1590px) {
+    .column-contact .column-con{
+        width: 100%;
+    }
 }

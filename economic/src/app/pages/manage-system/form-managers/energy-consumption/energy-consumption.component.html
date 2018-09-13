@@ -1,0 +1,50 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-consumption'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/EnergyConsumption/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-consumption'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/EnergyConsumption/exportExcelFormMK?enterpriseName={{getListParams.enterpriseName}}&year={{getListParams.year}}" download="{{getListParams.enterpriseName+'-'+getListParams.year+'-'+'综合能耗.xlsx'}}">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-moveout'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="综合能耗模板.xlsx">EXCEL模板下载</a>
+  </button>
+  
+
+  <!-- <button class="excel-export">EXCEL模板下载</button> -->
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>公司名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
+    </div>
+    <div class="form-group">
+      <label>年度:</label>
+      <input type="text" class="form-control" name="year" [(ngModel)]="getListParams.year" placeholder="年度">
+    </div>
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>企业名称</th>
+    <th>年份</th>
+    <th>综合能耗（吨标准煤）</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-c ng-scope" *ngFor="let item of list">
+    <td class="nowrap">{{item.company?.name}}</td>
+    <td class="nowrap">{{item.year}}</td>
+    <td class="nowrap">{{item.consumption}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-xs-12 col-12">
+    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+.address-con{
+    height: 30px;
+    line-height: 30px;
+    border-radius: 3px;
+    background: #f5f5f5;
+}
+.address-con .back-btn{
+    display: inline-block;
+    width: 30px;
+    height: inherit;
+    border-radius: 3px;
+    margin-right: 20px;
+    background-color: #f9b71c;
+    background-image: url("../../../../../assets/images/admin_address_back.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 80%;
+    vertical-align: top;
+    cursor: pointer;
+}
+.address-con .home-icon{
+    margin-right: 5px;
+}
+.industry-list span{
+    display: inline-block;
+    margin: 10px;
+}
+.industry-list span em{
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    border: 1px solid #f9b620;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.industry-list span em:after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: url("../../../../../assets/images/checkbox_arrow.png") no-repeat center;
+    background-size: contain;
+    border-radius: 4px;
+    left: 2px;
+    top: 2px;
+    transform: scale(0);
+    transition: all .3s cubic-bezier(.78,.14,.15,.86);
+}
+.industry-list span.active em:after{
+    transform: scale(1);
+}
+.single-form .form-label {
+    position: relative;
+    padding-left: 10px;
+}
+.single-form .form-label:before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 0;
+    bottom: 2px;
+    width: 4px;
+    background: #f9b620;
+    border-radius: 5px;
+}
+.single-form{
+    width: 60%;
+    margin: 30px auto 0;
+}
+.submit-con{
+    margin-top: 30px;
+}

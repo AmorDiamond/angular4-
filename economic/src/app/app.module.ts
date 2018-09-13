@@ -18,6 +18,7 @@ import { HasPromissionDirective } from './core/has-promission-directive/has-prom
 import { SharedModule } from './shared/shared.module';
 import { LoadingInterceptor } from './core/loading-interceptor/loading-interceptor';
 import { LoadingReducer } from './core/loading-ngrx/loading.reducer';
+import { RequestCountReducer } from './core/request-count-ngrx/request-count.reducer';
 import { ToastyModule } from 'ng2-toasty';
 import { ToastModalService } from './shared/toast-modal/toast-modal.service';
 import { PaginationModule, TooltipModule, ModalModule } from 'ngx-bootstrap';
@@ -41,7 +42,7 @@ import { PaginationModule, TooltipModule, ModalModule } from 'ngx-bootstrap';
     ToastyModule.forRoot(),
     ModalModule.forRoot(),
     StoreModule.forRoot(
-      { amap: amapReducer, container: ContainerReducer, loading: LoadingReducer }
+      { amap: amapReducer, container: ContainerReducer, loading: LoadingReducer, requestCount: RequestCountReducer }
     )
   ],
   providers: [

@@ -1,0 +1,67 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-scale'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/epBaseInfoPojo/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-scale'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/epBaseInfoPojo/exportExcelForm?name={{getListParams.name}}&industryType={{getListParams.industryType}}"
+     download="{{getListParams.name+'-'+getListParams.industryType+'-'+'上规入库企业.xlsx'}}">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-product'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="上规入库企业模板.xlsx">EXCEL模板下载</a>
+  </button>
+
+
+  <!-- <button class="excel-export">EXCEL模板下载</button> -->
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>企业名称:</label>
+      <input type="text" class="form-control" name="name" [(ngModel)]="getListParams.name" placeholder="企业名称">
+    </div>
+    <div class="form-group">
+      <label>行业类型:</label>
+        <input type="text" class="form-control" name="industryType" [(ngModel)]="getListParams.industryType" placeholder="行业类型">
+    </div>
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c nowrap">
+    <th>企业名称</th>
+    <th>统一社会信用代码</th>
+    <th>行业类型</th>
+    <th>登记注册类型</th>
+    <th>注册地址</th>
+    <th>法定代表人</th>
+    <th>注册时间</th>
+    <th>注册资金</th>
+    <th>经营地址</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="" *ngFor="let item of list">
+    <td>{{item.name}}</td>
+    <td class="text-c nowrap">{{item.creditCode}}</td>
+    <td>{{item.industryType}}</td>
+    <td>{{item.enterpriseType}}</td>
+    <td>{{item.regAddress}}</td>
+    <td class="text-c nowrap">{{item.legalRepresentative}}</td>
+    <td class="text-c nowrap">{{item.registrationTime | date:'yyyy-MM-dd'}}</td>
+    <td class="text-c nowrap">{{item.registeredCapital}}</td>
+    <td>{{item.address}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row rowkey-pagination">
+  <div class="col-xs-12 col-12">
+    <nav aria-label="Page navigation">
+      <ul class="pager">
+        <li [ngClass]="{'disabled' : nowPagesNum < 1}"><a href="javascript:void(0)" (click)="pageChanged(-1)">上一页</a></li>
+        <li [ngClass]="{'disabled' : !getListParams.lastRowKey}"><a href="javascript:void(0)" (click)="pageChanged(1)">下一页</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>

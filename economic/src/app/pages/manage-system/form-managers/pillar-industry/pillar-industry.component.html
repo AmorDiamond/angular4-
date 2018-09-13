@@ -1,0 +1,77 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-industry'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/MKPillarIndustry/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-industry'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/MKPillarIndustry/exportExcelFormMK?year={{getListParams.year}}"
+     download="{{getListParams.year+'-'+'支柱产业.xlsx'}}">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-industry'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="支柱产业模板.xlsx">EXCEL模板下载</a>
+  </button>
+  
+
+  <!-- <button class="excel-export">EXCEL模板下载</button> -->
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <!-- <div class="form-group">
+      <label>公司名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
+    </div> -->
+    <div class="form-group">
+      <label>年份:</label>
+      <input type="text" class="form-control" name="year" [(ngModel)]="getListParams.year" placeholder="年份">
+    </div>
+
+    <!-- <div class="form-group">
+      <label>年度:</label>
+        <input type="text" name="beginTime" placeholder="开始时间" class="form-control" bsDatepicker [(ngModel)]="chooseTime.beginCreateTime" [bsConfig]="bsConfig">
+    </div> -->
+
+    <!-- <div class="form-group">
+      <label>是否高企:</label>
+      <select class="form-control" required name="entityType" [(ngModel)]="searchParams.entityType">
+        <option value="">请选择业务对象</option>
+        <option *ngFor="let item of entityTypes" [value]="item.name">{{item.desc}}</option>
+      </select>
+    </div> -->
+
+    <!-- <div class="form-group">
+      <label>行业类型:</label>
+      <select class="form-control" required name="entityType" [(ngModel)]="searchParams.entityType">
+        <option value="">请选择业务对象</option>
+        <option *ngFor="let item of entityTypes" [value]="item.name">{{item.desc}}</option>
+      </select>
+    </div> -->
+
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>年份</th>
+    <th>季度</th>
+    <th>产业类型（新经济，电子，生物）</th>
+    <th>产值（亿元）</th>
+    <th>增速（百分比）</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-c ng-scope" *ngFor="let item of list">
+    <td class="nowrap">{{item.year}}</td>
+    <td class="nowrap">{{item.quarterInfo}}</td>
+    <td class="nowrap">{{item.mainstayIndustryType}}</td>
+    <td class="nowrap">{{item.economicOutput}}</td>
+    <td class="nowrap">{{item.addSpeed}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-xs-12 col-12">
+    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+</div>

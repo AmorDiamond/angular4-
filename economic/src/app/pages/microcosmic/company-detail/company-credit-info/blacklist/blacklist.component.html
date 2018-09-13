@@ -2,7 +2,7 @@
   <div class="panel-content" id="divs">
     <div id="chufa">
       <div class="panel-item-title">行政处罚信息：</div>
-      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findAdministrativePenaltyPage')" *ngIf="eCIAdministrativePenaltyPojos.length>0">
+      <perfect-scrollbar style="max-height: 366px" *ngIf="eCIAdministrativePenaltyPojos.length>0">
         <table class="table table-bordered" *ngFor="let item of eCIAdministrativePenaltyPojos">
           <tr>
             <td class="nowrap">违法行为类型:</td>
@@ -25,10 +25,6 @@
             <td class="nowrap" name="ddate">{{item.publicityDate | date: 'yyyy-MM-dd'}}</td>
           </tr>
           <tr>
-            <td class="nowrap">详情:</td>
-            <td colspan="3">{{item.details}}</td>
-          </tr>
-          <tr>
             <td class="nowrap">数据提供单位:</td>
             <td name="dataProvider">{{item.dateSource}}</td>
             <td class="nowrap">数据提供日期:</td>
@@ -47,16 +43,64 @@
             <td class="nowrap">{{item.punishmentType}}</td>
           </tr>
         </table>
+        <div class="load-more-info text-c" *ngIf="AdministrativePenaltyParams.lastRowKey">
+          <div class="load-more-con" (click)="findAdministrativePenaltyPage()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+        </div>
       </perfect-scrollbar>
 
       <div class="no-data-tips" *ngIf="eCIAdministrativePenaltyPojos.length<1">
         {{AdministrativePenaltyTips}}
       </div>
     </div>
-    <div id="panjue">
+    <div>
+      <div class="panel-item-title">司法执行信息：</div>
+      <perfect-scrollbar style="max-height: 366px" *ngIf="eCIJudicialExecutionPojos.length>0">
+        <table class="table table-bordered">
+          <tr>
+            <th>案号</th>
+            <th>案由</th>
+            <th>立案时间</th>
+            <th>案件类型</th>
+            <th>当事人</th>
+            <th>诉讼请求</th>
+            <th>结案日期</th>
+            <th>结案方式</th>
+            <th>结案案由</th>
+            <th>判决情况</th>
+            <th>是否执行</th>
+            <th>法院</th>
+            <th>数据提供单位</th>
+            <th>数据提供日期</th>
+          </tr>
+          <tr *ngFor="let item of eCIJudicialExecutionPojos">
+            <td>{{item.caseCode}}</td>
+            <td>{{item.caseReason}}</td>
+            <td>{{item.filingTime | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.caseType}}</td>
+            <td>{{item.litigant}}</td>
+            <td>{{item.claims}}</td>
+            <td>{{item.closingDate | date: 'yyyy-MM-dd'}}</td>
+            <td>{{item.closeType}}</td>
+            <td>{{item.caseClosedBy}}</td>
+            <td>{{item.judgment}}</td>
+            <td>{{item.whetherImplemented ? '已执行' : '未执行'}}</td>
+            <td>{{item.court}}</td>
+            <td>{{item.dataSource}}</td>
+            <td>{{item.dataProvisionTime | date: 'yyyy-MM-dd'}}</td>
+          </tr>
+        </table>
+        <div class="load-more-info text-c" *ngIf="JudicialExecutionParams.lastRowKey">
+          <div class="load-more-con" (click)="findJudicialExecutionPage()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+        </div>
+      </perfect-scrollbar>
+      <div class="no-data-tips" *ngIf="eCIJudicialExecutionPojos.length<1">
+        {{JudicialExecutionTips}}
+      </div>
+    </div>
+    <div>
       <div class="panel-item-title">司法判决信息：</div>
-      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findJudicialDecisionPage')">
-        <table class="table table-bordered" id="judicialDecisionEntities" *ngIf="eCIJudicialDecisionPojos.length>0">
+      <perfect-scrollbar style="max-height: 366px" *ngIf="eCIJudicialDecisionPojos.length>0">
+        <table class="table table-bordered">
           <tr>
             <th>案号</th>
             <th>案由</th>
@@ -90,15 +134,47 @@
             <td>{{item.dataProvisionTime | date: 'yyyy-MM-dd'}}</td>
           </tr>
         </table>
-        <div class="no-data-tips" *ngIf="eCIJudicialDecisionPojos.length<1">
-          {{JudicialDecisionTips}}
+        <div class="load-more-info text-c" *ngIf="JudicialDecisionParams.lastRowKey">
+          <div class="load-more-con" (click)="findJudicialDecisionPage()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
         </div>
       </perfect-scrollbar>
+      <div class="no-data-tips" *ngIf="eCIJudicialDecisionPojos.length<1">
+        {{JudicialDecisionTips}}
+      </div>
     </div>
-    <div id="panjue">
+    <div>
+      <div class="panel-item-title">行政监督检查信息：</div>
+      <perfect-scrollbar style="max-height: 366px" *ngIf="EIIApAssets.length>0">
+        <table class="table table-bordered">
+          <tr>
+            <th>抽查计划名称</th>
+            <th>检查实施机关</th>
+            <th>抽查机关</th>
+            <th>类型</th>
+            <th>检查事项</th>
+            <th>检查结果</th>
+          </tr>
+          <tr *ngFor="let item of EIIApAssets">
+            <td>{{item.checkprogram}}</td>
+            <td>{{item.inspectionauthority}}</td>
+            <td>{{item.selectiveauthority}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.checktheitems}}</td>
+            <td>{{item.checkresult}}</td>
+          </tr>
+        </table>
+        <div class="load-more-info text-c" *ngIf="EIIApAssetsParams.lastRowKey">
+          <div class="load-more-con" (click)="findEIIApAssets()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+        </div>
+      </perfect-scrollbar>
+      <div class="no-data-tips" *ngIf="EIIApAssets.length<1">
+        {{EIIApAssetsTips}}
+      </div>
+    </div>
+    <div>
       <div class="panel-item-title">失信被执行人：</div>
-      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findDebtorInfoPage')">
-        <table class="table table-bordered" id="judicialDecisionEntities" *ngIf="DebtorInfos.length>0">
+      <perfect-scrollbar style="max-height: 366px" *ngIf="DebtorInfos.length>0">
+        <table class="table table-bordered" id="judicialDecisionEntities">
           <tr>
             <th>案号</th>
             <th>失信被执行人名称</th>
@@ -134,10 +210,13 @@
               <td>{{item.newestDate | date: 'yyyy-MM-dd'}}</td> -->
           </tr>
         </table>
-        <div class="no-data-tips" *ngIf="DebtorInfos.length<1">
-          {{DebtorInfoTips}}
+        <div class="load-more-info text-c" *ngIf="DebtorInfoParams.lastRowKey">
+          <div class="load-more-con" (click)="findDebtorInfoPage()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
         </div>
       </perfect-scrollbar>
+      <div class="no-data-tips" *ngIf="DebtorInfos.length<1">
+        {{DebtorInfoTips}}
+      </div>
     </div>
     <!--<div id="panjue">
       <div class="panel-item-title">被执行人：</div>
@@ -245,39 +324,39 @@
         </table>
       </perfect-scrollbar>
     </div>-->
-    <div id="panjue">
+    <!--<div id="panjue">
       <div class="panel-item-title">裁判文书：</div>
       <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findRefereeDocumentsPage')">
         <table class="table table-bordered" id="judicialDecisionEntities" *ngIf="RefereeDocuments.length>0">
           <tr>
             <th>案由</th>
             <th>案号</th>
-            <!-- <th>原告</th>
+            &lt;!&ndash; <th>原告</th>
               <th>被告</th>
               <th>开庭日期</th>
               <th>承办部门</th>
-              <th>审判长</th> -->
+              <th>审判长</th> &ndash;&gt;
             <th>法院</th>
             <th>法庭</th>
             <th>发布日期</th>
-            <!-- <th>公告类型</th>
+            &lt;!&ndash; <th>公告类型</th>
               <th>公告内容</th>
-              <th>裁判文书内容</th> -->
+              <th>裁判文书内容</th> &ndash;&gt;
           </tr>
           <tr *ngFor="let item of RefereeDocuments">
             <td>{{item.cause}}</td>
             <td>{{item.number}}</td>
-            <!-- <td>{{item.appellant}}</td>
+            &lt;!&ndash; <td>{{item.appellant}}</td>
               <td>{{item.theAppellant}}</td>
               <td>{{item.courtDate}}</td>
               <td>{{item.underwritingDepartment}}</td>
-              <td>{{item.presidingJudge}}</td> -->
+              <td>{{item.presidingJudge}}</td> &ndash;&gt;
             <td>{{item.court}}</td>
             <td>{{item.curia}}</td>
             <td>{{item.releaseDate | date: 'yyyy-MM-dd'}}</td>
-            <!-- <td>{{item.bulletinType}}</td>
+            &lt;!&ndash; <td>{{item.bulletinType}}</td>
               <td>{{item.bulletinContent}}</td>
-              <td>{{item.refereeDocuments}}</td> -->
+              <td>{{item.refereeDocuments}}</td> &ndash;&gt;
           </tr>
         </table>
         <div class="no-data-tips" *ngIf="RefereeDocuments.length<1">
@@ -290,127 +369,41 @@
       <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findCourtNoticePage')">
         <table class="table table-bordered" id="judicialDecisionEntities" *ngIf="CourtNotice.length>0">
           <tr>
-            <!-- <th>案由</th>
-              <th>案号</th> -->
+            &lt;!&ndash; <th>案由</th>
+              <th>案号</th> &ndash;&gt;
             <th>原告</th>
             <th>被告</th>
-            <!-- <th>开庭日期</th>
+            &lt;!&ndash; <th>开庭日期</th>
               <th>承办部门</th>
-              <th>审判长</th> -->
+              <th>审判长</th> &ndash;&gt;
             <th>法院</th>
-            <!-- <th>法庭</th> -->
+            &lt;!&ndash; <th>法庭</th> &ndash;&gt;
             <th>发布日期</th>
             <th>公告类型</th>
             <th>公告内容</th>
-            <!-- <th>裁判文书内容</th> -->
+            &lt;!&ndash; <th>裁判文书内容</th> &ndash;&gt;
           </tr>
           <tr *ngFor="let item of CourtNotice">
-            <!-- <td>{{item.cause}}</td>
-              <td>{{item.number}}</td> -->
+            &lt;!&ndash; <td>{{item.cause}}</td>
+              <td>{{item.number}}</td> &ndash;&gt;
             <td>{{item.appellant}}</td>
             <td>{{item.theAppellant}}</td>
-            <!-- <td>{{item.courtDate}}</td>
+            &lt;!&ndash; <td>{{item.courtDate}}</td>
               <td>{{item.underwritingDepartment}}</td>
-              <td>{{item.presidingJudge}}</td> -->
+              <td>{{item.presidingJudge}}</td> &ndash;&gt;
             <td>{{item.court}}</td>
-            <!-- <td>{{item.curia}}</td> -->
+            &lt;!&ndash; <td>{{item.curia}}</td> &ndash;&gt;
             <td>{{item.releaseDate | date: 'yyyy-MM-dd'}}</td>
             <td>{{item.bulletinType}}</td>
             <td>{{item.bulletinContent}}</td>
-            <!-- <td>{{item.refereeDocuments}}</td> -->
+            &lt;!&ndash; <td>{{item.refereeDocuments}}</td> &ndash;&gt;
           </tr>
         </table>
         <div class="no-data-tips" *ngIf="CourtNotice.length<1">
           {{CourtNoticeTips}}
         </div>
       </perfect-scrollbar>
-    </div>
-    <div id="panjue">
-      <div class="panel-item-title">司法执行信息：</div>
-      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findJudicialExecutionPage')">
-        <table class="table table-bordered" id="judicialDecisionEntities" *ngIf="eCIJudicialExecutionPojos.length>0">
-          <tr>
-            <th>案号</th>
-            <th>案由</th>
-            <th>立案时间</th>
-            <th>案件类型</th>
-            <th>当事人</th>
-            <th>诉讼请求</th>
-            <th>结案日期</th>
-            <th>结案方式</th>
-            <th>结案案由</th>
-            <th>判决情况</th>
-            <th>是否执行</th>
-            <th>法院</th>
-            <th>数据提供单位</th>
-            <th>数据提供日期</th>
-          </tr>
-          <tr *ngFor="let item of eCIJudicialExecutionPojos">
-            <td>{{item.caseCode}}</td>
-            <td>{{item.caseReason}}</td>
-            <td>{{item.filingTime | date: 'yyyy-MM-dd'}}</td>
-            <td>{{item.caseType}}</td>
-            <td>{{item.litigant}}</td>
-            <td>{{item.claims}}</td>
-            <td>{{item.closingDate | date: 'yyyy-MM-dd'}}</td>
-            <td>{{item.closeType}}</td>
-            <td>{{item.caseClosedBy}}</td>
-            <td>{{item.judgment}}</td>
-            <td>{{item.whetherImplemented ? '已执行' : '未执行'}}</td>
-            <td>{{item.court}}</td>
-            <td>{{item.dataSource}}</td>
-            <td>{{item.dataProvisionTime | date: 'yyyy-MM-dd'}}</td>
-          </tr>
-        </table>
-        <div class="no-data-tips" *ngIf="eCIJudicialExecutionPojos.length<1">
-          {{JudicialExecutionTips}}
-        </div>
-      </perfect-scrollbar>
-    </div>
-    <div id="panjue">
-      <div class="panel-item-title">行政监督检查信息：</div>
-      <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('findEIIApAssets')">
-        <table class="table table-bordered" *ngIf="EIIApAssets.length>0">
-          <tr>
-            <th>抽查计划名称</th>
-            <th>检查实施机关</th>
-            <th>抽查机关</th>
-            <th>类型</th>
-            <th>检查事项</th>
-            <th>检查结果</th>
-          </tr>
-          <tr *ngFor="let item of EIIApAssets">
-            <td>{{item.checkprogram}}</td>
-            <td>{{item.inspectionauthority}}</td>
-            <td>{{item.selectiveauthority}}</td>
-            <td>{{item.type}}</td>
-            <td>{{item.checktheitems}}</td>
-            <td>{{item.checkresult}}</td>
-          </tr>
-        </table>
-        <div class="no-data-tips" *ngIf="EIIApAssets.length<1">
-          {{EIIApAssetsTips}}
-        </div>
-      </perfect-scrollbar>
-    </div>
-    <div id="panjue">
-      <div class="panel-item-title">行政强制信息：</div>
-      <div class="no-data-tips">
-        暂无信息！
-      </div>
-    </div>
-    <div id="panjue">
-      <div class="panel-item-title">其他行政执法信息：</div>
-      <div class="no-data-tips">
-        暂无信息！
-      </div>
-    </div>
-    <div id="panjue">
-      <div class="panel-item-title">批评谴责信息：</div>
-      <div class="no-data-tips">
-        暂无信息！
-      </div>
-    </div>
+    </div>-->
     <!--<div id="panjue">
       <div class="panel-item-title">税务违法：</div>
       <div id="judicialDecisionEntitiesDiv"></div>

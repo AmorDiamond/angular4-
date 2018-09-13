@@ -24,8 +24,9 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
   biologicalcityIndustryProportionTips = '加载中...';
   selectParkName: any;
   selectParkNameSubscription: Subscription;
+  enterpriseFenbuEchartData: any;
   ngOnInit() {
-    this.storeAmap.dispatch({
+    /*this.storeAmap.dispatch({
       type: ADD_INDUSTRY_MAP_POLYGON,
       payload: {
         action: 'ADD_INDUSTRY_MAP_POLYGON',
@@ -33,7 +34,7 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
           type: 'parkIndustry'
         }
       }
-    })
+    })*/
     /*this.selectParkNameSubscription = this.industryMapFenbuService.getSelectParkIndustry().subscribe(res => {
       this.selectParkName = res.options ? res.options : '园区产业企业占比';
       this.creatParkIndustryProportionEchart(this.selectParkName);
@@ -45,7 +46,14 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
   }
   /*获取数据*/
   getData(parkName?) {
-    this.selectParkName = parkName ? parkName : '高新西区';
+    this.industryMapFenbuService.getDataByParams({}, 'industryMapFenbuUrl').subscribe(res => {
+      console.log(res)
+      if (res.responseCode === '_200') {
+        const options = res.data;
+        this.creatEnterpriseFenbuEchart(options);
+      }
+    });
+    /*this.selectParkName = parkName ? parkName : '高新西区';
     let params = {dataSupplyTime: new Date().getFullYear(), functionalareaindustry: this.selectParkName};
     let time = new Date().getFullYear();
     let findParams = [
@@ -53,8 +61,8 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
       {findParams: {dataSupplyTime: time, functionalareaindustry: '高新南区'}, url: 'industryMapFunctionAreaMenuUrl'},
       {findParams: {dataSupplyTime: time, functionalareaindustry: '高新东区'}, url: 'industryMapFunctionAreaMenuUrl'},
       {findParams: {dataSupplyTime: time, functionalareaindustry: '天府国际生物城'}, url: 'industryMapFunctionAreaMenuUrl'},
-    ];
-    this.industryMapFenbuService.getRequestByForkJoin(findParams).subscribe(res => {
+    ];*/
+    /*this.industryMapFenbuService.getRequestByForkJoin(findParams).subscribe(res => {
       console.log('功能区数据', res)
       if(res[0].responseCode === '_200') {
         let options = res[0].data.registmap;
@@ -88,7 +96,7 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
           this.creatParkIndustryProportionEchart('biologicalcityIndustryProportionEchart', options);
         }
       }
-    })
+    })*/
   }
   creatParkProportionEchart() {
     const option_jckze = {
@@ -224,5 +232,79 @@ export class EnterpriseFenbuComponent implements OnInit, OnDestroy {
       ]
     };
     this[dataName] = option_cy;
+  }
+  /*绘制企业分布柱状图*/
+  creatEnterpriseFenbuEchart(options) {
+    let xAxisData = [];
+    let seriesData = [];
+    options.forEach(res => {
+      if (res[2]) {
+        xAxisData.push(res[2]);
+        seriesData.push(res[0] ? res[0] : 0);
+      }
+    });
+    let echartTitle = '各功能区企业分布';
+    const option = {
+      color: ['#21cbee', '#168aa1'],
+      title: {
+        text: echartTitle,
+        textStyle: {
+          color: '#bcbdbf'
+        },
+        left: 'center'
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
+      },
+      calculable: true,
+      xAxis: [
+        {
+          name: '功能区',
+          nameTextStyle : {
+            color : '#bcbdbf',
+          },
+          type: 'category',
+          data: xAxisData,
+          axisLabel : {
+            textStyle : {
+              color : '#bcbdbf',
+            }
+          }
+        }
+      ],
+      yAxis: [
+        {
+          name: '数量(家)',
+          nameTextStyle : {
+            color : '#bcbdbf',
+          },
+          type: 'value',
+          splitLine: {show: false},
+          axisLabel : {
+            textStyle : {
+              color : '#bcbdbf',
+            }
+          }
+        }
+      ],
+      series: [
+        {
+          name: '企业数量',
+          type: 'bar',
+          barMaxWidth: '50%',
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+            }
+          },
+          data: seriesData
+        }
+      ]
+    };
+    this.enterpriseFenbuEchartData = option;
   }
 }

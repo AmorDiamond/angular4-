@@ -1,0 +1,77 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-investment'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/macroFixedInverstment/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-investment'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/macroFixedInverstment/exportExcelForm?year={{getListParams.year}}" download="{{getListParams.year+'-'+'固定投资.xlsx'}}">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-investment'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="固定投资模板.xlsx">EXCEL模板下载</a>
+  </button>
+  
+
+  <!-- <button class="excel-export">EXCEL模板下载</button> -->
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>区域:</label>
+      <input type="text" class="form-control" name="areaRange" [(ngModel)]="getListParams.areaRange" placeholder="区域">
+    </div>
+    <div class="form-group">
+      <label>年度:</label>
+      <input type="text" class="form-control" name="year" [(ngModel)]="getListParams.year" placeholder="年度">
+    </div>
+
+    <!-- <div class="form-group">
+      <label>年度:</label>
+        <input type="text" name="beginTime" placeholder="开始时间" class="form-control" bsDatepicker [(ngModel)]="chooseTime.beginCreateTime" [bsConfig]="bsConfig">
+    </div> -->
+
+    <!-- <div class="form-group">
+      <label>是否高企:</label>
+      <select class="form-control" required name="entityType" [(ngModel)]="searchParams.entityType">
+        <option value="">请选择业务对象</option>
+        <option *ngFor="let item of entityTypes" [value]="item.name">{{item.desc}}</option>
+      </select>
+    </div> -->
+
+    <!-- <div class="form-group">
+      <label>行业类型:</label>
+      <select class="form-control" required name="entityType" [(ngModel)]="searchParams.entityType">
+        <option value="">请选择业务对象</option>
+        <option *ngFor="let item of entityTypes" [value]="item.name">{{item.desc}}</option>
+      </select>
+    </div> -->
+
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>年份</th>
+    <th>季度</th>
+    <th>地区</th>
+    <th>固定投资额（亿元）</th>
+    <th>增速（百分比）</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-c ng-scope" *ngFor="let item of list">
+    <td class="nowrap">{{item.year}}</td>
+    <td class="nowrap">{{item.month}}</td>
+    <td class="nowrap">{{item.areaRange}}</td>
+    <td class="nowrap">{{item.fixedInverstment}}</td>
+    <td class="nowrap">{{item.addSpeed}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-xs-12 col-12">
+    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+</div>
+<!-- <ng2-toasty [position]="'center-center'"></ng2-toasty> -->

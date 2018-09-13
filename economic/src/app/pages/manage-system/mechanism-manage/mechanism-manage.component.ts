@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { MechanismManageService } from "./mechanism-manage.service";
+import { MechanismManageService } from './mechanism-manage.service';
 
 @Component({
   selector: 'app-mechanism-manage',
   templateUrl: './mechanism-manage.component.html',
-  styleUrls: ['./mechanism-manage.component.css'],
-  providers: [MechanismManageService]
+  styleUrls: ['./mechanism-manage.component.css']
 })
 export class MechanismManageComponent implements OnInit {
 
@@ -27,25 +26,26 @@ export class MechanismManageComponent implements OnInit {
       const treeFormatData = [];
       const treeData = res;
       treeData.forEach(item => {
+        const hasChildren = item.children ? item.children : false;
         treeFormatData.push(
           {
-            "label": item.text,
-            "data": item.id,
-            "formatparent": item.data ? item.data : '',
-            "expandedIcon": "fa fa-folder-open",
-            "collapsedIcon": "fa fa-folder",
-            "leaf": false
+            'label': item.text,
+            'data': item.id,
+            'formatparent': item.data ? item.data : '',
+            'expandedIcon': 'fa fa-folder-open',
+            'collapsedIcon': 'fa fa-folder',
+            'leaf': !hasChildren // leaf为false时有下级加载
           }
-        )
+        );
       });
       this.files = <TreeNode[]> treeFormatData;
       // this.files = res.data;
-    })
+    });
   }
   /*获取数据组装*/
   loadNode(event) {
-    if(event.node) {
-      //in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
+    if (event.node) {
+      // in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
       console.log(event.node);
       const id = event.node.data;
       const parent = event.node.formatparent;
@@ -55,20 +55,21 @@ export class MechanismManageComponent implements OnInit {
         const treeFormatData = [];
         const treeData = res;
         treeData.forEach(item => {
+          const hasChildren = item.children ? item.children : false;
           treeFormatData.push(
             {
-              "label": item.text,
-              "data": item.id,
-              "formatparent": item.data ? item.data : '',
-              "expandedIcon": "fa fa-folder-open",
-              "collapsedIcon": "fa fa-folder",
-              "leaf": false
+              'label': item.text,
+              'data': item.id,
+              'formatparent': item.data ? item.data : '',
+              'expandedIcon': 'fa fa-folder-open',
+              'collapsedIcon': 'fa fa-folder',
+              'leaf': !hasChildren // leaf为false时有下级加载
             }
-          )
+          );
         });
         event.node.children = treeFormatData;
         // this.files = res.data;
-      })
+      });
     }
   }
 

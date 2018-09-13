@@ -2,7 +2,7 @@
   <div class="panel-content m-t-20">
     <div class="flex">
       <div class="flex-cell">
-        <div *ngIf="registerMoneyEchartData" class="flex-item" echarts [options]="registerMoneyEchartData"></div>
+        <div *ngIf="registerMoneyEchartData" class="flex-item single-echart" echarts [options]="registerMoneyEchartData"></div>
         <div class="no-data-tips" *ngIf="!registerMoneyEchartData">
           暂无信息！
         </div>

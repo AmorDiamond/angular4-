@@ -2,13 +2,10 @@
   <div class="focus-business-con">
     <div [hidden]="focusBusinessList.length<1">
       <div class="focus-business-item" *ngFor="let item of focusBusinessList" [routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: item.name}">
-        <div class="logo">
-          <img src="/economicSystem/assets/images/company_logo.png" alt="">
-        </div>
         <div class="column-item">
           <div class="name">{{item.name}}</div>
           <div class="other">
-            <span>注册类型：<i>{{item.registrationType ? item.registrationType : '未知'}}</i></span>
+            <span>注册类型：<i>{{item.enterpriseType ? item.enterpriseType : '未知'}}</i></span>
             <span>行业类型：<i>{{item.industryType ? item.industryType : '未知'}}</i></span>
             <span>通讯地址：<i>{{item.address ? item.address : '未知'}}</i></span>
           </div>

@@ -1,0 +1,21 @@
+.table-label{
+    min-width: 200px;
+}
+.table-handle{
+    color: #337ab7;
+    width: 100px;
+}
+.table-handle span{
+    cursor: pointer;
+}
+.types{
+    text-align: left;
+}
+.types span{
+    display: inline-block;
+    margin: 0 5px;
+}
+table .name{
+    text-align: left;
+    width: 300px;
+}

@@ -21,11 +21,11 @@
             <div routerLink="/mic/eventNotice/track/businessTrain" routerLinkActive="active"><em></em>企业培育</div>
           </div>
         </li>-->
-        <li><div class="menu-item" routerLink="/mic/eventNotice/track" routerLinkActive="active">重点企业追踪</div></li>
-        <li><div class="menu-item" routerLink="/mic/eventNotice/earlyWarning" routerLinkActive="active">企业信用事件预警</div></li>
-        <li><div class="menu-item" routerLink="/mic/eventNotice/recommend" routerLinkActive="active">拟规上企业推荐</div></li>
-        <li><div class="menu-item" routerLink="/mic/eventNotice/focusBusiness" routerLinkActive="active">关注企业列表</div></li>
-        <li><div class="menu-item" routerLink="/mic/eventNotice/personalPreference" routerLinkActive="active">个人偏好设置</div></li>
+        <li appAccessControl [accessData]="'track-messagePush'"><div class="menu-item" routerLink="/mic/eventNotice/track" routerLinkActive="active">重点企业追踪</div></li>
+        <li appAccessControl [accessData]="'early-warning'"><div class="menu-item" routerLink="/mic/eventNotice/earlyWarning" routerLinkActive="active">企业信用事件预警</div></li>
+        <li appAccessControl [accessData]="'recommend'"><div class="menu-item" routerLink="/mic/eventNotice/recommend" routerLinkActive="active">拟规上企业推荐</div></li>
+        <li appAccessControl [accessData]="'focus-business'"><div class="menu-item" routerLink="/mic/eventNotice/focusBusiness" routerLinkActive="active">关注企业列表</div></li>
+        <li appAccessControl [accessData]="'personal-preference'"><div class="menu-item" routerLink="/mic/eventNotice/personalPreference" routerLinkActive="active">个人偏好设置</div></li>
         <!--<li routerLink="/mic/eventNotice/breedTrack" routerLinkActive="active">重点企业培育跟踪</li>-->
       </ul>
     </div>

@@ -1,0 +1,1840 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~normalize.css/normalize.css";
+@import "~animate.css/animate.css";
+html,body{
+  height: 100%;
+  overflow: hidden;
+  font-size: 14px;
+}
+ul{
+  list-style: none;
+  margin: 0;
+}
+*{
+  box-sizing: border-box;
+}
+img{
+  vertical-align: middle;
+}
+.flex {
+  display: flex;
+}
+.flex>.flex-cell {
+  flex: 1;
+}
+.nowrap{
+  white-space: nowrap;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.text-c{
+  text-align: center;
+}
+.land-company-detail-tab .flex {
+  justify-content: space-between;
+}
+.microcosmic_container {
+  border-left: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 580px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 20;
+  padding: 20px;
+  transition: all .5s;
+}
+.microcosmic_container .back-arrow {
+  left: -40px;
+}
+.land-panel-con {
+  height: 100%;
+}
+.my-hide{
+  display: none;
+}
+table{
+  border: 1px solid #ddd;
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+  border-spacing: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+table td,table th{
+  padding: 8px;
+  border: 1px solid rgba(249,182,32,.3);
+}
+/*概况面板样式*/
+.icon-ctrl-panel, .right-top-md-style {
+  box-shadow: #19316d 4px 8px 12px 0px;
+}
+.right-top-land-infowindow .icon-ctrl-body .item-infowindow {
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.right-top-land-infowindow .icon-ctrl-body .echarts, .land-infowindow-md .icon-ctrl-body .echarts {
+  height: 250px;
+}
+/*概况面板样式END*/
+.land-colors-list{
+  white-space: nowrap;
+}
+#container{
+  outline: none;
+}
+.build-menu{
+  position: fixed;
+  bottom: 50px;
+  right: 100px;
+}
+.build-menu.show {
+  opacity: 1;
+}
+.build-menu .sub-menu2 {
+  width: 90px;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 6px;
+  position: relative;
+  background: #f9b620;
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: #151411;
+  font-weight: bold;
+  padding-left: 40px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, .4);
+  cursor: pointer;
+}
+.build-menu .sub-menu2 li {
+  font-size: 20px;
+  cursor: pointer;
+}
+.land-bottom-menu{
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  border-radius: 6px;
+  color: #fff;
+  background: #78bb7a;
+}
+.land-bottom-menu .item{
+  float: left;
+  padding: 5px;
+  cursor: pointer;
+  border-right: 1px solid #ddd;
+}
+.land-bottom-menu .item:last-child{
+  border-right: none;
+}
+.land-proportion{
+  height: 200px;
+}
+.used-land{
+  background: #f9b620;
+}
+.used-land-inefficient{
+  background: #ff7eff;
+}
+.nouse-land{
+  background: #4747f1;
+}
+.build-switch .sub-menu{
+  position: absolute;
+  left: 120%;
+  top: 0;
+  white-space: nowrap;
+  border-radius: 6px;
+  padding-left: 10px;
+  font-weight: normal;
+  color: #151411;
+  opacity: 0;
+  transition: opacity,left .5s;
+}
+.build-switch .sub-menu li{
+  width: 110px;
+  height: 55px;
+  line-height: 55px;
+  margin-bottom: 10px;
+  border-radius: 30px 30px 30px 0;
+  background: #fcf9f2;
+  box-shadow: inset -2px -2px 10px rgba(0,0,0,.2);
+  outline: none;
+}
+.build-switch .sub-menu li.active,.build-switch .sub-menu li:hover{
+  background: #f9b620;
+}
+.build-switch .sub-menu li:last-child{
+  margin-bottom: 0;
+}
+.function-land .sub-menu{
+  top: auto;
+  bottom: 0;
+}
+.build-switch .item:hover .sub-menu{
+  opacity: 1;
+  left: 100%;
+}
+.close-pop{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  z-index: 99;
+}
+.land-panel .land-panel-con .land-row-title{
+  width: 20%;
+}
+.land-panel .land-panel-con .two-row{
+  width: 15%;
+}
+.amap-marker-content .amap-overlay-text-container{
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, .6);
+}
+/*具体地块数据面板*/
+.land-panel{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-left: 4px solid rgba(249, 182, 32, 0.6);
+  padding: 20px;
+  transition: all .5s;
+  display: none;
+}
+.land-panel .land-panel-box{
+  margin: 0;
+  border-radius: 6px;
+  padding: 0 20px;
+  color: #bcbdbf;
+  height: 100%;
+  background: linear-gradient(to bottom right, #151411 30%,#151816 50%, #162c2e);
+}
+.land-panel .land-back-arrow {
+  position: absolute;
+  top: 50%;
+  left: -44px;
+  margin-top: -50px;
+  padding-right: 10px;
+  width: 40px;
+  height: 100px;
+  visibility: hidden;
+}
+.land-panel:hover .land-back-arrow {
+  visibility: visible;
+}
+.land-panel .land-back-arrow-btn {
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 100%;
+  right: 10px;
+  background-image: url(assets/images/back_arrow_right.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: backgroundColor .5s;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.land-panel:hover .land-back-arrow-btn {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.land-panel .land-back-arrow-btn.active {
+  transform: rotate(180deg);
+  background-color: rgba(0, 0, 0, 0.6);
+  visibility: visible;
+}
+/*颜色列表*/
+.eco-color .color-blank,.top-color .color-blank{
+  cursor:pointer;
+  background: #ddd;
+}
+.time-colors-panel{
+  position: fixed;
+  top: 20px;
+  right: 420px;
+  /* margin-right: 20px; */
+  /* background: rgba(252, 249, 242, .9); */
+  border-radius: 6px;
+  /* box-shadow: 3px 3px 15px rgba(0, 0, 0, .2); */
+  /* box-shadow: #19316d 4px 8px 12px 0px; */
+  transition: right 1s;
+  height: 0;
+}
+.color-blank{
+  padding: 10px;
+  display: inline-block;
+  border-radius: 5px;
+  margin-right: 5px;
+  vertical-align: text-bottom;
+  /*opacity: .8;*/
+}
+.color-item{
+  height: 30px;
+  line-height: 30px;
+}
+/*性质*/
+.nature-color .color-item .reserve-land.active,.use-nouse-color .color-item .reserve-land{
+  background: #07fff7;
+}
+.nature-color .color-item .industry-land.active,.use-nouse-color .color-item .industry-land{
+  background: #a57c52;
+}
+.nature-color .color-item .other-land.active,.use-nouse-color .color-item .other-land{
+  /*background: #7edfff;*/
+  background: #2a8ab8;
+}
+.nature-color .color-item .teach-land.active,.use-nouse-color .color-item .teach-land{
+  background: #ff7eff;
+}
+.nature-color .color-item .bsiness-land.active,.use-nouse-color .color-item .bsiness-land{
+  background: #ff0000;
+}
+.nature-color .color-item .house-land.active,.use-nouse-color .color-item .house-land{
+  /*background: #ffdf7e;*/
+  background: #ffd041;
+}
+/*低效*/
+.uninefficient-land{
+  background: #f9b620;
+}
+.inefficient-land{
+  background: #4747f1;
+}
+/*top*/
+.active .living-land,.active .electron-land,.active .make-land{
+  background: #ddd;
+  cursor: pointer
+}
+.active .living-land.active{
+  background: #f61d1d;
+}
+.active .electron-land.active,.active .living-land.active,.active .make-land.active{
+  background: #2a00ff;
+}
+.industry-color .living-land{
+  background: #f61d1d;
+}
+.industry-color .electron-land{
+  background: #2a00ff;
+  cursor: pointer;
+}
+.industry-color .make-land{
+  background: #51b706;
+}
+.industry-color .other-land{
+  background: #c4ae8d;
+}
+.active .yiqi-land{
+  background: #a57c52;
+}
+.active .top-other-land{
+  background: #7d7dff;
+}
+.active .service-land{
+  background: #ff0000;
+}
+/*eco-color*/
+
+.build-switch {
+  /*display: none;*/
+  position: absolute;
+  width: 120px;
+  left: 0px;
+  top: 50%;
+  margin-top: -255px;
+  text-align: center;
+  color: #151411;
+}
+.build-switch .item{
+  position: relative;
+  height: 120px;
+  background: #fcf9f2;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: inset -3px -3px 15px rgba(0,0,0,.2);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.build-switch .item span{
+  margin-top: 85px;
+  display: inline-block;
+}
+.build-switch .item:last-child{
+  margin-bottom: 0;
+}
+.build-switch .item::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  height: 65px;
+  width: 100%;
+  background: url("assets/images/menu_land_icon.png") center no-repeat;
+}
+.build-switch .item2::before{
+  background: url("assets/images/menu_industry_icon.png") center no-repeat;
+}
+.build-switch .item3::before{
+  background: url("assets/images/menu_life_icon.png") center no-repeat;
+}
+.build-switch .item4::before{
+  background: url("assets/images/menu_function_icon.png") center no-repeat;
+}
+.build-switch .item5::before{
+  background: url("assets/images/menu_function_icon.png") center no-repeat;
+}
+.build-switch .item:hover{
+  overflow: inherit;
+}
+.build-switch .active{
+  background: #f9b620;
+}
+.amap-ui-smp-ifwn-combo-sharp{
+  Position: absolute;
+  left: -12px;
+  top: 157px;
+  transform: rotate(90deg);
+}
+.amap-ui-smp-ifwn-content-body{
+  border-radius: 6px;
+}
+.land-info .land-info-item{
+  margin-bottom: 15px;
+}
+.land-info .title{
+  position: relative;
+  margin: 10px 0;
+  padding-left: 10px;
+}
+.land-info .title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 14px;
+  border-radius: 6px;
+  background: #7d85cb;
+  margin: 3px 0;
+}
+.land-info .land-desc{
+  color: #151411;
+  padding-left: 10px;
+}
+/*.park-build,.land-choose-time{
+    position: absolute;
+    top: 20px;
+    right: 60%;
+    padding: 10px;
+    margin-right: 20px;
+    background: rgba(252, 249, 242, .9);
+    border-radius: 6px;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, .2);
+    display: none;
+}*/
+.park-build{
+  position: absolute;
+  top: 20px;
+  right: 60%;
+  padding: 10px;
+  margin-right: 20px;
+  background: rgba(252, 249, 242, .9);
+  border-radius: 6px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, .2);
+  display: none;
+}
+.land-choose-time{
+  width: 130px;
+  padding: 10px;
+  overflow: hidden;
+  display: none;
+}
+.park-build-con .park-name{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.park-build-con .info-l{
+  margin-right: 20px;
+}
+.park-info{
+  color: #999999;
+  overflow: hidden;
+}
+.park-info span{
+  color: #333;
+  font-weight: bold;
+}
+.amap-info-content{
+  position: relative;
+  padding-left: 60px;
+  border-radius: 25px;
+  border: 2px solid #f9b620;
+  height: 54px;
+  line-height: 30px;
+  font-size: 20px;
+  white-space: nowrap;
+}
+.amap-info-content:before{
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-image: url("assets/images/park_build_infowind.png");
+  background-color: #f9b620;
+  background-position: center;
+  background-repeat: no-repeat;
+  top: 0;
+  left: -2px;
+}
+.amap-info-sharp{
+  top: -16px;
+  background: none;
+  width: 30px !important;
+  height: 30px !important;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-left: 2px solid #f9b620;
+  border-bottom: 2px solid #f9b620;
+  transform: rotate(-45deg);
+  background: #fff;
+  border-radius: 0 10px 0 0;
+}
+#myList{
+  display: none;
+}
+#myList li{
+  cursor: pointer;
+}
+.choose-park-buid{
+  position: relative;
+  border: 1px solid rgba(37, 36, 33, .6);
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 5px;
+  margin-top: 5px;
+  min-width: 120px;
+}
+.choose-park-buid .build-arrow{
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  transition: transform .3s;
+}
+.choose-park-buid .build-arrow.active{
+  transform: rotate(180deg);
+}
+li.poibox.selected,#myList li:hover {
+  color: #f9b621;
+}
+.zdy-full-cover-mask .zdy-big-mask,.zdy-full-cover-mask .spinner,.zdy-buildfull-cover-mask .zdy-big-mask,.zdy-buildfull-cover-mask .spinner{
+  z-index: 20;
+}
+.poi-title .build-name-icon{
+  margin: 0 5px;
+}
+.microcosmic_container{
+  border-left: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 580px;
+}
+.microcosmic_container .back-arrow{
+  left: -40px;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  padding-right: 10px;
+  width: 40px;
+  height: 100px;
+  visibility: hidden;
+}
+.microcosmic_container:hover .back-arrow {
+  visibility: visible;
+}
+.microcosmic_container .back-arrow-btn {
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 100%;
+  right: 10px;
+  background-image: url(assets/images/back_arrow_right.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: backgroundColor .5s;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.microcosmic_container .back-arrow-btn.active {
+  transform: rotate(180deg);
+  background-color: rgba(0, 0, 0, 0.6);
+  visibility: visible;
+}
+.microcosmic_container:hover .back-arrow-btn {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.land-panel-con{
+  height: 100%;
+}
+.land-panel-con .item{
+  margin-bottom: 20px;
+}
+.land-panel-con .item:last-child{
+  margin-bottom: 0;
+}
+.land-use-purpose,.land-info-con,.high-enterprise-radar,.high-enterprise-company-bd,.land-use-proportion{
+  border-radius: 20px 10px;
+  background: #fcf9f2;
+}
+.land-use-purpose,.high-enterprise-radar{
+  height: 320px;
+}
+.high-enterprise-radar{
+  height: 100%;
+}
+.land-use-proportion{
+  height: 100%;
+}
+.use-purpose-title,.public-title{
+  height: 50px;
+  line-height: 50px;
+  color: #11100d;
+  font-weight: bold;
+  background: url("assets/images/title_bg.png") no-repeat;
+}
+.use-purpose-title .title,.public-title .title{
+  font-size: 18px;
+  margin-left: 35px;
+  float: left;
+}
+.inefficient-use-purpose-title .title{
+  margin-left: 22px;
+}
+.land-use-purpose .use-purpose-bd,.high-enterprise-radar .radar-bd{
+  height: 250px;
+}
+.land-use-purpose-scroll .land-use-purpose{
+  position: relative;
+}
+.land-use-purpose .use-purpose-bt{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+}
+.land-use-purpose .use-purpose-bt .item{
+  width: 50%;
+  float: left;
+  text-align: center;
+}
+.land-colors-list .color-list-title{
+  height: 50px;
+  line-height: 30px;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #11100d;
+  background-color: #f9b620;
+  box-shadow: inset 3px 3px 10px rgba(249, 238, 238, 0.8);
+}
+.land-colors-list .color-list-bd{
+  padding: 10px;
+}
+/*.time-colors-panel{
+    overflow: hidden;
+}*/
+.time-colors-panel .color-list-title{
+  overflow: hidden;
+  border-radius: 6px 6px 0 0;
+}
+.high-enterprise-company-bd{
+  height: calc(100% - 340px);
+  overflow: hidden;
+}
+/*产业*/
+.industry-company-list{
+  background-color: #fcf9f2;
+  border-radius: 25px 10px;
+  height: 100%;
+  overflow: hidden;
+}
+.industry-company-bd{
+  height: calc(100% - 50px);
+}
+.industry-company-bd .company-con,.high-enterprise-company-bd .company-con{
+  border: 1px solid #f9b620;
+  border-radius: 23px 10px;
+  height: 300px;
+}
+.high-enterprise-company-bd .company-con{
+  height: 100%;
+}
+.industry-company-hd .time-item{
+  float: left;
+  width: 15%;
+  position: relative;
+  cursor: pointer;
+}
+.industry-company-hd .time-item:first-child{
+  border-radius: 24px 0 0;
+}
+.industry-company-hd .time-item.active,.industry-company-hd .time-item:hover{
+  background-color: #f9b620;
+  box-shadow: inset 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+.industry-company-hd .time-item.active:after,.industry-company-hd .time-item:hover:after{
+  position: absolute;
+  content: "";
+  height: 0px;
+  width: 0px;
+  top: 97%;
+  left: 37%;
+  border-top: 10px solid #f9b620;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
+.industry-company-hd{
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+.industry-company-bd{
+  box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+.industry-company-bd .own-company{
+  height: 80px;
+  line-height: 80px;
+  padding: 0 20px;
+}
+.industry-company-bd .own-company .logo{
+  margin-right: 10px;
+  vertical-align: text-bottom;
+  width: 50px;
+  overflow: hidden;
+  display: inline-block;
+}
+.industry-company-bd .own-company .logo img{
+  width: 100%;
+  border-radius: 50%;
+}
+.industry-company-bd .own-company .name{
+  font-size: 22px;
+  font-weight: bold;
+  display: inline-block;
+  max-width: 370px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.industry-company-bd .own-company .name-label{
+  color: #999999;
+  font-size: 16px;
+}
+.industry-company-bd .flex,.high-enterprise-company-bd .flex{
+  display: flex;
+}
+.industry-company-bd .company-list,.high-enterprise-company-bd .company-list{
+  text-align: center;
+}
+.industry-company-bd .company-list .company-item,.high-enterprise-company-bd .company-list .company-item{
+  border: none;
+}
+.industry-company-bd .company-list .logo img,.high-enterprise-company-bd .company-list .logo img{
+  border-radius: 50%;
+}
+.industry-company-bd .company-list .name{
+  text-align: left;
+}
+.industry-company-bd .company-list .name .top-label{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 140px;
+}
+.industry-company-bd .company-list .top-label,.high-enterprise-company-bd .company-list .top-label{
+  font-size: 14px;
+  font-weight: bold;
+  color: #11100d;
+}
+.industry-company-bd .company-list .bot-label,.high-enterprise-company-bd .company-list .bot-label{
+  color: #999999;
+}
+.industry-company-bd .company-list .item,.high-enterprise-company-bd .company-list .item{
+  border-right: 1px solid #ddd;
+}
+.industry-company-bd .company-list .logo,.high-enterprise-company-bd .company-list .logo{
+  width: 50px;
+  margin: 0 20px;
+}
+.high-enterprise-radar .high-enterprise-own{
+  display: table;
+}
+.high-enterprise-radar .high-enterprise-own .high-enterprise-own-name{
+  display: table-cell;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.high-enterprise-radar .high-enterprise-own-label{
+  font-weight: normal;
+  color: #999;
+  margin-left: 10px;
+  display: inline-block;
+}
+/*产业楼宇*/
+.industry-build-con{
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.industry-build-con .build-con-hd{
+  position: relative;
+  height: 120px;
+  background: #f9b620;
+}
+.industry-build-con .build-con-hd .logo{
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  margin: 0 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  top: 50%;
+  background-color: #ddd;
+}
+.industry-build-con .build-con-hd .logo img{
+  width: 100%;
+  height: 100%;
+}
+.industry-build-con .build-con-hd .name{
+  position: absolute;
+  left: 160px;
+  bottom: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  color: #11100d;
+}
+.industry-build-con .build-con-bd{
+  height: calc(100% - 120px);
+  background: #fcf9f2;
+  box-shadow: inset 0px 3px 10px rgba(0, 0, 0, .2);
+}
+.industry-build-con .build-con-bd .build-address .address-icon{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  background: url("assets/images/address_icon.png") center no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+}
+.industry-build-con .build-con-bd .build-address{
+  margin-left: 160px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+}
+.industry-build-con .build-con-bd .build-info-box{
+  height: calc(100% - 110px);
+  margin-top: 60px;
+  overflow: hidden;
+}
+.industry-build-con .build-con-bd .build-info{
+  font-size: 16px;
+  padding: 0 40px;
+}
+.industry-build-con .build-info .build-info-item{
+  line-height: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+.industry-build-con .build-info .build-info-item div{
+  float: left;
+}
+.industry-build-con .build-info .build-info-item .build-label{
+  padding-right: 10px;
+  color: #999;
+}
+.industry-build-con .build-info td{
+  border: none !important;
+}
+.build-menu .sub-menu2:before{
+  position: absolute;
+  content: '';
+  width: 40px;
+  height: 40px;
+  left: 0;
+  top: 0;
+  background: url("assets/images/park_build_infowind.png") center no-repeat;
+}
+/*图标示意*/
+.icon-ctrl-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  max-width: 140px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: #19316d 4px 8px 12px 0px;
+  padding: 0 0 20px 0;
+  background-color: #fcf9f2;
+}
+.icon-ctrl-panel .icon-ctrl-head {
+  height: 50px;
+  line-height: 50px;
+  padding-left: 10px;
+  font-size: 20px;
+  background: #f9b620;
+  box-shadow: inset 3px 3px 10px #f7eeee;
+}
+.icon-ctrl-panel .icon-ctrl-body .icon-ctrl-body-item {
+  height: 40px;
+  line-height: 40px;
+  padding: 3px 10px;
+}
+.icon-ctrl-panel .icon-ctrl-body .icon-ctrl-body-item .color-img {
+  width: 24px;
+  height: 28px;
+  float: left;
+  margin-right: 10px;
+}
+.icon-ctrl-panel .icon-ctrl-body .icon-ctrl-body-item .item-text {
+  float: left;
+}
+.icon-ctrl-panel .icon-ctrl-body .icon-ctrl-body-item .color-img img {
+  width: 100%;
+  height: 100%;
+}
+.right-top-md-fixed {
+  position: fixed;
+  right: 50px;
+  top: 50px;
+}
+.right-top-md-style {
+  position: absolute;
+  top: 20px;
+  background: #fcf9f2;
+  right: 20px;
+  width: 540px;
+  /* height: 300px; */
+  overflow: hidden;
+  box-shadow: #b3b3b3 4px 4px 10px 0px;
+  border-radius: 10px;
+}
+.right-top-md-head {
+  position: relative;
+  height: 120px;
+  background: #f9b620;
+  box-shadow: inset 3px 3px 10px #f7eeee;
+  border-radius: 10px 10px 0 0;
+}
+.right-top-md-head .head-img {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: #ccc 1px 1px 5px 0;
+}
+.right-top-md-head .head-img img {
+  width: 100%;
+  height: 100%;
+}
+.right-top-md-head .title {
+  margin: 70px 0 0 160px;
+  font-size: 26px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.right-top-md-body {
+  /* height: 120px; */
+}
+.right-top-md-body .body-address {
+  height: 30px;
+  line-height: 30px;
+  margin-left: 160px;
+}
+.right-top-md-body .body-address .body-address-img {
+  height: 30px;
+  width: 30px;
+  overflow: hidden;
+  float: left;
+  border-radius: 50%;
+}
+.right-top-md-body .body-address .body-address-img img{
+  height: 100%;
+  width: 100%;
+}
+.right-top-md-body .body-desc {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  overflow: hidden;
+}
+.right-top-md-body .body-desc .body-desc-item {
+  height: 120px;
+  flex: 1;
+}
+.right-top-md-body .body-desc .body-desc-item.right-line div {
+  border-right: 1px solid #ddd;
+}
+.right-top-md-body .body-desc .body-desc-item div{
+  text-align: center;
+}
+.right-top-md-body .body-desc .body-desc-item div:first-of-type {
+  margin-top: 18px;
+  font-size: 30px;
+}
+.right-top-md-body .body-desc .body-desc-item div:nth-of-type(2) {
+  font-size: 16px;
+  color: #999;
+}
+.right-top-md-body .detail-desc {
+  margin: 40px 0 40px 160px;
+  padding: 0 20px 0 0;
+}
+.active.icon-ctrl-panel {
+  right: 580px;
+}
+/*产业列表面板*/
+.industry-company-bd .company-con{
+  height: calc(100% - 205px);
+  overflow: hidden;
+}
+.industry-company-bd .land-company-list-box,.high-enterprise-company-bd .high-enterprise-list-box{
+  height: calc(100% - 50px);
+  overflow: hidden;
+}
+.industry-company-bd .company-bot{
+  text-align: center;
+  height: 115px;
+  line-height: 115px;
+}
+.industry-company-bd .company-bot .page-item{
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 25px;
+  border: 1px solid #f9b620;
+  background: url("assets/images/left_arrow.png") center no-repeat;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.industry-company-bd .company-bot .next-page{
+  border: 1px solid #11100d;
+  background: url("assets/images/right_arrow.png") center no-repeat;
+}
+.industry-company-bd .company-bot .page-item.active{
+  background-color: #11100d;
+}
+/*污水处理厂*/
+.km-item-box-xh {
+  position: relative;
+  top: 6px;
+  float: left;
+  width: 300px;
+  overflow-x: scroll;
+  margin-left: 70px;
+}
+
+.km-item-box-xh ul {
+  width: 720px;
+  overflow: hidden;
+  position: relative;
+}
+
+.km-item-box-xh ul li {
+  float: left;
+  width: 64px;
+  cursor: pointer;
+  text-align: right;
+}
+.km-item-box-xh ul li:before {
+  content: "";
+  display: inline-block;
+  position: relative;
+  left: -10px;
+  width: 8px;
+  height: 8px;
+  background: rgba(249, 79, 26, 0.6);
+  border-radius: 50%;
+}
+.km-item-box-xh ul li.active::before {
+  background: rgba(249, 79, 26, 1);
+}
+.add-length-xh {
+  float: left;
+  height: 24px;
+  width: 24px;
+  margin: 19px 0 0 10px;
+  cursor: pointer;
+  background: #000 url(/economic/images/back_arrow_right.png) 8px 4px no-repeat;
+  background-size: 9px;
+  border: 1px solid #f9b620;
+  border-radius: 50%;
+}
+.item.land-use-purpose.land-use-purpose-km-xh {
+  height: auto;
+}
+.use-purpose-bd.use-purpose-bd-company-list-xh {
+  height: 480px;
+}
+.use-purpose-bd-company-list-xh .company-list-xh {
+  float: left;
+  width: 50%;
+  height: 95px;
+  padding: 10px 0 10px 30px;
+}
+.use-purpose-bd-company-list-xh .company-list-xh .company-logo-xh, .use-purpose-bd-company-list-xh .company-list-xh .company-name-xh {
+  display: inline-block;
+}
+.use-purpose-bd-company-list-xh .company-list-xh .company-logo-xh {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background: url("assets/images/info_window_panel_logo.png");
+  background-size: cover;
+}
+.use-purpose-bd-company-list-xh .company-list-xh .company-name-xh {
+  display: inline-block;
+  vertical-align: top;
+  width: 160px;
+  height: 100%;
+  line-height: 28px;
+  font-size: 20px;
+}
+.pre-and-next-button-box-xh {
+  height: 70px;
+  width: 180px;
+  margin: 10px auto;
+}
+.pre-and-next-button-box-xh .company-list-pre-button-xh, .pre-and-next-button-box-xh .company-list-next-button-xh {
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+  border: 1px solid #f9b620;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.pre-and-next-button-box-xh .company-list-pre-button-xh {
+  background: url("/economic/images/left_arrow.png") no-repeat 16px 16px;
+  background-size: 26px 26px;
+}
+.pre-and-next-button-box-xh .company-list-next-button-xh {
+  float: right;
+  background: url("/economic/images/right_arrow.png") no-repeat 16px 16px;
+  background-size: 26px 26px;
+}
+.pre-and-next-button-box-xh .company-list-pre-button-xh.active,
+.pre-and-next-button-box-xh .company-list-pre-button-xh:hover,
+.pre-and-next-button-box-xh .company-list-next-button-xh.active,
+.pre-and-next-button-box-xh .company-list-next-button-xh:hover {
+  background-color: #000;
+}
+/*公司详情*/
+.land-company-detail-box{
+  border-left: none;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 580px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 20;
+  padding: 20px;
+  transition: all .5s;
+}
+.land-company-detail-box .company-detail-back-arrow{
+  left: -40px;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  padding-right: 10px;
+  width: 40px;
+  height: 100px;
+  visibility: hidden;
+}
+.land-company-detail-box:hover .company-detail-back-arrow {
+  visibility: visible;
+}
+.land-company-detail-box .company-detail-back-arrow-btn{
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 100%;
+  right: 10px;
+  background-image: url(assets/images/back_arrow_right.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: backgroundColor .5s;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.land-company-detail-box:hover .company-detail-back-arrow-btn {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.land-company-detail-box .land-company-detail{
+  height: 100%;
+  border-radius: 20px 10px;
+  background: #fcf9f2;
+  overflow: hidden;
+}
+.land-company-detail-box .land-company-detail-bd{
+  height: calc(100% - 90px);
+}
+.land-company-detail-box .land-company-detail-con{
+  padding: 0 20px;
+}
+.land-company-detail-box .land-company-detail-con table{
+  text-align: center;
+  color: #666;
+}
+.land-company-detail-box .land-company-detail-con table th{
+  color: #11100d;
+  border-color: #999;
+  text-align: center;
+}
+.land-company-detail-box .land-company-detail-con table td{
+  border-color: #999 !important;
+}
+.land-company-detail-box .land-company-detail-con .company-detail-label{
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0 15px;
+  margin: 45px 0 20px;
+  color: #11100d;
+}
+.land-company-detail-box .land-company-detail-con .company-detail-label:first-child{
+  margin-top: 20px;
+}
+.land-company-detail-box .land-company-detail-con .company-detail-label:before{
+  position: absolute;
+  content: "";
+  width: 5px;
+  top: 0px;
+  bottom: 0px;
+  left: 0;
+  background-color: #f9b620;
+  border-radius: 2px;
+}
+.land-company-detail .land-company-detail-hd{
+  position: relative;
+  height: 90px;
+  line-height: 90px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #11100d;
+  background-color: #f9b620;
+  box-shadow: inset 3px 3px 10px rgba(249, 238, 238, 0.8);
+}
+.land-company-detail .company-detail-title{
+  padding: 0 20px;
+}
+.land-company-detail .land-company-detail-hd .close-company-detail{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 20px;
+  right: 20px;
+  background-color: #fcf9f2;
+  background-image: url("assets/images/close_icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.land-company-detail .company-detail-title .logo{
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #ddd;
+  margin-right: 20px;
+}
+.land-company-detail-bd .company-detail-line{
+  height: 20px;
+  margin-top: 20px;
+  background: #eee;
+}
+.nature-color .color-item .color-blank{
+  background: #ddd;
+  cursor: pointer;
+}
+.land-use-purpose-con{
+  height: calc(100% - 50px);
+  overflow: hidden;
+}
+.right-top-land-infowindow{
+  width: 400px;
+  height: calc(100% - 40px);
+  max-width: none;
+}
+.land-infowindow-md{
+  width: 400px;
+  height: 300px;
+}
+.industry-land-infowindow{
+  width: 400px;
+  height: 460px;
+}
+.right-top-land-infowindow .icon-ctrl-head,.industry-land-infowindow .icon-ctrl-head,.land-infowindow-md .icon-ctrl-head{
+  font-size: 18px;
+  font-weight: bold;
+  color: #11100d;
+  box-shadow: inset 3px 3px 10px rgba(249, 238, 238, 0.8);
+  border-radius: 6px 6px 0 0;
+}
+.right-top-land-infowindow .icon-ctrl-body .item,.industry-land-infowindow .icon-ctrl-body .item{
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+.right-top-land-infowindow .icon-ctrl-body .echarts,.land-infowindow-md .icon-ctrl-body .echarts{
+  height: 250px;
+}
+.right-top-land-infowindow .icon-ctrl-body{
+  height: calc(100% - 70px);
+  /*overflow-y: hidden;*/
+}
+.right-top-land-infowindow .icon-ctrl-body .item{
+  height: 50px;
+  line-height: 50px;
+  white-space: nowrap;
+  width: 150px;
+}
+.right-top-land-infowindow .icon-ctrl-body .jingji{
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  white-space: nowrap;
+}
+.right-top-land-infowindow .icon-ctrl-body .item .top-label{
+  white-space: nowrap;
+  width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.right-top-land-infowindow .icon-ctrl-body .item-infowindow{
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.right-top-land-infowindow .high-enterprise-company-bd .company-list .logo{
+  line-height: 50px;
+  font-size: 20px;
+}
+.color-list-tips{
+  height: 120px;
+}
+.color-list-tips .tips-left,.color-list-tips .tips-right{
+  width: 50%;
+  height: 100%;
+  position: relative;
+  padding: 0 10px;
+}
+.color-list-tips .color{
+  float: left;
+  height: 100%;
+  background: #ddd;
+  width: 6px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.color-list-tips .text{
+  float: right;
+  width: 10px;
+}
+.color-list-tips .tips-left,.color-list-tips .text .top,.color-list-tips .tips-left,.color-list-tips .text .bot{
+
+}
+.color-list-tips .text .md{
+  height: 80px;
+  background: url("assets/images/color_list_tips_arrow.png") center no-repeat;
+}
+.color-list-tips .tips-right{
+  float: right;
+}
+
+.color-list-tips .color span{
+  display: block;
+  height: 12px;
+  background: #000;
+}
+.color-list-tips .color span.color10{
+  background: #f61d1d;
+}
+.color-list-tips .color span.color9{
+  background: #f52f1d;
+}
+.color-list-tips .color span.color8{
+  background: #f5411d;
+}
+.color-list-tips .color span.color7{
+  background: #f5531d;
+}
+.color-list-tips .color span.color6{
+  background: #f5651d;
+}
+.color-list-tips .color span.color5{
+  background: #f5771d;
+}
+.color-list-tips .color span.color4{
+  background: #f5891d;
+}
+.color-list-tips .color span.color3{
+  background: #f59b1d;
+}
+.color-list-tips .color span.color2{
+  background: #f5ad1d;
+}
+.color-list-tips .color span.color1{
+  background: #f5bf1d;
+}
+/*右侧色条*/
+.color-list-tips .tips-left .color span.color10{
+  background: #1139ff;
+}
+.color-list-tips .tips-left .color span.color9{
+  background: #124dff;
+}
+.color-list-tips .tips-left .color span.color8{
+  background: #1261ff;
+}
+.color-list-tips .tips-left .color span.color7{
+  background: #1275ff;
+}
+.color-list-tips .tips-left .color span.color6{
+  background: #1288ff;
+}
+.color-list-tips .tips-left .color span.color5{
+  background: #129cff;
+}
+.color-list-tips .tips-left .color span.color4{
+  background: #12b0ff;
+}
+.color-list-tips .tips-left .color span.color3{
+  background: #12c4ff;
+}
+.color-list-tips .tips-left .color span.color2{
+  background: #12d7ff;
+}
+.color-list-tips .tips-left .color span.color1{
+  background: #12ebff;
+}
+.industry-land-infowindow .echarts{
+  height: 250px;
+}
+.icon-ctrl-panel.industry-land-infowindow{
+  overflow: initial;
+}
+.high-enterprise-rank{
+  width: 20px;
+  height: 20px;
+  background: #f9b621;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, .4);
+}
+.workshop-color .high-workshop-land{
+  background: #ff7eff;
+}
+.workshop-color .workshop-land{
+  background: #07fff7;
+}
+.right-top-land-infowindow .workshop-vacant-proportion{
+  text-align: center;
+  font-size: 18px;
+  margin: 20px 0;
+}
+.right-top-land-infowindow .workshop-vacant-proportion .title{
+  font-weight: bold;
+}
+.microcosmic_container .high-enterprise-radar .public-title .rank-num{
+  margin-left: 35px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #f9b71c;
+  height: 50px;
+  display: inline-block;
+  padding-top: 10px;
+  float: left;
+  font-family: fantasy;
+}
+.industry-last-colors-panel{
+  position: absolute;
+  top: 20px;
+  right: 570px;
+  margin-right: 20px;
+  background: rgba(252, 249, 242, .9);
+  border-radius: 6px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, .2);
+  transition: right 1s;
+  overflow: hidden;
+}
+.land-colors-list .last-10-land.active{
+  background: #01d1dd;
+}
+.land-colors-list .last-inefficient-land.active{
+  background: #dd0001;
+}
+.land-colors-list .last-10-land,.land-colors-list .last-inefficient-land {
+  background: #ddd;
+  cursor: pointer;
+}
+.high-enterprise-radar .radar-bt tr{
+  cursor: pointer;
+}
+.industry-fenbu-marker{
+  background: rgba(249, 182, 33, .8);
+  border-radius: 3px;
+  padding: 0 5px;
+}
+.industry-fenbu-search .search-btn{
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #f9b620 url(assets/images/xcj_search_min.png) no-repeat center;
+  background-size: contain;
+  outline: none;
+  background-size: 76%;
+  border-radius: 50%;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.search-cover-mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0,0,0,.7);
+  z-index: 100;
+  display: none;
+}
+.search_input_box{
+  z-index: 101;
+}
+.search-company-con .company-list{
+  text-align: center;
+}
+.search-company-con .company-list .company-item{
+  border: none;
+}
+.search-company-con .company-list .company-item.active{
+  background: rgba(249, 182, 33, .4);
+}
+.search-company-con .company-list .logo{
+  width: 50px;
+  margin: 0 20px;
+}
+.search-company-con .company-list .item{
+  border-right: 1px solid #ddd;
+  margin: 0;
+}
+.search-company-con .company-list .item:last-child{
+  border: none;
+}
+.search-company-con .company-list .name {
+  text-align: left;
+}
+.search-company-con .company-list .top-label{
+  font-size: 14px;
+  font-weight: bold;
+  color: #11100d;
+}
+.search-company-con .company-list .name .top-label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 250px;
+}
+.search-company-con .company-list .bot-label{
+  color: #999999;
+}
+.land-panel-con .search-company-con{
+  background-color: #fcf9f2;
+  border-radius: 10px;
+  height: 100%;
+  overflow: hidden;
+}
+.land-panel-con .search-company-con .search-company-bd{
+  height: calc(100% - 50px);
+}
+.search-company-bd .company-list .company-item.flex{
+  display: flex;
+  align-items: center;
+}
+.search-company-con .search-company-hd .title{
+  height: 50px;
+  line-height: 50px;
+  background: #f9b620;
+  font-size: 20px;
+  font-weight: bold;
+  text-indent: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.industry-color .industry-fenbu-search{
+  position: absolute;
+  /* bottom: -50px; */
+  /*right: 0;*/
+  right: 20px;
+  margin-top: 20px;
+}
+.high-enterprise-company-bd .company-list .company-item.active{
+  background: rgba(249, 182, 32, .4);
+}
+.industry-last-colors-panel .last-inefficient-land{
+  border: 4px solid #c7c7c7;
+  padding: 6px;
+  transition: all 1s;
+}
+.industry-last-colors-panel .last-inefficient-land.active{
+  border-color: #f00;
+  background: #47d1dd;
+}
+.industry-breakdown-color-panel{
+  /*position: absolute; */
+  /* top: 20px; */
+  /* right: 550px; */
+  margin-right: 20px;
+  background: rgba(252, 249, 242, .9);
+  border-radius: 6px;
+  box-shadow: #19316d 4px 8px 12px 0px;
+  transition: right 1s;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.industry-breakdown-color-panel .network-land{
+  background: #1261ff;
+}
+.industry-breakdown-color-panel .circuit-land{
+  background: #12bcff;
+}
+.industry-breakdown-color-panel .intelligent-land{
+  background: #88f3ff;
+}
+.industry-breakdown-color-panel .newtype-land{
+  background: #aad8dc;
+}
+.land-company-detail-tab{
+  text-align: center;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+.land-company-detail-tab .flex{
+  justify-content: space-between;
+}
+.land-company-detail-tab .detail-tab-item{
+  border: 1px solid #f9b620;
+  border-radius: 10px;
+  width: 30%;
+  padding: 5px;
+  cursor: pointer;
+}
+.land-company-detail-tab .detail-tab-item.active{
+  background: #f9b620;
+}
+.land-company-detail-tab-con{
+  height: calc(100% - 50px);
+}
+.land-panel-con .table{
+  margin: 0;
+}
+.land-use-purpose-box .land-info-con{
+  overflow: hidden;
+}
+.right-top-land-infowindow.land-infowindow-cj{
+  overflow: initial;
+}
+.around-support-panel{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  padding: 0px 20px 20px 20px;
+  background: #fcf9f2;
+  border-radius: 20px;
+  box-shadow: #19316d 5px 5px 15px 5px;
+}
+.around-support-panel .around-support-item{
+  position: relative;
+  width: 80px;
+  height: 90px;
+  line-height: 160px;
+  text-align: center;
+  font-size: 14px;
+  color: #000;
+  /*margin: 0 10px;*/
+  cursor: pointer;
+  /*margin-bottom: 20px;*/
+}
+.around-support-panel .around-support-item.active{
+  color: #f9b620;
+}
+.around-support-panel .around-support-item:before{
+  position: absolute;
+  content: '';
+  width: 80px;
+  height: 90px;
+  top: 0;
+  left: 0;
+}
+.around-gas-station.around-support-item:before{
+  background: url("assets/images/around_gas_station_tips_icon.png") center no-repeat;
+  background-size: 60%;
+}
+.around-bank.around-support-item:before{
+  background: url("assets/images/around_bank_tips_icon.png") center no-repeat;
+  background-size: 60%;
+}
+.around-car-service.around-support-item:before{
+  background: url("assets/images/around_car_service_tips_icon.png") center no-repeat;
+  background-size: 60%;
+}
+.around-hotel.around-support-item:before{
+  background: url("assets/images/around_hotel_tips_icon.png") center no-repeat;
+  background-size: 60%;
+}
+.around-restaurant.around-support-item:before{
+  background: url("assets/images/around_restaurant_tips_icon.png") center no-repeat;
+  background-size: 60%;
+}
+.around-supermaket.around-support-item:before{
+  background: url("assets/images/around_supermarket_tips_icon.png") center no-repeat;
+  background-size: 60%;
+}
+.around-shopping.around-support-item:before{
+  background: url("assets/images/around_shopping_tips_icon.png") center no-repeat;
+  background-size: 60%;
+}
+.around-support-con .flex{
+  flex-wrap: wrap;
+  width: 320px;
+}
+.industry-company-list-panel{
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  height: initial;
+  top: 490px;
+  width: 400px;
+}
+.industry-company-list-panel .industry-company-bd .company-list .name .top-label{
+  width: 130px;
+}
+.industry-company-list-panel .industry-company-bd .company-list .logo{
+  width: 40px;
+  margin: 0 10px;
+}
+.industry-company-list-panel .company-list .company-item img{
+  width: 40px;
+  height: 40px;
+}
+.industry-company-list-panel .industry-company-bd{
+  padding-top: 20px;
+}
+.industry-company-list-panel .industry-company-bd .company-con {
+  height: 100%;
+  overflow: hidden;
+}
+.industry-company-list-panel .type-tab{
+  height: 50px;
+  line-height: 40px;
+  /*margin-left: 170px;*/
+  margin-left: 152px;
+  justify-content: space-around;
+}
+.industry-company-list-panel .type-tab .type-tab-item{
+  cursor: pointer;
+  margin-top: 12px;
+  position: relative;
+}
+.industry-company-list-panel .type-tab .type-tab-item.active{
+  color: #f9b620;
+}
+.industry-company-list-panel .type-tab .type-tab-item.active.type-tab-item:before {
+  position: absolute;
+  /*content: '';*/
+  width: 5px;
+  height: 5px;
+  background: #f9b620;
+  left: -10px;
+  top: 50%;
+  margin-top: -2px;
+  border-radius: 3px;
+}
+.right-panel{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+#land-subsidy, #scale-type, #has-land {
+   font-weight: normal;
+   margin-left: 15px;
+ }
+.m-t-20{
+  margin-top: 20px;
+}
+.company-detail-workscopyright-con,.company-detail-badcredit-con{
+  margin-top: 20px;
+}
+.colors-row {
+  float: left;
+}
+.land-colors-time-con{
+  background: rgba(252, 249, 242, .9);
+  border-radius: 6px;
+  box-shadow: #19316d 4px 8px 12px 0px;
+  margin-right: 20px;
+}
+.no-data-info{
+  background: url(assets/images/notData.png) center no-repeat;
+  height: 200px;
+  background-size: contain;
+}
+.land-colors-box{
+  background: rgba(252, 249, 242, .9);
+  border-radius: 6px;
+  box-shadow: #19316d 4px 8px 12px 0px;
+  margin-right: 20px;
+}

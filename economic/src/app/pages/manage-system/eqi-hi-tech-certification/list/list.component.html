@@ -9,10 +9,11 @@
   <form class="form-inline">
     <div class="form-group">
       <label>公司名称:</label>
-      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
+      <input type="text" class="form-control" name="enterpriseName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
     </div>
     <div class="filter-bt" style="margin: 10px 0;">
       <button class="btn search-btn" (click)="getList()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
     </div>
   </form>
 </div>

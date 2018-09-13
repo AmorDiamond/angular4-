@@ -7,7 +7,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class MacEconomicPillarService {
 
   private subject = new BehaviorSubject<any>(0);
+  /*所有产业产值和增速*/
   private macPillarIndustryUrl = '/v1/macroMainstay/findByYear';
+  /*各季度产值*/
+  private macPillarIndustryQuarterUrl = '/v1/macroMainstay/findByQuarter';
   constructor(
     private http: HttpClient,
   ) {
@@ -18,9 +21,9 @@ export class MacEconomicPillarService {
     const requestType = type ? type : 'get';
     let params;
     let paramsString = ``;
-    if(!requestType || requestType === 'get' || requestType === 'delete') {
-      for(let item in findParams) {
-        if(item) {
+    if (!requestType || requestType === 'get' || requestType === 'delete') {
+      for (let item in findParams) {
+        if (item) {
           paramsString += findParams[item] ? `${item}=${findParams[item]}&` : '';
         }
       }

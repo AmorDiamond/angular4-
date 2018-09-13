@@ -9,8 +9,10 @@ import 'rxjs/add/observable/forkJoin';
 @Injectable()
 export class FloorMenuService{
   constructor(private http: HttpClient) { }
-  /*根据年份和楼宇名称查询楼宇的企业当年的注册资本和当年的企业数量*/
-  private floorMenuUrl = '/v1/IndustrydepController/findfloor';
+  /*查看楼宇企业注册资本信息*/
+  private floorRegisterMoneyUrl = '/v1/IndustrydepController/findRegistCapitalGroupByFloor';
+  /*查看楼宇企业注册类型信息*/
+  private floorEnterpriseTypeUrl = '/v1/IndustrydepController/findEnterpriseTypeGroupByFloor';
 
   getDataByParams(findParams, url, type?): Observable<any> {
     let paramsString = '';

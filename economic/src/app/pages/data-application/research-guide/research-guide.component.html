@@ -1,37 +1,7 @@
-<div class="panel-content">
-  <div class="flex-column">
-    <div class="data-search-box">
-      <div class="data-search-con form-inline text-c">
-        <select name="" id="" class="form-control">
-          <option value="">企业</option>
-          <option value="" disabled>行业</option>
-        </select>
-        <input type="text" class="form-control" value="国腾" disabled>
-        <button class="btn btn-warning" (click)="getList()">搜索</button>
-      </div>
-    </div>
-    <div class="flex-cell">
-      <perfect-scrollbar>
-        <div class="data-search-list" style="height: 1000px">
-          <div *ngIf="companyList.length>0">
-            <div class="data-search-item" *ngFor="let item of companyList" [routerLink]="['detail']" [queryParams]="{name: item.name}">
-              <div class="logo">
-                <img src="/economicSystem/assets/images/company_logo.png" alt="">
-              </div>
-              <div class="column-item">
-                <div class="name">{{item.name}}</div>
-                <div class="other">
-                  <span>产业类型：<i>{{item.industryType}}</i></span>
-                  <span>企业地址：<i>{{item.address}}</i></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="no-data-tips text-c" *ngIf="companyList.length<1">
-            请在上方输入您想搜索的信息！
-          </div>
-        </div>
-      </perfect-scrollbar>
+<div appAccessControl [accessData]="'search-enterprise'" class="research-content">
+  <div class="data-search-box">
+    <div class="data-search-con">
+      <input class="data-search-input" [(ngModel)]="searchName" type="text" placeholder="请输入关键字！" (keydown.enter)="keyBoardInput($event)"><button class="data-search-btn" (click)="getList()"></button>
     </div>
   </div>
 </div>

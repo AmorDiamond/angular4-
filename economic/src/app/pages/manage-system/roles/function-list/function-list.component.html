@@ -1,5 +1,5 @@
 <div class="con-hd">
-  <button class="btn add-btn" routerLink="/admin/roles/functionManage/-1">新增功能</button>
+  <button appAccessControl [accessData]="'manager-create-function'" class="btn add-btn" routerLink="/admin/roles/functionManage/-1">新增功能</button>
 </div>
 <div class="filter">
   <form class="form-inline">
@@ -23,41 +23,38 @@
       <label>权限串:</label> <input type="text" class="form-control" name="resource" [(ngModel)]="competenceListParams.resource" placeholder="权限串">
     </div>
     <div class="filter-bt">
-      <button class="btn search-btn" (click)="searchMethodList()">搜索</button>
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
     </div>
   </form>
 </div>
-<table class="table table-bordered table-hover table-s table-overflow-x">
+<table class="table table-bordered table-hover table-s table-overflow-x text-c">
   <thead>
-  <tr class="text-c">
+  <tr class="nowrap">
     <th>编号</th>
     <th>权限名称</th>
     <th>methods</th>
     <th>权限串</th>
     <th>状态</th>
-    <th>创建人</th>
     <th>创建时间</th>
-    <th>修改人</th>
     <th>修改时间</th>
     <th>操作</th>
   </tr>
   </thead>
   <tbody>
-  <tr class="text-c ng-scope" *ngFor="let item of methodsList">
+  <tr class="" *ngFor="let item of methodsList">
     <td class="nowrap">{{item.id | slice:0:6}}***</td>
-    <td>{{item.comment}}</td>
+    <td class="table-label text-left">{{item.comment}}</td>
     <td class="nowrap">{{item.methods}}</td>
-    <td class="nowrap">{{item.resource}}</td>
+    <td class="table-label text-left">{{item.resource}}</td>
     <td class="nowrap"><span *ngIf="item.status == 'STATUS_NORMAL'" class="green">正常</span><span *ngIf="item.status == 'STATUS_DISABLE'" class="red">禁用</span></td>
-    <td class="">无创建人</td>
-    <td class="nowrap">{{item.createDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-    <td class="nowrap">无修改人</td>
-    <td class="nowrap">无修改时间</td>
+    <td class="">{{item.createDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+    <td class="">{{item.modifyDate | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
     <td class="f-14">
       <div class="nowrap">
-        <a tooltip="编辑" routerLink="/admin/roles/functionManage/{{item.id}}"><i class="fa fa-pencil"></i></a>
-        <a tooltip="禁用" *ngIf="item.status == 'STATUS_NORMAL'" href="javascript:void(0)" (click)="disableMethod(item.id, false,template)"><i class="fa fa-ban"></i></a>
-        <a tooltip="启用" *ngIf="item.status == 'STATUS_DISABLE'" href="javascript:void(0)" (click)="disableMethod(item.id, true,template)"><i class="fa fa-check-square"></i></a>
+        <a appAccessControl [accessData]="'manager-edit-function'" tooltip="编辑" routerLink="/admin/roles/functionManage/{{item.id}}"><i class="fa fa-pencil"></i></a>
+        <a appAccessControl [accessData]="'manager-disable-function'" tooltip="禁用" *ngIf="item.status == 'STATUS_NORMAL'" href="javascript:void(0)" (click)="disableMethod(item.id, false,template)"><i class="fa fa-ban"></i></a>
+        <a appAccessControl [accessData]="'manager-disable-function'" tooltip="启用" *ngIf="item.status == 'STATUS_DISABLE'" href="javascript:void(0)" (click)="disableMethod(item.id, true,template)"><i class="fa fa-check-square"></i></a>
       </div>
     </td>
   </tr>

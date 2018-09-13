@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params, NavigationStart } from '@angular/router';
 import { MicrocosmicService } from '../../../microcosmic.service';
 import { CompanyBasicService } from '../company-basic.service';
-import { ToastModalService } from "../../../../../shared/toast-modal/toast-modal.service";
+import { ToastModalService } from '../../../../../shared/toast-modal/toast-modal.service';
 
 declare var $: any;
 
@@ -28,29 +28,35 @@ export class CompanyProfileComponent implements OnInit {
   CompanyProfile = '加载中...';
   CompanyIntroductionTips = '加载中...';
   CompanyContactPeopleTips = '加载中...';
+  FamousProductTips = '加载中...';
   changeContactPeopleConfirmTips = '确定修改该公司联系人信息吗？';
   changeContactPeopleStatus = false;
   dataRowkey: any;
   oldContactInfo: any = {};
+  // 名优产品
+  FamousProduct = [];
+  getFamousProductParamas = { companyName: 'test1', pageSize: 10, lastRowKey: '' };
   ngOnInit() {
 
     this.keyWord = this.microcomicService.getUrlParams('name');
     this.microcomicService.setCompanyName(this.keyWord);
+    this.getFamousProductParamas.companyName = this.keyWord;
     this.getCompanyProfile(this.keyWord);
     this.getContactPeopleInfo(this.keyWord);
+    this.getFamousProduct();
   }
   getCompanyProfile(companyName) {
     console.log(companyName);
     this.companyBasicService.getCompanyProfile(companyName).subscribe(res => {
       console.log('企业概况', res);
       if (res.responseCode === '_200') {
-        if (!res.data.baseInfoPojos[0]) {
+        if (!res.data.baseInfoPojos) {
           this.CompanyProfile = '暂无信息！';
         }
-        if (!res.data.baseInfoPojos[0] || !res.data.introduction) {
+        if (!res.data.baseInfoPojos || !res.data.introduction) {
           this.CompanyIntroductionTips = '暂无信息！';
         }
-        this.baseInfo = res.data.baseInfoPojos[0];
+        this.baseInfo = res.data.baseInfoPojos;
         /*判断是否有主要产品信息*/
         if (this.baseInfo && this.baseInfo.businessScope) {
           const options = this.baseInfo.businessScope.split(/[。、；]/);
@@ -66,9 +72,24 @@ export class CompanyProfileComponent implements OnInit {
 
       if (res.data.eIIRelationPojo.length < 1) {
         this.CompanyContactPeopleTips = '暂无信息！';
+        return;
       }
       this.contactPeopleInfo = res.data.eIIRelationPojo;
-    })
+    });
+  }
+  // 名优产品
+  getFamousProduct() {
+    this.companyBasicService.findListByUrl(this.getFamousProductParamas, 'FamousProduct')
+      .subscribe(res => {
+        console.log('查询到的名优产品信息=============>', res);
+        if (res.responseCode === '_200') {
+          if (res.data.eQIFamousProductPojo.length < 1) {
+            this.FamousProductTips = '暂无信息！';
+          }
+          this.getFamousProductParamas.lastRowKey = res.data.pagination.lastRowKey;
+          this.FamousProduct = [...this.FamousProduct, ...res.data.eQIFamousProductPojo];
+        }
+      });
   }
 
   /*点击纠错获取原始值*/
@@ -105,7 +126,7 @@ export class CompanyProfileComponent implements OnInit {
       duties: this.changeContactPeopleInfo.duties,
       contactInfo: this.changeContactPeopleInfo.contactInfo,
     };
-    if(changeParams.contactsName === this.oldContactInfo.contactsName && changeParams.duties === this.oldContactInfo.duties && changeParams.contactInfo === this.oldContactInfo.contactInfo) {
+    if (changeParams.contactsName === this.oldContactInfo.contactsName && changeParams.duties === this.oldContactInfo.duties && changeParams.contactInfo === this.oldContactInfo.contactInfo) {
       this.toastModalService.addToasts({tipsMsg: '无数据更新！', type: 'warning'});
       return;
     }

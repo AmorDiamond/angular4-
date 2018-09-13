@@ -1,0 +1,5 @@
+.no-inefficient-info{
+  background: url(../../../../assets/images/notData.png) center no-repeat;
+  height: 200px;
+  background-size: contain;
+}

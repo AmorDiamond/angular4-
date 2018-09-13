@@ -64,12 +64,12 @@ export class BlacklistComponent implements OnInit {
     this.JudicialDecisionParams.enterpriseName = this.keyWord;
     this.JudicialExecutionParams.enterpriseName = this.keyWord;
     this.DebtorInfoParams.enterpriseName = this.keyWord;
-    this.DebtorParams.enterpriseName = this.keyWord;
+    /*this.DebtorParams.enterpriseName = this.keyWord;
     this.AbnormalBusinessParams.enterpriseName = this.keyWord;
     this.ProclamationParams.enterpriseName = this.keyWord;
     this.RefereeDocumentsParams.enterpriseName = this.keyWord;
     this.CourtNoticeParams.enterpriseName = this.keyWord;
-    this.ECITaxIllegalParams.enterpriseName = this.keyWord;
+    this.ECITaxIllegalParams.enterpriseName = this.keyWord;*/
     this.EIIApAssetsParams.enterpriseName = this.keyWord;
     this.findAdministrativePenaltyPage();
     this.findJudicialDecisionPage();
@@ -77,10 +77,10 @@ export class BlacklistComponent implements OnInit {
     this.findDebtorInfoPage();
     // this.findDebtorPage();
     // this.findAbnormalBusinessPage();
-    this.findCourtNoticePage();
+    // this.findCourtNoticePage();
     // this.findECITaxIllegalPage();
     // this.findECIProclamationPage();
-    this.findRefereeDocumentsPage();
+    // this.findRefereeDocumentsPage();
     this.findEIIApAssets();
   }
 
@@ -142,9 +142,23 @@ export class BlacklistComponent implements OnInit {
         }
       });
   }
+  // 行政监督检
+  findEIIApAssets() {
+    this.companyCreditService.findListByCompanyName(this.EIIApAssetsParams, 'EIIApAssets')
+      .subscribe((res) => {
+        if (res.responseCode === '_200') {
+          if (res.data.eIIApAssetsPojo.length < 1) {
+            this.EIIApAssetsTips = '暂无信息！';
+          }
+          console.log('行政监督检', res.data.eIIApAssetsPojo);
+          this.EIIApAssetsParams.lastRowKey = res.data.pagination.lastRowKey;
+          this.EIIApAssets = [...this.EIIApAssets, ...res.data.eIIApAssetsPojo];
+        }
+      });
+  }
 
   // 被执行人
-  findDebtorPage() {
+  /*findDebtorPage() {
     this.companyCreditService.findListByCompanyName(this.DebtorParams, 'Debtor')
       .subscribe((res: CompanyCreditResponse) => {
         if (res.responseCode === '_200') {
@@ -219,21 +233,7 @@ export class BlacklistComponent implements OnInit {
           this.ECITaxIllegal = [...this.ECITaxIllegal, ...res.data.eCITaxIllegalPojos];
         }
       });
-  }
-  // 行政监督检
-  findEIIApAssets() {
-    this.companyCreditService.findListByCompanyName(this.EIIApAssetsParams, 'EIIApAssets')
-      .subscribe((res) => {
-        if (res.responseCode === '_200') {
-          if (res.data.eIIApAssetsPojo.length < 1) {
-            this.EIIApAssetsTips = '暂无信息！';
-          }
-          console.log('行政监督检', res.data.eIIApAssetsPojo);
-          this.EIIApAssetsParams.lastRowKey = res.data.pagination.lastRowKey;
-          this.EIIApAssets = [...this.EIIApAssets, ...res.data.eIIApAssetsPojo];
-        }
-      });
-  }
+  }*/
   /*监听滚动到底部*/
   psYReachEnd(options) {}
 }

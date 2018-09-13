@@ -5,17 +5,13 @@
     <table class="table table-bordered table-align-c" *ngIf="governmentHonorList.length>0">
       <tr>
         <th>荣誉名称</th>
-        <th>奖励级别</th>
-        <th>名次</th>
-        <th>表彰内容</th>
-        <th>年度</th>
+        <th>评(认)定/发证机关</th>
+        <th>评(认)定/发证日期</th>
       </tr>
       <tr *ngFor="let data of governmentHonorList">
         <td>{{data.honorName}}</td>
-        <td>{{data.level}}</td>
-        <td>{{data.ranking}}</td>
-        <td>{{data.commendContent}}</td>
-        <td>{{data.year}}</td>
+        <td>{{data.evaluationInstitution}}</td>
+        <td>{{data.evaluationDate | date:'yyyy-MM-dd'}}</td>
       </tr>
     </table>
     <div class="no-data-tips" *ngIf="governmentHonorList.length<1">

@@ -16,21 +16,22 @@ export class EditRoelsComponent implements OnInit {
               private toastModalService: ToastModalService) { }
   ldapName: any;
   ldapNodeType: any;
-  ldapNodeTypes = [{label: '用户', value: 1}, {label: '机构', value: 2}];
+  ldapNodeTypes = [{label: '政府机构', value: 1}, {label: '普通机构', value: 2}];
   userRoles = [];
   editHasRoles = [];
   editUserId: any;
   loginUserId: any;
-  bindUserRoleParams = {url: '/v1/roles/bindRolesForLdapNode', method: 'post'};
-  unbindUserRoleParams = {url: '/v1/roles/unbindRolesForLdapNode', method: 'post'};
-  getUserDetailParams = {url: '/v1/ldapNode/findById', method: 'get'};
-  getUserRolesParams = {url: '/v1/roles/findLdapRolesById', method: 'get'};
+  bindUserRoleParams = {url: '/manager/v1/roles/bindRolesForLdapNode', method: 'post'};
+  unbindUserRoleParams = {url: '/manager/v1/roles/unbindRolesForLdapNode', method: 'post'};
+  getUserDetailParams = {url: '/manager/v1/ldapUser/findById', method: 'get'};
+  getUserRolesParams = {url: '/manager/v1/roles/findLdapRolesById', method: 'get'};
+  getAllRolesParams = {url: '/manager/v1/roles/all', method: 'get'};
   ngOnInit() {
     this.routeInfo.params.subscribe((params: ParamMap) => {
       if (params['id'] !== '-1') {
         this.getUserDetail(params['id']);
         this.editUserId = params['id'];
-        this.loginUserId = sessionStorage.getItem('ldapUserId');
+        this.loginUserId = sessionStorage.getItem('userId');
         this.getUserRoles();
       }
     });
@@ -38,15 +39,25 @@ export class EditRoelsComponent implements OnInit {
   getUserDetail(userId) {
     const url = this.getUserDetailParams.url;
     this.http.get(url + '?id=' + userId ).subscribe((res: any) => {
-      this.ldapName = res.data.ldapName;
-      this.ldapNodeType = res.data.nodeType;
+      this.ldapName = res.data.account;
+      this.ldapNodeType = res.data.type;
     });
   }
   /*获取登录用户拥有的角色*/
   getUserRoles() {
     const url = this.getUserRolesParams.url;
     this.http.get(url + '?id=' + this.loginUserId ).subscribe((res: any) => {
-      this.getUserHasRoles(res.data);
+      if (res.responseCode === '_200') {
+        const data = res.data;
+        console.log(data)
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].id === 1 || data[i].id === '1') {
+            this.http.get(this.getAllRolesParams.url).subscribe((result: any) => {
+              this.getUserHasRoles(result.data);
+            });
+          }
+        }
+      }
     });
   }
   /*获取编辑用户已拥有的角色*/

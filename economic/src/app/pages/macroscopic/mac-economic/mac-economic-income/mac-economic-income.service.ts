@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class MacEconomicIncomeService {
-  private macPeopleIncomeUrl = '/v1/macroPublicAvgincome/findcomeAndspeed';
+  private macPeopleIncomeUrl = '/v1/macroPublicAvgincome/findByYearAndArea';
   private macPeopleIncomeRateUrl = '/v1/macroPublicAvgincome/findPercapitaincome';
   constructor(private http: HttpClient) {}
 

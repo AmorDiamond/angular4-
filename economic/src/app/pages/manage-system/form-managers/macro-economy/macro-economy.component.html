@@ -1,0 +1,56 @@
+<div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-gdp'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/macroGdp/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-gdp'" class="excel-import">
+  <a class="excel-import" target="_blank" href="/manager/v1/macroGdp/exportExcelForm?year={{getListParams.year}}&areaRange={{getListParams.areaRange}}"
+     download="{{getListParams.year+'-'+getListParams.areaRange+'-'+'宏观经济GDP.xlsx'}}">导出</a>
+  </button>
+  <button appAccessControl [accessData]="'manager-download-gdp'" class="excel-import">
+  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="宏观经济GDP模板.xlsx">EXCEL模板下载</a>
+  </button>
+  
+
+  <!-- <button class="excel-export">EXCEL模板下载</button> -->
+</div>
+<div class="filter">
+  <form class="form-inline">
+    <div class="form-group">
+      <label>区域:</label>
+      <input type="text" class="form-control" name="areaRange" [(ngModel)]="getListParams.areaRange" placeholder="区域">
+    </div>
+    <div class="form-group">
+      <label>年度:</label>
+      <input type="text" class="form-control" name="year" [(ngModel)]="getListParams.year" placeholder="年度">
+    </div>
+    <div class="filter-bt">
+      <button class="btn search-btn" (click)="search()">搜索</button>
+      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+    </div>
+  </form>
+</div>
+<table class="table table-bordered table-hover table-s table-overflow-x">
+  <thead>
+  <tr class="text-c">
+    <th>年份</th>
+    <th>季度</th>
+    <th>地区</th>
+    <th>GDP值(亿元)</th>
+    <th>增速(%)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="text-c ng-scope" *ngFor="let item of list">
+    <td class="nowrap">{{item.year}}</td>
+    <td class="nowrap">{{item.quarterInfo}}</td>
+    <td class="nowrap">{{item.areaRange}}</td>
+    <td class="nowrap">{{item.economicOutput}}</td>
+    <td class="nowrap">{{item.addSpeed}}</td>
+  </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-xs-12 col-12">
+    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+  </div>
+</div>
+<!-- <ng2-toasty [position]="'center-center'"></ng2-toasty> -->
