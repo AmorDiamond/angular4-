@@ -1,6 +1,6 @@
-<div class="con-hd">
+<!-- <div class="con-hd">
   <button appAccessControl [accessData]="'manager-create-roles'" class="btn add-btn" routerLink="/admin/roles/roleManage/-1">新增角色</button>
-</div>
+</div> -->
 <div class="filter">
   <form class="form-inline">
     <div class="form-group">
@@ -12,10 +12,11 @@
         <option *ngFor="let statu of rolesStatus" [value]="statu.value">{{statu.label}}</option>
       </select>
     </div>
-    <div class="filter-bt">
+    <div class="form-group">
       <button class="btn search-btn" (click)="search()">搜索</button>
-      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <button class="btn" (click)="resetSearch()">重置</button>
     </div>
+    <button appAccessControl [accessData]="'manager-create-roles'" class="btn fr" routerLink="/admin/roles/roleManage/-1">新增角色</button>
   </form>
 </div>
 <table class="table table-bordered table-hover table-s table-overflow-x">
@@ -50,8 +51,13 @@
 </table>
 <div class="row">
   <div class="col-xs-12 col-12">
-    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
-                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+    <pager [totalItems]="pageParams.bigTotalItems"
+           [(ngModel)]="pageParams.bigCurrentPage"
+           (pageChanged)="pageChanged($event)"
+           pageBtnClass="pager-btn"
+           [itemsPerPage]="pageParams.itemsPerPage"
+           class="pull-left" previousText="上一页" nextText="下一页">
+    </pager>
   </div>
 </div>
 <ng-template #template>

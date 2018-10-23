@@ -12,10 +12,11 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   login(data) {
-    return this.http.post('/login', new HttpParams().set('username', data.username).set('password', data.password), {
+    /*return this.http.post('/login', new HttpParams().set('username', data.username).set('password', data.password), {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded'),
       // params: new HttpParams().set('username', data.username).set('password', data.password),
-    });
+    });*/
+    return this.http.post('/user/' + 1, 1);
   }
 
 }

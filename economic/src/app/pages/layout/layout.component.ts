@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { LayoutService } from './layout.service';
 import { IntermediateService } from '../intermediate/intermediate.service';
 import { MicrocosmicService } from '../microcosmic/microcosmic.service';
-import {ADD_MARKER_MID, ADD_POLYGON, ADD_SINGLE_POLYGON, CLEAR_MARKER} from '../../core/amap-ngrx/amap.actions';
+import { ADD_MARKER_MID, ADD_POLYGON, ADD_SINGLE_POLYGON, CLEAR_MARKER } from '../../core/amap-ngrx/amap.actions';
 import { Amap } from '../../core/amap-ngrx/amap.model';
 declare var $: any;
 
@@ -139,13 +139,17 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.keyWord = '';
   }
 
+
+
+
+
   ngOnInit() {
     this.ecoRevenueTime = this.ecoTopRevenueTime = this.intermediateService.getInitRevenueTime();
     /*临时用于隐藏微观概况面板*/
     this.PanleHideSubscription = this.microcosmicService.getPanleHide().subscribe(res => {
       if (res.hide) {
         this.panelHide = true;
-      }else {
+      } else {
         this.panelHide = false;
       }
     })
@@ -184,6 +188,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     });
 
     this.layoutService.connect();
+
 
     this.socketSubscription = this.layoutService.messages
       .retryWhen(errors => errors.delay(1000))
@@ -237,7 +242,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     });
 
     setTimeout(() => {
-      const userDefaultPage = localStorage.getItem('userDefaultPage');
+      const userDefaultPage = sessionStorage.getItem('userDefaultPage');
       const hasVist = sessionStorage.getItem('hasVist');
       // 设置啦偏好页面并在之前未访问过系统执行
       if (userDefaultPage && hasVist == null) {
@@ -284,6 +289,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
 
     // this.connect();
   }
+
+
   ngOnDestroy() {
     this.getTimeColorControlFn.unsubscribe();
     this.getParkNameFn.unsubscribe();
@@ -299,6 +306,24 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.canShowNotifyContent = false;
   }
 
+  loginOut() {
+    console.log("退出‘=============");
+    sessionStorage.setItem('hasLogin', '');
+    sessionStorage.setItem('userId', '');
+    sessionStorage.setItem('userRole', '');
+    sessionStorage.setItem('userDefaultPage', '');
+    this.router.navigate(['login']);
+    /*this.layoutService.loginOut()
+      .subscribe((res: any) => {
+        console.log(res);
+        if (res.responseCode === '_200') {
+          this.router.navigate(['login']);
+        } else {
+
+          this.router.navigate(['login']);
+        }
+      });*/
+  }
   showNotifyContent() {
     this.canShowNotifyContent = !this.canShowNotifyContent;
   }
@@ -438,7 +463,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       type: ADD_POLYGON,
       payload: {
         action: 'ADD_POLYGON',
-        data: {type: polygonType, time: revenueTime, flag: true}
+        data: { type: polygonType, time: revenueTime, flag: true }
       }
     });
   }
@@ -448,7 +473,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       type: ADD_SINGLE_POLYGON,
       payload: {
         action: 'ADD_SINGLE_POLYGON',
-        data: {type: 'dataPolygonTopSingleLands', industry: this.ecoTopIndustry}
+        data: { type: 'dataPolygonTopSingleLands', industry: this.ecoTopIndustry }
       }
     });
   }
@@ -458,7 +483,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
       type: ADD_SINGLE_POLYGON,
       payload: {
         action: 'ADD_SINGLE_POLYGON',
-        data: {type: 'dataPolygonEcoSingleLands', industry: this.ecoOutputIndustry}
+        data: { type: 'dataPolygonEcoSingleLands', industry: this.ecoOutputIndustry }
       }
     });
   }

@@ -1,16 +1,17 @@
-<div class="data-application-box">
-  <div class="public-panel-title">
-    <div class="back-box fl" routerLink="/dataApplication/qualityRecommend">
-      <span class="back-btn"></span>
-    </div>
-    <h3>潜在优质企业列表信息</h3>
+<div class="public-panel-title">
+  <div class="back-box fl" routerLink="/dataApplication/qualityRecommend">
+    <span class="back-btn"></span>
   </div>
+  <h3>潜在优质企业列表信息</h3>
+</div>
   <div class="right-panel">
+    <div class="panel-content-box">
+      <div class="data-application-box">
     <perfect-scrollbar>
       <div class="panel-content" *ngIf="dataList.length>0">
         <div class="recommend-list-hd">
           <div class="column-index fl text-c">分数</div>
-          <div class="column-company fl">已选企业</div>
+          <div class="column-company fl">企业名称</div>
           <div class="column-industry fl text-c">行业类型</div>
           <div class="column-add fl">通讯地址</div>
         </div>
@@ -31,5 +32,6 @@
         </div>
       </div>
     </perfect-scrollbar>
+      </div>
+    </div>
   </div>
-</div>

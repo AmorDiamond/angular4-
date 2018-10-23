@@ -1,11 +1,14 @@
 <!-- 拟规上企业推荐 -->
+<div class="panel-content-box">
 <perfect-scrollbar>
   <div class="panel-content">
   <div class="panel-item-title">拟规上企业推荐：</div>
   <div class="flex" *ngIf="Recommend.length>0">
     <div class="flex-cell" *ngFor="let item of Recommend">
       <div class="flex-item" style="width: 100%;">
-        <div class="flex-head" [routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: item.name}">{{item.name}}</div>
+        <div class="flex-head" (click)="viewCompanyData(item.name)">
+          <span class="name-icon">{{(item.name | slice:0:2) == '成都' || (item.name | slice:0:2) == '四川' ? (item.name | slice:2:4) : (item.name | slice:0:2)}}</span>{{item.name}}
+        </div>
         <ul>
           <li class="title">公司名称</li>
           <li>{{item.name}}</li>
@@ -34,8 +37,10 @@
       </div>
     </div> -->
   </div>
-  <div class="no-data-tips" *ngIf="Recommend.length<1">
+  <div class="no-data-tips no-data-tips-full" *ngIf="Recommend.length<1">
+    <span class="tips-bg"></span>
     {{RecommendTipsMsg}}
   </div>
 </div>
 </perfect-scrollbar>
+</div>

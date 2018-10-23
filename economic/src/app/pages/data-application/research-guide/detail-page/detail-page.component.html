@@ -1,3 +1,4 @@
+<div class="panel-content-box">
 <div class="data-application-box">
   <div class="public-panel-title">
     <div class="back-box fl" routerLink="/dataApplication">
@@ -28,7 +29,7 @@
           <div class="column-remove fl text-c">移除</div>
         </div>
         <div class="research-list-con" *ngIf="!changeResearchTimeStatus">
-          <div class="research-list-item border" *ngFor="let item of selectedList;index as index">
+          <div class="research-list-item border" *ngFor="let item of selectedList;index as index" [ngClass]="{'list-remove-item': item.remove}">
             <div class="list-column column-index fl">
               <div class="column-con text-c">{{item.order}}</div>
             </div>
@@ -81,13 +82,13 @@
           </div>
         </div>
         <div class="research-list-ft">
-          <button appAccessControl [accessData]="'down-research-detail'" [buttonAccess]="true" class="download-btn fr" (click)="downLoad()">下载</button><span class="fr">调研时间：{{startResearchTime | date:'yyyy年MM月dd日 HH:mm'}}-{{endResearchTime | date:'HH:mm'}}</span>
+          <button appAccessControl [accessData]="'down-research-detail'" [buttonAccess]="true" class="color-full-button fr" (click)="downLoad()">下载</button><span class="fr">调研时间：{{startResearchTime | date:'yyyy年MM月dd日 HH:mm'}}-{{endResearchTime | date:'HH:mm'}}</span>
         </div>
       </div>
     </perfect-scrollbar>
   </div>
 </div>
-
+</div>
 <!--<div class="panel-content m-t-20">
   <div class="panel-item-title">企业概况</div>
   <div *ngIf="companyName == '成都国腾实业集团有限公司'">

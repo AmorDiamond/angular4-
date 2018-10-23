@@ -15,7 +15,7 @@ export class UserListComponent implements OnInit {
   disableParams = {id: '', flag: ''};
   usersList = [];
   URLS = {
-    findUsersList: '/manager/v1/ldapUser/findUserByParams',
+    findUsersList: 'assets/jsonData/manage/ldapUserfindUserByParams.json',
     disableOrUsableUrl: '/manager/v1/ldapUser/disableOrUsable'
   };
   ldapUserListParams = {

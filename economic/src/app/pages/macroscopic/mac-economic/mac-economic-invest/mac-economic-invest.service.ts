@@ -8,9 +8,9 @@ export class MacEconomicInvestService {
 
   private subject = new BehaviorSubject<any>(0);
   /*查询高新区各季度投资*/
-  private macInvestUrl = '/v1/macroFixedInverstment/findGaoxinByYear';
+  private macInvestUrl = 'assets/jsonData/mac/macroFixedInverstmentfindGaoxinByYear';
   /*查询各区域投资增速*/
-  private macInvestAreaSpeedUrl = '/v1/macroFixedInverstment/findAllByYear';
+  private macInvestAreaSpeedUrl = 'assets/jsonData/mac/macroFixedInverstmentfindAllByYear';
   constructor(
     private http: HttpClient
   ) {}
@@ -29,6 +29,6 @@ export class MacEconomicInvestService {
       params = {params: new HttpParams({ fromString: paramsString })};
     }
 
-    return this.http[requestType](httpUrl, params);
+    return this.http[requestType](httpUrl + findParams.year + '.json', params);
   }
 }

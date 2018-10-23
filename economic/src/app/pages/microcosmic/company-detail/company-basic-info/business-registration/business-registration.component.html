@@ -1,74 +1,105 @@
-<!-- <div class="panel-bd pop-index-0 animated active"> -->
-<div class="panel-content">
-  <div class="panel-item-title">工商登记信息：</div>
-  <table class="table table-bordered" *ngIf="companyDetail?.name">
-    <tr>
-      <td class="nowrap table-label">公司名称:</td>
-      <td colspan="3" id="companyName">{{companyDetail?.name}}</td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">住所:</td>
-      <td colspan="3" id="companyAddress">{{companyDetail?.address}}</td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">社会信用代码:</td>
-      <td id="creditCode">{{companyDetail?.creditCode}}</td>
-      <td class="nowrap table-label">法人:</td>
-      <td id="legalPerson">{{companyDetail?.legalRepresentative}}</td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">成立日期:</td>
-      <td id="establishTime">{{companyDetail?.establishDate | date:'yyyy-MM-dd'}}</td>
-      <td class="nowrap table-label">核准日期:</td>
-      <td id="approvedTime">{{companyDetail?.approvedDate | date:'yyyy-MM-dd'}}</td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">注册资本:</td>
-      <td id="funds">{{companyDetail?.registeredCapital ? companyDetail?.registeredCapital + '万元' : ''}}</td>
-      <td class="nowrap table-label">登记状态:</td>
-      <td id="registrationType">{{companyDetail?.regStatus}}</td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">营业期限自:</td>
-      <td>{{companyDetail?.operatingPeriodBegin | date:'yyyy-MM-dd'}}</td>
-      <td class="nowrap table-label">营业期限至:</td>
-      <td>{{companyDetail?.operatingPeriodEnd | date:'yyyy-MM-dd'}}</td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">注册类型:</td>
-      <td id="enterpriseType" colspan="3">{{companyDetail?.enterpriseType}}</td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">企业联系电话:</td>
-      <td colspan="3" id="telephone" class="correct-info">
-        <span *ngIf="!changeTelephoneStatus" popover="点击纠正信息" placement="right" triggers="mouseenter:mouseleave" (click)="getChangeInitInfo(companyDetail.rowKey,'changeTelephoneStatus')">{{companyDetail?.epTelephone ? companyDetail?.epTelephone : '无'}}</span>
-        <span *ngIf="changeTelephoneStatus">
-          <input type="text" [(ngModel)]="changeCompanyInfo.epTelephone">
-          <button appAccessControl [accessData]="'edit-address-phone'" [buttonAccess]="true" (click)="submitChangeTelephone(changeTelephoneTemplate)">提交纠错</button>
-          <button (click)="cancelChangeInfo('changeTelephoneStatus')">取消纠错</button>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">企业通讯地址:</td>
-      <td colspan="3" id="companyEms" class="correct-info">
-        <span *ngIf="!changeAddressStatus" popover="点击纠正信息" placement="right" triggers="mouseenter:mouseleave" (click)="getChangeInitInfo(companyDetail.rowKey,'changeAddressStatus')">{{companyDetail?.mailingAddress ? companyDetail?.mailingAddress : '无'}}</span>
-        <span *ngIf="changeAddressStatus">
-          <input type="text" [(ngModel)]="changeCompanyInfo.mailingAddress">
-          <button appAccessControl [accessData]="'edit-address-phone'" [buttonAccess]="true" (click)="submitChangeAddress(changeAddressTemplate)">提交纠错</button>
-          <button (click)="cancelChangeInfo('changeAddressStatus')">取消纠错</button>
-        </span>
-      </td>
-    </tr>
-    <tr>
-      <td class="nowrap table-label">经营范围:</td>
-      <td colspan="3" id="range">{{companyDetail?.businessScope}}</td>
-    </tr>
-
-  </table>
-  <div class="no-data-tips" *ngIf="!companyDetail?.name">
-    {{CompanyDetailTips}}
-  </div>
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content">
+      <div>
+        <div class="panel-item-title">工商登记信息：</div>
+        <table class="table table-bordered" *ngIf="companyDetail?.name">
+          <tr>
+            <td class="nowrap table-label">公司名称:</td>
+            <td colspan="3" id="companyName">{{companyDetail?.name}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">住所:</td>
+            <td colspan="3" id="companyAddress">{{companyDetail?.address}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">社会信用代码:</td>
+            <td id="creditCode">{{companyDetail?.creditCode}}</td>
+            <td class="nowrap table-label">法人:</td>
+            <td id="legalPerson">{{companyDetail?.legalRepresentative}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">成立日期:</td>
+            <td id="establishTime">{{companyDetail?.establishDate | date:'yyyy-MM-dd'}}</td>
+            <td class="nowrap table-label">核准日期:</td>
+            <td id="approvedTime">{{companyDetail?.approvedDate | date:'yyyy-MM-dd'}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">注册资本:</td>
+            <td id="funds">{{companyDetail?.registeredCapital ? companyDetail?.registeredCapital + '万元' : ''}}</td>
+            <td class="nowrap table-label">登记状态:</td>
+            <td id="registrationType">{{companyDetail?.regStatus}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">营业期限自:</td>
+            <td>{{companyDetail?.operatingPeriodBegin | date:'yyyy-MM-dd'}}</td>
+            <td class="nowrap table-label">营业期限至:</td>
+            <td>{{companyDetail?.operatingPeriodEnd | date:'yyyy-MM-dd'}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">注册类型:</td>
+            <td id="enterpriseType" colspan="3">{{companyDetail?.enterpriseType}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">企业联系电话:</td>
+            <td colspan="3" id="telephone" class="correct-info">
+              <span *ngIf="!changeTelephoneStatus" popover="点击纠正信息" placement="right" triggers="mouseenter:mouseleave" (click)="getChangeInitInfo(companyDetail.rowKey,'changeTelephoneStatus')">{{companyDetail?.epTelephone ? companyDetail?.epTelephone : '无'}}</span>
+              <span *ngIf="changeTelephoneStatus">
+              <input type="text" [(ngModel)]="changeCompanyInfo.epTelephone">
+              <button appAccessControl [accessData]="'edit-address-phone'" [buttonAccess]="true" (click)="submitChangeTelephone(changeTelephoneTemplate)">提交纠错</button>
+              <button (click)="cancelChangeInfo('changeTelephoneStatus')">取消纠错</button>
+            </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">企业通讯地址:</td>
+            <td colspan="3" id="companyEms" class="correct-info">
+              <span *ngIf="!changeAddressStatus" popover="点击纠正信息" placement="right" triggers="mouseenter:mouseleave" (click)="getChangeInitInfo(companyDetail.rowKey,'changeAddressStatus')">{{companyDetail?.mailingAddress ? companyDetail?.mailingAddress : '无'}}</span>
+              <span *ngIf="changeAddressStatus">
+              <input type="text" [(ngModel)]="changeCompanyInfo.mailingAddress">
+              <button appAccessControl [accessData]="'edit-address-phone'" [buttonAccess]="true" (click)="submitChangeAddress(changeAddressTemplate)">提交纠错</button>
+              <button (click)="cancelChangeInfo('changeAddressStatus')">取消纠错</button>
+            </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">经营范围:</td>
+            <td colspan="3" id="range">{{companyDetail?.businessScope}}</td>
+          </tr>
+        </table>
+        <div class="no-data-tips no-data-tips-full" *ngIf="!companyDetail?.name">
+          <span class="tips-bg"></span>
+          {{CompanyDetailTips}}
+        </div>
+      </div>
+      <div>
+        <div class="panel-item-title">工商变更信息：</div>
+        <div *ngIf="companyChangeList.length>0">
+          <table class="table table-bordered text-c" id="businessChangeInfo">
+            <tr>
+              <th class="nowrap">变更事项</th>
+              <th class="nowrap">变更前内容</th>
+              <th class="nowrap">变更后内容</th>
+              <th class="nowrap">变更日期</th>
+            </tr>
+            <tr *ngFor="let data of companyChangeList">
+              <td>{{data.changeType}}</td>
+              <td style="max-width: 200px;text-align: left">{{data.changeBeforeContent}}</td>
+              <td style="max-width: 200px;text-align: left">{{data.changeAfterContent}}</td>
+              <td class="nowrap">{{data.changeDate | date:'yyyy-MM--dd'}}</td>
+            </tr>
+          </table>
+          <div class="load-more-info text-c" *ngIf="changeInfoParams.lastRowKey">
+            <div class="load-more-con" (click)="getCompanyChangeInfo()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+          </div>
+        </div>
+        <div class="no-data-tips no-data-tips-full" *ngIf="companyChangeList.length<1">
+          <span class="tips-bg"></span>
+          {{CompanyChangeInfoTips}}
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
 </div>
 <ng-template #changeAddressTemplate>
   <div class="modal-body text-center">
@@ -84,4 +115,3 @@
     <button type="button" class="btn btn-primary" (click)="declineSaveChangeInfo()" >取消</button>
   </div>
 </ng-template>
-<!-- </div> -->

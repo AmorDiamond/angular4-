@@ -11,7 +11,12 @@ import { StoreModule } from '@ngrx/store';
 import { amapReducer } from './core/amap-ngrx/amap.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContainerReducer } from './core/container-ngrx/contsiner.reducer';
-// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// import { DelonMockModule } from '@delon/mock';
+// import * as MOCKDATA from '../../_mock';
+// 配置mock模拟请求只对开发环境有效
+// import { environment } from '../environments/environment';
+// const MOCKMODULE = !environment.production ? [ DelonMockModule.forRoot({ data: MOCKDATA }) ] : [];
+// End
 import { LayoutService } from './pages/layout/layout.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HasPromissionDirective } from './core/has-promission-directive/has-promission-directive';
@@ -43,7 +48,8 @@ import { PaginationModule, TooltipModule, ModalModule } from 'ngx-bootstrap';
     ModalModule.forRoot(),
     StoreModule.forRoot(
       { amap: amapReducer, container: ContainerReducer, loading: LoadingReducer, requestCount: RequestCountReducer }
-    )
+    ),
+    // DelonMockModule.forRoot({ data: MOCKDATA })
   ],
   providers: [
     [{ provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],

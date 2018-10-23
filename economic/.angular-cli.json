@@ -26,6 +26,7 @@
       "../node_modules/primeicons/primeicons.css",
       "../node_modules/primeng/resources/themes/omega/theme.css",
       "../node_modules/primeng/resources/primeng.min.css",
+      "../node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css",
       "assets/css/animate.min.css",
       "assets/css/normalize.css",
       "assets/css/jquery.mCustomScrollbar.min.css",

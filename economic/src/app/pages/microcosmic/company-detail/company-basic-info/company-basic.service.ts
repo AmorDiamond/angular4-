@@ -10,18 +10,18 @@ export class CompanyBasicService {
   companyRowkey: any;
   private companyDetailUrl = '/v1/epBaseInfoPojo/';
   private companyMainStaffUrl = '/v1/epMainStaffPojo/findAll';
-  private companyChangeInfoUrl = '/v1/epChangeInfo/findListByCompanyNameec';
-  private companyTaxationUrl = '/v1/epTaxationPojo/findListByCompanyName';
-  private companyProfileUrl = '/v1/epBaseInfoPojo/findNameAllEpBaseInfo';
+  private companyChangeInfoUrl = 'assets/jsonData/epChangeInfo/findListByCompanyNameec.json';
+  private companyTaxationUrl = 'assets/jsonData/epBaseInfoPojo/findListByCompanyName.json';
+  private companyProfileUrl = 'assets/jsonData/epBaseInfoPojo/findNameAllEpBaseInfo.json';
   private companySocialSecurityUrl = '/v1/InsuranceInformationPojo';
   /*获取企业联系人姓名、电话、职位*/
-  private companyContactPeopleUrl = '/v1/eIIRelationPojo/findListByCompanyName';
+  private companyContactPeopleUrl = 'assets/jsonData/epBaseInfoPojo/findListByCompanyName.json';
   /*纠错企业联系人姓名、职位、联系方式*/
   private changeContactPeopleAllUrl = '/v1/errorInfo/findnameAndphone';
   /*纠错企业通讯地址和联系方式*/
   private changeAdressAndContactUrl = '/v1/errorInfo/findepTelAndAdress';
   /*获取企业自定义标签*/
-  private companyCustomLabelUrl = '/v1/iabels/findByName';
+  private companyCustomLabelUrl = 'assets/jsonData/iabels/findByName.json';
   /*添加企业自定义标签*/
   private addCompanyCustomLabelUrl = '/v1/iabels/add';
   /*删除企业自定义标签*/
@@ -30,6 +30,8 @@ export class CompanyBasicService {
   private FamousProduct = '/v1/eQIFamousProductPojo/getEQICertificationPojoByCompany';
   /*根据公司名称,获取企业问题*/
   private companyProblemesUrl = '/v1/businessProblemLedger/findListByCompanyName';
+  /*获取企业的综合评价*/
+  private businessEvaluationUrl = 'assets/jsonData/epBaseInfoPojo/getBusinessEvaluation.json';
   constructor(private http: HttpClient) {}
 
   getCompanyDetail(rowkey): Observable<any> {

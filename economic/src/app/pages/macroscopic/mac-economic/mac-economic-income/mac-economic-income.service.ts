@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class MacEconomicIncomeService {
-  private macPeopleIncomeUrl = '/v1/macroPublicAvgincome/findByYearAndArea';
+  private macPeopleIncomeUrl = 'assets/jsonData/mac/macroPublicAvgincomefindByYearAndArea';
   private macPeopleIncomeRateUrl = '/v1/macroPublicAvgincome/findPercapitaincome';
   constructor(private http: HttpClient) {}
 
@@ -23,6 +23,6 @@ export class MacEconomicIncomeService {
       params = {params: new HttpParams({ fromString: paramsString })};
     }
 
-    return this.http[requestType](httpUrl, params);
+    return this.http[requestType](httpUrl + findParams.year + '.json', params);
   }
 }

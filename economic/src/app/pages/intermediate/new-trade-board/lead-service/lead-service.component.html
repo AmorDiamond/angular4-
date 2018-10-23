@@ -1,0 +1,53 @@
+<perfect-scrollbar>
+  <div class="panel-content">
+    <div class="row-box">
+      <div class="row-con">
+        <div class="row-con-title">近三年企业数量和职工人数</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="CompanyNumberAndPeopleNumberEchartData" (chartClick)="chartClick($event)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row-box">
+      <div class="row-con">
+        <div class="row-con-title">{{CompositionEchartChoseYear ? CompositionEchartChoseYear + '职工学历层次分布' : '职工学历层次分布'}}</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="EducationCompositionEchartData"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row-box">
+      <div class="row-con">
+        <div class="row-con-title">{{CompositionEchartChoseYear ? CompositionEchartChoseYear + '职工岗位类型占比' : '职工岗位类型占比'}}</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="JobCompositionEchartData"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-box">
+      <div class="row-con">
+        <div class="row-con-title">近三年政府支持与税收</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="GovernmentalSupportAndTaxEchartData"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row-box">
+      <div class="row-con">
+        <div class="row-con-title">近三年固定投资、营业收入和利润</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="FixedInvestmentIncomeProfitEchartData"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row-box">
+      <div class="row-con">
+        <div class="row-con-title">近三年人均收入、人均税收、人均利润</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="PeopleIncomePeopleTaxPeopleProfitEchartData"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</perfect-scrollbar>

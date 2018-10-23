@@ -1,0 +1,490 @@
+.flex-column .flex-cell:first-child{
+    padding: 0;
+}
+.panel-content,.overview-box{
+    height: 100%;
+}
+.panel-content{
+    margin: 0;
+    overflow: hidden;
+}
+.panel-content .flex-item{
+    height: 100%;
+}
+.flex>.flex-cell{
+    width: auto;
+}
+.flex .flex-cell-two{
+    flex-grow: 2;
+}
+.overview-title{
+    color: #737dc2;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.overview-info .left{
+    width: 40%;
+}
+.overview-info .right{
+    width: 60%;
+}
+.overview-info{
+    padding: 20px;
+    overflow: hidden;
+}
+.overview-info .data{
+    font-size: 16px;
+    margin-bottom: 60px;
+}
+.overview-info .number{
+    font-size: 20px;
+    font-weight: bold;
+    color: #56ba8b;
+}
+.column-one .overview-info .left .number{
+    font-size: 36px;
+}
+.data-list{
+    overflow: hidden;
+}
+.data-list li{
+    float: left;
+    width: 50%;
+}
+.data-list li{
+    height: auto;
+    margin-bottom: 15px;
+}
+.data-list .text{
+    display: inline-block;
+    max-width: 60%;
+    margin-right: 5px;
+}
+.column-one{
+    width: 50%;
+    height: 100%;
+}
+.column-one .row-item{
+    height: 475px;
+}
+.column-one .row-item:first-child{
+    padding-bottom: 10px;
+}
+.column-one .row-item:last-child{
+    padding-top: 10px;
+}
+.column-item{
+    width: 25%;
+    height: 100%;
+}
+.column-item{
+    height: 950px;
+}
+.border{
+    border: 1px solid #191919;
+    border-radius: 6px;
+    background: #191919;
+}
+.column-item1{
+    padding-right: 20px;
+}
+.column-item2{
+    padding: 0 10px 0 0;
+}
+.column-item3{
+    padding: 0 0 0 10px;
+}
+.item-con{
+    height: 100%;
+}
+.column-one .item-title{
+    width: 80%;
+    margin: 30px auto 10px;
+    padding: 10px 0;
+    background: #1a1a1a;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.line-box{
+    border-left: 1px solid #404040;
+    padding: 5px 0;
+    margin-top: 40px;
+}
+.line-box .line-item{
+    position: relative;
+    height: 10px;
+    margin: 30px 0;
+}
+.line-box .line-item .color-circle{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: -5px;
+    border-radius: 10px;
+}
+.line-box .item1{
+    background: #4d80e233;
+}
+.line-box .item2{
+    background: #57ba8b33;
+}
+.line-box .item3{
+    background: #6757b933;
+}
+.line-box .item4{
+    background: #d88a4a33;
+}
+.line-con{
+    height: 100%;
+}
+.line-box .item1 .line-con,.line-box .item1 .color-circle{
+    background: #4d80e2;
+}
+.line-box .item2 .line-con,.line-box .item2 .color-circle{
+    background: #57ba8b;
+}
+.line-box .item3 .line-con,.line-box .item3 .color-circle{
+    background: #6757b9;
+}
+.line-box .item4 .line-con,.line-box .item4 .color-circle{
+    background: #d88a4a;
+}
+.circle-con{
+    position: relative;
+    width: 50%;
+    padding: 25%;
+    margin: 25px auto;
+    border: 16px solid #444444;
+    border-radius: 50%;
+}
+.circle-con .item-data {
+    position: absolute;
+    border: 16px solid #444444;
+    white-space: nowrap;
+}
+.item-data .text,.item-data .data-info{
+    position: absolute;
+    color: #fff;
+}
+.item-data .data-info{
+    background: #444444;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+.circle-con .item1{
+    top: 10%;
+    left: 77%;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background: #57ba8b;
+}
+.item-data.item1 .text{
+    left: 0px;
+    top: 25px;
+}
+.item-data.item1 .data-info{
+    left: 90px;
+    top: 25px;
+}
+.circle-con .item2{
+    top: 60%;
+    left: 75%;
+    width: 90px;
+    height: 90px;
+    border-radius: 45px;
+    background: #d88a4a;
+}
+.item-data.item2 .text{
+    left: -5px;
+    top: 22px;
+}
+.item-data.item2 .data-info{
+    left: 80px;
+    top: 25px;
+}
+.circle-con .item3{
+    top: 85%;
+    left: 35%;
+    width: 80px;
+    height: 80px;
+    border-radius: 45px;
+    background: #497ad6;
+}
+.item-data.item3 .text{
+    left: 1px;
+    top: 20px;
+}
+.item-data.item3 .data-info{
+    right: 65px;
+    top: 35px;
+}
+.circle-con .item4{
+    top: 70%;
+    left: -5%;
+    width: 70px;
+    height: 70px;
+    border-radius: 45px;
+    background: #497ad6;
+}
+.item-data.item4 .text{
+    left: -5px;
+    top: 14px;
+}
+.item-data.item4 .data-info{
+    right: 60px;
+    top: 14px;
+}
+.circle-con .item5{
+    top: 35%;
+    left: -18%;
+    width: 60px;
+    height: 60px;
+    border-radius: 45px;
+    background: #57ba8c;
+}
+.item-data.item5 .text{
+    left: -8px;
+    top: 8px;
+}
+.item-data.item5 .data-info{
+    right: 50px;
+    top: 0px;
+}
+.circle-con .item6{
+    top: -6%;
+    left: 0%;
+    width: 70px;
+    height: 70px;
+    border-radius: 45px;
+    background: #d78a4a;
+}
+.item-data.item6 .text{
+    left: -5px;
+    top: 10px;
+}
+.item-data.item6 .data-info{
+    right: 60px;
+    top: 0px;
+}
+.circle-con .item7{
+    top: -18%;
+    left: 45%;
+    width: 80px;
+    height: 80px;
+    border-radius: 45px;
+    background: #487ad5;
+}
+.item-data.item7 .text{
+    left: 0px;
+    top: 15px;
+}
+.item-data.item7 .data-info{
+    left: 70px;
+    top: -10px;
+}
+.column-item2 .title-label{
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+    background: #252525;
+    border-radius: 6px;
+    text-align: center;
+    color: #737dc2;
+}
+.column-item2 .work-people{
+    height: 300px;
+}
+.column-item2 .constitute-chart{
+    height: 250px;
+}
+.economic-chart{
+    height: 300px;
+}
+.balance-scale{
+    position: relative;
+    height: 100%;
+}
+.economic-info-list{
+    padding: 0 10px;
+}
+.economic-info-list .title-label{
+    overflow: hidden;
+    font-size: 14px;
+}
+.economic-info-list .number{
+    font-size: 18px;
+    font-weight: bold;
+    color: #3c62a8;
+}
+.economic-info-list .line-bar{
+    height: 20px;
+    background: #48b19b33;
+    margin-top: 20px;
+}
+.economic-chart .bottom-arrow{
+    position: relative;
+    height: 0px;
+    width: 0px;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 50px solid #497ad5;
+    left: 50%;
+    margin-left: -30px;
+    top: 55%;
+}
+.economic-chart .bottom-arrow:after{
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: -8px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 15px solid #100f0a;
+}
+.economic-chart .middle-position{
+    position: relative;
+    width: 70%;
+    top: 55%;
+    left: 15%;
+}
+.economic-chart .middle-position{
+    position: relative;
+    width: 70%;
+    top: 55%;
+    left: 15%;
+    transition: transform 3s;
+}
+.economic-chart .middle-position.left-more{
+    transform: rotate(-5deg);
+}
+.economic-chart .middle-position.right-more{
+    transform: rotate(5deg);
+}
+.economic-chart .crossbar{
+    height: 0px;
+    border-bottom: 4px solid #497ad5;
+}
+.economic-chart .item-tray{
+    position: absolute;
+    width: 30%;
+    top: -13px;
+    height: 0px;
+    border-top: 8px solid #497ad5;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+.economic-chart .item-tray:after{
+    content: '';
+    position: absolute;
+    width: 30%;
+    top: 0px;
+    left: 50%;
+    margin-left: -15%;
+    border-top: 4px solid #497ad5;
+}
+.economic-chart .left-tray{
+    left: -11%;
+}
+.economic-chart .right-tray{
+    right: -11%;
+}
+.economic-chart .text-desc{
+    position: absolute;
+    top: 60%;
+    width: 90%;
+    margin-left: 15%;
+}
+.economic-chart .text-desc .text-item{
+    position: absolute;
+    width: 60px;
+    font-size: 14px;
+}
+.economic-chart .text-desc .right-text{
+    right: 15%;
+}
+.economic-info-list .color-bar{
+    height: 100%;
+    background: -webkit-linear-gradient(to right,#1480c9,#369fab,#4fb794);
+    background: -moz-linear-gradient(to right,#1480c9,#369fab,#4fb794);
+    background: -o-linear-gradient(to right,#1480c9,#369fab,#4fb794);
+    background: linear-gradient(to right,#1480c9,#369fab,#4fb794);
+}
+.economic-info-list .list-item{
+    margin-bottom: 40px;
+}
+.economic-chart .money-chip{
+    position: absolute;
+    top: 26%;
+    transition: top 3s;
+}
+.economic-chart .money-chip .icon-bg{
+    width: 50px;
+    height: 50px;
+    background: url("../../../../../assets/images/coin_icon_less_bg.png") no-repeat center;
+    background-size: 50%;
+}
+.economic-chart .left-money{
+    left: 18%;
+    margin-left: -25px;
+}
+.economic-chart .left-money.left-less{
+    top: 24%;
+}
+.economic-chart .left-money.left-more .icon-bg{
+    top: 28%;
+    background: url("../../../../../assets/images/coin_icon_more_bg.png") no-repeat center;
+    background-size: contain;
+}
+.economic-chart .right-money{
+    right: 18%;
+    margin-right: -25px;
+}
+.economic-chart .right-money .icon-bg{
+    position: absolute;
+    right: 0;
+}
+.economic-chart .right-money.right-less{
+    top: 24%;
+}
+.economic-chart .right-money.right-more .icon-bg{
+    background: url("../../../../../assets/images/coin_icon_more_bg.png") no-repeat center;
+    background-size: contain;
+}
+.economic-chart .data-info .number{
+    font-size: 20px;
+    font-weight: bold;
+    color: #4477cf;
+}
+.overview-info .circle-con .number{
+    color: #bcbdbf;
+}
+.overview-info .circle-con .data-info{
+    color: #86878b;
+}
+
+@media (min-width: 1900px) {
+    .circle-con .item5{
+        left: -14%;
+    }
+    .circle-con .item6{
+        left: 4%;
+    }
+    .circle-con .item1{
+        left: 80%;
+    }
+    .circle-con .item2{
+        left: 80%;
+    }
+    .circle-con .item3{
+        top: 88%
+    }
+}
+@media (min-width: 1400px) {
+    .circle-con{
+        width: 40%;
+        padding: 20%;
+    }
+}

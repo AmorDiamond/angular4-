@@ -1,24 +1,28 @@
-<div class="panel-content custom-label-box">
-  <div class="panel-item-title">企业自定义标签：</div>
-  <div class="custom-label-list" *ngIf="labelLists.length>0">
-    <span class="custom-label-item" *ngFor="let item of labelLists">{{item.content}}<em class="fa fa-times" (click)="deleteLabel(item.id,deleteLabelTemplate)"></em></span>
-  </div>
-  <div class="no-data-tips" *ngIf="labelLists.length<1">
-    {{CompanyCustomLabelTips}}
-  </div>
-  <div class="add-custom-label">
-    <div class="fl form-inline" *ngIf="addLabelStatus">
-      <div class="form-group add-handle-con">
-        <input type="text" class="form-control" [(ngModel)]="newLabel"><button class="btn btn-primary btn-sm" (click)="addNewLabel()">提交</button><button class="btn btn-danger btn-sm" (click)="addLabelStatus = false;newLabel = ''">取消</button>
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content custom-label-box">
+      <div class="panel-item-title">企业自定义标签：</div>
+      <div class="custom-label-list" *ngIf="labelLists.length>0">
+        <span class="custom-label-item" *ngFor="let item of labelLists">{{item.content}}<em class="fa fa-times" (click)="deleteLabel(item.id,deleteLabelTemplate)"></em></span>
+      </div>
+      <div class="no-data-tips" *ngIf="labelLists.length<1">
+        {{CompanyCustomLabelTips}}
+      </div>
+      <div class="add-custom-label">
+        <div class="fl form-inline" *ngIf="addLabelStatus">
+          <div class="form-group add-handle-con">
+            <input type="text" class="form-control" [(ngModel)]="newLabel"><button class="btn btn-primary btn-sm" (click)="addNewLabel()">提交</button><button class="btn btn-danger btn-sm" (click)="addLabelStatus = false;newLabel = ''">取消</button>
+          </div>
+        </div>
+        <button *ngIf="!addLabelStatus" class="btn btn-warning add-label-button" (click)="addLabelStatus = true">添加标签</button>
       </div>
     </div>
-    <button *ngIf="!addLabelStatus" class="btn btn-warning btn-sm" (click)="addLabelStatus = true">添加标签</button>
-  </div>
+    <ng-template #deleteLabelTemplate>
+      <div class="modal-body text-center">
+        <p>{{deleteLabelConfirmTips}}</p>
+        <button type="button" class="btn btn-default" (click)="confirmDeleteLabel()" >确认</button>
+        <button type="button" class="btn btn-primary" (click)="declineDeleteLabel()" >取消</button>
+      </div>
+    </ng-template>
+  </perfect-scrollbar>
 </div>
-<ng-template #deleteLabelTemplate>
-  <div class="modal-body text-center">
-    <p>{{deleteLabelConfirmTips}}</p>
-    <button type="button" class="btn btn-default" (click)="confirmDeleteLabel()" >确认</button>
-    <button type="button" class="btn btn-primary" (click)="declineDeleteLabel()" >取消</button>
-  </div>
-</ng-template>

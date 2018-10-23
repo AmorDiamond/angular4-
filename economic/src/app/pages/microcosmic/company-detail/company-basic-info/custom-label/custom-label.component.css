@@ -1,10 +1,23 @@
 .add-custom-label{
     margin-top: 20px;
 }
+.add-label-button{
+    background: none;
+    border-radius: 30px;
+    padding: 5px 20px;
+    background: #ffcc00;
+    border: none;
+    outline: none;
+    box-shadow: 0 2px 6px #d9ae00;
+    color: #0d0d0d;
+    margin-bottom: 10px;
+}
 .add-handle-con button{
     margin-left: 10px;
     background: none;
     border: 1px solid #f9b620;
+    border-radius: 30px;
+    padding: 5px 20px;
 }
 .add-handle-con button:hover{
     border-color: #f9a125;

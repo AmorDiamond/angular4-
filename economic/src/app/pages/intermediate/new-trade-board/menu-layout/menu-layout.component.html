@@ -1,0 +1,17 @@
+<div class="right-panel">
+  <div class="content">
+    <div class="panel-menu-box">
+      <div class="panel-menu">
+        <ul>
+          <li appAccessControl [accessData]="'medium-industry-manufacturing'" class="menu-item" [routerLink]="['advancedManufacture']" routerLinkActive="active">先进制造业</li>
+          <li appAccessControl [accessData]="'medium-industry-serviceindustry'" class="menu-item" [routerLink]="['leadService']" routerLinkActive="active">主导服务业</li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel-menu-right company-detail">
+      <div class="panel-right-box">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

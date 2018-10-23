@@ -1,11 +1,16 @@
 <div class="address-con"><span class="back-btn" routerLink="../../"></span><span class="home-icon fa fa-home"></span>首页 > 产业类型管理 > {{nowLocation}}</div>
 <div class="single-form">
     <div class="form-group">
-        <label class="form-label" for="name">企业名称</label>
-        <input type="text" disabled class="form-control" id="name" [value]="companyName">
+        <label class="form-label" for="name">产业名称</label>
+        <input type="text" class="form-control" id="name" disabled [value]="typeName" placeholder="产业类型名称">
     </div>
-    <div class="industry-list">
-        <span *ngFor="let item of industryTypeList" [ngClass]="{'active': item.hasChecked}" (click)="item.hasChecked = !item.hasChecked"><em></em>{{item.name}}</span>
+    <div class="industry-list nz-tree-box">
+        <nz-tree #nzTree [(ngModel)]="nodes"
+                 [nzAsyncData]="true"
+                 [nzCheckable]="true"
+                 [nzDefaultCheckedKeys]="checkedKeys"
+                 (nzExpandChange)="mouseAction('expand',$event)">
+        </nz-tree>
     </div>
     <div class="submit-con">
         <button appAccessControl [accessData]="'manager-edit-industry'" [buttonAccess]="true" class="btn btn-warning" (click)="saveChange()">提交</button>

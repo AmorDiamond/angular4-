@@ -1,4 +1,4 @@
-import { Directive, Output, Input, EventEmitter, ElementRef, OnInit, OnDestroy } from '@angular/core';
+import { Directive, Output, Input, EventEmitter, ElementRef, Renderer2, OnInit, OnDestroy } from '@angular/core';
 import { LayoutService } from '../../pages/layout/layout.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -34,7 +34,7 @@ export class AccessControlDirective implements OnInit, OnDestroy {
     if (Array.isArray(this.accessData)) {
       let status = true;
       for (let i = 0; i < res.length; i++) {
-        if (this.accessData.indexOf(res[i].type) > -1 && res[i].hasAccess) {
+        if (this.accessData.includes(res[i].type) && res[i].hasAccess) {
           status = false;
           break;
         }
@@ -55,7 +55,7 @@ export class AccessControlDirective implements OnInit, OnDestroy {
     if (Array.isArray(this.accessData)) {
       let status = true;
       for (let i = 0; i < res.length; i++) {
-        if (this.accessData.indexOf(res[i].type) > -1 && res[i].hasAccess) {
+        if (this.accessData.includes(res[i].type) && res[i].hasAccess) {
           status = false;
           break;
         }

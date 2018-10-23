@@ -1,15 +1,13 @@
-<div class="con-hd">
-  <button appAccessControl [accessData]="'manager-import-investment'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/macroFixedInverstment/importExcel'}" >EXCEL导入</button>
-  <button appAccessControl [accessData]="'manager-export-investment'" class="excel-import">
-  <a class="excel-import" target="_blank" href="/manager/v1/macroFixedInverstment/exportExcelForm?year={{getListParams.year}}" download="{{getListParams.year+'-'+'固定投资.xlsx'}}">导出</a>
+<!-- <div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-investment'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/macroFixedInverstment/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-investment'" class="btn">
+  <a class="btn" target="_blank" href="/manager/v1/macroFixedInverstment/exportExcelForm?year={{getListParams.year}}" download="{{getListParams.year+'-'+'固定投资.xlsx'}}">导出</a>
   </button>
-  <button appAccessControl [accessData]="'manager-download-investment'" class="excel-import">
-  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="固定投资模板.xlsx">EXCEL模板下载</a>
+  <button appAccessControl [accessData]="'manager-download-investment'" class="btn">
+  <a class="btn" target="_blank" href="{{formExcelTemplateData}}" download="固定投资模板.xlsx">EXCEL模板下载</a>
   </button>
   
-
-  <!-- <button class="excel-export">EXCEL模板下载</button> -->
-</div>
+</div> -->
 <div class="filter">
   <form class="form-inline">
     <div class="form-group">
@@ -42,10 +40,20 @@
       </select>
     </div> -->
 
-    <div class="filter-bt">
+    <div class="form-group">
       <button class="btn search-btn" (click)="search()">搜索</button>
-      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <button class="btn" (click)="resetSearch()">重置</button>
     </div>
+    <div class="form-group fr">
+        <button appAccessControl [accessData]="'manager-import-investment'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/macroFixedInverstment/importExcel'}" >EXCEL导入</button>
+        <!-- <button class="btn"> -->
+        <a class="btn" appAccessControl [accessData]="'manager-export-investment'" target="_blank" href="/manager/v1/macroFixedInverstment/exportExcelForm?year={{getListParams.year}}" download="{{getListParams.year+'-'+'固定投资.xlsx'}}">导出</a>
+        <!-- </button> -->
+        <!-- <button class="btn"> -->
+        <a class="btn" appAccessControl [accessData]="'manager-download-investment'" target="_blank" href="{{formExcelTemplateData}}" download="固定投资模板.xlsx">EXCEL模板下载</a>
+        <!-- </button> -->
+        
+      </div>
   </form>
 </div>
 <table class="table table-bordered table-hover table-s table-overflow-x">
@@ -70,8 +78,13 @@
 </table>
 <div class="row">
   <div class="col-xs-12 col-12">
-    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
-                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+    <pager [totalItems]="pageParams.bigTotalItems"
+           [(ngModel)]="pageParams.bigCurrentPage"
+           (pageChanged)="pageChanged($event)"
+           pageBtnClass="pager-btn"
+           [itemsPerPage]="pageParams.itemsPerPage"
+           class="pull-left" previousText="上一页" nextText="下一页">
+    </pager>
   </div>
 </div>
 <!-- <ng2-toasty [position]="'center-center'"></ng2-toasty> -->

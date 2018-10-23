@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
       .filter(event => event instanceof NavigationEnd)
       .subscribe(() => {
         /*路由跳转完后获取页面title*/
-        this.http.get('../assets/titleConfig.json').subscribe(res => {
+        this.http.get('assets/titleConfig.json').subscribe(res => {
           console.log(this.router.url);
           const title = res[this.router.url] ? '成都高新区企业多维数据平台' + res[this.router.url] : '成都高新区企业多维数据平台';
           this.titleService.setTitle(title);

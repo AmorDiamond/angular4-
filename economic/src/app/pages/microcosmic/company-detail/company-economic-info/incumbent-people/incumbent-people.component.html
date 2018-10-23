@@ -1,18 +1,86 @@
-<div class="panel-content m-b-20">
+<perfect-scrollbar>
+  <div class="panel-content m-b-20">
   <div class="flex">
     <div class="flex-cell">
-      <div class="flex-item" echarts [options]="parkNumberData" (chartClick)="changeEnterprisePeopleByYear($event)" id="main4"></div>
+      <div class="row-con">
+        <div class="row-con-title">公司近三年在职人员总数</div>
+        <div class="flex-item" echarts [options]="parkNumberData" (chartClick)="changeEnterprisePeopleByYear($event)" id="main4"></div>
+      </div>
     </div>
     <div class="flex-cell">
-      <div class="flex-item" echarts [options]="StaffCompositionRatioData" id="main2"></div>
+      <div class="row-con">
+        <div class="row-con-title">{{chooseYear ? chooseYear + '学历结构情况' : '学历结构情况'}}</div>
+        <div class="flex-item" echarts [options]="StaffCompositionRatioData" id="main2"></div>
+      </div>
     </div>
   </div>
   <div class="flex">
     <div class="flex-cell">
-      <div class="flex-item" echarts [options]="ManagementStructureEchartData"></div>
+      <div class="row-con">
+        <div class="row-con-title">{{chooseYear ? chooseYear + '管理结构情况' : '管理结构情况'}}</div>
+        <div class="flex-item" echarts [options]="ManagementStructureEchartData"></div>
+      </div>
     </div>
     <div class="flex-cell">
-      <div class="flex-item" echarts [options]="EmploymentStatusEchartData"></div>
+      <div class="row-con">
+        <div class="row-con-title">{{chooseYear ? chooseYear + '就业情况' : '就业情况'}}</div>
+        <div class="flex-item" echarts [options]="EmploymentStatusEchartData"></div>
+      </div>
+    </div>
+  </div>
+  <div class="table-data-title">{{peopleTableData?.dataSupplyTime ? peopleTableData?.dataSupplyTime + '年人员概况信息' : '人员概况信息'}}</div>
+  <div class="panel-item-title">从业人员数：</div>
+  <div class="table-data">
+    <div class="flex-column flex-table">
+      <div class="flex-cell flex">
+        <div class="table-label"><span class="table-label">从业人员期末人数</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">人员总数</span><span>{{peopleTableData?.employees ? peopleTableData?.employees + '人' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">留学归国人员</span><span>{{peopleTableData?.returnedOverseasStudents ? peopleTableData?.returnedOverseasStudents + '人' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">外籍常驻人员</span><span>{{peopleTableData?.foreignResident ? peopleTableData?.foreignResident + '人' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">引进外籍专家</span><span>{{peopleTableData?.highTitleStaff ? peopleTableData?.highTitleStaff + '人' : ''}}</span></div>
+          <div class="flex-cell flex">
+            <span class="table-label">当年新增从业人员</span>
+            <div class="flex-cell flex-column">
+              <div class="flex-cell"><span class="table-label">新增从业人员合计</span><span>{{peopleTableData?.newEmployees ? peopleTableData?.newEmployees + '人' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">吸纳高校应届毕业生</span><span>{{peopleTableData?.graduates ? peopleTableData?.graduates + '人' : ''}}</span></div>
+            </div>
+          </div>
+          <div class="flex-cell"><span class="table-label">参加社保人数</span><span>{{peopleTableData?.numberOfInsured ? peopleTableData?.numberOfInsured + '人' : ''}}</span></div>
+        </div>
+      </div>
+      <div class="flex-cell"><span class="table-label">从业人员平均人数</span><span>{{peopleTableData?.averageNumberOfEmployeess ? peopleTableData?.averageNumberOfEmployeess + '人' : ''}}</span></div>
+    </div>
+  </div>
+
+  <div class="panel-item-title">从业人员构成：</div>
+  <div class="table-data">
+    <div class="flex-column flex-table">
+      <div class="flex-cell flex">
+        <div class="table-label"><span class="table-label">按学历、学位分</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell flex">
+            <span class="table-label">研究生</span>
+            <div class="flex-cell flex-column">
+              <div class="flex-cell"><span class="table-label">研究生合计</span><span>{{peopleTableData?.postgraduate ? peopleTableData?.postgraduate + '人' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">博士</span><span>{{peopleTableData?.doctoralNumber ? peopleTableData?.doctoralNumber + '人' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">硕士</span><span>{{peopleTableData?.mastersDegree ? peopleTableData?.mastersDegree + '人' : ''}}</span></div>
+            </div>
+          </div>
+          <div class="flex-cell"><span class="table-label">本科</span><span>{{peopleTableData?.undergraduate ? peopleTableData?.undergraduate + '人' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">大专</span><span>{{peopleTableData?.college ? peopleTableData?.college + '人' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">理工类本科学历以上人员</span><span>{{peopleTableData?.bachelorDegreeOrAbove ? peopleTableData?.bachelorDegreeOrAbove + '人' : ''}}</span></div>
+        </div>
+      </div>
+      <div class="flex-cell flex">
+        <div class="table-label"><span class="table-label">按岗位类型分</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">中层及以上管理人员</span><span>{{peopleTableData?.manager ? peopleTableData?.manager + '人' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">专业技术人员</span><span>{{peopleTableData?.professionalTechnicians ? peopleTableData?.professionalTechnicians + '人' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">技术工人</span><span>{{peopleTableData?.skilledWorker ? peopleTableData?.skilledWorker + '人' : ''}}</span></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+</perfect-scrollbar>

@@ -1,6 +1,6 @@
-<div class="con-hd">
+<!-- <div class="con-hd">
   <button appAccessControl [accessData]="'manager-create-function'" class="btn add-btn" routerLink="/admin/roles/functionManage/-1">新增功能</button>
-</div>
+</div> -->
 <div class="filter">
   <form class="form-inline">
     <div class="form-group">
@@ -22,10 +22,11 @@
     <div class="form-group">
       <label>权限串:</label> <input type="text" class="form-control" name="resource" [(ngModel)]="competenceListParams.resource" placeholder="权限串">
     </div>
-    <div class="filter-bt">
+    <div class="form-group">
       <button class="btn search-btn" (click)="search()">搜索</button>
-      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <button class="btn" (click)="resetSearch()">重置</button>
     </div>
+    <button appAccessControl [accessData]="'manager-create-function'" class="btn fr" routerLink="/admin/roles/functionManage/-1">新增功能</button>
   </form>
 </div>
 <table class="table table-bordered table-hover table-s table-overflow-x text-c">
@@ -62,8 +63,13 @@
 </table>
 <div class="row">
   <div class="col-xs-12 col-12">
-    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
-                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+    <pager [totalItems]="pageParams.bigTotalItems"
+           [(ngModel)]="pageParams.bigCurrentPage"
+           (pageChanged)="pageChanged($event)"
+           pageBtnClass="pager-btn"
+           [itemsPerPage]="pageParams.itemsPerPage"
+           class="pull-left" previousText="上一页" nextText="下一页">
+    </pager>
   </div>
 </div>
 <ng-template #template>

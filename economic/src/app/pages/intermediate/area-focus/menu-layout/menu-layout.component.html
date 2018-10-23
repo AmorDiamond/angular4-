@@ -1,0 +1,21 @@
+<div class="right-panel">
+  <div class="content">
+    <div class="panel-menu-box">
+      <div class="panel-menu">
+        <div class="menu-row active">
+          <div class="menu-item"><div class="menu-text">{{area}}</div><span class="fa fa-caret-down info-arrow"></span></div>
+          <ul class="sub-menu">
+            <li appAccessControl [accessData]="'medium-area-scale'" routerLink="/int/areaFocus/nav/scale" [queryParams]="{area:area}" routerLinkActive="active"><em></em>规模</li>
+            <li appAccessControl [accessData]="'medium-area-economic'" routerLink="/int/areaFocus/nav/economy" [queryParams]="{area:area}" routerLinkActive="active"><em></em>经济</li>
+            <li appAccessControl [accessData]="'medium-area-scale'" routerLink="/int/areaFocus/nav/other" [queryParams]="{area:area}" routerLinkActive="active"><em></em>其他</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel-menu-right company-detail">
+      <div class="panel-right-box">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

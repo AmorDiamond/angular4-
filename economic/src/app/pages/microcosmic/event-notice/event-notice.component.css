@@ -1,3 +1,4 @@
+/*
 
 .event-notice-con .panel-menu .menu-item {
   position: relative;
@@ -67,5 +68,15 @@
 .event-notice-con .panel-menu li:hover .menu-item,.event-notice-con .panel-menu li .menu-item.active {
   color: #f9b620;
   background: rgba(249, 182, 32, 0.2);
-  /*box-shadow: inset 3px 0px 3px 0 rgba(255, 255, 255, 0.4), inset -3px 0px 3px 0 rgba(0, 0, 0, 0.9);*/
+}
+*/
+.panel-menu li .menu-item{
+   border-bottom: none;
+   padding: 0;
+   font-size: inherit;
+   cursor: pointer;
+  outline: none;
+}
+.panel-menu .active .menu-item{
+  color: #ffcc00;
 }

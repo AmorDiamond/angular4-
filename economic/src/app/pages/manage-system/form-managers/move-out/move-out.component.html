@@ -1,26 +1,35 @@
-<div class="con-hd">
-  <button appAccessControl [accessData]="'manager-import-moveout'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/EpBaseInfoPojo/importExcel'}" >EXCEL导入</button>
-  <button appAccessControl [accessData]="'manager-export-moveout'" class="excel-import">
-  <a class="excel-import" target="_blank" href="/manager/v1/EpBaseInfoPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}"
+<!-- <div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-moveout'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/EpBaseInfoPojo/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-moveout'" class="btn">
+  <a class="btn" target="_blank" href="/manager/v1/EpBaseInfoPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}"
      download="{{getListParams.enterpriseName+'-'+'企业迁出名单.xlsx'}}">导出</a>
   </button>
-  <button appAccessControl [accessData]="'manager-download-moveout'" class="excel-import">
-  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="企业迁出名单模板.xlsx">EXCEL模板下载</a>
+  <button appAccessControl [accessData]="'manager-download-moveout'" class="btn">
+  <a class="btn" target="_blank" href="{{formExcelTemplateData}}" download="企业迁出名单模板.xlsx">EXCEL模板下载</a>
   </button>
-  
 
-  <!-- <button class="excel-export">EXCEL模板下载</button> -->
-</div>
+</div> -->
 <div class="filter">
   <form class="form-inline">
     <div class="form-group">
       <label>公司名称:</label>
       <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
     </div>
-    <div class="filter-bt">
+    <div class="form-group">
       <button class="btn search-btn" (click)="search()">搜索</button>
-      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <button class="btn" (click)="resetSearch()">重置</button>
     </div>
+    <div class="form-group fr">
+        <button appAccessControl [accessData]="'manager-import-moveout'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/EpBaseInfoPojo/importExcel'}" >EXCEL导入</button>
+        <!-- <button class="btn"> -->
+        <a class="btn" appAccessControl [accessData]="'manager-export-moveout'" target="_blank" href="/manager/v1/EpBaseInfoPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}"
+           download="{{getListParams.enterpriseName+'-'+'企业迁出名单.xlsx'}}">导出</a>
+        <!-- </button> -->
+        <!-- <button class="btn"> -->
+        <a class="btn" appAccessControl [accessData]="'manager-download-moveout'" target="_blank" href="{{formExcelTemplateData}}" download="企业迁出名单模板.xlsx">EXCEL模板下载</a>
+        <!-- </button> -->
+      
+      </div>
   </form>
 </div>
 <table class="table table-bordered table-hover table-s table-overflow-x">

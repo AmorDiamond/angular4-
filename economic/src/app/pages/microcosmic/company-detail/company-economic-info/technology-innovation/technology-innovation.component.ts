@@ -20,6 +20,30 @@ export class TechnologyInnovationComponent implements OnInit {
   OrganizationPeopleEchartData: any;
   ExpenditureEchartData: any;
   IntellectualPropertyEchartData: any;
+  technologyTableData: any;
+  chooseYear = new Date().getFullYear() - 1;
+  echartInitConfig = {
+    colors: ['#5079d9', '#57ba8c', '#ffcc00', '#7958d6', '#bcbdbf', '#7c7e80'],
+    backgroundColor: '#191919',
+    titleTextStyle: {
+      color: '#7c7e80',
+      fontSize: 18,
+      fontWeight: 'normal'
+    },
+    legendStyle: {
+      width: '30%',
+      itemWidth: 14,
+      itemHeight: 14,
+      borderRadius: '10px',
+    },
+    labelTextColor: '#7c7e80',
+    gridTop: 100,
+    legendTop: 20,
+    splitLineStyle: {
+      color: '#1f2020',
+    },
+    lineSmooth: true,
+  };
 
   ngOnInit() {
     this.companyName = this.microcomicService.getUrlParams('name');
@@ -30,6 +54,8 @@ export class TechnologyInnovationComponent implements OnInit {
     // this.getExpenditureData();
     /*获取知识产权数据*/
     this.getIntellectualPropertyData();
+    /*获取表格数据*/
+    this.getTechnologyTableData(new Date().getFullYear() - 1);
   }
   /*获取机构数据和经费支出数据*/
   getOrganizationData() {
@@ -60,7 +86,7 @@ export class TechnologyInnovationComponent implements OnInit {
     const params = {name: this.companyName};
     this.companyEconomicInfoService.findListByUrl(params, 'IntellectualPropertyUrl').subscribe(res => {
       if (res.responseCode === '_200') {
-        const data = res.data;
+        const data = res.data ? res.data : {};
         const options = {
           xAxis: ['商标数', '专利数', '软件著作权数', '集成电路布图数', '国家科技奖励数', '国际标准数', '国内或行业标准数'],
           number: [
@@ -103,13 +129,26 @@ export class TechnologyInnovationComponent implements OnInit {
       this.creatIntellectualPropertyEchart(options);
     });*/
   }
+  /*获取表格数据*/
+  getTechnologyTableData(year) {
+    const params = {name: this.companyName, year: year};
+    this.companyEconomicInfoService.findListByUrl(params, 'companyTechnologyTableUrl').subscribe(res => {
+      console.log('表格数据', res)
+      if (res.responseCode === '_200') {
+        this.technologyTableData = res.data;
+      }
+    });
+  }
   /*绘制机构数据图表数据*/
   creatOrganizationEchartOld(options) {
     // const data = { xAxis: [], number: [], people: [] };
     const data = options;
     const echatsTitle = new Date().getFullYear() - 1;
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option = {
+      color: [this.echartInitConfig.colors[0]],
       title: {
+        show: false,
         text: echatsTitle + '机构数据',
         left: 'center', // 居中
         textStyle: {
@@ -122,7 +161,6 @@ export class TechnologyInnovationComponent implements OnInit {
       toolbox: {
       },
       grid: {
-        top: '25%',
         left: '3%',
         right: '3%',
         bottom: '5%',
@@ -131,7 +169,7 @@ export class TechnologyInnovationComponent implements OnInit {
       legend: {
         data: ['机构数', '机构人员', '经费支出'],
         textStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         top: '8%'
       },
@@ -143,7 +181,7 @@ export class TechnologyInnovationComponent implements OnInit {
         data: data.xAxis,
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }],
@@ -151,26 +189,26 @@ export class TechnologyInnovationComponent implements OnInit {
         type: 'value',
         name: '机构数/机构人员',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       },
         {
           type: 'value',
-          name: '经费支出(元)',
+          name: '经费支出(万元)',
           nameTextStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           },
           min: 0,
           axisLabel: {
             // formatter: '{value} %',
             textStyle: {
-              color: '#bcbdbf'
+              color: labelTextColor
             }
           }
         }
@@ -178,14 +216,12 @@ export class TechnologyInnovationComponent implements OnInit {
       series: [{
         name: '机构数',
         type: 'bar',
-        color: ['#1eb5d4'],
-        // stack: '总数',
         label: {
           normal: {
             show: true,
             position: 'top',
             formatter: function (param) {
-              return param.data + '家';
+              return param.data + '个';
             }
           }
         },
@@ -218,7 +254,7 @@ export class TechnologyInnovationComponent implements OnInit {
             show: true,
             position: 'top',
             formatter: function (param) {
-              return param.data + '元';
+              return param.data + '万元';
             }
           }
         },
@@ -262,8 +298,11 @@ export class TechnologyInnovationComponent implements OnInit {
     // const data = { xAxis: [], number: [], people: [] };
     const data = options;
     const echatsTitle = new Date().getFullYear() - 1;
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option = {
+      color: [this.echartInitConfig.colors[1]],
       title: {
+        show: false,
         text: echatsTitle + '机构数据',
         left: 'center', // 居中
         textStyle: {
@@ -271,12 +310,17 @@ export class TechnologyInnovationComponent implements OnInit {
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999'
+          }
+        }
       },
       toolbox: {
       },
       grid: {
-        top: '25%',
         left: '3%',
         right: '3%',
         bottom: '5%',
@@ -284,7 +328,7 @@ export class TechnologyInnovationComponent implements OnInit {
       },
       legend: {
         textStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         top: '10%'
       },
@@ -296,20 +340,24 @@ export class TechnologyInnovationComponent implements OnInit {
         data: ['机构数'],
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }],
       yAxis: [{
         type: 'value',
-        name: '机构数(家)',
+        name: '机构数(个)',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
+        splitLine: {
+          show: true,
+          lineStyle: this.echartInitConfig.splitLineStyle,
+        },
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       },
@@ -331,15 +379,13 @@ export class TechnologyInnovationComponent implements OnInit {
       series: [{
         name: '机构数',
         type: 'bar',
-        color: ['#1eb5d4'],
         barMaxWidth: '40%',
-        // stack: '总数',
         label: {
           normal: {
             show: true,
             position: 'top',
             formatter: function (param) {
-              return param.data + '家';
+              return param.data + '个';
             }
           }
         },
@@ -378,8 +424,11 @@ export class TechnologyInnovationComponent implements OnInit {
     // const data = { xAxis: [], number: [], people: [] };
     const data = options;
     const echatsTitle = new Date().getFullYear() - 1;
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option = {
+      color: [this.echartInitConfig.colors[2]],
       title: {
+        show: false,
         text: echatsTitle + '机构人员数据',
         left: 'center', // 居中
         textStyle: {
@@ -387,12 +436,17 @@ export class TechnologyInnovationComponent implements OnInit {
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999'
+          }
+        }
       },
       toolbox: {
       },
       grid: {
-        top: '25%',
         left: '3%',
         right: '3%',
         bottom: '5%',
@@ -412,7 +466,7 @@ export class TechnologyInnovationComponent implements OnInit {
         data: ['机构人员'],
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }],
@@ -420,12 +474,16 @@ export class TechnologyInnovationComponent implements OnInit {
         type: 'value',
         name: '机构人员(人)',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
+        splitLine: {
+          show: true,
+          lineStyle: this.echartInitConfig.splitLineStyle,
+        },
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }
@@ -433,9 +491,7 @@ export class TechnologyInnovationComponent implements OnInit {
       series: [{
         name: '机构人员',
         type: 'bar',
-        color: ['#1eb5d4'],
         barMaxWidth: '40%',
-        // stack: '总数',
         label: {
           normal: {
             show: true,
@@ -456,8 +512,11 @@ export class TechnologyInnovationComponent implements OnInit {
 
     const data = {xAxis: [], number: [options]};
     const echatsTitle = new Date().getFullYear() - 1;
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option = {
+      color: [this.echartInitConfig.colors[3]],
       title: {
+        show: false,
         text: echatsTitle + '经费支出',
         left: 'center', // 居中
         textStyle: {
@@ -465,12 +524,17 @@ export class TechnologyInnovationComponent implements OnInit {
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999'
+          }
+        }
       },
       toolbox: {
       },
       grid: {
-        top: '25%',
         left: '3%',
         right: '3%',
         bottom: '5%',
@@ -478,7 +542,7 @@ export class TechnologyInnovationComponent implements OnInit {
       },
       legend: {
         textStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         top: '10%'
       },
@@ -490,20 +554,24 @@ export class TechnologyInnovationComponent implements OnInit {
         data: ['经费支出'],
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }],
       yAxis: [{
         type: 'value',
-        name: '经费支出(元)',
+        name: '经费支出(万元)',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
+        splitLine: {
+          show: true,
+          lineStyle: this.echartInitConfig.splitLineStyle,
+        },
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }
@@ -511,15 +579,13 @@ export class TechnologyInnovationComponent implements OnInit {
       series: [{
         name: '经费支出',
         type: 'bar',
-        color: ['#1eb5d4'],
         barMaxWidth: '40%',
-        // stack: '总数',
         label: {
           normal: {
             show: true,
             position: 'top',
             formatter: function (param) {
-              return param.data + '元';
+              return param.data + '万元';
             }
           }
         },
@@ -534,8 +600,11 @@ export class TechnologyInnovationComponent implements OnInit {
     const data = options;
     const legendData = data.xAxis;
     const echatsTitle = new Date().getFullYear() - 1;
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option = {
+      color: this.echartInitConfig.colors,
       title: {
+        show: false,
         text: echatsTitle + '知识产权数据',
         left: 'center', // 居中
         textStyle: {
@@ -543,18 +612,26 @@ export class TechnologyInnovationComponent implements OnInit {
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999'
+          }
+        }
       },
       toolbox: {
       },
       grid: {
-        // top: '10%',
-        // containLabel: true
+        left: '3%',
+        right: '3%',
+        bottom: '5%',
+        containLabel: true
       },
       legend: {
         data: legendData,
         textStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         top: '10%'
       },
@@ -566,19 +643,23 @@ export class TechnologyInnovationComponent implements OnInit {
         data: data.xAxis,
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }],
       yAxis: [{
         type: 'value',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
+        splitLine: {
+          show: true,
+          lineStyle: this.echartInitConfig.splitLineStyle,
+        },
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }
@@ -586,8 +667,6 @@ export class TechnologyInnovationComponent implements OnInit {
       series: [{
         name: '知识产权',
         type: 'bar',
-        color: ['#1eb5d4'],
-        stack: '总数',
         label: {
           normal: {
             show: true,

@@ -1,0 +1,67 @@
+{
+  "timestemp": 1540275758703,
+  "data": [
+    {
+      "id": null,
+      "order": 1,
+      "name": "中建电子信息技术有限公司成都分公司",
+      "address": "成都高新区天益街38号",
+      "startDate": null,
+      "endDate": null,
+      "referenceTime": 13,
+      "researchTime": "30",
+      "createDate": 1540275758684,
+      "creator": null
+    },
+    {
+      "id": null,
+      "order": 2,
+      "name": "成都希德电子信息技术有限公司",
+      "address": "科园二路10号2栋2单元10层",
+      "startDate": null,
+      "endDate": null,
+      "referenceTime": 14,
+      "researchTime": "30",
+      "createDate": 1540275758684,
+      "creator": null
+    },
+    {
+      "id": null,
+      "order": 3,
+      "name": "四川丹露电子信息科技有限公司",
+      "address": "成都高新区天府大道北段1700号1栋1单元18层1804号",
+      "startDate": null,
+      "endDate": null,
+      "referenceTime": 55,
+      "researchTime": "30",
+      "createDate": 1540275758684,
+      "creator": null
+    },
+    {
+      "id": null,
+      "order": 4,
+      "name": "成都高新区管委会",
+      "address": "成都市武侯区天府大道北段18号高新区管委会",
+      "startDate": null,
+      "endDate": null,
+      "referenceTime": 53,
+      "researchTime": null,
+      "createDate": 1540275758684,
+      "creator": null
+    },
+    {
+      "id": null,
+      "order": 5,
+      "name": "上海丹露电子信息科技有限公司成都分公司",
+      "address": "成都高新区天府大道北段1700号1栋1单元18层1804号",
+      "startDate": null,
+      "endDate": null,
+      "referenceTime": 0,
+      "researchTime": null,
+      "createDate": 1540275758684,
+      "creator": null
+    }
+  ],
+  "responseCode": "_200",
+  "errorMsg": null
+}

@@ -1,7 +1,19 @@
+<div class="panel-content-box">
 <div appAccessControl [accessData]="'search-enterprise'" class="research-content">
-    <div class="data-search-box">
-        <div class="data-search-con">
-            <input class="data-search-input" [(ngModel)]="searchName" type="text" placeholder="请输入关键字！" (keydown.enter)="keyBoardInput($event)"><button class="data-search-btn" (click)="getList()"></button>
-        </div>
+  <div class="data-search-box">
+    <div class="data-search-con">
+      <input class="data-search-input" [(ngModel)]="searchName" type="text" placeholder="输入企业/关键字" (keydown.enter)="keyBoardInput($event)">
+      <button class="data-search-btn" (click)="getList()"><span class="search-icon"></span>搜索
+      </button>
+
+      <div class="search-record-con">
+        <span class="record-item" (click)="searchName = '成都';getList()">成都</span>
+        <span class="record-item" (click)="searchName = '高新区';getList()">高新区</span>
+        <span class="record-item" (click)="searchName = '电子信息';getList()">电子信息</span>
+        <span class="record-item" (click)="searchName = '高质量企业';getList()">高质量企业</span>
+        <span class="record-item" (click)="searchName = '电商服务业';getList()">电商服务业</span>
+      </div>
     </div>
+  </div>
+</div>
 </div>

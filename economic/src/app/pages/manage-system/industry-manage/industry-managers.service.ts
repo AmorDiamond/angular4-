@@ -14,16 +14,18 @@ export class IndustryManagersService {
     private routerInfo: ActivatedRoute,
     private http: HttpClient,
   ) {}
-  /*获取企业产业类型*/
-  private getCompanyIndustryType = '/manager/v1/epBaseInfoPojo/findCompanyWithIndustryType';
-  /*获取产业类型*/
-  private getIndustryType = '/manager/v1/epBaseInfoPojo/findIndustryType';
+  /*获取行业类型tree*/
+  private ldapTreeUrl = '/manager/v1/mapTree/getJsTree';
   /*导入企业产业类型*/
-  private importExcelIndustry = '/manager/v1/epBaseInfoPojo/importExcelChangeType';
-  /*修改企业产业类型*/
-  private editCompanyIndustryType = '/manager/v1/epBaseInfoPojo/modifyIndustryClass';
-  /*产业类型搜索企业列表*/
-  private getCompanyIndustryList = '/manager/v1/epBaseInfoPojo/searchCompany';
+  // private importExcelIndustry = '/manager/v1/epBaseInfoPojo/importExcelChangeType';
+  /*产业类型列表*/
+  private getIndustryTypeList = '/manager/v1/epBaseInfoPojo/findIndustryType';
+  /*添加产业类型*/
+  private addIndustryTypeUrl = '/manager/v1/mapTree/createIndustryClassType';
+  /*修改产业类型*/
+  private editIndustryTypeUrl = '/manager/v1/mapTree/bindingIndustry';
+  /*获取具体产业类型详情*/
+  private getIndustryTypeInfoUrl = '/manager/v1/mapTree/getIndustryClassTypeById';
   getSubject() {
     return this.subject.asObservable();
   }
@@ -61,7 +63,7 @@ export class IndustryManagersService {
     }
     if (requestType === 'patch') {
       // params = findParams;
-      params = new HttpParams().set('companyName', findParams.companyName).set('typeIds', findParams.typeIds);
+      params = new HttpParams().set('name', findParams.name).set('industryTypeIds', findParams.industryTypeIds).set('industryClassTypeId', findParams.industryClassTypeId);
     }
     if (requestType === 'post') {
       if (postType && postType === 'object') {
@@ -79,6 +81,12 @@ export class IndustryManagersService {
     }
     console.log(params)
     return this.http[requestType](url, params);
+  }
+  /*修改产业类型信息*/
+  editIndustryBindTypes(findParams, url): Observable<any> {
+    const requestUrl = this[url];
+    const params = new HttpParams().set('industryClassTypeId', findParams.industryClassTypeId).set('industryTypeIds', findParams.industryTypeIds);
+    return this.http.patch(requestUrl, params);
   }
   /*通过多个请求获取数据*/
   getRequestByForkJoin(options: Array<any>, type?): Observable<any> {

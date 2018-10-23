@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CHANGE } from '../../../core/container-ngrx/container.action';
 import { Store } from '@ngrx/store';
 import { ContainerStyle } from '../../../core/container-ngrx/container.model';
@@ -6,6 +6,8 @@ import { DataApplicationService } from '../data-application.service';
 import { ToastModalService } from '../../../shared/toast-modal/toast-modal.service';
 import { LayoutService } from '../../layout/layout.service';
 import { Subscription } from 'rxjs/Subscription';
+import { TreeNode } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-output',
@@ -19,6 +21,7 @@ export class DataOutputComponent implements OnInit, OnDestroy {
     private dataApplicationService: DataApplicationService,
     private toastModalService: ToastModalService,
     private layoutService: LayoutService,
+    private router: Router,
   ) { }
   dataList = [];
   allSelectedStatus = false;
@@ -37,13 +40,25 @@ export class DataOutputComponent implements OnInit, OnDestroy {
   hasSearch = false;
   hasDownload = false;
   searchParams = {
-    industryType: '',
-    enterpriseType: '',
-    industryClassType: '',
-    supervisory: '',
-    whetherAuthentication: '',
+    industryTypeId: '',
+    enterpriseTypeId: '',
+    industryClassTypeId: '',
+    supervisory: false,
+    whetherAuthentication: false,
+    whetherGazelles: false,
+    enrollmentOfFundsEnum: '',
+    establishDate: '',
+    address: '',
+    companyName: '',
+    iabels: '',
+    year: '',
+    staffSizeEnum: '',
+    incomeScaleEnum: '',
+    taxScaleEnum: '',
+    energyConsumptionEnum: '',
+    sewageScaleEenum: '',
     page: 0,
-    size: 15,
+    size: 30,
   };
   pageParams = {
     maxSize: 5,
@@ -53,14 +68,35 @@ export class DataOutputComponent implements OnInit, OnDestroy {
     numPages: 0
   };
   /*行业类型*/
-  tradeTypeList = [];
+  tradeTypeList: TreeNode[];
   /*注册类型*/
-  registerTypeList = [];
+  registerTypeList: TreeNode[];
   /*产业类型*/
-  industryTypeList = [];
+  industryTypeList: TreeNode[];
+  /*自定义标签*/
+  labelLists = ['高企', '上规', '瞪羚'];
+  /*注册资金枚举*/
+  RegisterMoneyEnums = [];
+  /*人员规模枚举*/
+  StaffSizeEnums = [];
+  /*营收规模枚举*/
+  IncomeScaleEnums = [];
+  /*税收规模枚举*/
+  TaxScaleEnums = [];
+  /*能耗规模枚举*/
+  EnergyConsumptionEnums = [];
+  /*排污规模枚举*/
+  SewageScaleEenums = [];
   /*搜索的企业列表*/
   companyList = [];
   allSelectedCompanyStatus = false;
+  files: TreeNode[];
+  selectedRegisterTypeFile: any;
+  selectedTradeTypeFile: any;
+  selectedIndustryTypeFile: any;
+  openRegisterTypeTree = false;
+  openTradeTypeTree = false;
+  openIndustryTypeTree = false;
   ngOnInit() {
     this.store.dispatch({
       type: CHANGE,
@@ -68,262 +104,212 @@ export class DataOutputComponent implements OnInit, OnDestroy {
         width: '60%'
       }
     });
-    this.getList();
+    this.getCoustomLabel();
+    this.getRegisterMoneyEnums();
+    this.getStaffSizeEnums();
+    this.getIncomeScaleEnums();
+    this.getTaxScaleEnums();
+    this.getEnergyConsumptionEnums();
+    this.getSewageScaleEenums();
+  }
+  /*获取文档的点击事件触发关闭tree弹框*/
+  @HostListener('document:click', ['$event'])
+  onClick ($event)  {
+    this.openTradeTypeTree = false;
+    this.openRegisterTypeTree = false;
+    this.openIndustryTypeTree = false;
   }
   ngOnDestroy() {
-    this.accessControlSubject.unsubscribe();
+    // this.accessControlSubject.unsubscribe();
   }
   /*通过条件搜索*/
   search() {
-    console.log(this.searchParams);
-    this.dataApplicationService.requestByParams(this.searchParams, 'getCompanysByTypesUrl').subscribe(res => {
+    this.searchParams.enterpriseTypeId = this.selectedRegisterTypeFile ? this.selectedRegisterTypeFile.data : '';
+    this.searchParams.industryTypeId = this.selectedTradeTypeFile ? this.selectedTradeTypeFile.data : '';
+    this.searchParams.industryClassTypeId = this.selectedIndustryTypeFile ? this.selectedIndustryTypeFile.data : '';
+    if (this.searchParams.iabels) {
+      if (this.searchParams.iabels === '高企') {
+        this.searchParams.whetherAuthentication = true;
+        this.searchParams.iabels = '';
+      }else if (this.searchParams.iabels === '上规') {
+        this.searchParams.supervisory = true;
+        this.searchParams.iabels = '';
+      }else if (this.searchParams.iabels === '瞪羚') {
+        this.searchParams.whetherGazelles = true;
+        this.searchParams.iabels = '';
+      }
+    }
+    if (this.searchParams.staffSizeEnum || this.searchParams.incomeScaleEnum || this.searchParams.taxScaleEnum || this.searchParams.energyConsumptionEnum || this.searchParams.sewageScaleEenum) {
+      if (!this.searchParams.year) {
+        this.toastModalService.addToasts({tipsMsg: '请输入要查询的年份！', type: 'error'});
+        return;
+      }
+    }
+    console.log('this.searchParams', this.searchParams);
+    this.dataApplicationService.changeOutputSearchParams(this.searchParams);
+    this.router.navigate(['/dataApplication/outputList']);
+  }
+  /*获取自定义标签数据*/
+  getCoustomLabel() {
+    this.dataApplicationService.requestByParams({}, 'customizeLabelUrl').subscribe(res => {
+      console.log('标签', res);
       if (res.responseCode === '_200') {
-        this.hasSearch = true;
-        this.companyList = res.data.content;
-        this.pageParams.bigTotalItems = res.data.totalElements;
-        if (this.companyList.length < 1) {
-          this.toastModalService.addToasts({tipsMsg: '暂无信息！', type: 'info'});
-        }
+        const data = res.data;
+        data.forEach(item => {
+          this.labelLists.push(item.content);
+        });
+      }
+    });
+  }
+  /*获取注册资金枚举*/
+  getRegisterMoneyEnums() {
+    this.dataApplicationService.requestByParams({enumsName: 'EnrollmentOfFundsEnum'}, 'getEnumsUrlEnrollmentOfFundsEnum').subscribe(res => {
+      console.log('枚举', res);
+      if (res.responseCode === '_200') {
+        this.RegisterMoneyEnums = res.data;
       }else {
         this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
       }
     });
   }
-  /*获取数据*/
-  getList() {
-    this.dataApplicationService.requestByParams({}, 'allIndustryTypesUrl').subscribe(res => {
+  /*获取人员规模枚举*/
+  getStaffSizeEnums() {
+    this.dataApplicationService.requestByParams({enumsName: 'StaffSizeEnum'}, 'getEnumsUrlStaffSizeEnum').subscribe(res => {
       if (res.responseCode === '_200') {
-        this.industryTypeList = res.data;
+        this.StaffSizeEnums = res.data;
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
       }
     });
-    this.accessControlSubject = this.layoutService.getAccessControlSubject().subscribe(res => {
-      const options = [
-        {id: 1, name: '企业基本信息', children: [
-            {id: 11, name: '企业概况', enumerate: 'BASEINFO'},
-            {id: 14, name: '工商变更信息', enumerate: 'EPCHANGEINFO'},
-            {id: 15, name: '税务登记信息', enumerate: 'EPTAXATION'},
-            {id: 16, name: '社会保障信息', enumerate: 'INSURANCELNFORMATION'},
-            {id: 17, name: '企业问题台账', enumerate: 'BUSINESSPROBLEMLEDGER'}
-          ]},
-        {id: 2, name: '企业资质信息', enumerate: 'EQICERTIFICATION'},
-        {id: 3, name: '企业信用信息', children: [
-            {id: 31, name: '企业荣誉', enumerate: 'ECIHONOR'},
-            {id: 32, name: '黑名单', enumerate: 'ECIJUDICIALDECISION'},
-            {id: 33, name: '履约缴费', enumerate: 'PERPAYMENTINFORMATION'},
-            {id: 34, name: '行业评级', enumerate: 'INDUSTRYRATINGINFORMATION'},
-          ]},
-        {id: 4, name: '企业无形资产', children: [
-            {id: 41, name: '企业商标和专利信息', enumerate: 'IATRADEMARKANDPATENT'},
-            {id: 42, name: 'ICP备案信息', enumerate: 'IAICP'},
-          ]},
-        {id: 5, name: '企业经济指标', children: [
-            {id: 51, name: '经济、人员、科技创新概况', enumerate: 'EIIAPASSETS'},
-            {id: 52, name: '政府支持信息', enumerate: 'GOVERNMENTSUPPORT'},
-            {id: 53, name: '招聘信息', enumerate: 'EIIRECRUIT'},
-          ]},
-        {id: 6, name: '企业综合评价', enumerate: ''},
-      ];
-      for (let i = 0; i < res.length; i++) {
-        if (res[i].hasAccess) {
-          for (let j = 0; j < options.length; j++) {
-            if (options[j].children) {
-              options[j].children.forEach(item => {
-                if (item.name === res[i].text) {
-                  item['hasAccess'] = true;
-                  options[j]['hasAccess'] = true;
-                }
-              });
-            }else if (options[j].name === res[i].text) {
-              options[j]['hasAccess'] = true;
-            }
+  }
+  /*获取收入规模枚举*/
+  getIncomeScaleEnums() {
+    this.dataApplicationService.requestByParams({enumsName: 'IncomeScaleEnum'}, 'getEnumsUrlIncomeScaleEnum').subscribe(res => {
+      if (res.responseCode === '_200') {
+        this.IncomeScaleEnums = res.data;
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
+      }
+    });
+  }
+  /*获取税收规模枚举*/
+  getTaxScaleEnums() {
+    this.dataApplicationService.requestByParams({enumsName: 'TaxScaleEnum'}, 'getEnumsUrlTaxScaleEnum').subscribe(res => {
+      if (res.responseCode === '_200') {
+        this.TaxScaleEnums = res.data;
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
+      }
+    });
+  }
+  /*获取能耗规模枚举*/
+  getEnergyConsumptionEnums() {
+    this.dataApplicationService.requestByParams({enumsName: 'EnergyConsumptionEnum'}, 'getEnumsUrlEnergyConsumptionEnum').subscribe(res => {
+      if (res.responseCode === '_200') {
+        this.EnergyConsumptionEnums = res.data;
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
+      }
+    });
+  }
+  /*获取排污规模枚举*/
+  getSewageScaleEenums() {
+    this.dataApplicationService.requestByParams({enumsName: 'SewageScaleEenum'}, 'getEnumsUrlSewageScaleEenum').subscribe(res => {
+      if (res.responseCode === '_200') {
+        this.SewageScaleEenums = res.data;
+      }else {
+        this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
+      }
+    });
+  }
+  /*获取树结构*/
+  getTreeData(id?, parent?) {
+    const params = {id: id ? id : 'registration'};
+    this.dataApplicationService.requestByParams(params, 'treeTypesUrl').subscribe((res: any) => {
+      console.log(res);
+      const treeFormatData = [];
+      const treeData = res;
+      treeData.forEach(item => {
+        const hasChildren = item.children ? item.children : false;
+        treeFormatData.push(
+          {
+            'label': item.text,
+            'data': item.id,
+            // "formatparent": item.data ? item.data : '',
+            'expandedIcon': 'fa fa-folder-open',
+            'collapsedIcon': 'fa fa-folder',
+            'leaf': !hasChildren // leaf为false时有下级加载
           }
-        }
+        );
+      });
+      if (id === 1) {
+        this.registerTypeList = <TreeNode[]> treeFormatData;
+      }else if (id === 2) {
+        this.tradeTypeList = <TreeNode[]> treeFormatData;
+      }else if (id === 3) {
+        this.industryTypeList = <TreeNode[]> treeFormatData;
       }
-      this.dataList = options;
-      console.log(this.dataList);
     });
   }
-  /*保存选择的企业去下载数据*/
-  goToDownloadPage() {
-    const selectedCompanys = [];
-    this.companyList.forEach(item => {
-      if (item.hasSelected) {
-        selectedCompanys.push(item);
+  /*获取具体产业类型详情/获取具体产业下属的行业类型树结构*/
+  getTradeTypesTree(id) {
+    const params = {industryClassTypeId: id ? id : ''};
+    this.dataApplicationService.requestByParams(params, 'getIndustryTypeInfoUrl').subscribe(res => {
+      if (res.responseCode === '_200') {
+        const treeFormatData = [];
+        const treeData = res.data.includingIndustry;
+        treeData.forEach(item => {
+          const hasChildren = item.children || item.childCount > 0 ? true : false;
+          treeFormatData.push(
+            {
+              'label': item.name,
+              'data': item.id,
+              // "formatparent": item.data ? item.data : '',
+              'expandedIcon': 'fa fa-folder-open',
+              'collapsedIcon': 'fa fa-folder',
+              'leaf': !hasChildren // leaf为false时有下级加载
+            }
+          );
+        });
+        this.tradeTypeList = <TreeNode[]> treeFormatData;
       }
     });
-    if (selectedCompanys.length < 1) {
-      this.toastModalService.addToasts({tipsMsg: '请选择需要导出数据的企业！', type: 'warning', timeout: 2000});
-      return;
-    }
-    this.hasSearch = false;
-    this.hasDownload = true;
   }
 
-  /*翻页搜索*/
-  pageChanged($event) {
-    this.searchParams.page = $event.page - 1;
-    this.search();
-  }
-  /*单独选中企业后处理事件*/
-  singleSelectedCompany() {
-    let allSelectedCompany = true;
-    for (let i = 0; i < this.companyList.length; i++) {
-      if (!this.companyList[i].hasSelected) {
-        allSelectedCompany = false;
-        break;
-      }
-    }
-    this.allSelectedCompanyStatus = allSelectedCompany;
-  }
-  /*全选企业列表操作*/
-  allSelectedCompany() {
-    if (this.allSelectedCompanyStatus) {
-      this.companyList.forEach(item => {
-        if (!item.hasSelected) {
-          item.hasSelected = true;
-        }
-      });
-    }else {
-      this.companyList.forEach(item => {
-        if (item.hasSelected) {
-          item.hasSelected = false;
-        }
+  /*获取数据组装*/
+  loadNode(event) {
+    if (event.node && !event.node.children) {
+      // in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
+      console.log(event.node);
+      const id = event.node.data;
+      const parent = event.node.formatparent;
+      const params = {id: id ? id : 'registration'};
+      this.dataApplicationService.requestByParams(params, 'treeTypesUrl').subscribe((res: any) => {
+        console.log(res);
+        const treeFormatData = [];
+        const treeData = res;
+        treeData.forEach(item => {
+          const hasChildren = item.children ? item.children : false;
+          treeFormatData.push(
+            {
+              'label': item.text,
+              'data': item.id,
+              // "formatparent": item.data ? item.data : '',
+              'expandedIcon': 'fa fa-folder-open',
+              'collapsedIcon': 'fa fa-folder',
+              'leaf': !hasChildren // leaf为false时有下级加载
+            }
+          );
+        });
+        event.node.children = treeFormatData;
       });
     }
-
+  }
+  /*选择产业类型后重置行业类型数据*/
+  changeTradeTypeList(event?) {
+    this.tradeTypeList = null;
+    this.selectedTradeTypeFile = '';
   }
   /*组装所需格式数据*/
   formatOutputData() {}
-  /*单独选中后处理事件*/
-  selectedHandle(index) {
-    const children = this.dataList[index].children;
-    if (children) {
-      const len = children.length;
-      let allSelectedGroup = true;
-      for (let i = 0; i < len; i++) {
-        if (!children[i].hasSelected) {
-          allSelectedGroup = false;
-        }
-      }
-      this.dataList[index].hasSelected = allSelectedGroup;
-      /*判断所选项目数目*/
-      this.countSelected();
-      /*if (allSelectedGroup) {
-
-        /!*判断是否全选*!/
-        let allSelected = true;
-        const dataLen = this.dataList.length;
-        for (let i = 0; i < dataLen; i++) {
-          if (!this.dataList[i].hasSelected) {
-            allSelected = false;
-            break;
-          }
-        }
-        if (allSelected) {
-          this.allSelectedStatus = true;
-        }
-      }else {
-        this.allSelectedStatus = false;
-      }*/
-    }
-  }
-  /*全选获取的组别*/
-  allSelectedGroup(index) {
-    const children = this.dataList[index].children;
-    if (children) {
-      if (this.dataList[index].hasSelected) {
-        children.forEach(res => {
-          res.hasSelected = true;
-        });
-      }else {
-        children.forEach(res => {
-          res.hasSelected = false;
-        });
-      }
-    }
-    /*判断所选项目数目*/
-    this.countSelected();
-    /*判断是否全选*/
-    /*let allSelected = true;
-    const dataLen = this.dataList.length;
-    for (let i = 0; i < dataLen; i++) {
-      if (!this.dataList[i].hasSelected) {
-        allSelected = false;
-        break;
-      }
-    }
-    this.allSelectedStatus = allSelected;*/
-  }
-  /*全选操作*/
-  allSelected() {
-    if (this.allSelectedStatus) {
-      this.dataList.forEach(res => {
-        res.hasSelected = true;
-      });
-      this.dataList.forEach((res, i) => {
-        this.allSelectedGroup(i);
-      });
-    }else {
-      this.dataList.forEach(res => {
-        res.hasSelected = false;
-      });
-      this.dataList.forEach((res, i) => {
-        this.allSelectedGroup(i);
-      });
-    }
-  }
-  /*导出数据*/
-  downLoadDataFn() {
-    const params = {moduleType: [], companyNames: []};
-    // let params = '';
-    this.dataList.forEach(res => {
-      if (res.children) {
-        res.children.forEach(childItem => {
-          if (childItem.hasSelected) {
-            // params += childItem.enumerate ? childItem.enumerate + ',' : '';
-            params.moduleType.push(childItem.enumerate);
-          }
-        });
-      }else if (res.hasSelected) {
-        // params += res.enumerate ? res.enumerate + ',' : '';
-        params.moduleType.push(res.enumerate);
-      }
-    });
-    // const countSelected = params.split(',');
-    if (params.moduleType.length > 5) {
-      this.toastModalService.addToasts({tipsMsg: '所选项目超过5个！', type: 'warning', timeout: 2000});
-      return;
-    }
-    this.companyList.forEach(item => {
-      if (item.hasSelected) {
-        params.companyNames.push(item.name);
-      }
-    });
-    if (params.companyNames.length < 1) {
-      this.toastModalService.addToasts({tipsMsg: '请选择需要导出数据的企业！', type: 'warning', timeout: 2000});
-      return;
-    }
-    const todayTime = new Date();
-    const todayDate = todayTime.getFullYear() + '-' + (todayTime.getMonth() + 1) + '-' + todayTime.getDate();
-    console.log(params);
-    this.dataApplicationService.exportZip(params, '系统数据导出' + todayDate, 'application/zip');
-  }
-  /*统计获取已选*/
-  countSelected() {
-    const list = [];
-    this.dataList.forEach(res => {
-      if (res.children) {
-        res.children.forEach(childItem => {
-          if (childItem.hasSelected) {
-            list.push(childItem);
-          }
-        });
-      }else if (res.hasSelected && res.enumerate) {
-        list.push(res);
-      }
-    });
-    if (list.length > 5) {
-      this.toastModalService.addToasts({tipsMsg: '所选项目超过5个！', type: 'warning', timeout: 2000});
-    }
-  }
 }

@@ -3,15 +3,16 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../shared/shared.module';
 import { DataOutputRoutingModule } from './data-output-routing.module';
 import { DataOutputComponent } from './data-output.component';
-import { PaginationModule, TooltipModule, ModalModule } from 'ngx-bootstrap';
+import { TreeModule } from 'primeng/tree';
+import { OutputPageComponent } from './output-page/output-page.component';
 
 @NgModule({
   imports: [
     CommonModule,
     DataOutputRoutingModule,
     SharedModule,
-    PaginationModule.forRoot(),
+    TreeModule,
   ],
-  declarations: [DataOutputComponent]
+  declarations: [DataOutputComponent, OutputPageComponent]
 })
 export class DataOutputModule { }

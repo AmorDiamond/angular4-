@@ -1,0 +1,93 @@
+<perfect-scrollbar>
+  <div class="panel-content">
+    <div class="row-box row-box1">
+      <div class="row-con">
+        <div class="row-con-title">{{typeName}}投入情况</div>
+        <div class="row-item-box">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="GovernmentalSupportEchart"></div>
+          </div>
+          <table class="table table-bordered text-c">
+            <tr>
+              <th>年份</th>
+              <th>政府支持(万)</th>
+              <th>固定投资(万)</th>
+              <th>研发经费(万)</th>
+            </tr>
+            <tr *ngFor="let item of GovernmentalSupportDataInfo">
+              <td>{{item[3]}}</td>
+              <td>{{item[0]}}</td>
+              <td>{{item[1]}}</td>
+              <td>{{item[2]}}</td>
+            </tr>
+            <tr *ngIf="GovernmentalSupportDataInfo.length<1">
+              <td colspan="4">暂无信息！</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-box row-box-two row-box2">
+      <div class="row-con">
+        <div class="row-con-title">{{typeName}}产出情况</div>
+        <div class="output-box">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="OutputValueEchartData" (chartClick)="chartClick($event)"></div>
+          </div>
+          <table class="table table-bordered text-c">
+            <tr>
+              <th>年份</th>
+              <th>总产值(万)</th>
+              <th>资产(万)</th>
+              <th>营收(万)</th>
+              <th>利润(万)</th>
+              <th>税收(万)</th>
+              <th>利润率</th>
+            </tr>
+            <tr *ngFor="let item of OutputValueDataInfo">
+              <td>{{item[0]}}</td>
+              <td>{{item[1]}}</td>
+              <td>{{item[2]}}</td>
+              <td>{{item[3]}}</td>
+              <td>{{item[4]}}</td>
+              <td>{{item[5]}}</td>
+              <td>{{(item[4]/item[3]) ? (item[4]/item[3]*100).toFixed(2) : 0}}%</td>
+            </tr>
+            <tr *ngIf="OutputValueDataInfo.length<1">
+              <td colspan="7">暂无信息！</td>
+            </tr>
+          </table>
+        </div>
+        <div class="input-rate-box">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="OperatingIncomeTypeRateEchartData"></div>
+          </div>
+          <div class="row-item">
+            <div class="item-con" echarts [options]="OperatingIncomeTypeLadderEchartData"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-box row-box3">
+      <div class="row-con">
+        <div class="row-con-title">{{typeName}}投入和产出对比情况</div>
+        <div class="row-item-box">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="GovernmentalSupportAndTaxEchartData"></div>
+          </div>
+        </div>
+        <div class="row-item-box">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="FixedInvestmentIncomeProfitEchartData"></div>
+          </div>
+        </div>
+        <div class="row-item-box last-row-item">
+          <div class="row-item ">
+            <div class="item-con" echarts [options]="PeopleIncomePeopleTaxPeopleProfitEchartData"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</perfect-scrollbar>

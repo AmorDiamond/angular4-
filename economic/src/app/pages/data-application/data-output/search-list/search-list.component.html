@@ -1,0 +1,85 @@
+<div class="panel-content data-output-box">
+  <div class="public-panel-title">
+    <div class="back-box fl" routerLink="../dataOutput">
+      <span class="back-btn"></span>
+    </div>
+    <h3>企业精准搜索结果</h3>
+  </div>
+  <div class="panel-content-box">
+    <div class="flex-column">
+      <div class="data-output-bd flex-cell">
+        <perfect-scrollbar>
+          <div class="list-th">
+            <div class="th-item th-name">企业名称</div>
+            <div class="th-item th-time">注册时间</div>
+            <div class="th-item th-address">通讯地址</div>
+            <div class="th-item th-type">行业类型</div>
+            <div class="th-item th-type">产业类型</div>
+            <div class="th-item th-people">职工人数</div>
+            <div class="th-item th-income">营业收入(万元)</div>
+            <div class="th-item th-tax">税收(万元)</div>
+            <div class="th-item th-energy">综合能耗(吨/标准煤)</div>
+            <div class="th-item th-sewage">环保排污(吨/每年)</div>
+            <div class="th-item th-selected">选择</div>
+          </div>
+          <div class="company-list" *ngIf="companyList.length>0">
+            <div class="company-item" *ngFor="let item of companyList">
+              <!--<div class="logo fl">
+                <span class="name-icon">{{(item.name | slice: 0:2) == '成都' || (item.name | slice: 0:2) == '四川' ? (item.name | slice: 2:4) : (item.name | slice: 0:2)}}</span>
+              </div>
+              <div class="info-data fl">
+                <div class="name">{{item.name}}</div>
+                <div class="address"><span class="info-label">地址：</span>{{item.address ? item.address : '未知'}}</div>
+                <div class="other">
+                  <span><span class="info-label">注册类型：</span>{{item.enterpriseType ? item.enterpriseType.name : '未知'}}</span>
+                  <span><span class="info-label">行业类型：</span>{{item.industryType ? item.industryType.name : '未知'}}</span>
+                  <span>
+                  <span class="info-label">产业类型：</span><span *ngFor="let type of item.industryClassType;index as index">{{index > 0 ? ',' + type : type}}</span>
+                  <span *ngIf="!item.industryClassType || item.industryClassType.length<1">未知</span>
+                </span>
+                </div>
+              </div>
+              <div class="selected-box">
+                <div class="select-con" [ngClass]="{'active': item.hasSelected}" (click)="item.hasSelected = !item.hasSelected;singleSelectedCompany()"></div>
+              </div>-->
+              <div class="data-item name" (click)="viewCompanyData(item.name)">{{item.name}}</div>
+              <div class="data-item time text-c">{{item.establishDate | date: 'yyyy/MM/dd'}}</div>
+              <div class="data-item address">{{item.address}}</div>
+              <div class="data-item type">{{item.industryType ? item.industryType.name : '未知'}}</div>
+              <div class="data-item type">{{item.industryType ? (item.industryType.relatedIndustry ? item.industryType.relatedIndustry.name : '未知') : '未知'}}</div>
+              <div class="data-item people text-c">{{item.peopleNumber}}</div>
+              <div class="data-item income text-c">{{item.incomeNumber}}</div>
+              <div class="data-item tax text-c">{{item.taxNumber}}</div>
+              <div class="data-item energy text-c">{{item.energyNumber}}</div>
+              <div class="data-item sewage text-c">{{item.sewageNumber}}</div>
+              <div class="data-item selected">
+                <div class="select-box">
+                  <div class="select-con" [ngClass]="{'active': item.hasSelected}" (click)="item.hasSelected = !item.hasSelected;singleSelectedCompany()"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="no-data-tips no-data-tips-full" *ngIf="companyList.length<1">
+            <span class="tips-bg"></span>
+            暂无信息！
+          </div>
+        </perfect-scrollbar>
+      </div>
+      <div class="data-output-ft data-application-box">
+        <div class="left-column">
+          <div class="fl page-number">共<span class="total-number">{{pageParams.bigTotalItems}}</span>条</div>
+          <div class="pages-box fl">
+            <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
+                        [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+          </div>
+        </div>
+        <div class="right-column fr">
+          <div class="select-box fl" [ngClass]="{'active': allSelectedCompanyStatus}">
+            <div class="select-con" (click)="allSelectedCompanyStatus = !allSelectedCompanyStatus;allSelectedCompany()"></div>全选
+          </div>
+          <button appAccessControl [accessData]="'data-output'" [buttonAccess]="true" class="color-full-button" (click)="goToDownloadPage()">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

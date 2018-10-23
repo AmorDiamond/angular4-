@@ -1,0 +1,1 @@
+{"timestemp":1540270551428,"data":[{"name":"STEP_ONE","value":1,"desc":"500"},{"name":"STEP_TWO","value":2,"desc":"500~1000"},{"name":"STEP_THREE","value":3,"desc":"1000~2000"},{"name":"STEP_FOUR","value":4,"desc":"2000~10000"},{"name":"STEP_FIVE","value":5,"desc":"10000~40000"},{"name":"STEP_SIX","value":6,"desc":"40000"}],"responseCode":"_200","errorMsg":null}

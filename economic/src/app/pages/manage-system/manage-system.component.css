@@ -128,3 +128,19 @@ button{
 .admin-container .con-box{
   padding-right: 20px;
 }
+.login_out{
+  height:58px;
+  width:58px;
+  text-align:center;
+  line-height:58px;
+  font-size:16px;
+  background-color:#272a35;
+  border:1px solid #181a21;
+  color:#939393;
+  cursor:pointer;
+  transition: all ease 0.3s;
+}
+.login_out:hover{
+  border-color:#ffcc00;
+  color:#ffcc00;
+}

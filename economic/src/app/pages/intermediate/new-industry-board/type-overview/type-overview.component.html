@@ -1,0 +1,108 @@
+<perfect-scrollbar>
+<div class="panel-content">
+  <div class="overview-box">
+    <div class="column-one column-item1 flex-column fl">
+      <div class="row-item flex-cell">
+        <div class="item-con border">
+          <div class="overview-title text-c">企业概况</div>
+          <div class="overview-info">
+            <div class="left fl text-c">
+              <div class="item-title">企业总数：</div>
+              <div class="data"><span class="number">{{overviewData?.total}}</span>家</div>
+              <div class="item-title">注册资本：</div>
+              <div class="data"><span class="number">{{overviewData?.money}}</span>亿</div>
+            </div>
+            <div class="right fr">
+              <ul class="data-list">
+                <li><span class="text">规上企业:</span><span class="number">{{overviewData?.scaleUp}}</span>家</li>
+                <li><span class="text">高新技术企业:</span><span class="number">{{overviewData?.hightCompany}}</span>家</li>
+                <!--<li><span class="text">上市及新三板挂牌企业:</span><span><span class="number">80</span>家</span></li>-->
+                <li><span class="text">流失企业数:</span><span class="number">{{overviewData?.moveCompany}}</span>家</li>
+              </ul>
+              <div class="line-box">
+                <div class="line-item item1"><div class="line-con" [ngStyle]="{'width': '80%'}"></div><span class="color-circle" [ngStyle]="{'left': '79%'}"></span></div>
+                <div class="line-item item2"><div class="line-con" [ngStyle]="{'width': '60%'}"></div><span class="color-circle" [ngStyle]="{'left': '59%'}"></span></div>
+                <div class="line-item item3"><div class="line-con" [ngStyle]="{'width': '30%'}"></div><span class="color-circle" [ngStyle]="{'left': '29%'}"></span></div>
+                <div class="line-item item4"><div class="line-con" [ngStyle]="{'width': '10%'}"></div><span class="color-circle" [ngStyle]="{'left': '9%'}"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row-item flex-cell">
+        <!--<div class="item-con border" echarts [options]="TechnologicalInnovationEchartData"></div>-->
+        <div class="item-con border">
+          <div class="overview-title text-c">科技创新</div>
+          <div class="overview-info">
+            <div class="circle-con">
+              <div class="item-data item1"><span class="text">发表科技论文</span><span class="data-info"><span class="number">{{TechnologicalInnovationData?.paper}}</span>篇</span></div>
+              <div class="item-data item2"><span class="text">机构经费支出</span><span class="data-info"><span class="number">{{TechnologicalInnovationData?.funding}}</span>万</span></div>
+              <div class="item-data item3"><span class="text">机构人员</span><span class="data-info"><span class="number">{{TechnologicalInnovationData?.people}}</span>人</span></div>
+              <div class="item-data item4"><span class="text">期末机构</span><span class="data-info"><span class="number">{{TechnologicalInnovationData?.mechanism}}</span>家</span></div>
+              <div class="item-data item5"><span class="text">专利总数</span><span class="data-info"><span class="number">{{TechnologicalInnovationData?.patent}}</span>件</span></div>
+              <div class="item-data item6"><span class="text">商标总数</span><span class="data-info"><span class="number">{{TechnologicalInnovationData?.trademark}}</span>个</span></div>
+              <div class="item-data item7"><span class="text">R&D总额</span><span class="data-info"><span class="number">{{TechnologicalInnovationData?.RD}}</span>万</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column-item column-item2 fl">
+      <div class="item-con border">
+        <div class="overview-title text-c">人才情况</div>
+        <div class="title-label">从业人数</div>
+        <div class="work-people" echarts [options]="workPeopleEchartData"></div>
+        <div class="title-label">从业人员构成</div>
+        <div class="constitute-chart" echarts [options]="PeopleConstituteEchartData"></div>
+        <div class="constitute-chart" echarts [options]="PeopleConstituteJobEchartData"></div>
+      </div>
+    </div>
+    <div class="column-item column-item3 fl">
+      <div class="item-con border">
+        <div class="overview-title text-c">经济现状</div>
+        <div class="economic-chart">
+          <div class="balance-scale">
+            <div class="left-money money-chip" [ngClass]="{'left-more': leftMoney > rightMoney, 'left-less': leftMoney < rightMoney}">
+              <div class="data-info"><span class="number">{{leftMoney}}</span>万元</div>
+              <div class="icon-bg"></div>
+            </div>
+            <div class="right-money money-chip" [ngClass]="{'right-more': leftMoney < rightMoney, 'right-less': leftMoney > rightMoney}">
+              <div class="data-info"><span class="number">{{rightMoney}}</span>万元</div>
+              <div class="icon-bg"></div>
+            </div>
+            <div class="text-desc"><div class="text-item left-text">政府投入</div><div class="text-item right-text">实际上缴税费总额</div></div>
+            <div class="middle-position" [ngClass]="{'left-more': leftMoney > rightMoney, 'right-more': leftMoney < rightMoney}">
+              <div class="item-tray left-tray"></div>
+              <div class="item-tray right-tray"></div>
+              <div class="crossbar"></div>
+            </div>
+            <div class="bottom-arrow"></div>
+          </div>
+        </div>
+        <div class="economic-info-list">
+          <div class="list-item">
+            <div class="title-label"><span class="fl text-label">工业总产值:</span><span class="fr"><span class="number">{{EconomicData?.industrialOutput}}</span>万元</span></div>
+            <div class="line-bar"><div class="color-bar" [ngStyle]="{'width': '30%'}"></div></div>
+          </div>
+          <div class="list-item">
+            <div class="title-label"><span class="fl text-label">营业收入:</span><span class="fr"><span class="number">{{EconomicData?.operatingIncome}}</span>万元</span></div>
+            <div class="line-bar"><div class="color-bar" [ngStyle]="{'width': '80%'}"></div></div>
+          </div>
+          <div class="list-item">
+            <div class="title-label"><span class="fl text-label">营业利润:</span><span class="fr"><span class="number">{{EconomicData?.operatingProfit}}</span>万元</span></div>
+            <div class="line-bar"><div class="color-bar" [ngStyle]="{'width': '30%'}"></div></div>
+          </div>
+          <div class="list-item">
+            <div class="title-label"><span class="fl text-label">资产总计:</span><span class="fr"><span class="number">{{EconomicData?.totalAssets}}</span>万元</span></div>
+            <div class="line-bar"><div class="color-bar" [ngStyle]="{'width': '80%'}"></div></div>
+          </div>
+          <div class="list-item">
+            <div class="title-label"><span class="fl text-label">年末负债总计:</span><span class="fr"><span class="number">{{EconomicData?.totalLiabilities}}</span>万元</span></div>
+            <div class="line-bar"><div class="color-bar" [ngStyle]="{'width': '10%'}"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</perfect-scrollbar>

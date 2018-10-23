@@ -51,7 +51,7 @@ export class MapComponent implements OnInit {
     // });
     setTimeout(() => {
       const map = new AMap.Map('t-amap', {
-        features: ['bg', 'road', 'building']
+        // features: ['bg', 'road', 'building']
       });
       this.AMAPOBJ = map;
       this.AMAPOBJ.on('click', e => {
@@ -68,18 +68,18 @@ export class MapComponent implements OnInit {
           }
         });
       });
-      let district;
+      /*let district;
       district = new AMap.DistrictSearch({
         level: 'district',
         extensions: 'all'
       });
-      /*先搜索成都市的所有行政区*/
+      /!*先搜索成都市的所有行政区*!/
       district.search('成都市', (status, result) => {
         if (status === 'complete') {
           const areaList = result.districtList[0].districtList;
           areaList.forEach(item => {
             if (item.name) {
-              /*再通过行政区的adcode区搜索范围*/
+              /!*再通过行政区的adcode区搜索范围*!/
               district.search(item.adcode, (areaStatus, areaResult) => {
                 if (areaStatus === 'complete') {
                   const areaData = areaResult.districtList[0];
@@ -91,7 +91,7 @@ export class MapComponent implements OnInit {
             }
           });
         }
-      });
+      });*/
       this.action = {
         'openInfo': (data) => {
           const infoWindow = new AMap.InfoWindow({
@@ -2339,7 +2339,7 @@ export class MapComponent implements OnInit {
         zIndex: 999,
         icon: new AMap.Icon({
           size: new AMap.Size(40, 50),  // 图标大小
-          image: '../assets/images/build_position_icon.png',
+          image: 'assets/images/build_position_icon.png',
           // imageOffset: new AMap.Pixel(0, -60),
           imageSize: new AMap.Size(40, 50)
         }),

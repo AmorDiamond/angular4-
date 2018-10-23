@@ -37,4 +37,8 @@ export class FocusBusinessComponent implements OnInit {
       }
     });
   }
+  /*去企业详情*/
+  viewCompanyData(name) {
+    this.eventNoticeService.setBackRouteUrl(name, '/mic/eventNotice/focusBusiness');
+  }
 }

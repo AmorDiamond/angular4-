@@ -1,0 +1,177 @@
+<!-- <p>
+  economy works!
+</p> -->
+<!-- <div class="eco_detail_box">
+    <div class="eco_detail_coloun_box">
+      <h3 class="eco_title">{{area}}投入情况</h3>
+      <div class="eco_detail_con">
+        <div class="eco_detail_chart_box">
+          <div class="echart_box" echarts [options]="optionOne"></div>
+        </div>
+        <div class="eco_detaile_tab_box">
+          <table class="table table-bordered table-hover table-s table-overflow-x">
+            <tr>
+              <th>年份</th>
+              <th>政府支持（万元）</th>
+              <th>固定投资（万元）</th>
+              <th>研发经费（万元）</th>
+            </tr>
+            <tr *ngFor="let item of ecoDataOne">
+              <td>{{item.year}}</td>
+              <td>{{item.support}}</td>
+              <td>{{item.cinvestment}}</td>
+              <td>{{item.science}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="eco_detail_coloun_box">
+      <h3 class="eco_title">{{area}}产出情况</h3>
+      <div class="eco_detail_con">
+        <div class="eco_slide_con">
+          <div class="eco_detail_chart_box">
+            <div class="echart_box" echarts [options]="optionTwo"></div>
+          </div>
+          <div class="eco_detaile_tab_box">
+            <table class="table table-bordered table-hover table-s table-overflow-x">
+              <tr>
+                <th>年份</th>
+                <th>工业总产值
+                  <br>（万元）</th>
+                <th>资产总计
+                  <br>（万元）</th>
+                <th>营业收入
+                  <br>（万元）</th>
+                <th>利润
+                  <br>（万元）</th>
+                <th>税收
+                  <br>（万元）</th> -->
+<!-- <th>利润率（万元）</th> -->
+<!-- </tr>
+              <tr *ngFor="let item of ecoDataTwo">
+                <td>{{item.year}}</td>
+                <td>{{item.industrial}}</td>
+                <td>{{item.totalAssets}}</td>
+                <td>{{item.businessIncome}}</td>
+                <td>{{item.operatingProfit}}</td>
+                <td>{{item.totalataxesOutput}}</td> -->
+<!-- <td>{{item.profitMargin}}</td> -->
+<!-- </tr>
+            </table>
+          </div>
+        </div>
+        <div class="eco_slide_con">
+          <div class="eco_detail_chart_box" style="height:50%">
+            <div class="echart_box" echarts [options]="optionSeven"></div>
+          </div>
+          <div class="eco_detaile_tab_box" style=height:50%>
+            <div class="echart_box" echarts [options]="optionThree"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+<!-- <div class="eco_detail_box btm_box">
+
+    <h3 class="eco_title">{{area}}投入和产出对比情况</h3>
+    <div class="eco_detail_coloun_box">
+      <div class="echart_box" echarts [options]="optionFour"></div>
+    </div>
+    <div class="eco_detail_coloun_box">
+      <div class="echart_box" echarts [options]="optionFive"></div>
+    </div>
+    <div class="eco_detail_coloun_box">
+      <div class="echart_box" echarts [options]="optionSix"></div>
+    </div>
+
+  </div> -->
+<div class="ecomonmy_container">
+  <perfect-scrollbar>
+    <div class="top_container">
+      <div class="left_container">
+        <h5 class="title_max">{{area}}投入情况</h5>
+        <div class="left_con_box">
+          <div class="left_echart_box">
+            <div class="echart_box" echarts [options]="optionOne"></div>
+          </div>
+          <div class="left_table_box">
+            <table class="table table-bordered table-hover table-s table-overflow-x">
+              <tr>
+                <th>年份</th>
+                <th>政府支持（万元）</th>
+                <th>固定投资（万元）</th>
+                <th>研发经费（万元）</th>
+              </tr>
+              <tr *ngFor="let item of ecoDataOne">
+                <td>{{item.year}}</td>
+                <td>{{item.support}}</td>
+                <td>{{item.cinvestment}}</td>
+                <td>{{item.science}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="right_container">
+        <h5 class="title_max">{{area}}产出情况</h5>
+        <div class="right_con_boxs">
+          <div class="right_left_con_box">
+            <div class="left_echart_box">
+              <div class="echart_box" echarts [options]="optionTwo" (chartClick)="updateEchart($event.name)"></div>
+            </div>
+            <div class="left_table_box">
+              <table class="table table-bordered table-hover table-s table-overflow-x">
+                <tr>
+                  <th>年份</th>
+                  <th>工业总产值
+                    <br>（万元）</th>
+                  <th>资产总计
+                    <br>（万元）</th>
+                  <th>营业收入
+                    <br>（万元）</th>
+                  <th>利润
+                    <br>（万元）</th>
+                  <th>税收
+                    <br>（万元）</th>
+                  <!-- <th>利润率（万元）</th> -->
+                </tr>
+                <tr *ngFor="let item of ecoDataTwo">
+                  <td>{{item.year}}</td>
+                  <td>{{item.industrial}}</td>
+                  <td>{{item.totalAssets}}</td>
+                  <td>{{item.businessIncome}}</td>
+                  <td>{{item.operatingProfit}}</td>
+                  <td>{{item.totalataxesOutput}}</td>
+                  <!-- <td>{{item.profitMargin}}</td> -->
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="right_right_con_box">
+            <div class="right_top_echart_box">
+              <div class="echart_box" echarts [options]="optionSeven"></div>
+            </div>
+            <div class="right_bottom_echart_box">
+              <div class="echart_box" echarts [options]="optionThree"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom_container">
+      <h5 class="title_max">{{area}}投入和产出对比情况</h5>
+      <div class="bottom_con_box">
+        <div class="bottom_echart_box">
+          <div class="echart_box" echarts [options]="optionFour"></div>
+        </div>
+        <div class="bottom_echart_box">
+          <div class="echart_box" echarts [options]="optionFive"></div>
+        </div>
+        <div class="bottom_echart_box">
+          <div class="echart_box" echarts [options]="optionSix"></div>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</div>

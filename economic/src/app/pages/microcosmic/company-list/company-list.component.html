@@ -8,6 +8,7 @@
         <h3 class="fl" id="titleName">
           {{keyWord}}
         </h3>
+        <div class="fr total-number"><span>{{pageParams.total}}</span>家</div>
       </div>
     </div>
   </div>
@@ -15,7 +16,7 @@
     <div class="panel-menu-box">
       <ul class="panel-menu" id="filterMenu">
         <perfect-scrollbar style="height: 100%">
-          <li class="" (click)="enterpriseTypeClick()">全部</li>
+          <li class="" (click)="enterpriseTypeClick()" [ngClass]="{'active': !selectType}">全部</li>
           <!--<li *ngFor="let enterpriseType of industryTypeList" [ngClass]="{'active': enterpriseTypeActive[enterpriseType] || (selectType == enterpriseType && !enterpriseTypeActive[enterpriseType])}" (click)="enterpriseTypeClick(enterpriseType)">{{enterpriseType.length>6 ? enterpriseType.slice(0,6) + '...' : enterpriseType}}（{{enterpriseTypesNumber[enterpriseType]}}）</li>-->
           <li *ngFor="let industryType of industryTypeList" [ngClass]="{'active': selectType == industryType.industryType}" (click)="enterpriseTypeClick(industryType.industryType)">{{industryType.industryType.length>6 ? industryType.industryType.slice(0,6) + '...' : industryType.industryType}}（{{industryType.number}}）</li>
         </perfect-scrollbar>
@@ -28,9 +29,9 @@
             <div class="panel-content" id="companyList">
               <div class="company-item animated flipInX" *ngFor="let company of companys">
                 <div class="company-logo">
-                  <img src="assets/images/company_logo.png" alt="">
+                  <span class="name-icon">{{(company.company.name | slice: 0:2) == '成都' || (company.company.name | slice: 0:2) == '四川' ? (company.company.name | slice: 2:4) : (company.company.name | slice: 0:2)}}</span>
                 </div>
-                <div class="info"[routerLink]="['/mic/companyDetail/basic/company-profile']" [queryParams]="{name: company.company.rowKey}"> <!-- [routerLink]="['/mic/companyDetail', company?.rowKey]" -->
+                <div class="info" (click)="viewCompanyData(company.company.rowKey)"> <!-- [routerLink]="['/mic/companyDetail', company?.rowKey]" -->
                   <div class="name" [innerHTML]="company.company?.hilightName ? company.company?.hilightName : company.company?.name"></div>
                   <span [innerHTML]="company.company?.industryType"></span>
                   <span class="num">{{company.company?.id}}</span>

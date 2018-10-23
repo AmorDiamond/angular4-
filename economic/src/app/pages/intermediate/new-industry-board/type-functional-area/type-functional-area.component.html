@@ -1,0 +1,62 @@
+<perfect-scrollbar>
+  <div class="panel-content">
+    <div class="row-box row-box1">
+      <div class="row-con">
+        <div class="row-con-title">{{typeName}}在各功能区的情况
+          <select name="" [(ngModel)]="chooseYear" (ngModelChange)="yearChange()">
+            <option *ngFor="let item of yearList" [value]="item" [selected]="chooseYear == item">{{item}}</option>
+          </select>
+        </div>
+        <div class="row-item-box row-item-two">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="CompanyTotalWorkerNumberEchartData" (chartClick)="chartClick($event)"></div>
+          </div>
+        </div>
+        <div class="row-item-box">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="EducationCompositionEchartData"></div>
+          </div>
+        </div>
+        <div class="row-item-box last-row-item">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="JobCompositionEchartData"></div>
+          </div>
+        </div>
+        <div class="row-item-box row-item-two">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="GovernmentalSupportEchartData"></div>
+          </div>
+        </div>
+        <div class="row-item-box row-item-two last-row-item">
+          <div class="row-item">
+            <div class="item-con" echarts [options]="AssetsIncomeTaxProfitEchartData"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-box row-box2">
+      <div class="row-con">
+        <div class="row-con-title row-sub-title">各功能区营业收入阶梯分布</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="OperatingIncomeLadderEchartData"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row-box row-box2">
+      <div class="row-con">
+        <div class="row-con-title row-sub-title">各功能区人均收入、人均税收、人均利润</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="PeopleIncomePeopleTaxPeopleProfitEchartData"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row-box row-box2">
+      <div class="row-con">
+        <div class="row-con-title row-sub-title">各功能区政府支持与税收占比</div>
+        <div class="row-item">
+          <div class="item-con" echarts [options]="GovernmentalSupportAndTaxEchartData"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</perfect-scrollbar>

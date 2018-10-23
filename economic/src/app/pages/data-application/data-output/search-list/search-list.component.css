@@ -1,0 +1,209 @@
+.border{
+    border: 1px solid #303030;
+    border-radius: 6px;
+}
+.all-select-column{
+    width: 50px;
+    height: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+.select-con{
+    position: relative;
+    width: 26px;
+    height: 26px;
+    border: 1px solid #5e5e5e;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+.active .select-con:after,.select-con.active:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../../../../assets/images/checkbox_arrow.png") no-repeat center;
+    background-size: 70%;
+}
+.data-output-bd .select-box{
+}
+.data-output-ft{
+    font-size: 14px;
+    border-top: 1px solid #303030;
+    padding: 0 20px;
+}
+.data-output-ft .total-number{
+    color: #f9b620;
+}
+.data-output-ft .select-con{
+    margin: 0 10px;
+}
+.data-output-ft .download-btn{
+    border: none;
+    background: #f9b620;
+    border-radius: 4px;
+    color: #33363f;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 14px;
+    font-weight: bold;
+    outline: none;
+}
+.data-output-ft .left-column{
+    display: inline-block;
+    margin-top: 14px;
+    color: #7c7e80;
+    overflow: hidden;
+}
+.data-output-ft .left-column .page-number{
+    margin: 15px 30px 0 0;
+}
+.company-list .selected-td{
+    position: relative;
+}
+.company-list .selected-td .select-con{
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.panel-content{
+    margin: 0;
+    height: 100%;
+}
+.panel-content.choose-download-box{
+    padding: 10px;
+}
+.company-list .company-item{
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid #303030;
+    height: 44px;
+    line-height: 44px
+}
+.company-list .company-item .selected-box{
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -13px;
+}
+.panel-content-box{
+    height: calc(100% - 70px);
+}
+.list-th{
+    overflow: hidden;
+    color: #7c7e80;
+    margin: 20px;
+    font-size: 16px;
+    white-space: nowrap;
+}
+.list-th .th-item{
+    float: left;
+    text-indent: 6px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.company-list{
+    margin: 0 20px;
+    border: 1px solid #303030;
+    border-radius: 6px 6px 0 0;
+    border-bottom: none;
+}
+.company-list .company-item:last-child{
+    border-bottom: none;
+}
+.company-item .data-item{
+    float: left;
+    color: #bcbdbf;
+    font-size: 14px;
+    border-right: 1px solid #303030;
+    padding: 0 5px;
+    /*padding-bottom: 999px;*/
+    /*margin-bottom: -999px;*/
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: inherit;
+}
+.company-item .data-item:last-child{
+    border: none;
+}
+.list-th .th-name,.company-item .name{
+    width: 226px;
+}
+.company-item .name{
+    cursor: pointer;
+}
+.list-th .th-time,.company-item .time{
+    width: 97px;
+}
+.list-th .th-address,.company-item .address{
+    width: 333px;
+}
+.list-th .th-type,.company-item .type{
+    width: 116px;
+}
+.list-th .th-people,.company-item .people{
+    width: 94px;
+}
+.list-th .th-income,.company-item .income{
+    width: 154px;
+}
+.list-th .th-tax,.company-item .tax{
+    width: 122px;
+}
+.list-th .th-energy,.company-item .energy{
+    width: 193px;
+}
+.list-th .th-sewage,.company-item .sewage{
+    width: 153px;
+}
+.list-th .th-selected,.company-item .selected{
+    width: 95px;
+    text-align: center;
+}
+.data-output-ft .right-column{
+    margin-top: 20px;
+    color: #bcbdbf;
+}
+.data-output-ft .right-column .select-con{
+    border-color: #ffcc00;
+}
+.data-output-ft .right-column .select-box{
+    margin: 10px 20px;
+}
+@media (max-width: 1366px) {
+    .list-th .th-name,.company-item .name{
+        width: 13.3%;
+    }
+    .list-th .th-time,.company-item .time{
+        width: 5.7%;
+    }
+    .list-th .th-address,.company-item .address{
+        width: 19.6%;
+    }
+    .list-th .th-type,.company-item .type{
+        width: 6.83%;
+    }
+    .list-th .th-people,.company-item .people{
+        width: 5.53%;
+    }
+    .list-th .th-income,.company-item .income{
+        width: 9.06%;
+    }
+    .list-th .th-tax,.company-item .tax{
+        width: 7.18%;
+    }
+    .list-th .th-energy,.company-item .energy{
+        width: 11.36%;
+    }
+    .list-th .th-sewage,.company-item .sewage{
+        width: 9.01%;
+    }
+    .list-th .th-selected,.company-item .selected{
+        width: 5.59%;
+    }
+}

@@ -21,18 +21,18 @@ export class IndustryCategoryComponent implements OnInit {
     this.getLdapTreeData();
   }
   /*获取树结构*/
-  getLdapTreeData(id?, parent?) {
-    const params = {id: id ? id : '#', parent: parent ? parent : ''};
-    this.registerCategoryService.getNodes(params, 'industryTypesUrl').subscribe((res: any) => {
+  getLdapTreeData(id?) {
+    const params = {id: id ? id : 'industrial'};
+    this.registerCategoryService.getNodes(params, 'ldapTreeUrl').subscribe((res: any) => {
       console.log(res);
-      if (res.responseCode === '_200') {
+      // if (res.responseCode === '_200') {
         const treeFormatData = [];
-        const treeData = res.data;
+        const treeData = res;
         treeData.forEach(item => {
           const hasChildren = item.children ? item.children : false;
           treeFormatData.push(
             {
-              'label': item.name,
+              'label': item.text + '(' + item.number + ')',
               'data': item.id,
               // 'formatparent': item.data ? item.data : '',
               'expandedIcon': 'fa fa-folder-open',
@@ -42,29 +42,29 @@ export class IndustryCategoryComponent implements OnInit {
           );
         });
         this.files = <TreeNode[]> treeFormatData;
-      }else {
-        this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
-      }
+      // }else {
+      //   this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
+      // }
     });
   }
   /*获取数据组装*/
   loadNode(event) {
-    if (event.node) {
+    if (event.node && !event.node.children) {
       // in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
       console.log(event.node);
       const id = event.node.data;
       const parent = event.node.formatparent;
-      const params = {id: id ? id : '#', parent: parent ? parent : ''};
-      this.registerCategoryService.getNodes(params, 'industryTypesUrl').subscribe((res: any) => {
+      const params = {id: id ? id : 'industrial'};
+      this.registerCategoryService.getNodes(params, 'ldapTreeUrl').subscribe((res: any) => {
         console.log(res);
-        if (res.responseCode === '_200') {
+        // if (res.responseCode === '_200') {
           const treeFormatData = [];
-          const treeData = res.data;
+          const treeData = res;
           treeData.forEach(item => {
             const hasChildren = item.children ? item.children : false;
             treeFormatData.push(
               {
-                'label': item.name,
+                'label': item.text + '(' + item.number + ')',
                 'data': item.id,
                 // 'formatparent': item.data ? item.data : '',
                 'expandedIcon': 'fa fa-folder-open',
@@ -74,9 +74,9 @@ export class IndustryCategoryComponent implements OnInit {
             );
           });
           event.node.children = treeFormatData;
-        }else {
-          this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
-        }
+        // }else {
+        //   this.toastModalService.addToasts({tipsMsg: res.errorMsg ? res.errorMsg : '未知错误！', type: 'error'});
+        // }
       });
     }
   }

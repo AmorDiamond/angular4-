@@ -1,14 +1,14 @@
 <div class="industry-manage-box">
   <div class="filter">
     <form class="form-inline" autocomplete="off">
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label>企业名称:</label>
         <input class="form-control" type="text" name="companyName" [(ngModel)]="searchParams.companyName" placeholder="企业名称">
-      </div>
-      <div class="filter-bt">
-        <button class="btn search-btn" (click)="search()">搜索</button>
-        <button class="btn search-btn" (click)="resetSearch()">重置</button>
-        <button appAccessControl [accessData]="'manager-upload-industry'" class="btn search-btn fr" routerLink="../uploadIndustry">上传</button>
+      </div> -->
+      <div class="form-group">
+        <!-- <button class="btn search-btn" (click)="search()">搜索</button>
+        <button class="btn" (click)="resetSearch()">重置</button> -->
+        <button appAccessControl [accessData]="'manager-industryClass-add'" class="btn fr" routerLink="../addType">新增产业类型</button>
       </div>
     </form>
   </div>
@@ -17,25 +17,25 @@
   <table class="table table-bordered table-hover table-s table-overflow-x">
     <thead>
     <tr class="text-c">
-      <th>企业名称</th>
-      <th>产业类型</th>
+      <th>产业名称</th>
+      <th>行业类型</th>
       <th>操作</th>
     </tr>
     </thead>
     <tbody>
     <tr class="text-c" *ngFor="let item of dataList">
       <td class="nowrap name">{{item.name}}</td>
-      <td class="table-label types"><span *ngFor="let type of item.industryClassType">{{type.name}}</span></td>
+      <td class="table-label types"><span *ngFor="let type of item.includingIndustry">{{type.name + '(' + type.number + ')'}}</span></td>
       <td class="nowrap table-handle">
-        <span appAccessControl [accessData]="'manager-edit-industry'" class="fa fa-pencil-square-o" routerLink="../editIndustry/{{item.name}}" tooltip="编辑"></span>
+        <span appAccessControl [accessData]="'manager-industryClass-edit'" class="fa fa-pencil-square-o" routerLink="../editIndustry/{{item.id}}" tooltip="编辑"></span>
       </td>
     </tr>
     </tbody>
   </table>
-  <div class="row">
+  <!--<div class="row">
     <div class="col-xs-12 col-12">
       <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
                   [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
     </div>
-  </div>
+  </div>-->
 </div>

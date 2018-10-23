@@ -1,16 +1,13 @@
-<div class="con-hd">
-  <button appAccessControl [accessData]="'manager-import-industry'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/MKPillarIndustry/importExcel'}" >EXCEL导入</button>
-  <button appAccessControl [accessData]="'manager-export-industry'" class="excel-import">
-  <a class="excel-import" target="_blank" href="/manager/v1/MKPillarIndustry/exportExcelFormMK?year={{getListParams.year}}"
+<!-- <div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-industry'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/MKPillarIndustry/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-industry'" class="btn">
+  <a class="btn" target="_blank" href="/manager/v1/MKPillarIndustry/exportExcelFormMK?year={{getListParams.year}}"
      download="{{getListParams.year+'-'+'支柱产业.xlsx'}}">导出</a>
   </button>
-  <button appAccessControl [accessData]="'manager-download-industry'" class="excel-import">
-  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="支柱产业模板.xlsx">EXCEL模板下载</a>
+  <button appAccessControl [accessData]="'manager-download-industry'" class="btn">
+  <a class="btn" target="_blank" href="{{formExcelTemplateData}}" download="支柱产业模板.xlsx">EXCEL模板下载</a>
   </button>
-  
-
-  <!-- <button class="excel-export">EXCEL模板下载</button> -->
-</div>
+</div> -->
 <div class="filter">
   <form class="form-inline">
     <!-- <div class="form-group">
@@ -43,10 +40,20 @@
       </select>
     </div> -->
 
-    <div class="filter-bt">
+    <div class="form-group">
       <button class="btn search-btn" (click)="search()">搜索</button>
-      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <button class="btn" (click)="resetSearch()">重置</button>
     </div>
+    <div class="form-group fr">
+        <button appAccessControl [accessData]="'manager-import-industry'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/MKPillarIndustry/importExcel'}" >EXCEL导入</button>
+        <!-- <button class="btn"> -->
+        <a class="btn" appAccessControl [accessData]="'manager-export-industry'" target="_blank" href="/manager/v1/MKPillarIndustry/exportExcelFormMK?year={{getListParams.year}}"
+           download="{{getListParams.year+'-'+'支柱产业.xlsx'}}">导出</a>
+        <!-- </button> -->
+        <!-- <button class="btn"> -->
+        <a class="btn" appAccessControl [accessData]="'manager-download-industry'" target="_blank" href="{{formExcelTemplateData}}" download="支柱产业模板.xlsx">EXCEL模板下载</a>
+        <!-- </button> -->
+      </div>
   </form>
 </div>
 <table class="table table-bordered table-hover table-s table-overflow-x">
@@ -71,7 +78,12 @@
 </table>
 <div class="row">
   <div class="col-xs-12 col-12">
-    <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
-                [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
+    <pager [totalItems]="pageParams.bigTotalItems"
+           [(ngModel)]="pageParams.bigCurrentPage"
+           (pageChanged)="pageChanged($event)"
+           pageBtnClass="pager-btn"
+           [itemsPerPage]="pageParams.itemsPerPage"
+           class="pull-left" previousText="上一页" nextText="下一页">
+    </pager>
   </div>
 </div>

@@ -31,11 +31,11 @@ export class ListComponent implements OnInit {
   }
   /*获取数据*/
   getList() {
-    this.industryManagersService.requestByParams(this.searchParams, 'getCompanyIndustryList').subscribe(res => {
+    this.industryManagersService.requestByParams({}, 'getIndustryTypeList').subscribe(res => {
       console.log(res)
       if (res.responseCode === '_200') {
-        this.dataList = res.data.content;
-        this.pageParams.bigTotalItems = res.data.totalElements;
+        this.dataList = res.data;
+        // this.pageParams.bigTotalItems = res.data.totalElements;
         if (this.dataList.length < 1) {
           this.toastModalService.addToasts({tipsMsg: '暂无信息！', type: 'info'});
         }

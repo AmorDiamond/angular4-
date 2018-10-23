@@ -4,6 +4,7 @@ import { DataApplicationComponent } from './data-application.component';
 import { DetailPageComponent } from './research-guide/detail-page/detail-page.component';
 import { ContactDetailPageComponent } from './contact-lookup/detail-page/detail-page.component';
 import { RecommendListComponent } from './quality-recommend/recommend-list/recommend-list.component';
+import { SearchListComponent } from './data-output/search-list/search-list.component';
 
 const routes: Routes = [
   {path: '', component: DataApplicationComponent, children: [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'researchDetail', component: DetailPageComponent},
   {path: 'contactDetail', component: ContactDetailPageComponent},
   {path: 'recommendList', component: RecommendListComponent},
+  {path: 'outputList', component: SearchListComponent},
 ];
 
 @NgModule({

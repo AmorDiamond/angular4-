@@ -1,15 +1,107 @@
-
+.panel-content{
+    margin: 0;
+}
 .panel-content .flex .flex-cell {
     padding-top: 20px;
+}
+.panel-content .flex:nth-child(1) .flex-cell {
+    padding-top: 0;
 }
 .panel-content .flex>.flex-cell:nth-child(2n) {
     padding-left: 20px;
 }
 .panel-content .flex .flex-item {
-    border: 1px solid rgba(249,182,32,.3);
-    border-radius: 10px;
+    border: none;
+    border-radius: initial;
 }
 .panel-content .flex-item {
     /*width: 3.125rem;*/
     height: 2.083333rem;
+}
+.table-data-title{
+    font-size: 14px;
+    color: #f9b620;
+    font-weight: bold;
+    margin: 30px 0 20px;
+}
+.flex{
+    display: flex;
+    align-items: center;
+}
+.flex-table{
+    border: 1px solid #303030;
+    border-top: none;
+}
+.flex-table:first-child{
+    border-top:  1px solid #303030;
+    border-radius: 10px 10px 0 0;
+}
+.flex-table:last-child{
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+}
+.flex-table .flex-cell{
+    padding: 0 !important;
+}
+.flex-column .flex-cell{
+    border-left: 1px solid #303030;
+    border-bottom: 1px solid #303030;
+}
+.flex-column .flex-cell.table-label{
+    border: none;
+}
+.flex-column span{
+    display: inline-block;
+    padding: 10px;
+    border-right: 1px solid #303030;
+}
+.flex>span{
+    border: none;
+}
+.flex-column span:last-child{
+    border: none;
+}
+.flex .flex-column{
+    border: none;
+}
+.table-label{
+    width: 120px;
+}
+.table-label span{
+    padding: 10px;
+    display: inline-block;
+}
+.flex>.table-label{
+    margin-right: -1px;
+}
+.flex-column .flex-cell:last-child{
+    border-bottom: none;
+}
+.single-table .table-label{
+    border-right: 1px solid #303030;
+}
+.single-table .flex-cell span{
+    padding: 10px;
+}
+.table-data{
+    margin: 20px 0;
+}
+.number{
+    font-size: 14px;
+    font-weight: bold;
+    color: #eee;
+}
+
+.row-con{
+    border-radius: 6px;
+    background: #191919;
+    overflow: hidden;
+}
+.row-con-title{
+    font-size: 18px;
+    color: #7c7e80;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-bottom: 1px solid #313131;
 }

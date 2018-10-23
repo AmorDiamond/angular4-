@@ -47,8 +47,9 @@ div.flex-item {
     color: #626262;
 }
 .panel-content .project-report .flex-item{
-    border: 1px solid rgba(249, 182, 32, .3);
+    border: 1px solid #303030;
     border-radius: 10px;
+    overflow: hidden;
 }
 .panel-content .project-report{
     white-space: nowrap;
@@ -73,4 +74,7 @@ div.flex-item {
     -webkit-line-clamp: 1;
     overflow: hidden;
     white-space: initial;
+}
+.flex-item .title{
+    margin-top: 14px;
 }

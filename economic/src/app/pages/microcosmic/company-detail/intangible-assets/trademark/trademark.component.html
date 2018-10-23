@@ -1,32 +1,35 @@
 <!-- 商标信息 -->
-<div class="panel-content">
-  <div class="panel-item-title">企业商标信息：</div>
+<div class="panel-content-box">
   <perfect-scrollbar>
-    <table class="table table-bordered table-align-c" id="businessChangeInfo" *ngIf="trademarkList.length>0">
-      <tr>
-        <th>商标名称</th>
-        <th>注册号</th>
-        <th>分类码</th>
-        <th>分类名</th>
-        <th>申请日期</th>
-        <th>商标链接</th>
-        <th>商标流程</th>
-      </tr>
-      <tr *ngFor="let data of trademarkList">
-        <td>{{data.trademarkName}}</td>
-        <td>{{data.regCode}}</td>
-        <td>{{data.classificationCode}}</td>
-        <td>{{data.classification}}</td>
-        <td class="nowrap">{{data.applicationDate}}</td>
-        <td>{{data.pictureLink}}</td>
-        <td>{{data.process}}</td>
-      </tr>
-    </table>
-    <div class="load-more-info text-c" *ngIf="trademarkListPramas.lastRowKey">
-      <div class="load-more-con" (click)="getTrademarkList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
-    </div>
-    <div class="no-data-tips" *ngIf="trademarkList.length<1">
-      {{TrademarkListTips}}
+    <div class="panel-content">
+      <div class="panel-item-title">企业商标信息：</div>
+        <table class="table table-bordered table-align-c" id="businessChangeInfo" *ngIf="trademarkList.length>0">
+          <tr>
+            <th>商标名称</th>
+            <th>注册号</th>
+            <th>分类码</th>
+            <th>分类名</th>
+            <th>申请日期</th>
+            <th>商标链接</th>
+            <th>商标流程</th>
+          </tr>
+          <tr *ngFor="let data of trademarkList">
+            <td>{{data.trademarkName}}</td>
+            <td>{{data.regCode}}</td>
+            <td>{{data.classificationCode}}</td>
+            <td>{{data.classification}}</td>
+            <td class="nowrap">{{data.applicationDate}}</td>
+            <td>{{data.pictureLink}}</td>
+            <td>{{data.process}}</td>
+          </tr>
+        </table>
+        <div class="load-more-info text-c" *ngIf="trademarkListPramas.lastRowKey">
+          <div class="load-more-con" (click)="getTrademarkList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+        </div>
+        <div class="no-data-tips no-data-tips-full" *ngIf="trademarkList.length<1">
+          <span class="tips-bg"></span>
+          {{TrademarkListTips}}
+        </div>
     </div>
   </perfect-scrollbar>
 </div>

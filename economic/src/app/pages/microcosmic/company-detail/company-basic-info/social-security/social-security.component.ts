@@ -8,7 +8,8 @@ import { MicrocosmicService } from '../../../microcosmic.service';
   templateUrl: './social-security.component.html',
   styles: [`
     .table-label{
-        width: 110px;
+      width: 110px;
+      color: #7c7e80;
     }
   `]
 })

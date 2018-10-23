@@ -1,0 +1,35 @@
+<div class="panel-content-box">
+<div class="panel-content data-output-box choose-download-box">
+  <div class="flex-column">
+    <div class="data-output-hd">
+      <div class="left fl text-c">选择</div>
+      <div class="right fl">业务表单</div>
+    </div>
+    <div class="data-output-bd flex-cell">
+      <perfect-scrollbar>
+        <div class="row-box border" *ngFor="let item of dataList; index as listIndex" [hidden]="!item.hasAccess">
+          <div class="all-select-column fl" [ngClass]="{'active': item.hasSelected}">
+            <div class="select-con" (click)="item.hasSelected = !item.hasSelected;allSelectedGroup(listIndex)"></div>
+          </div>
+          <div class="row-right">
+            <div class="row-title" [ngClass]="{'active': !item.children}">{{item.name}}</div>
+            <div class="output-item" *ngFor="let data of item.children" [hidden]="!data.hasAccess" [ngClass]="{'hasAccess': data.hasAccess}">
+              <div class="select-box fl" *ngIf="data.hasAccess" [ngClass]="{'active': data.hasSelected}">
+                <div class="select-con" (click)="data.hasSelected = !data.hasSelected;selectedHandle(listIndex)"></div>
+              </div>
+              <div class="select-label">{{data.name}}</div>
+            </div>
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+    <div class="data-output-ft">
+      <!--<div class="select-box fl" [ngClass]="{'active': allSelectedStatus}">
+        <div class="select-con" (click)="allSelectedStatus = !allSelectedStatus;allSelected()"></div>全选
+      </div>-->
+      <span class="back-btn" routerLink="/dataApplication/outputList"> <i class="fa fa-mail-reply-all"></i>返回搜索</span>
+      <button appAccessControl [accessData]="'data-output'" [buttonAccess]="true" class="color-full-button fr" (click)="downLoadDataFn()">下载</button>
+    </div>
+  </div>
+</div>
+</div>

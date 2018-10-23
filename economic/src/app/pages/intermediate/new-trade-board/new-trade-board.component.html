@@ -1,0 +1,65 @@
+<!--行业看板-->
+<div class="industry-panel animated tab_con">
+  <perfect-scrollbar>
+    <div class="right-panel">
+      <div class="panel-content">
+        <div class="row-box">
+          <div class="row-item row-box1">
+            <div class="row-title">国民经济行业分类(GB/T 4754--2017)</div>
+            <div class="type-box">
+              <div class="type-item type-item1">
+                <div class="type-label">门类</div>
+                <div class="type-circle type-circle1">
+                  <span class="type-number">20</span>
+                </div>
+              </div>
+              <div class="type-item type-item2">
+                <div class="type-label">大类</div>
+                <div class="type-circle type-circle2">
+                  <span class="type-number">97</span>
+                </div>
+              </div>
+              <div class="type-item type-item3">
+                <div class="type-label">中类</div>
+                <div class="type-circle type-circle3">
+                  <span class="type-number">476</span>
+                </div>
+              </div>
+              <div class="type-item type-item4">
+                <div class="type-label">小类</div>
+                <div class="type-circle type-circle4">
+                  <span class="type-number">1380</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-item row-box2">
+            <div class="column-item" [routerLink]="['tradeInfo/advancedManufacture']">
+              <div class="industry-type">进入先进制造业</div>
+              <div class="industry-number">企业数：{{leadServiceNumber}}家</div>
+            </div>
+            <div class="column-item" [routerLink]="['tradeInfo/leadService']">
+              <div class="industry-type">进入主导服务业</div>
+              <div class="industry-number">企业数：{{advancedNumber}}家</div>
+            </div>
+          </div>
+          <div class="row-item row-box3">
+            <ul>
+              <li>入库企业数：{{allTypesNumberData[0]}}家</li>
+              <li>规上企业：{{allTypesNumberData[1]}}家</li>
+              <li>高新技术企业：{{allTypesNumberData[2]}}家</li>
+              <li>总注册资本：{{allTypesNumberData[3]}}亿元</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row-box type-chart-box">
+          <div class="row-con-title">{{chooseYear}}固定投资、营业收入和利润</div>
+          <select name="" [(ngModel)]="chooseYear" (ngModelChange)="yearChange()">
+            <option *ngFor="let item of yearList" [value]="item" [selected]="chooseYear == item">{{item}}</option>
+          </select>
+          <div class="row-item row-box4" echarts [options]="TypeInfoEchartData"></div>
+        </div>
+      </div>
+    </div>
+  </perfect-scrollbar>
+</div>

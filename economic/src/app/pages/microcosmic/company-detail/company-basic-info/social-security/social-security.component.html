@@ -1,75 +1,78 @@
-<!-- <div class="panel-bd pop-index-0 animated active"> -->
-<div class="panel-content">
-  <div class="panel-item-title">社会保险登记信息：</div>
-  <div *ngIf="companyDetailList.length>0">
-    <table class="table table-bordered" *ngFor="let companyDetail of companyDetailList">
-      <tr>
-        <td class="nowrap table-label">单位地址:</td>
-        <td colspan="3" id="companyAddress">{{companyDetail?.unitAddress}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">参保险种:</td>
-        <td colspan="3">{{companyDetail?.insuredSpecies}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">单位社保编码:</td>
-        <td id="insuranceCode">{{companyDetail?.socialSecurityCode}}</td>
-        <td class="nowrap table-label">社保登记日期:</td>
-        <td class="nowrap" id="insuranceRecordDate">{{companyDetail?.registrationDate | date:'yyyy-MM-dd'}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">是否新参保:</td>
-        <td id="isNewInsured">{{companyDetail?.whetherNewInsurance}}</td>
-        <td class="nowrap table-label">养老保险参保人数:</td>
-        <td id="Insuran1">{{companyDetail?.numberElderlyPeople}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">医疗保险参保人数:</td>
-        <td id="Insuran2">{{companyDetail?.medicalPopulation}}</td>
-        <td class="nowrap table-label">工商保险参保人数:</td>
-        <td id="Insuran3">{{companyDetail?.numberOfInjuries}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">失业保险参保人数:</td>
-        <td id="Insuran4">{{companyDetail?.unemployed}}</td>
-        <td class="nowrap table-label">生育保险参保人数:</td>
-        <td id="Insuran5">{{companyDetail?.maternityInsurance}}</td>
-      </tr>
-      <!--<tr>
-        <td class="nowrap">公积金缴纳人数:</td>
-        <td colspan="3">{{companyDetail?.accumulationFundNum}}</td>
-      </tr>-->
-      <tr>
-        <td class="nowrap table-label">当年应缴保险费:</td>
-        <td id="premiumPayable">{{companyDetail?.payableInsurance}}</td>
-        <td class="nowrap table-label">当年实缴保险费:</td>
-        <td id="premiumPaid">{{companyDetail?.payingPremiums}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">是否足额缴纳:</td>
-        <td id="isFullPayment">{{companyDetail?.isFullPayment}}</td>
-        <td class="nowrap table-label">应缴滞纳金:</td>
-        <td id="lateFees">{{companyDetail?.demurrageDue}}</td>
-      </tr>
-      <tr>
-        <!--<td class="nowrap">缴费年度:</td>
-        <td id="paymentYear">{{companyDetail?.paymentYear}}</td>-->
-        <td class="nowrap table-label">参保缴费状态:</td>
-        <td id="insuredPaymentStatus">{{companyDetail?.insuredPaymentStatus}}</td>
-        <td class="nowrap table-label">数据提供时间:</td>
-        <td class="nowrap" id="dataSupplyTime">{{companyDetail?.dataSupplyTime | date:'yyyy-MM-dd'}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">数据提供单位:</td>
-        <td id="dataProvider" colspan="3">{{companyDetail?.dataProvider}}</td>
-      </tr>
-    </table>
-    <div class="load-more-info text-c" *ngIf="securityParams.lastRowKey">
-      <div class="load-more-con" (click)="getCompanyTaxation()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content">
+      <div class="panel-item-title">社会保险登记信息：</div>
+      <div *ngIf="companyDetailList.length>0">
+        <table class="table table-bordered" *ngFor="let companyDetail of companyDetailList">
+          <tr>
+            <td class="nowrap table-label">单位地址:</td>
+            <td colspan="3" id="companyAddress">{{companyDetail?.unitAddress}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">参保险种:</td>
+            <td colspan="3">{{companyDetail?.insuredSpecies}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">单位社保编码:</td>
+            <td id="insuranceCode">{{companyDetail?.socialSecurityCode}}</td>
+            <td class="nowrap table-label">社保登记日期:</td>
+            <td class="nowrap" id="insuranceRecordDate">{{companyDetail?.registrationDate | date:'yyyy-MM-dd'}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">是否新参保:</td>
+            <td id="isNewInsured">{{companyDetail?.whetherNewInsurance}}</td>
+            <td class="nowrap table-label">养老保险参保人数:</td>
+            <td id="Insuran1">{{companyDetail?.numberElderlyPeople}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">医疗保险参保人数:</td>
+            <td id="Insuran2">{{companyDetail?.medicalPopulation}}</td>
+            <td class="nowrap table-label">工商保险参保人数:</td>
+            <td id="Insuran3">{{companyDetail?.numberOfInjuries}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">失业保险参保人数:</td>
+            <td id="Insuran4">{{companyDetail?.unemployed}}</td>
+            <td class="nowrap table-label">生育保险参保人数:</td>
+            <td id="Insuran5">{{companyDetail?.maternityInsurance}}</td>
+          </tr>
+          <!--<tr>
+            <td class="nowrap">公积金缴纳人数:</td>
+            <td colspan="3">{{companyDetail?.accumulationFundNum}}</td>
+          </tr>-->
+          <tr>
+            <td class="nowrap table-label">当年应缴保险费:</td>
+            <td id="premiumPayable">{{companyDetail?.payableInsurance}}</td>
+            <td class="nowrap table-label">当年实缴保险费:</td>
+            <td id="premiumPaid">{{companyDetail?.payingPremiums}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">是否足额缴纳:</td>
+            <td id="isFullPayment">{{companyDetail?.isFullPayment}}</td>
+            <td class="nowrap table-label">应缴滞纳金:</td>
+            <td id="lateFees">{{companyDetail?.demurrageDue}}</td>
+          </tr>
+          <tr>
+            <!--<td class="nowrap">缴费年度:</td>
+            <td id="paymentYear">{{companyDetail?.paymentYear}}</td>-->
+            <td class="nowrap table-label">参保缴费状态:</td>
+            <td id="insuredPaymentStatus">{{companyDetail?.insuredPaymentStatus}}</td>
+            <td class="nowrap table-label">数据提供时间:</td>
+            <td class="nowrap" id="dataSupplyTime">{{companyDetail?.dataSupplyTime | date:'yyyy-MM-dd'}}</td>
+          </tr>
+          <tr>
+            <td class="nowrap table-label">数据提供单位:</td>
+            <td id="dataProvider" colspan="3">{{companyDetail?.dataProvider}}</td>
+          </tr>
+        </table>
+        <div class="load-more-info text-c" *ngIf="securityParams.lastRowKey">
+          <div class="load-more-con" (click)="getCompanyTaxation()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+        </div>
+      </div>
+      <div class="no-data-tips no-data-tips-full" *ngIf="companyDetailList.length<1">
+        <span class="tips-bg"></span>
+        {{CompanyDetailTips}}
+      </div>
     </div>
-  </div>
-  <div class="no-data-tips" *ngIf="companyDetailList.length<1">
-    {{CompanyDetailTips}}
-  </div>
+  </perfect-scrollbar>
 </div>
-<!-- </div> -->

@@ -7,8 +7,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 export class MacEconomicGdpService {
 
   private subject = new BehaviorSubject<any>(0);
-  private macGdpByYearUrl = '/v1/macroGdp/findByYear';
-  private macGdpSpeedByYearUrl = '/v1/macroGdp/findByGDP';
+  private macGdpByYearUrl = 'assets/jsonData/mac/macroGdpfindByYear';
+  private macGdpSpeedByYearUrl = 'assets/jsonData/mac/macroGdpfindByGDP';
   constructor(
     private http: HttpClient
   ) {}
@@ -27,7 +27,8 @@ export class MacEconomicGdpService {
       params = {params: new HttpParams({ fromString: paramsString })};
     }
 
-    return this.http[requestType](httpUrl, params);
+    // return this.http[requestType](httpUrl, params);
+    return this.http[requestType](httpUrl + findParams.year + '.json', params);
   }
 
 }

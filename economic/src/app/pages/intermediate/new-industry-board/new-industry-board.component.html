@@ -1,0 +1,9 @@
+<!--产业看板-->
+<div class="industry-panel animated tab_con">
+  <div class="right-panel">
+    <div class="content">
+      <p style="color: red;font-size: 18px; position: absolute;">请点击有子节点的二级节点进入详情，比如：电子信息、生物医药、航空装备等</p>
+      <div class="relation-chart" echarts [options]="RelationChartData" (chartClick)="onChartClick($event)"></div>
+    </div>
+  </div>
+</div>

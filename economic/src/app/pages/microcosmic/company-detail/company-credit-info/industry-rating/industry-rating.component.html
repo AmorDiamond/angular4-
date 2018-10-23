@@ -1,25 +1,30 @@
-<div class="panel-content">
-  <div>
-    <div class="panel-item-title">行业评级：</div>
-    <div class="con" *ngIf="IndustryRating.length>0">
-      <table class="table table-bordered text-c">
-        <tr>
-          <th>信用等级</th>
-          <th>评定年度</th>
-          <th>数据提供单位</th>
-          <th>数据提供时间</th>
-        </tr>
-        <tr *ngFor="let item of IndustryRating">
-          <td>{{item.creditRating}}</td>
-          <td>{{item.year}}</td>
-          <td>{{item.dataProvider}}</td>
-          <td>{{item.dataSupplyTime | date:'yyyy-MM-dd'}}</td>
-        </tr>
-      </table>
-    </div>
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content">
+      <div>
+        <div class="panel-item-title">行业评级：</div>
+        <div class="con" *ngIf="IndustryRating.length>0">
+          <table class="table table-bordered text-c">
+            <tr>
+              <th>信用等级</th>
+              <th>评定年度</th>
+              <th>数据提供单位</th>
+              <th>数据提供时间</th>
+            </tr>
+            <tr *ngFor="let item of IndustryRating">
+              <td>{{item.creditRating}}</td>
+              <td>{{item.year}}</td>
+              <td>{{item.dataProvider}}</td>
+              <td>{{item.dataSupplyTime | date:'yyyy-MM-dd'}}</td>
+            </tr>
+          </table>
+        </div>
 
-    <div class="no-data-tips" *ngIf="IndustryRating.length<1">
-      {{IndustryRatingTips}}
+        <div class="no-data-tips no-data-tips-full" *ngIf="IndustryRating.length<1">
+          <span class="tips-bg"></span>
+          {{IndustryRatingTips}}
+        </div>
+      </div>
     </div>
-  </div>
+  </perfect-scrollbar>
 </div>

@@ -4,18 +4,19 @@
     "text": "企业概况",
     "ids": [],
     "resources": [
-      "/v1/epBaseInfoPojo/{param}&GET",
       "/v1/epBaseInfoPojo/findNameAllEpBaseInfo&GET",
       "/v1/eIIRelationPojo/findListByCompanyName&GET",
-      "/v1/eQIFamousProductPojo/getEQICertificationPojoByCompany&GET"
+      "/v1/epBaseInfoPojo/getBusinessEvaluation&GET",
+      "/v1/iabels/findByName&GET"
     ]
   },
   {
     "type": "business-registration",
-    "text": "工商注册信息",
+    "text": "工商登记信息",
     "ids": [],
     "resources": [
-      "/v1/epBaseInfoPojo/{param}&GET"
+      "/v1/epBaseInfoPojo/findNameAllEpBaseInfo&GET",
+      "/v1/epChangeInfo/findListByCompanyNameec&GET"
     ]
   },
   {
@@ -147,7 +148,10 @@
     "text": "经济概况",
     "ids": [],
     "resources": [
-      "/v1/eIIApAssets/findOperatingIncome&GET"
+      "/v1/eIIApAssets/findOperatingIncome&GET",
+      "/v1/eIIApAssets/findRecentTax",
+      "/v1/eIIApAssets/findRecentAssets",
+      "/v1/eIIApAssets/findMicroeconomicTypeGrid"
     ]
   },
   {
@@ -165,7 +169,7 @@
     "resources": [
       "/v1/DomesticDevelopment/findMechanism&GET",
       "/v1/STAOtherSituation/findKnowHow&GET",
-      "/v1/IATrademarkAndPatent/findPatentPage&GET"
+      "/v1/STAOtherSituation/findAllScienceAndTechnology"
     ]
   },
   {
@@ -192,16 +196,6 @@
     "ids": [],
     "resources": [
       "/v1/EIIRecruit/findEIIRecruitPage&GET"
-    ]
-  },
-  {
-    "type": "overview",
-    "text": "企业综合评价",
-    "ids": [],
-    "resources": [
-      "/v1/EAEvaluation/findScore&GET",
-      "/v1/EAEvaluation/findEvaluation&GET",
-      "/v1/EAEvaluation/findDisadvantaged&GET"
     ]
   },
   {
@@ -282,6 +276,14 @@
     "ids": [],
     "resources": [
       "/v1/dataApplication/download&GET"
+    ]
+  },
+  {
+    "type": "data-output-search",
+    "text": "企业精准搜索",
+    "ids": [],
+    "resources": [
+      "/v1/epBaseInfoPojo/searchCompanyByParam&GET"
     ]
   },
   {
@@ -472,7 +474,7 @@
   },
   {
     "type": "manager-register-category",
-    "text": "后台码表-注册类型、行业类型",
+    "text": "后台码表-注册类型、行业类型、产业类型",
     "ids": [],
     "resources": [
       "/manager/v1/mapTree/getJsTree&GET"
@@ -485,6 +487,33 @@
     "resources": [
       "/manager/v1/logRecord/search&GET",
       "/manager/v1/logRecord/getEnums&GET"
+    ]
+  },
+  {
+    "type": "manager-industryClass-search",
+    "text": "后台产业管理-列表",
+    "ids": [],
+    "resources": [
+      "/manager/v1/epBaseInfoPojo/findIndustryType&GET"
+    ]
+  },
+  {
+    "type": "manager-industryClass-add",
+    "text": "后台产业管理-新增",
+    "ids": [],
+    "resources": [
+      "/manager/v1/mapTree/getJsTree&GET",
+      "/manager/v1/mapTree/createIndustryClassType&PATCH"
+    ]
+  },
+  {
+    "type": "manager-industryClass-edit",
+    "text": "后台产业管理-修改",
+    "ids": [],
+    "resources": [
+      "/manager/v1/mapTree/getJsTree&GET",
+      "/manager/v1/mapTree/getIndustryClassTypeById&GET",
+      "/manager/v1/mapTree/bindingIndustry&PATCH"
     ]
   },
   {
@@ -896,38 +925,188 @@
     ]
   },
   {
-    "type": "manager-industry-category",
-    "text": "后台码表管理-产业类型",
+    "type": "medium-industryClass-borad",
+    "text": "中观产业看板",
     "ids": [],
     "resources": [
-      "/manager/v1/epBaseInfoPojo/findIndustryType&GET"
+      "/v1/mediumViewController/getIndustryMap&GET"
     ]
   },
   {
-    "type": "manager-industry-manage",
-    "text": "后台产业类型管理列表",
+    "type": "medium-industryClass-detail",
+    "text": "中观产业详情-具体某个产业",
     "ids": [],
     "resources": [
-      "/manager/v1/epBaseInfoPojo/searchCompany&GET"
+      "/v1/mediumViewController/getCompanyProfile&GET",
+      "/v1/mediumViewController/getTechnologyProfile&GET",
+      "/v1/mediumViewController/getPersonnelProfile&GET",
+      "/v1/mediumViewController/getPositionProfile&GET",
+      "/v1/mediumViewController/getEconomicProfile&GET"
     ]
   },
   {
-    "type": "manager-edit-industry",
-    "text": "修改企业产业类型",
+    "type": "medium-industryClass-scale",
+    "text": "中观产业详情-规模",
     "ids": [],
     "resources": [
-      "/manager/v1/epBaseInfoPojo/modifyIndustryClass&PATCH",
-      "/manager/v1/epBaseInfoPojo/findIndustryType&GET",
-      "/manager/v1/epBaseInfoPojo/findCompanyWithIndustryType&GET"
+      "/v1/mediumViewController/getScaleProfile&GET"
     ]
   },
   {
-    "type": "manager-upload-industry",
-    "text": "导入企业产业类型",
+    "type": "medium-industryClass-economic",
+    "text": "中观产业详情-经济",
     "ids": [],
     "resources": [
-      "/manager/v1/epBaseInfoPojo/importExcelChangeType&POST",
-      "/manager/v1/epBaseInfoPojo/findIndustryType&GET"
+      "/v1/mediumViewController/getEconomicOverview&GET"
+    ]
+  },
+  {
+    "type": "medium-industryClass-function",
+    "text": "中观产业详情-功能区",
+    "ids": [],
+    "resources": [
+      "/v1/mediumViewController/getRegionalNumber&GET",
+      "/v1/mediumViewController/getRegionalDistribution&GET",
+      "/v1/mediumViewController/getExpenditureProfile&GET",
+      "/v1/mediumViewController/getAssetIncome&GET",
+      "/v1/mediumViewController/getRevenueLadder&GET",
+      "/v1/mediumViewController/getAverageProduction&GET",
+      "/v1/mediumViewController/getRegionalGovernmentRevenue&GET"
+    ]
+  },
+  {
+    "type": "medium-industryClass-other",
+    "text": "中观产业详情-其他",
+    "ids": [],
+    "resources": [
+      "/v1/mediumViewController/getLossRate&GET",
+      "/v1/mediumViewController/getEnergyProductionValue&GET",
+      "/v1/mediumViewController/getUnitSewage&GET",
+      "/v1/mediumViewController/getSewageCapacity&GET"
+    ]
+  },
+  {
+    "type": "medium-area-borad",
+    "text": "中观地域聚集",
+    "ids": [],
+    "resources": [
+      "/v1/mediumArea/industryHeatMap&GET",
+      "/v1/mediumArea/enterpriseProportion&GET",
+      "/v1/mediumArea/businessPanel&GET",
+      "/v1/mediumArea/perCapitaBusinessPanel&GET"
+    ]
+  },
+  {
+    "type": "medium-area-scale",
+    "text": "中观地域聚集详情-规模",
+    "ids": [],
+    "resources": [
+      "/v1/mediumArea/threeYearsCompanyAndStaff&GET",
+      "/v1/mediumArea/areaStaffLevel&GET",
+      "/v1/mediumArea/threeYearsPatent&GET",
+      "/v1/mediumArea/threeYearsPropertyRight&GET"
+    ]
+  },
+  {
+    "type": "medium-area-economic",
+    "text": "中观地域聚集详情-经济",
+    "ids": [],
+    "resources": [
+      "/v1/mediumArea/informationOutputDetails&GET",
+      "/v1/mediumArea/inputSituation&GET",
+      "/v1/mediumArea/informationOutput&GET",
+      "/v1/mediumArea/differentoOperatingIncomeLevels&GET",
+      "/v1/mediumArea/governmentSubsidiesAndTaxes&GET",
+      "/v1/mediumArea/fixedInvestmentAndIncomeProfit&GET",
+      "/v1/mediumArea/perCapitaBusinessByAllYear&GET"
+    ]
+  },
+  {
+    "type": "medium-area-scale",
+    "text": "中观地域聚集详情-其他",
+    "ids": [],
+    "resources": [
+      "/v1/mediumArea/relocationOfEnterprises&GET",
+      "/v1/mediumArea/comprehensiveEnergyConsumption&GET",
+      "/v1/mediumArea/environmentalTrends&GET",
+      "/v1/mediumArea/unitEnvironmentalTrends&GET"
+    ]
+  },
+  {
+    "type": "medium-industry-board",
+    "text": "中观行业看板",
+    "ids": [],
+    "resources": [
+      "/v1/mediumViewController/getIndustryView&GET"
+    ]
+  },
+  {
+    "type": "medium-industry-manufacturing",
+    "text": "中观行业看板-先进制造",
+    "ids": [],
+    "resources": [
+      "/v1/mediumViewController/getManufacturingView&GET"
+    ]
+  },
+  {
+    "type": "medium-industry-serviceindustry",
+    "text": "中观行业看板-主导服务业",
+    "ids": [],
+    "resources": [
+      "/v1/mediumViewController/getServiceIndustryView&GET"
+    ]
+  },
+  {
+    "type": "macro-gdp",
+    "text": "宏观-高新区GDP",
+    "ids": [],
+    "resources": [
+      "/v1/macroGdp/findByYear&GET",
+      "/v1/macroGdp/findByGDP&GET"
+    ]
+  },
+  {
+    "type": "macro-mainstay",
+    "text": "宏观-支柱产业",
+    "ids": [],
+    "resources": [
+      "/v1/macroMainstay/findByQuarter&GET",
+      "/v1/macroMainstay/findByYear&GET"
+    ]
+  },
+  {
+    "type": "macro-fixed-inverst",
+    "text": "宏观-固定投资",
+    "ids": [],
+    "resources": [
+      "/v1/macroFixedInverstment/findGaoxinByYear&GET",
+      "/v1/macroFixedInverstment/findAllByYear&GET"
+    ]
+  },
+  {
+    "type": "macro-public-budget",
+    "text": "宏观-公共性预算",
+    "ids": [],
+    "resources": [
+      "/v1/macroPublicBudget/findByYear&GET",
+      "/v1/macroPublicBudget/findAllGroupByArea&GET"
+    ]
+  },
+  {
+    "type": "macro-public-expend",
+    "text": "宏观-公共性支出",
+    "ids": [],
+    "resources": [
+      "/v1/macroPublicExpend/findByGaoXin&GET",
+      "/v1/macroPublicExpend/findByAll&GET"
+    ]
+  },
+  {
+    "type": "macro-public-avgincome",
+    "text": "宏观-人均收入",
+    "ids": [],
+    "resources": [
+      "/v1/macroPublicAvgincome/findByYearAndArea&GET"
     ]
   }
 ]

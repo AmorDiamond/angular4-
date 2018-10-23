@@ -2,8 +2,10 @@
   <div class="system-back" routerLink="/mic"></div>
   <div class="head-right">
     <div class="system-name fl">后台管理</div>
+    <div class="fr login_out" (click)="loginOut()">退出</div>
     <div class="fr admin-name">{{loginUserName}}</div>
   </div>
+
 </header>
 <div class="admin-container">
   <div class="left-bar">
@@ -41,7 +43,7 @@
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
-      <li appAccessControl [accessData]="['manager-register-category','manager-industry-category']" class="nav_item" routerLinkActive="active" [ngClass]="{'active': routerUrl == 'category' || menusUrl == 'category'}">
+      <li appAccessControl [accessData]="'manager-register-category'" class="nav_item" routerLinkActive="active" [ngClass]="{'active': routerUrl == 'category' || menusUrl == 'category'}">
         <a class="top-menu" (click)="changeMenuShow('category')">
           <i class="fa fa-sitemap fa-fw"></i>码表管理
           <i class="arrow fa fa-angle-right"></i>
@@ -53,7 +55,7 @@
           <li appAccessControl [accessData]="'manager-register-category'">
             <a routerLink="category/TradeCategory" routerLinkActive="active">行业类别</a>
           </li>
-          <li appAccessControl [accessData]="'manager-industry-category'">
+          <li appAccessControl [accessData]="'manager-register-category'">
             <a routerLink="category/industryCategory" routerLinkActive="active">产业类别</a>
           </li>
         </ul>
@@ -64,7 +66,7 @@
           <i class="arrow fa fa-angle-right"></i>
         </a>
       </li>
-      <li appAccessControl [accessData]="'manager-industry-manage'" class="nav_item" routerLinkActive="active">
+      <li appAccessControl [accessData]="'manager-industryClass-search'" class="nav_item" routerLinkActive="active">
         <a class="top-menu" routerLink="industryManage">
           <i class="fa fa-industry fa-fw"></i>产业管理
           <i class="arrow fa fa-angle-right"></i>

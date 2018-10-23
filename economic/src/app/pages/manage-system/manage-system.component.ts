@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-manage-system',
@@ -13,7 +14,8 @@ export class ManageSystemComponent implements OnInit {
   loginUserName = sessionStorage.getItem('userName');
   constructor(
     private router: Router,
-    private routerInfo: ActivatedRoute
+    private routerInfo: ActivatedRoute,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -28,4 +30,26 @@ export class ManageSystemComponent implements OnInit {
     // tslint:disable-next-line:forin
     this.menusUrl = this.menusUrl === name ? this.routerUrl : name;
   }
+
+  loginOut(){
+    console.log('tuichu================');
+    
+    sessionStorage.setItem('hasLogin', '');
+    sessionStorage.setItem('userId', '');
+    sessionStorage.setItem('userRole', '');
+    sessionStorage.setItem('userDefaultPage', '');
+    
+    this.http.post('/ldap/security/logout',new HttpParams(), {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    }).subscribe((res: any) => {
+      console.log(res);
+      if (res.responseCode === '_200') {
+        this.router.navigate(['login']);
+      } else {
+
+        this.router.navigate(['login']);
+      }
+    })
+  }
+
 }

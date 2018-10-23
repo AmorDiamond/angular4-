@@ -1,122 +1,291 @@
-<div appAccessControl [accessData]="'company-profile'" class="panel-content">
-  <div class="panel-item-title">企业简介：</div>
-  <div class="company-profile-con">
-    <div class="company-profile" *ngIf="baseInfo?.introduction">
-      {{baseInfo?.introduction ? baseInfo?.introduction : '无'}}
-    </div>
-    <div class="no-data-tips" *ngIf="!baseInfo?.introduction">
-      {{CompanyIntroductionTips}}
-    </div>
-    <div class="company-tag">
-      <span *ngIf="baseInfo?.whetherAuthentication == 1">高企</span>
-      <span *ngIf="baseInfo?.isSupervisory == '是'">上规</span>
-      <span *ngIf="baseInfo?.isKeyEnterprise == '是'">重点企业</span>
-      <span *ngIf="baseInfo?.isTopCompanies == '是'">全球百强入驻</span>
-    </div>
-  </div>
-  <div class="panel-item-title">企业行业类型：</div>
-  <div class="company-profile-con">
-    <div *ngIf="baseInfo?.industryType">
-      {{baseInfo?.industryType}}
-    </div>
-    <div class="no-data-tips" *ngIf="!baseInfo?.industryType">
-      暂无信息！
-    </div>
-  </div>
-  <div class="panel-item-title">企业产业类型：</div>
-  <div class="company-profile-con">
-    <div *ngIf="baseInfo?.industryClassification">
-      <span *ngFor="let item of baseInfo?.industryClassification.split(',')" class="industry-item">{{item}}</span>
-    </div>
-    <div class="no-data-tips" *ngIf="!baseInfo?.industryClassification">
-      暂无信息！
-    </div>
-  </div>
-  <div class="panel-item-title">企业联系人：</div>
-  <div class="company-profile-con">
-<!--姓名，职位，联系电话-->
-    <div class="contact-people" *ngIf="contactPeopleInfo.length>0">
-      <table class="table table-bordered text-c contact-item">
-        <tr>
-          <th>姓名</th>
-          <th>职位</th>
-          <th>联系电话</th>
-          <th>编辑</th>
-        </tr>
-        <tr *ngFor="let item of contactPeopleInfo; index as index">
-          <td>
-            <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.contactsName}}</span>
-            <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.contactsName"></span>
-          </td>
-          <td>
-            <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.duties}}</span>
-            <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.duties"></span>
-          </td>
-          <td>
-            <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.contactInfo}}</span>
-            <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.contactInfo"></span>
-          </td>
-          <td class="last-column">
-            <div *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey">
-              <button (click)="submitChangeContactPeople(changeContactPeopleTemplate,item.rowKey)">提交</button>
-              <button (click)="cancelChangeContactPeople()">取消</button>
+<perfect-scrollbar>
+  <div appAccessControl [accessData]="'company-profile'" class="panel-content">
+  <div class="overviews_bg">
+    <div class="overviews_box1">
+      <div class="overviews_boxx1">
+        <div class="logoo">{{(keyWord | slice: 0:2) == '成都' || (keyWord | slice: 0:2) == '四川' ? (keyWord | slice: 2:4) : (keyWord | slice: 0:2)}}</div>
+        <div class="title_box">
+          <div class="title">{{keyWord}}</div>
+          <div class="lable_box company-tag">
+            <span *ngIf="baseInfo?.whetherAuthentication == 1">高企</span>
+            <span *ngIf="baseInfo?.isSupervisory == '是'">上规</span>
+            <span *ngIf="baseInfo?.isKeyEnterprise == '是'">重点企业</span>
+            <span *ngIf="baseInfo?.isTopCompanies == '是'">全球百强入驻</span>
+            <span *ngIf="baseInfo?.isGazelles == '是'">瞪羚企业</span>
+            <span *ngIf="baseInfo?.listingSituation == 1">深交所主板</span>
+            <span *ngIf="baseInfo?.listingSituation == 2">上交所</span>
+            <span *ngIf="baseInfo?.listingSituation == 3">新加坡</span>
+            <span *ngIf="baseInfo?.listingSituation == 4">香港</span>
+            <span *ngIf="baseInfo?.listingSituation == 5">纳斯达克</span>
+            <span *ngIf="baseInfo?.listingSituation == 6">纽约交易所</span>
+            <span *ngIf="baseInfo?.listingSituation == 7">东京</span>
+            <span *ngIf="baseInfo?.listingSituation == 8">伦敦</span>
+            <span *ngIf="baseInfo?.listingSituation == 9">其他海外市场</span>
+            <span *ngIf="baseInfo?.listingSituation == 10">深交所创业板</span>
+            <span *ngIf="baseInfo?.listingSituation == 11">新三板</span>
+            <span *ngIf="baseInfo?.listingSituation == 12">深交所中小板</span>
+            <span *ngIf="baseInfo?.listingSituation == 13">地方四板</span>
+            <div class="custom-label-list" *ngIf="labelLists.length>0">
+              <span class="custom-label-item" *ngFor="let item of labelLists">{{item.content}}<em class="fa fa-times" (click)="deleteLabel(item.id,deleteLabelTemplate)"></em></span>
             </div>
-            <button appAccessControl [accessData]="'edit-contactinfo'" *ngIf="dataRowkey !== item.rowKey" [disabled]="changeContactPeopleStatus && dataRowkey" (click)="getChangeContactInfo(index,item.rowKey)">纠错</button>
-          </td>
-        </tr>
-      </table>
+          </div>
+          <div class="time_box">
+            <div class="add-custom-label" [ngClass]="{'active': addLabelStatus}">
+              <div class="fl form-inline">
+                <div class="form-group add-handle-con">
+                  <input type="text" class="form-control" [(ngModel)]="newLabel"><button appAccessControl [accessData]="'add-custom-label'" [buttonAccess]="true" class="btn btn-primary btn-sm" (click)="addNewLabel()">提交</button><button class="btn btn-danger btn-sm" (click)="addLabelStatus = false;newLabel = ''">取消</button>
+                </div>
+              </div>
+            </div>
+            <button *ngIf="!addLabelStatus" appAccessControl [accessData]="'add-custom-label'" class="btn btn-warning add-label-button" (click)="addLabelStatus = true">添加标签</button>
+          </div>
+        </div>
+      </div>
+      <div class="overviews_boxxx1">
+        <div class="item">
+          <div class="ti">法人代表</div>
+          <div class="con">{{baseInfo?.legalRepresentative}}</div>
+        </div>
+        <div class="item">
+          <div class="ti">成立日期</div>
+          <div class="con">{{baseInfo?.establishDate | date: 'yyyy/MM/dd'}}</div>
+        </div>
+        <div class="item">
+          <div class="ti">注册资本</div>
+          <div class="con">{{baseInfo?.registeredCapital}}万</div>
+        </div>
+        <div class="item item4">
+          <div class="ti">公司地址</div>
+          <div class="con">{{baseInfo?.address}}</div>
+        </div>
+      </div>
     </div>
-    <div class="no-data-tips" *ngIf="contactPeopleInfo.length<1">
-      {{CompanyContactPeopleTips}}
+    <div class="overviews_box1">
+      <div class="overviewsfour_box">
+        <div class="row-box">
+          <div class="item" style="padding-left: 0">
+            <div class="ti">行业类型</div>
+            <div class="lable_box type-info" *ngIf="baseInfo?.industryType">
+              <span>{{baseInfo?.industryType}}</span>
+            </div>
+            <div class="no-data-tips" *ngIf="!baseInfo?.industryType"></div>
+            <div class="ti">产业类型</div>
+            <div class="lable_box type-info" *ngIf="baseInfo?.industryClassification">
+              <span *ngFor="let item of baseInfo?.industryClassification.split(',')">{{item}}</span>
+            </div>
+            <div class="no-data-tips" *ngIf="!baseInfo?.industryClassification"></div>
+          </div>
+          <!--<div class="item">
+            <div class="ti">产业类型</div>
+            <div class="lable_box" *ngIf="baseInfo?.industryClassification">
+              <span *ngFor="let item of baseInfo?.industryClassification.split(',')">{{item}}</span>
+            </div>
+            <div class="no-data-tips" *ngIf="!baseInfo?.industryClassification"></div>
+          </div>-->
+          <div class="item company-desc">
+            <div class="ti">企业简介</div>
+            <div class="p" *ngIf="baseInfo?.introduction">{{baseInfo?.introduction}}</div>
+            <div class="no-data-tips" *ngIf="!baseInfo?.introduction"></div>
+          </div>
+          <div class="item item4">
+            <div class="ti">企业诉求</div>
+            <div class="lable_box" *ngIf="corporateAppeal.length>0">
+              <span *ngFor="let item of corporateAppeal">{{item.questionType}}</span>
+            </div>
+            <div class="no-data-tips" *ngIf="corporateAppeal.length<1"></div>
+          </div>
+        </div>
+        <div class="item contact-box">
+          <div class="ti">企业联络</div>
+          <!--姓名，职位，联系电话-->
+          <div class="contact-people" *ngIf="contactPeopleInfo.length>0">
+            <table class="table table-bordered text-c contact-item">
+              <tr>
+                <th>姓名</th>
+                <th>职位</th>
+                <th>联系电话</th>
+                <th>编辑</th>
+              </tr>
+              <tr *ngFor="let item of contactPeopleInfo; index as index">
+                <td>
+                  <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.contactsName}}</span>
+                  <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.contactsName"></span>
+                </td>
+                <td>
+                  <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.duties}}</span>
+                  <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.duties"></span>
+                </td>
+                <td>
+                  <span *ngIf="(dataRowkey ? dataRowkey !== item.rowKey : true)">{{item.contactInfo}}</span>
+                  <span *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey"><input type="text" [(ngModel)]="changeContactPeopleInfo.contactInfo"></span>
+                </td>
+                <td class="last-column">
+                  <div *ngIf="changeContactPeopleStatus && dataRowkey == item.rowKey">
+                    <button (click)="submitChangeContactPeople(changeContactPeopleTemplate,item.rowKey)">提交</button>
+                    <button (click)="cancelChangeContactPeople()">取消</button>
+                  </div>
+                  <button appAccessControl [accessData]="'edit-contactinfo'" *ngIf="dataRowkey !== item.rowKey" [disabled]="changeContactPeopleStatus && dataRowkey" (click)="getChangeContactInfo(index,item.rowKey)">纠错</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="no-data-tips" *ngIf="contactPeopleInfo.length<1">
+            <span class="tips-bg"></span>
+            {{CompanyContactPeopleTips}}
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="panel-item-title">企业主要产品：</div>
-  <div class="company-profile-con">
-    <!--<div class="major-product" *ngIf="baseInfo?.businessScope">
-      <div>{{baseInfo?.businessScope}}</div>
+    <!--<div class="overviews_box1">
+      <div class="overviewspin_box">
+        <div class="title">综合评价</div>
+        <div class="overviewsfive_box">
+          <div class="item_bg">
+            <div class="item item1">
+              <div class="ti">评价指标</div>
+              <div class="item_box">
+                <div class="con" *ngFor="let item of BusinessEvaluationData">{{item.name}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="item_bg">
+            <div class="item">
+              <div class="ti">评分</div>
+              <div class="item_box">
+                <div class="con" *ngFor="let item of BusinessEvaluationData">{{item.number[0] ? item.number[0].toFixed(2) : 0}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="item_bg">
+            <div class="item">
+              <div class="ti">最高分</div>
+              <div class="item_box">
+                <div class="con" *ngFor="let item of BusinessEvaluationData">{{item.number[1] ? item.number[1].toFixed(2) : 0}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="item_bg">
+            <div class="item">
+              <div class="ti">最低分</div>
+              <div class="item_box">
+                <div class="con" *ngFor="let item of BusinessEvaluationData">{{item.number[2] ? item.number[2].toFixed(2) : 0}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="item_bg">
+            <div class="item">
+              <div class="ti">平均分</div>
+              <div class="item_box">
+                <div class="con" *ngFor="let item of BusinessEvaluationData">{{item.number[3] ? item.number[3].toFixed(2) : 0}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>-->
-    <div [hidden]="!baseInfo?.businessScope" id="holderProduct" style="width: 3.645833rem;height:200px;text-align: center;"></div>
-    <div class="no-data-tips" *ngIf="!baseInfo?.businessScope">
-      {{CompanyProfile}}
+<!--多维度评分-->
+    <div class="overviews_box1">
+      <img style="width: 10px;" src="assets/images/echart_linear_small_img.png" class="my-hide" id="linear-pic">
+      <div class="overviewspin_box">
+        <div class="title">多维排名</div>
+        <div class="overviewsfive_box">
+          <div class="column-item">
+            <div class="column-item-label"><span class="text">投入</span></div>
+            <div class="rank-item">
+              <div class="rank-echart">
+                <div class="echart" echarts [options]="SiteAreaRankEchart"></div>
+                <div class="data-box"><span class="data-number">{{SiteAreaRankData?.dataNumber}}</span><span *ngIf="SiteAreaRankData?.dataNumber !== '未知'">平方米</span></div>
+              </div>
+              <div class="rank-info">
+                <div class="rank-title">经营场地面积</div>
+                <div class="rank-number">排名：<span>{{SiteAreaRankData?.rankNumber}}</span></div>
+                <div class="rank-top">排名第一企业：</div>
+                <div class="rank-top-name">{{SiteAreaRankData?.rankTopName}}</div>
+              </div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-echart">
+                <div class="echart" echarts [options]="RDRankEchart"></div>
+                <div class="data-box"><span class="data-number">{{RDRankData?.dataNumber}}</span><span *ngIf="RDRankData?.dataNumber !== '未知'">万元</span></div>
+              </div>
+              <div class="rank-info">
+                <div class="rank-title">R&D</div>
+                <div class="rank-number">排名：<span>{{RDRankData?.rankNumber}}</span></div>
+                <div class="rank-top">排名第一企业：</div>
+                <div class="rank-top-name">{{RDRankData?.rankTopName}}</div>
+              </div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-echart">
+                <div class="echart" echarts [options]="GOVSupportRankEchart"></div>
+                <div class="data-box"><span class="data-number">{{GOVSupportRankData?.dataNumber}}</span><span *ngIf="GOVSupportRankData?.dataNumber !== '未知'">万元</span></div>
+              </div>
+              <div class="rank-info">
+                <div class="rank-title">政府支持</div>
+                <div class="rank-number">排名：<span>{{GOVSupportRankData?.rankNumber}}</span></div>
+                <div class="rank-top">排名第一企业：</div>
+                <div class="rank-top-name">{{GOVSupportRankData?.rankTopName}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="column-item">
+            <div class="column-item-label"><span class="text">产出</span></div>
+            <div class="rank-item">
+              <div class="rank-echart">
+                <div class="echart" echarts [options]="IncomeRankEchart"></div>
+                <div class="data-box"><span class="data-number">{{incomeRankData?.dataNumber}}</span><span *ngIf="incomeRankData?.dataNumber !== '未知'">万元</span></div>
+              </div>
+              <div class="rank-info">
+                <div class="rank-title">营业收入</div>
+                <div class="rank-number">排名：<span>{{incomeRankData?.rankNumber}}</span></div>
+                <div class="rank-top">排名第一企业：</div>
+                <div class="rank-top-name">{{incomeRankData?.rankTopName}}</div>
+              </div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-echart">
+                <div class="echart" echarts [options]="PaidTaxRankEchart"></div>
+                <div class="data-box"><span class="data-number">{{PaidTaxRankData?.dataNumber}}</span><span *ngIf="PaidTaxRankData?.dataNumber !== '未知'">万元</span></div>
+              </div>
+              <div class="rank-info">
+                <div class="rank-title">实缴税收</div>
+                <div class="rank-number">排名：<span>{{PaidTaxRankData?.rankNumber}}</span></div>
+                <div class="rank-top">排名第一企业：</div>
+                <div class="rank-top-name">{{PaidTaxRankData?.rankTopName}}</div>
+              </div>
+            </div>
+            <div class="rank-item">
+              <div class="rank-echart">
+                <div class="echart" echarts [options]="SocialSecurityRankEchart"></div>
+                <div class="data-box"><span class="data-number">{{SocialSecurityRankData?.dataNumber}}</span><span *ngIf="SocialSecurityRankData?.dataNumber !== '未知'">人</span></div>
+              </div>
+              <div class="rank-info">
+                <div class="rank-title">社保缴纳人员</div>
+                <div class="rank-number">排名：<span>{{SocialSecurityRankData?.rankNumber}}</span></div>
+                <div class="rank-top">排名第一企业：</div>
+                <div class="rank-top-name">{{SocialSecurityRankData?.rankTopName}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="panel-item-title">名优产品目录：</div>
-  <perfect-scrollbar style="max-height: 366px" *ngIf="FamousProduct.length>0">
-    <table class="table table-bordered" *ngFor="let item of FamousProduct">
-      <tr>
-        <td class="nowrap table-label">产品名:</td>
-        <td name="name">{{item.name}}</td>
-        <td class="nowrap table-label">产品类别:</td>
-        <td name="number">{{item.category}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">质量标准认证:</td>
-        <td name="name" colspan="3">{{item.qualityStandard}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">获奖信息:</td>
-        <td colspan="3" name="office">{{item.awards}}</td>
-      </tr>
-      <tr>
-        <td class="nowrap table-label">主要原材料:</td>
-        <td name="validityStart" colspan="3">{{item.rawMaterial}}</td>
-      </tr>
-    </table>
-    <div class="load-more-info text-c" *ngIf="getFamousProductParamas.lastRowKey">
-      <div class="load-more-con" (click)="getFamousProduct()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
-    </div>
-  </perfect-scrollbar>
-  <div class="no-data-tips" *ngIf="FamousProduct.length<1">
-    {{FamousProductTips}}
-  </div>
-
 </div>
+</perfect-scrollbar>
 
 <ng-template #changeContactPeopleTemplate>
   <div class="modal-body text-center">
     <p>{{changeContactPeopleConfirmTips}}</p>
     <button type="button" class="btn btn-default" (click)="saveChangeInfo()" >确认</button>
     <button type="button" class="btn btn-primary" (click)="declineSaveChangeInfo()" >取消</button>
+  </div>
+</ng-template>
+
+<ng-template #deleteLabelTemplate>
+  <div class="modal-body text-center">
+    <p>{{deleteLabelConfirmTips}}</p>
+    <button type="button" class="btn btn-default" (click)="confirmDeleteLabel()" >确认</button>
+    <button type="button" class="btn btn-primary" (click)="declineDeleteLabel()" >取消</button>
   </div>
 </ng-template>

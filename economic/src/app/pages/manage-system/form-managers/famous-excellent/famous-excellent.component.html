@@ -1,15 +1,13 @@
-<div class="con-hd">
-  <button appAccessControl [accessData]="'manager-import-product'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/eQIFamousProductPojo/importExcel'}" >EXCEL导入</button>
-  <button appAccessControl [accessData]="'manager-export-product'" class="excel-import">
-  <a class="excel-import" target="_blank" href="/manager/v1/eQIFamousProductPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}" download="{{getListParams.enterpriseName+'-'+'名优产品.xlsx'}}">导出</a>
+<!-- <div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-product'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/eQIFamousProductPojo/importExcel'}" >EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-product'" class="btn">
+  <a class="btn" target="_blank" href="/manager/v1/eQIFamousProductPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}" download="{{getListParams.enterpriseName+'-'+'名优产品.xlsx'}}">导出</a>
   </button>
-  <button appAccessControl [accessData]="'manager-download-product'" class="excel-import">
-  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="名优产品模板.xlsx">EXCEL模板下载</a>
+  <button appAccessControl [accessData]="'manager-download-product'" class="btn">
+  <a class="btn" target="_blank" href="{{formExcelTemplateData}}" download="名优产品模板.xlsx">EXCEL模板下载</a>
   </button>
   
-
-  <!-- <button class="excel-export">EXCEL模板下载</button> -->
-</div>
+</div> -->
 <div class="filter">
   <form class="form-inline">
     <div class="form-group">
@@ -24,9 +22,18 @@
       <label>名优名录分类:</label>
       <input type="text" class="form-control" name="category" [(ngModel)]="getListParams.category" placeholder="名优名录分类">
     </div>
-    <div class="filter-bt">
+    <div class="form-group">
       <button class="btn search-btn" (click)="search()">搜索</button>
-      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <button class="btn" (click)="resetSearch()">重置</button>
+    </div>
+    <div class="form-group fr">
+        <button appAccessControl [accessData]="'manager-import-product'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/eQIFamousProductPojo/importExcel'}" >EXCEL导入</button>
+        <!-- <buttonclass="btn"> -->
+        <a class="btn" appAccessControl [accessData]="'manager-export-product'"  target="_blank" href="/manager/v1/eQIFamousProductPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}" download="{{getListParams.enterpriseName+'-'+'名优产品.xlsx'}}">导出</a>
+        <!-- </button> -->
+        <!-- <buttonclass="btn"> -->
+        <a class="btn" appAccessControl [accessData]="'manager-download-product'"  target="_blank" href="{{formExcelTemplateData}}" download="名优产品模板.xlsx">EXCEL模板下载</a>
+        <!-- </button> -->
     </div>
   </form>
 </div>

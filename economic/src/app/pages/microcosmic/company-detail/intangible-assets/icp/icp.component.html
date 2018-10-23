@@ -1,29 +1,34 @@
-<div class="panel-content">
-  <div class="panel-item-title">ICP备案信息：</div>
-  <table class="table table-bordered table-align-c" *ngIf="icpList.length>0">
-    <tr>
-      <th>企业名称</th>
-      <th>首页网址</th>
-      <th>备案许可号</th>
-      <th>网站名称</th>
-      <th>审核时间</th>
-      <th>域名</th>
-      <th>到期日期</th>
-    </tr>
-    <tr *ngFor="let data of icpList">
-      <td>{{data.enterpriseName}}</td>
-      <td>{{data.homepageURL}}</td>
-      <td>{{data.permitCode}}</td>
-      <td>{{data.websiteName}}</td>
-      <td>{{data.auditDate | date:'yyyy-MM-dd'}}</td>
-      <td>{{data.domainName}}</td>
-      <td>{{data.expirationDate | date:'yyyy-MM-dd'}}</td>
-    </tr>
-  </table>
-  <div class="load-more-info text-c" *ngIf="icpListPramas.lastRowKey">
-    <div class="load-more-con" (click)="getIcpList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
-  </div>
-  <div class="no-data-tips" *ngIf="icpList.length<1">
-    {{IcpListTips}}
-  </div>
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content">
+      <div class="panel-item-title">ICP备案信息：</div>
+      <table class="table table-bordered table-align-c" *ngIf="icpList.length>0">
+        <tr>
+          <th>企业名称</th>
+          <th>首页网址</th>
+          <th>备案许可号</th>
+          <th>网站名称</th>
+          <th>审核时间</th>
+          <th>域名</th>
+          <th>到期日期</th>
+        </tr>
+        <tr *ngFor="let data of icpList">
+          <td>{{data.enterpriseName}}</td>
+          <td>{{data.homepageURL}}</td>
+          <td>{{data.permitCode}}</td>
+          <td>{{data.websiteName}}</td>
+          <td>{{data.auditDate | date:'yyyy-MM-dd'}}</td>
+          <td>{{data.domainName}}</td>
+          <td>{{data.expirationDate | date:'yyyy-MM-dd'}}</td>
+        </tr>
+      </table>
+      <div class="load-more-info text-c" *ngIf="icpListPramas.lastRowKey">
+        <div class="load-more-con" (click)="getIcpList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+      </div>
+      <div class="no-data-tips no-data-tips-full" *ngIf="icpList.length<1">
+        <span class="tips-bg"></span>
+        {{IcpListTips}}
+      </div>
+    </div>
+  </perfect-scrollbar>
 </div>

@@ -1,0 +1,236 @@
+.eco_detail_box{
+    position: relative;
+    height:65%;
+    /* background-color:#ff3500; */
+    /* padding:10px; */
+    
+}
+.eco_detail_box:last-child{
+    height:35%;
+}
+.eco_title{
+    position: absolute;
+    top:10px;left:10px;right:10px;
+    height:44px;
+    /* width:100%; */
+    line-height:44px;
+    margin:0;
+    padding:0;
+    text-align:center;
+    z-index:9;
+    font-size:20px;
+    border-bottom:1px solid #7c7e80;
+}
+.eco_detail_coloun_box{
+    position: relative;
+    float:left;
+    width:30%;
+    height:100%;
+    padding:10px;
+    /* background-color:#fff; */
+}
+.eco_detail_coloun_box:last-child{
+    width:70%;
+}
+.btm_box{
+    padding:10px;
+    border-radius:10px;
+    overflow:hidden;
+}
+.btm_box .eco_detail_coloun_box{
+    width:33.33%;
+    background-color:#191919;
+    padding:58px 0 10px 0;
+    border-radius:10px ;
+}
+.eco_detail_con{
+    height:100%;
+    border-radius:10px;
+    padding:58px 10px 10px;
+    background-color:#191919;
+}
+.eco_detail_chart_box{
+    height:60%;
+}
+.eco_detaile_tab_box{
+    height:40%;
+    overflow:hidden;
+    padding:0 20px;
+}
+.echart_box{
+    /* background-color:#191919 !important; */
+    width:100%;height:100%;
+}
+
+/* .echart_box:after{
+    content:'';
+    position: absolute;
+    left:0;
+    right:0;
+    top:44px;
+    height:1px;
+    background-color:#7c7e80
+} */
+
+.eco_slide_con{
+    float:left;width:50%;
+    height:100%;
+    /* padding:0 10px; */
+    border-right: 1px solid #7c7e80;
+    padding-right: 10px;
+}
+.eco_slide_con:last-child{
+    border-right:0;
+}
+.eco_detaile_tab_box table{
+    margin-top:30px;
+    width:100%;
+}
+.eco_detaile_tab_box table th,.eco_detaile_tab_box table td{
+    padding:0;
+    line-height:20px;
+    padding:5px 0;
+    border-color:#7c7e80 !important;
+}
+.eco_detaile_tab_box table th{
+    text-align:center;
+}
+.eco_detaile_tab_box table tr:hover{
+    background-color:transparent;
+}
+.btm_box .echart_box{
+    border-right:1px solid #7c7e80;
+}
+.eco_detail_coloun_box:last-child .echart_box{
+    border-right:0;
+}
+
+
+
+
+/* ============================================================== */
+.ecomonmy_container{
+    width:100%;
+    height:100%;
+}
+.top_container{
+    /* min-height:550px; */
+    /* height:65%; */
+    overflow:hidden;
+}
+.left_container,.right_container{
+    float:left;
+    width:30%;
+    /* min-height:550px;
+    height:100%; */
+    /* padding:0 10px; */
+    position: relative;
+    /* border-radius:10px; */
+    /* background-color:#191919; */
+}
+.right_container{
+    width:70%;
+    padding-left:20px;
+}
+.title_max{
+    position: absolute;
+    top:0;
+    left:0px;
+    right:0px;
+    height:44px;
+    line-height:44px;
+    text-align:center;
+    z-index:9;
+    font-size:18px;
+    border-bottom:1px solid #313131;
+    margin:0;padding:0;
+    color: #e7e9eb;
+}
+.right_container .title_max{
+    left:20px;
+}
+.left_con_box,.right_con_boxs{
+    width:100%;
+    /* height:100%;
+    min-height:550px; */
+    border-radius:6px;
+    background-color:#191919;
+    padding-top:44px;
+    /* height:3rem; */
+    overflow:hidden;
+}
+.left_echart_box{
+    /* height:60%;
+    min-height:330px; */
+    height:2rem;
+
+}
+.left_table_box{
+    height:1rem;
+    padding:0 10px;
+}
+.left_table_box table{
+    border:1px solid #303030;
+    border-radius:10px;
+}
+.left_table_box table th,.left_table_box table td{
+    border-color:#303030;
+    text-align:center;
+}
+.left_table_box table tr:hover{
+    background-color:transparent;
+}
+.right_left_con_box,.right_right_con_box{
+    float:left;
+    padding-right:10px;
+    position: relative;
+    width:50%;
+}
+.right_right_con_box{
+    padding-right:0;
+    padding-left:10px;
+}
+.right_left_con_box:after,.bottom_echart_box:after{
+    border-right:1px solid #313131;
+    content:'';
+    display:block;
+    position: absolute;
+    top:10px;
+    bottom:10px;
+    right:0;
+}
+.right_top_echart_box,.right_bottom_echart_box{
+    height:1.5rem;
+}
+.bottom_container{
+    width:100%;
+    overflow:hidden;
+    /* background-color:#191919; */
+    /* border-radius:10px; */
+    /* padding-top:44px; */
+    /* padding:10px; */
+    position: relative;
+    margin-top:20px;
+}
+.bottom_con_box{
+    border-radius:10px;
+    background-color:#191919;
+    overflow:hidden;
+}
+.bottom_echart_box{
+    float:left;
+    width:33.33%;
+    padding-right:10px;
+    height:1.69rem;
+    position: relative;
+    padding-top:44px;
+}
+.bottom_echart_box{
+    padding-right:0;
+}
+.bottom_echart_box:after{
+    top:54px;
+}
+.bottom_echart_box:last-child:after{
+    display:none;
+}

@@ -1,39 +1,53 @@
 .personal-set-con{
     padding: 20px;
-    font-size: 16px;
+    font-size: 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 200px;
 }
 .preference-con{
-    padding: 20px;
+    text-align: center;
 }
 .preference-con .item{
-    margin: 0 20px;
-    float: left;
+    margin: 0 10px;
+    display: inline-block;
     cursor: pointer;
     user-select: none;
 }
 .preference-con .item em{
     display: inline-block;
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
-    border: 1px solid #f9b620;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border: 1px solid #7c7e80;
     vertical-align: middle;
+    border-radius: 6px;
 }
 .preference-con .item.active em{
+    border-color: #ffcc00;
     background: url("../../../../../assets/images/checked_arrow.png") no-repeat center;
-    background-size: 90%;
+    background-size: 60%;
 }
 .preference-con .active{
     color: #f9b620;
 }
 .submit-con{
     text-align: center;
-    margin-top: 30px;
+    margin-top: 70px;
 }
 .submit-con .btn{
+    padding: 0;
     margin: 0 auto;
-    color: #333;
-    padding: 4px 10px;
-    background: #f9b620;
-    border-radius: 6px;
+    color: #0d0d0d;
+    height: 44px;
+    line-height: 44px;
+    width: 200px;
+    background: #ffcc00;
+    border-radius: 100px;
+    box-shadow: inset 0 -5px 1px #d9ae00;
+    font-size: 16px;
 }

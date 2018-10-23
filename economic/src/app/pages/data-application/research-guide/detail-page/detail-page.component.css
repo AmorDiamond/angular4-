@@ -6,7 +6,7 @@
     color: #bcbdbf;
 }
 .right-panel{
-    height: calc(100% - 50px);
+    height: calc(100% - 70px);
 }
 .data-application-box .panel-content{
     font-size: 16px;
@@ -30,20 +30,20 @@
     background-size: cover;
     cursor: pointer;
 }
-.data-application-box{
+/*.data-application-box{
     -webkit-border-radius:  10px 10px 6px 6px;
     -moz-border-radius:  10px 10px 6px 6px;
     -o-border-radius:  10px 10px 6px 6px;
     -ms-border-radius:  10px 10px 6px 6px;
     background: -webkit-gradient(linear, left top, right bottom, color-stop(30%, #151411), color-stop(50%, #151816), to(#162c2e));
     background: linear-gradient(to bottom right, #151411 30%, #151816 50%, #162c2e);
-}
+}*/
 .research-detail-hd{
     color: #7d85cb;
     margin-bottom: 20px;
 }
 .border{
-    border: 1px solid #f9b62066;
+    border: 1px solid #303030;
     border-radius: 6px;
 }
 .time{
@@ -169,7 +169,7 @@
     text-overflow: ellipsis;
 }
 .research-list-item .list-column{
-    border-right: 1px solid #f9b62066;
+    border-right: 1px solid #303030;
 }
 .research-list-item .edit-address{
     margin-left: 10px;
@@ -247,4 +247,11 @@
 }
 .list-column .form_datetime,.research-detail-hd .form_datetime{
     padding-bottom: 12px;
+}
+.list-remove-item{
+    background: #747bbb54;
+    border-color: #ffffff47;
+}
+.research-list-ft button{
+    margin-left: 20px;
 }

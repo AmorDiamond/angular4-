@@ -2,7 +2,7 @@
   <div class="panel-hd">
     <div class="title">
       <div class="title-con">
-        <div class="back-box fl" [routerLink]="['/mic/companyList', searchName]">
+        <div class="back-box fl" [routerLink]="searchName ? [backRouterUrl, searchName] : [backRouterUrl]">
           <span class="back-btn"></span>
         </div>
         <!-- <h3 class="fl" id="name">{{id}}企业科技有限公司</h3> -->
@@ -34,29 +34,31 @@
         <li routerLink="operatorNexus" routerLinkActive="active">经营者关联视图</li>
         <li routerLink="overview" routerLinkActive="active">企业综合评价</li>
       </ul> -->
-      <div class="industry-menu">
+      <div class="panel-menu reset-menu">
         <div appAccessControl [accessData]="['company-profile','business-registration','business-change','tax-tegistration','social-security','business-problem-ledger','custom-label']" class="menu-row" [ngClass]="{'active':showIndustryMenusControl === 'basic'}">
           <div class="menu-item" (click)="showIndustryMenus('basic')">
             <div class="menu-text">企业基本信息</div><span class="fa fa-caret-down info-arrow"></span></div>
           <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'basic'">
             <li appAccessControl [accessData]="'company-profile'" [routerLink]="['basic/company-profile']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>企业概况</li>
             <li appAccessControl [accessData]="'business-registration'" [routerLink]="['basic/business-registration']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>工商登记信息</li>
-            <li appAccessControl [accessData]="'business-change'" [routerLink]="['basic/business-change']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>工商变更信息</li>
+            <!--<li appAccessControl [accessData]="'business-change'" [routerLink]="['basic/business-change']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>工商变更信息</li>-->
             <li appAccessControl [accessData]="'tax-tegistration'" [routerLink]="['basic/tax-tegistration']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>税务登记信息</li>
             <li appAccessControl [accessData]="'social-security'" [routerLink]="['basic/social-security']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>社会保障信息</li>
             <li appAccessControl [accessData]="'business-problem-ledger'" [routerLink]="['basic/business-problem-ledger']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>企业问题台账</li>
-            <li appAccessControl [accessData]="'custom-label'" [routerLink]="['basic/custom-label']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>自定义标签</li>
+            <!--<li appAccessControl [accessData]="'custom-label'" [routerLink]="['basic/custom-label']" [queryParams]="{name: rowKey}" routerLinkActive="active"><em></em>自定义标签</li>-->
           </ul>
         </div>
-        <div appAccessControl [accessData]="'qualifications'" class="menu-row" [routerLink]="['qualifications']" [queryParams]="{name: rowKey}" routerLinkActive="active" [ngClass]="{'active':showIndustryMenusControl === 'qualifications'}">
-          <div class="menu-item" (click)="showIndustryMenus('qualifications')">
-            <div class="menu-text">企业资质信息</div>
+        <div appAccessControl [accessData]="['operatingIncome','incumbentPeople','technologyInnovation','governmentFunds','annualReport','jobOffers']" class="menu-row" [ngClass]="{'active':showIndustryMenusControl === 'economicIndicators'}">
+          <div class="menu-item" (click)="showIndustryMenus('economicIndicators')">
+            <div class="menu-text">经济指标信息</div><span class="fa fa-caret-down info-arrow"></span>
           </div>
-          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'qualificationsX'">
-            <li routerLink="qualifications/industry-qualification" routerLinkActive="active"><em></em>行业资格认证</li>
-            <li routerLink="qualifications/senior-company" routerLinkActive="active"><em></em>高企认证</li>
-            <li routerLink="qualifications/standard" routerLinkActive="active"><em></em>标准制定</li>
-            <li routerLink="qualifications/famous-product" routerLinkActive="active"><em></em>名优产品目录</li>
+          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'economicIndicators'">
+            <li appAccessControl [accessData]="'operatingIncome'" [routerLink]="['economicIndicators/operatingIncome']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item4"><em></em>经济概况</li>
+            <li appAccessControl [accessData]="'incumbentPeople'" [routerLink]="['economicIndicators/incumbentPeople']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item1"><em></em>人员概况</li>
+            <li appAccessControl [accessData]="'technologyInnovation'" [routerLink]="['economicIndicators/technologyInnovation']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>科技创新概况</li>
+            <li appAccessControl [accessData]="'governmentFunds'" [routerLink]="['economicIndicators/governmentFunds']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item3"><em></em>政府支持情况</li>
+            <li appAccessControl [accessData]="'annualReport'" [routerLink]="['economicIndicators/annualReport']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>企业年报</li>
+            <li appAccessControl [accessData]="'jobOffers'" [routerLink]="['economicIndicators/jobOffers']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>招聘信息</li>
           </ul>
         </div>
         <div appAccessControl [accessData]="['honor','blacklist','performance-payment','industry-rating']" class="menu-row" [ngClass]="{'active':showIndustryMenusControl === 'credit'}">
@@ -92,17 +94,15 @@
             <!--<li routerLink="assets/domain-name" routerLinkActive="active" class="item3"><em></em>企业域名信息</li>-->
           </ul>
         </div>
-        <div appAccessControl [accessData]="['operatingIncome','incumbentPeople','technologyInnovation','governmentFunds','annualReport','jobOffers']" class="menu-row" [ngClass]="{'active':showIndustryMenusControl === 'economicIndicators'}">
-          <div class="menu-item" (click)="showIndustryMenus('economicIndicators')">
-            <div class="menu-text">经济指标信息</div><span class="fa fa-caret-down info-arrow"></span>
+        <div appAccessControl [accessData]="'qualifications'" class="menu-row" [routerLink]="['qualifications']" [queryParams]="{name: rowKey}" routerLinkActive="active">
+          <div class="menu-item link-menu-item" (click)="showIndustryMenus('')">
+            <div class="menu-text">企业资质信息</div>
           </div>
-          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'economicIndicators'">
-            <li appAccessControl [accessData]="'operatingIncome'" [routerLink]="['economicIndicators/operatingIncome']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item4"><em></em>经济概况</li>
-            <li appAccessControl [accessData]="'incumbentPeople'" [routerLink]="['economicIndicators/incumbentPeople']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item1"><em></em>人员概况</li>
-            <li appAccessControl [accessData]="'technologyInnovation'" [routerLink]="['economicIndicators/technologyInnovation']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>科技创新概况</li>
-            <li appAccessControl [accessData]="'governmentFunds'" [routerLink]="['economicIndicators/governmentFunds']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item3"><em></em>政府支持情况</li>
-            <li appAccessControl [accessData]="'annualReport'" [routerLink]="['economicIndicators/annualReport']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>企业年报</li>
-            <li appAccessControl [accessData]="'jobOffers'" [routerLink]="['economicIndicators/jobOffers']" [queryParams]="{name: rowKey}" routerLinkActive="active" class="item"><em></em>招聘信息</li>
+          <ul class="sub-menu" *ngIf="showIndustryMenusControl === 'qualificationsX'">
+            <li routerLink="qualifications/industry-qualification" routerLinkActive="active"><em></em>行业资格认证</li>
+            <li routerLink="qualifications/senior-company" routerLinkActive="active"><em></em>高企认证</li>
+            <li routerLink="qualifications/standard" routerLinkActive="active"><em></em>标准制定</li>
+            <li routerLink="qualifications/famous-product" routerLinkActive="active"><em></em>名优产品目录</li>
           </ul>
         </div>
         <!--<div class="menu-row" routerLink="economicForecast" routerLinkActive="active" [ngClass]="{'active':showIndustryMenusControl === 'economicForecast'}">
@@ -119,20 +119,17 @@
           <div class="menu-item" (click)="showIndustryMenus('operatorNexus')">
             <div class="menu-text" style="margin-right:0;">经营者关联视图</div>
           </div>
-        </div>-->
+        </div>
         <div appAccessControl [accessData]="'overview'" class="menu-row" [routerLink]="['overview']" [queryParams]="{name: rowKey}" routerLinkActive="active" [ngClass]="{'active':showIndustryMenusControl === 'overview'}">
           <div class="menu-item" (click)="showIndustryMenus('overview')">
             <div class="menu-text">企业综合评价</div>
           </div>
-        </div>
+        </div>-->
       </div>
       </perfect-scrollbar>
     </div>
     <div class="panel-menu-right">
-
-      <perfect-scrollbar style="height: 100%">
-        <router-outlet></router-outlet>
-      </perfect-scrollbar>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

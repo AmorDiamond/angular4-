@@ -1,18 +1,237 @@
-<div class="panel-content m-b-20">
-  <div class="flex">
-    <div class="flex-cell">
+<perfect-scrollbar>
+  <div class="panel-content m-b-20">
+<div class="flex">
+  <div class="flex-cell">
+    <div class="row-con">
+      <div class="row-con-title">{{chooseYear ? chooseYear + '机构数据' : '机构数据'}}</div>
       <div class="flex-item" echarts [options]="OrganizationEchartData" id="main4"></div>
     </div>
-    <div class="flex-cell">
+  </div>
+  <div class="flex-cell">
+    <div class="row-con">
+      <div class="row-con-title">{{chooseYear ? chooseYear + '机构人员数据' : '机构人员数据'}}</div>
       <div class="flex-item" echarts [options]="OrganizationPeopleEchartData"></div>
     </div>
-    <div class="flex-cell">
+  </div>
+  <div class="flex-cell">
+    <div class="row-con">
+      <div class="row-con-title">{{chooseYear ? chooseYear + '经费支出' : '经费支出'}}</div>
       <div class="flex-item" echarts [options]="ExpenditureEchartData" id="main2"></div>
     </div>
   </div>
-  <div class="flex">
-    <div class="flex-cell">
+</div>
+<div class="flex">
+  <div class="flex-cell">
+    <div class="row-con">
+      <div class="row-con-title">{{chooseYear ? chooseYear + '知识产权数据' : '知识产权数据'}}</div>
       <div class="flex-item" echarts [options]="IntellectualPropertyEchartData"></div>
     </div>
   </div>
 </div>
+<div class="table-data-title">{{technologyTableData?.dataSupplyTime ? technologyTableData?.dataSupplyTime + '年科技创新概况信息' : '科技创新概况信息'}}</div>
+<div class="panel-item-title">科技活动人员情况：</div>
+<div class="table-data">
+  <div class="flex flex-table">
+    <div class="flex-cell table-label"><span class="table-label">科技活动人员情况</span></div>
+    <div class="flex-cell flex-column">
+      <div class="flex-cell"><span class="table-label">人员总数</span><span>{{technologyTableData?.activeStaffTotal ? technologyTableData?.activeStaffTotal + '人' : ''}}</span></div>
+      <div class="flex-cell"><span class="table-label">参加科技项目人员</span><span>{{technologyTableData?.technologyProject ? technologyTableData?.technologyProject + '人' : ''}}</span></div>
+      <div class="flex-cell"><span class="table-label">科技管理和服务人员</span><span>{{technologyTableData?.managementServiceStaff ? technologyTableData?.managementServiceStaff + '人' : ''}}</span></div>
+      <div class="flex-cell"><span class="table-label">高中级技术职称人员</span><span>{{technologyTableData?.highTitleStaff ? technologyTableData?.highTitleStaff + '人' : ''}}</span></div>
+      <div class="flex-cell"><span class="table-label">无高中级技术职称博士人员</span><span>{{technologyTableData?.noTitleDr ? technologyTableData?.noTitleDr + '人' : ''}}</span></div>
+      <div class="flex-cell"><span class="table-label">全时人员</span><span>{{technologyTableData?.fullTimeStaff ? technologyTableData?.fullTimeStaff + '人' : ''}}</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="panel-item-title">科技活动费用情况：</div>
+<div class="table-data">
+  <div class="flex-table flex-column">
+      <div class="flex-cell"><span class="table-label">经费支出合计</span><span>{{technologyTableData?.scienceActivityFunding ? technologyTableData?.scienceActivityFunding + '万元' : ''}}</span></div>
+      <div class="flex-cell"><span class="table-label">来自政府部门的科技活动经费</span><span>{{technologyTableData?.activityFundingFromGovernment ? technologyTableData?.activityFundingFromGovernment + '万元' : ''}}</span></div>
+      <div class="flex-cell flex">
+        <span class="table-label">企业内部的日常科技活动经费支出</span>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">支出合计</span><span>{{technologyTableData?.internalActivities ? technologyTableData?.internalActivities + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">人员人工费</span><span>{{technologyTableData?.laborCosts ? technologyTableData?.laborCosts + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">原材料费</span><span>{{technologyTableData?.rawMaterialCosts ? technologyTableData?.rawMaterialCosts + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">折旧费用与长期费用摊销</span><span>{{technologyTableData?.amortization ? technologyTableData?.amortization + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">无形资产摊销</span><span>{{technologyTableData?.amortizationOfIntangibleAssets ? technologyTableData?.amortizationOfIntangibleAssets + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">其他费用</span><span>{{technologyTableData?.otherFee ? technologyTableData?.otherFee + '万元' : ''}}</span></div>
+        </div>
+      </div>
+      <div class="flex-cell flex">
+        <span class="table-label">当年形成用于科技活动的固定资产支出</span>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">支出合计</span><span>{{technologyTableData?.technologicalActivitiesFixedAssets ? technologyTableData?.technologicalActivitiesFixedAssets + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">仪器和设备</span><span>{{technologyTableData?.equipmentCost ? technologyTableData?.equipmentCost + '万元' : ''}}</span></div>
+        </div>
+      </div>
+      <div class="flex-cell flex">
+        <span class="table-label">委托外单位开展科技活动的经费支出</span>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">支出合计</span><span>{{technologyTableData?.commissionedFunds ? technologyTableData?.commissionedFunds + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">对境内研究机构支出</span><span>{{technologyTableData?.domesticSpending ? technologyTableData?.domesticSpending + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">对境内高等学校支出</span><span>{{technologyTableData?.higherEducationExpenditure ? technologyTableData?.higherEducationExpenditure + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">对境内企业支出</span><span>{{technologyTableData?.domesticCorporateSpending ? technologyTableData?.domesticCorporateSpending + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">对境外支出</span><span>{{technologyTableData?.overseasSpending ? technologyTableData?.overseasSpending + '万元' : ''}}</span></div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="panel-item-title">科技活动产出及相关情况：</div>
+<div class="table-data">
+  <div class=" flex-column flex-table">
+    <div class="flex-cell flex">
+      <span class="table-label">自主知识产权情况</span>
+      <div class="flex-cell flex-column">
+        <div class="flex-cell flex">
+          <span class="table-label">当年申请专利数</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">专利申请数合计</span><span>{{technologyTableData?.patentApplications ? technologyTableData?.patentApplications + '件' : ''}}</span></div>
+            <div class="flex-cell flex">
+              <span class="table-label">申请发明专利</span>
+              <div class="flex-cell flex-column">
+                <div class="flex-cell"><span class="table-label">申请发明专利合计</span><span>{{technologyTableData?.patentedInvention ? technologyTableData?.patentedInvention + '件' : ''}}</span></div>
+                <div class="flex-cell"><span class="table-label">国内发明专利</span><span>{{technologyTableData?.domesticInventionPatent ? technologyTableData?.domesticInventionPatent + '件' : ''}}</span></div>
+              </div>
+            </div>
+            <div class="flex-cell"><span class="table-label">申请欧美日专利</span><span>{{technologyTableData?.foreignPatentApplications ? technologyTableData?.foreignPatentApplications + '件' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">申请PCT国际专利</span><span>{{technologyTableData?.pCTInternationalPatent ? technologyTableData?.pCTInternationalPatent + '件' : ''}}</span></div>
+          </div>
+        </div>
+        <div class="flex-cell flex">
+          <span class="table-label">当年专利授权数</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">专利授权数合计</span><span>{{technologyTableData?.patentsGranted ? technologyTableData?.patentsGranted + '件' : ''}}</span></div>
+            <div class="flex-cell flex">
+              <span class="table-label">授权发明专利</span>
+              <div class="flex-cell flex-column">
+                <div class="flex-cell"><span class="table-label">授权发明专利合计</span><span>{{technologyTableData?.authorizedInventionPatent ? technologyTableData?.authorizedInventionPatent + '件' : ''}}</span></div>
+                <div class="flex-cell"><span class="table-label">授权国内发明专利</span><span>{{technologyTableData?.authorizedDomesticInventionPatent ? technologyTableData?.authorizedDomesticInventionPatent + '件' : ''}}</span></div>
+              </div>
+            </div>
+            <div class="flex-cell"><span class="table-label">授权欧美日专利</span><span>{{technologyTableData?.europeanAmericanPatents ? technologyTableData?.europeanAmericanPatents + '件' : ''}}</span></div>
+          </div>
+        </div>
+        <div class="flex-cell flex">
+          <span class="table-label">期末拥有有效专利数</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">有效专利数合计</span><span>{{technologyTableData?.effectivePatent ? technologyTableData?.effectivePatent + '件' : ''}}</span></div>
+            <div class="flex-cell flex">
+              <span class="table-label">发明专利</span>
+              <div class="flex-cell flex-column">
+                <div class="flex-cell"><span class="table-label">发明专利合计</span><span>{{technologyTableData?.effectiveInventionPatent ? technologyTableData?.effectiveInventionPatent + '件' : ''}}</span></div>
+                <div class="flex-cell"><span class="table-label">境外授权发明专利</span><span>{{technologyTableData?.effectiveForeignPatent ? technologyTableData?.effectiveForeignPatent + '件' : ''}}</span></div>
+              </div>
+            </div>
+            <div class="flex-cell flex">
+              <span class="table-label">拥有境外授权专利</span>
+              <div class="flex-cell flex-column">
+                <div class="flex-cell"><span class="table-label">境外授权专利合计</span><span>{{technologyTableData?.ownedForeignPatent ? technologyTableData?.ownedForeignPatent + '件' : ''}}</span></div>
+                <div class="flex-cell"><span class="table-label">拥有欧美日专利</span><span>{{technologyTableData?.effectiveEuropeanAmericanPatents ? technologyTableData?.effectiveEuropeanAmericanPatents + '件' : ''}}</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-cell"><span class="table-label">专利所有权转让及许可数</span><span>{{technologyTableData?.patentTransferLicense ? technologyTableData?.patentTransferLicense + '件' : ''}}</span></div>
+        <div class="flex-cell"><span class="table-label">专利所有权转让及许可收入</span><span>{{technologyTableData?.patentTransferIncome ? technologyTableData?.patentTransferIncome + '万元' : ''}}</span></div>
+      </div>
+    </div>
+    <div class="flex-cell flex">
+      <span class="table-label">新产品生产及销售情况</span>
+      <div class="flex-cell flex-column">
+        <div class="flex-cell"><span class="table-label">新产品产值</span><span>{{technologyTableData?.newProductOutputValue ? technologyTableData?.newProductOutputValue + '万元' : ''}}</span></div>
+        <div class="flex-cell flex">
+          <span class="table-label">产品销售收入</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">销售收入合计</span><span>{{technologyTableData?.newProductSalesRevenue ? technologyTableData?.newProductSalesRevenue + '万元' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">出口</span><span>{{technologyTableData?.exportAmount ? technologyTableData?.exportAmount + '万元' : ''}}</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-cell flex">
+      <span class="table-label">境外分支机构设立情况</span>
+      <div class="flex-cell flex-column">
+        <div class="flex-cell"><span class="table-label">境外营销服务机构数</span><span>{{technologyTableData?.overseasMarketingAgency ? technologyTableData?.overseasMarketingAgency + '个' : ''}}</span></div>
+        <div class="flex-cell"><span class="table-label">境外技术研发机构数</span><span>{{technologyTableData?.overseasTechnicalInstitutions ? technologyTableData?.overseasTechnicalInstitutions + '个' : ''}}</span></div>
+        <div class="flex-cell"><span class="table-label">境外生产制造基地数</span><span>{{technologyTableData?.overseasBases ? technologyTableData?.overseasBases + '个' : ''}}</span></div>
+      </div>
+    </div>
+    <div class="flex-cell flex">
+      <span class="table-label">其他情况</span>
+      <div class="flex-cell flex-column">
+        <div class="flex-cell"><span class="table-label">发表科技论文</span><span>{{technologyTableData?.publishedPapers ? technologyTableData?.publishedPapers + '篇' : ''}}</span></div>
+        <div class="flex-cell flex">
+          <span class="table-label">期末拥有注册商标</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">注册商标合计</span><span>{{technologyTableData?.trademarkTotal ? technologyTableData?.trademarkTotal + '件' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">当年注册商标</span><span>{{technologyTableData?.trademark ? technologyTableData?.trademark + '件' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">境外注册商标</span><span>{{technologyTableData?.overseasTrademarks ? technologyTableData?.overseasTrademarks + '件' : ''}}</span></div>
+          </div>
+        </div>
+        <div class="flex-cell flex">
+          <span class="table-label">拥有软件著作权</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">软件著作权合计</span><span>{{technologyTableData?.softwareCopyright ? technologyTableData?.softwareCopyright + '件' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">当年获得软件著作权</span><span>{{technologyTableData?.softwareCopyrightForYear ? technologyTableData?.softwareCopyrightForYear + '件' : ''}}</span></div>
+          </div>
+        </div>
+        <div class="flex-cell flex">
+          <span class="table-label">拥有集成电路布图</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">集成电路布图合计</span><span>{{technologyTableData?.integratedCircuitLayout ? technologyTableData?.integratedCircuitLayout + '件' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">当年获得集成电路布图</span><span>{{technologyTableData?.integratedCircuitLayoutForYear ? technologyTableData?.integratedCircuitLayoutForYear + '件' : ''}}</span></div>
+          </div>
+        </div>
+        <div class="flex-cell flex">
+          <span class="table-label">拥有植物新品种</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">植物新品种合计</span><span>{{technologyTableData?.newPlantSpecies ? technologyTableData?.newPlantSpecies + '件' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">当年获得植物新品种</span><span>{{technologyTableData?.newPlantSpeciesForYear ? technologyTableData?.newPlantSpeciesForYear + '件' : ''}}</span></div>
+          </div>
+        </div>
+        <div class="flex-cell flex">
+          <span class="table-label">拥有国家一类新药品种</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">新药品种合计</span><span>{{technologyTableData?.newMedicine ? technologyTableData?.newMedicine + '件' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">当年获得国家一类新药证书</span><span>{{technologyTableData?.newDrugCertificate ? technologyTableData?.newDrugCertificate + '件' : ''}}</span></div>
+          </div>
+        </div>
+        <div class="flex-cell flex">
+          <span class="table-label">拥有国家一级中药保护品种</span>
+          <div class="flex-cell flex-column">
+            <div class="flex-cell"><span class="table-label">中药保护品种合计</span><span>{{technologyTableData?.chineseMedicine ? technologyTableData?.chineseMedicine + '件' : ''}}</span></div>
+            <div class="flex-cell"><span class="table-label">当年获得国家一级中药保护品种证书</span><span>{{technologyTableData?.chineseMedicineCertificate ? technologyTableData?.chineseMedicineCertificate + '件' : ''}}</span></div>
+          </div>
+        </div>
+        <div class="flex-cell"><span class="table-label">当年形成国际标准</span><span>{{technologyTableData?.internationalStandard ? technologyTableData?.internationalStandard + '项' : ''}}</span></div>
+        <div class="flex-cell"><span class="table-label">当年形成国家或行业标准</span><span>{{technologyTableData?.industryStandard ? technologyTableData?.industryStandard + '项' : ''}}</span></div>
+        <div class="flex-cell"><span class="table-label">当年获得国家科技奖励</span><span>{{technologyTableData?.technologyAward ? technologyTableData?.technologyAward + '项' : ''}}</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel-item-title">技术获取和技术改造情况：</div>
+<div class="table-data">
+  <div class=" flex-column flex-table">
+    <div class="flex-cell"><span class="table-label">技术改造经费支出</span><span>{{technologyTableData?.technicalRenovationFunds ? technologyTableData?.technicalRenovationFunds + '万元' : ''}}</span></div>
+    <div class="flex-cell"><span class="table-label">引进境外技术经费支出</span><span>{{technologyTableData?.overseasTechnicalExpenditures ? technologyTableData?.overseasTechnicalExpenditures + '万元' : ''}}</span></div>
+    <div class="flex-cell"><span class="table-label">引进境外技术的消化吸收经费支出</span><span>{{technologyTableData?.technologyDigestion ? technologyTableData?.technologyDigestion + '万元' : ''}}</span></div>
+    <div class="flex-cell"><span class="table-label">购买境内技术经费支出</span><span>{{technologyTableData?.purchaseTechnicalAmount ? technologyTableData?.purchaseTechnicalAmount + '万元' : ''}}</span></div>
+  </div>
+</div>
+
+<div class="panel-item-title">技术合同交易情况：</div>
+<div class="table-data">
+  <div class=" flex-column flex-table">
+    <div class="flex-cell"><span class="table-label">认定登记的技术合同项数</span><span>{{technologyTableData?.technicalContract ? technologyTableData?.technicalContract + '项' : ''}}</span></div>
+    <div class="flex-cell"><span class="table-label">认定登记的技术合同成交金额</span><span>{{technologyTableData?.technologyContractAmount ? technologyTableData?.technologyContractAmount + '万元' : ''}}</span></div>
+  </div>
+</div>
+</div>
+</perfect-scrollbar>

@@ -7,7 +7,7 @@ import { MicrocosmicService } from '../microcosmic.service';
 import { Subscription } from 'rxjs/Subscription';
 import { CompanyDetailService, AttentionParams } from './company-detail.service';
 import { CompanyBasicService } from './company-basic-info/company-basic.service';
-import { ToastModalService } from "../../../shared/toast-modal/toast-modal.service";
+import { ToastModalService } from '../../../shared/toast-modal/toast-modal.service';
 import { ADD_COMPANY_ADDRESS } from '../../../core/amap-ngrx/amap.actions';
 import { ContainerStyle } from '../../../core/container-ngrx/container.model';
 
@@ -26,6 +26,8 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
   searchName: any;
   // 判断一级菜单是否选中
   showIndustryMenusControl = '';
+  /*返回路由*/
+  backRouterUrl = '/mic/companyList';
   constructor(
     private routeInfo: ActivatedRoute,
     private router: Router,
@@ -72,6 +74,14 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     this.rowKey = this.microcomicService.getUrlParams('name');
     /*获取储存的搜索关键字用于从详情返回*/
     this.searchName = localStorage.getItem('searchName') ? localStorage.getItem('searchName') : this.rowKey;
+    const backRouterUrl = sessionStorage.getItem('backRouteUrl');
+    if (backRouterUrl) {
+      this.backRouterUrl = backRouterUrl;
+      if (this.backRouterUrl !== '/mic/companyList') {
+        this.searchName = '';
+      }
+    }
+    console.log('this.backRouterUrl', this.backRouterUrl);
     this.getBaseInfo(this.rowKey);
     /*this.subscription = this.microcomicService.getCompanyName()
       .subscribe(res => {
@@ -108,15 +118,16 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
 
   getBaseInfo(name) {
     const loginUserId = sessionStorage.getItem('userId');
-    this.companyBasicService.getCompanyDetail(name)
+    this.companyBasicService.getCompanyProfile(name)
       .subscribe(res => {
         console.log('获取关注人', res);
         if (res.responseCode === '_200') {
+          const data = res.data.baseInfoPojos;
           /*获取关注人列表里是否存在当前登录的用户*/
-          const hasFollow = res.data.concernedPeople && res.data.concernedPeople.split(',').indexOf('|' + loginUserId + '|') > -1 ? true : false;
-          this.isFollow = res.data.concernedPeople && hasFollow ? true : false;
+          const hasFollow = data.concernedPeople && data.concernedPeople.split(',').indexOf('|' + loginUserId + '|') > -1 ? true : false;
+          this.isFollow = data.concernedPeople && hasFollow ? true : false;
 
-          const company = res.data;
+          const company = data;
           const companysAddress = [];
           if (company.coordinate && company.coordinate.split(',')[1]) {
             companysAddress.push({id: company.rowKey, company: company.name, address: company.coordinate})

@@ -1,10 +1,206 @@
-<div class="panel-content">
-  <div class="flex">
-    <div class="flex-cell">
-      <div class="flex-item" echarts [options]="businessIncomeData" (chartClick)="changeBusinessIncomeRatioData($event)" id="main"></div>
+<perfect-scrollbar>
+  <div class="panel-content">
+    <div class="flex">
+      <div class="flex-cell">
+        <div class="row-con">
+          <div class="row-con-title">公司近三年内收入变化</div>
+          <div class="flex-item" echarts [options]="businessIncomeData" (chartClick)="changeBusinessIncomeRatioData($event)" id="main"></div>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="row-con">
+          <div class="row-con-title">{{RateEchartChoseYear ? RateEchartChoseYear + '年收入占比' : '收入占比'}}</div>
+          <div class="flex-item" echarts [options]="businessIncomeRatioData" [loading]="businessIncomeRatioLoading" id="main3"></div>
+        </div>
+      </div>
     </div>
-    <div class="flex-cell">
-      <div class="flex-item" echarts [options]="businessIncomeRatioData" [loading]="businessIncomeRatioLoading" id="main3"></div>
+    <div class="flex">
+      <div class="flex-cell">
+        <div class="row-con">
+          <div class="row-con-title">公司近三年内缴税费信息</div>
+          <div class="flex-item" echarts [options]="taxPayEChartData"></div>
+        </div>
+      </div>
+      <div class="flex-cell">
+        <div class="row-con">
+          <div class="row-con-title">公司近三年内资产信息</div>
+          <div class="flex-item" echarts [options]="assetsTotalEChartData"></div>
+        </div>
+      </div>
+    </div>
+    <div class="table-data-title">{{businessIncomeTableData?.dataSupplyTime ? businessIncomeTableData?.dataSupplyTime + '年经济概况信息' : '经济概况信息'}}</div>
+    <div class="table-data">
+      <div class="flex flex-table">
+        <div class="flex-cell table-label"><span>进出口信息</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">进出口总额</span><span>{{businessIncomeTableData?.totalImportExport ? businessIncomeTableData?.totalImportExport + '万元' : ''}}</span></div>
+          <div class="flex-cell flex">
+            <span class="table-label">出口信息</span>
+            <div class="flex-cell flex-column">
+              <div class="flex-cell"><span class="table-label">出口总额</span><span>{{businessIncomeTableData?.totalExport ? businessIncomeTableData?.totalExport + '万元' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">高新技术产品出口</span><span>{{businessIncomeTableData?.highTechExports ? businessIncomeTableData?.highTechExports + '万元' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">技术服务出口</span><span>{{businessIncomeTableData?.technicalServiceExport ? businessIncomeTableData?.technicalServiceExport + '万元' : ''}}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<div class="flex flex-table">
+        <div class="flex-cell table-label"><span>进出口信息</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell flex">
+            <div class="table-label"><span>总额</span></div>
+            <div class="flex-cell flex-column">
+              <div class="flex-cell"><span class="table-label">总额</span><span>200万元</span></div>
+              <div class="flex-cell"><span class="table-label">总额</span><span>200万元</span></div>
+            </div>
+          </div>
+          <div class="flex-cell"><span class="table-label">高新技术产品出口</span><span>200万元</span></div>
+          <div class="flex-cell"><span class="table-label">技术服务出口</span><span>200万元</span></div>
+        </div>
+      </div>-->
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>营业成本</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.operatingCost ? businessIncomeTableData?.operatingCost + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>税金及附加</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.taxesAndSurcharges ? businessIncomeTableData?.taxesAndSurcharges + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>销售费用</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.salesExpense ? businessIncomeTableData?.salesExpense + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>管理费用</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.managementCosts ? businessIncomeTableData?.managementCosts + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>财务费用</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.financialExpenses ? businessIncomeTableData?.financialExpenses + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>资产减值损失</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.assetImpairmentLoss ? businessIncomeTableData?.assetImpairmentLoss + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>公允价值变动收益</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.fairChangeIncome ? businessIncomeTableData?.fairChangeIncome + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>投资收益</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.investmentIncome ? businessIncomeTableData?.investmentIncome + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>其他收益</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.otherEarnings ? businessIncomeTableData?.otherEarnings + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>营业利润</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.operatingProfit ? businessIncomeTableData?.operatingProfit + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>营业外收入</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.nonOperatingIncome ? businessIncomeTableData?.nonOperatingIncome + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>营业外支出</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.operatingExpenses ? businessIncomeTableData?.operatingExpenses + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>净利润</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.netProfit ? businessIncomeTableData?.netProfit + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>所得税费用</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.incomeTaxExpense ? businessIncomeTableData?.incomeTaxExpense + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table">
+        <div class="flex-cell table-label"><span>实际上缴税费信息</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">税费总额</span><span>{{businessIncomeTableData?.totalActualTax ? businessIncomeTableData?.totalActualTax + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">增值税</span><span>{{businessIncomeTableData?.vat1 ? businessIncomeTableData?.vat1 + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">所得税</span><span>{{businessIncomeTableData?.incomeTax1 ? businessIncomeTableData?.incomeTax1 + '万元' : ''}}</span></div>
+        </div>
+      </div>
+      <div class="flex flex-table">
+        <div class="flex-cell table-label"><span>减免税信息</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">免税总额</span><span>{{businessIncomeTableData?.totalTaxRelief ? businessIncomeTableData?.totalTaxRelief + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">增值税</span><span>{{businessIncomeTableData?.vat2 ? businessIncomeTableData?.vat2 + '万元' : ''}}</span></div>
+          <div class="flex-cell flex">
+            <span class="table-label">所得税信息</span>
+            <div class="flex-cell flex-column">
+              <div class="flex-cell"><span class="table-label">所得税总额</span><span>{{businessIncomeTableData?.incomeTax2 ? businessIncomeTableData?.incomeTax2 + '万元' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">享受高新技术企业所得税减免</span><span>{{businessIncomeTableData?.highTechTaxRelief ? businessIncomeTableData?.highTechTaxRelief + '万元' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">研究开发加计扣除所得税减免</span><span>{{businessIncomeTableData?.rdTaxDeductions ? businessIncomeTableData?.rdTaxDeductions + '万元' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">技术转让所得税减免</span><span>{{businessIncomeTableData?.technicalTransferTaxRelief ? businessIncomeTableData?.technicalTransferTaxRelief + '万元' : ''}}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>应交增值税</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.vatPayable ? businessIncomeTableData?.vatPayable + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>本年应付职工薪酬</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.taxTotal ? businessIncomeTableData?.taxTotal + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table">
+        <div class="flex-cell table-label"><span>资产信息</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">资产总计</span><span>{{businessIncomeTableData?.totalAssets ? businessIncomeTableData?.totalAssets + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">流动资产合计</span><span>{{businessIncomeTableData?.liquidAssets ? businessIncomeTableData?.liquidAssets + '万元' : ''}}</span></div>
+          <div class="flex-cell"><span class="table-label">固定资产合计</span><span>{{businessIncomeTableData?.fixedAssets ? businessIncomeTableData?.fixedAssets + '万元' : ''}}</span></div>
+          <div class="flex-cell flex">
+            <span class="table-label">累计折旧信息</span>
+            <div class="flex-cell flex-column">
+              <div class="flex-cell"><span class="table-label">折旧总计</span><span>{{businessIncomeTableData?.accumulatedDepreciation ? businessIncomeTableData?.accumulatedDepreciation + '万元' : ''}}</span></div>
+              <div class="flex-cell"><span class="table-label">本年折旧</span><span>{{businessIncomeTableData?.depreciation ? businessIncomeTableData?.depreciation + '万元' : ''}}</span></div>
+            </div>
+          </div>
+          <div class="flex-cell"><span class="table-label">无形资产</span><span>{{businessIncomeTableData?.intangibleAssets ? businessIncomeTableData?.intangibleAssets + '万元' : ''}}</span></div>
+        </div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>年末负债合计</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.totalLiabilities ? businessIncomeTableData?.totalLiabilities + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table">
+        <div class="flex-cell table-label"><span>年末所有者权益信息</span></div>
+        <div class="flex-cell flex-column">
+          <div class="flex-cell"><span class="table-label">权益总计</span><span>{{businessIncomeTableData?.proprietorsEquity ? businessIncomeTableData?.proprietorsEquity + '万元' : ''}}</span></div>
+          <div class="flex-cell flex">
+            <span class="table-label">实收资本信息</span>
+            <div class="flex-cell flex-column">
+              <div class="flex-cell"><span class="table-label">实收资本总计</span><span>{{businessIncomeTableData?.paidUpCapital ? businessIncomeTableData?.paidUpCapital + '万元' : ''}}</span></div>
+              <div class="flex-cell flex">
+                <span class="table-label">企业上市融资股本</span>
+                <div class="flex-cell flex-column">
+                  <div class="flex-cell"><span class="table-label">融资股本总计</span><span>{{businessIncomeTableData?.financingEquity ? businessIncomeTableData?.financingEquity + '万元' : ''}}</span></div>
+                  <div class="flex-cell"><span class="table-label">海外上市融资股本</span><span>{{businessIncomeTableData?.overseasFinancingEquity ? businessIncomeTableData?.overseasFinancingEquity + '万元' : ''}}</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>当年获得创业风险投资机构的风险投资额</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.riskInvestmentAmount ? businessIncomeTableData?.riskInvestmentAmount + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>对境外直接投资额</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.foreignInvestment ? businessIncomeTableData?.foreignInvestment + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>本年完成固定资产投资额</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.fixedAssetsInvestment ? businessIncomeTableData?.fixedAssetsInvestment + '万元' : ''}}</span></div>
+      </div>
+      <div class="flex flex-table single-table">
+        <div class="flex-cell table-label"><span>规模以上工业企业及重点耗能企业综合能耗消费量</span></div>
+        <div class="flex-cell"><span>{{businessIncomeTableData?.comprehensiveEnergyConsumption ? businessIncomeTableData?.comprehensiveEnergyConsumption + '吨标准煤' : ''}}</span></div>
+      </div>
     </div>
   </div>
-</div>
+</perfect-scrollbar>

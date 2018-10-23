@@ -1,0 +1,22 @@
+<div class="right-panel">
+  <div class="content">
+    <div class="panel-menu-box">
+      <div class="panel-menu">
+        <div class="menu-row active">
+          <div class="menu-item" appAccessControl [accessData]="'medium-industryClass-detail'" [routerLink]="['../typeInfo']" [queryParams]="{id: typeId,name: typeName}"><div class="menu-text">{{typeName}}</div><span class="fa fa-caret-down info-arrow"></span></div>
+          <ul class="sub-menu">
+            <li appAccessControl [accessData]="'medium-industryClass-scale'" [routerLink]="['typeScale']" [queryParams]="{id: typeId,name: typeName}" routerLinkActive="active"><em></em>规模</li>
+            <li appAccessControl [accessData]="'medium-industryClass-economic'" [routerLink]="['typeEconomic']" [queryParams]="{id: typeId,name: typeName}" routerLinkActive="active"><em></em>经济</li>
+            <li appAccessControl [accessData]="'medium-industryClass-function'" [routerLink]="['typeFunctional']" [queryParams]="{id: typeId,name: typeName}" routerLinkActive="active"><em></em>功能区</li>
+            <li appAccessControl [accessData]="'medium-industryClass-other'" [routerLink]="['typeOther']" [queryParams]="{id: typeId,name: typeName}" routerLinkActive="active"><em></em>其他</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel-menu-right company-detail">
+      <div class="panel-right-box">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

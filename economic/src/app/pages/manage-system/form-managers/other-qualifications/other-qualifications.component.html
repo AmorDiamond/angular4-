@@ -1,26 +1,33 @@
-<div class="con-hd">
-  <button class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/eQICertificationPojo/importExcel'}" >EXCEL导入</button>
-  <button class="excel-import">
-  <a class="excel-import" target="_blank" href="/manager/v1/eQICertificationPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}" download="{{getListParams.enterpriseName+'-'+'资质认证.xlsx'}}"
+<!-- <div class="con-hd">
+  <button class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/eQICertificationPojo/importExcel'}" >EXCEL导入</button>
+  <button class="btn">
+  <a class="btn" target="_blank" href="/manager/v1/eQICertificationPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}" download="{{getListParams.enterpriseName+'-'+'资质认证.xlsx'}}"
      download="{{getListParams.enterpriseName+'-'+'资质认证.xlsx'}}">导出</a>
   </button>
-  <button class="excel-import">
-  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="资质认证模板.xlsx">EXCEL模板下载</a>
+  <button class="btn">
+  <a class="btn" target="_blank" href="{{formExcelTemplateData}}" download="资质认证模板.xlsx">EXCEL模板下载</a>
   </button>
-  
-
-  <!-- <button class="excel-export">EXCEL模板下载</button> -->
-</div>
+</div> -->
 <div class="filter">
   <form class="form-inline">
     <div class="form-group">
       <label>公司名称:</label>
       <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.enterpriseName" placeholder="公司名称">
     </div>
-    <div class="filter-bt">
+    <div class="form-group">
       <button class="btn search-btn" (click)="search()">搜索</button>
-      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <button class="btn" (click)="resetSearch()">重置</button>
     </div>
+    <div class="form-group fr">
+        <button class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/eQICertificationPojo/importExcel'}" >EXCEL导入</button>
+        <!-- <button class="btn"> -->
+        <a class="btn" target="_blank" href="/manager/v1/eQICertificationPojo/exportExcelForm?enterpriseName={{getListParams.enterpriseName}}" download="{{getListParams.enterpriseName+'-'+'资质认证.xlsx'}}"
+           download="{{getListParams.enterpriseName+'-'+'资质认证.xlsx'}}">导出</a>
+        <!-- </button> -->
+        <!-- <button class="btn"> -->
+        <a class="btn" target="_blank" href="{{formExcelTemplateData}}" download="资质认证模板.xlsx">EXCEL模板下载</a>
+        <!-- </button> -->
+      </div>
   </form>
 </div>
 <table class="table table-bordered table-hover table-s table-overflow-x">

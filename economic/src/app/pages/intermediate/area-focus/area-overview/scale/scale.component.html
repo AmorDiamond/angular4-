@@ -1,0 +1,29 @@
+<!-- <p>
+  scale works!
+</p> -->
+<div class="detail_column_box">
+  <h3 class="detail_column_tit">{{area}}企业和职工情况</h3>
+  <div class="container_column_box">
+    <div class="detail_column_item">
+      <div class="echart_box" echarts [options]="optionOne" (chartClick)="getDataTwo($event.name)"></div>
+    </div>
+    <div class="detail_column_item">
+      <div class="echart_box" echarts [options]="optionTwo"></div>
+    </div>
+    <div class="detail_column_item">
+      <div class="echart_box" echarts [options]="optionThree"></div>
+    </div>
+  </div>
+</div>
+
+<div class="detail_column_box bom_box">
+  <h3 class="detail_column_tit">{{area}}知识产权情况</h3>
+  <div class="container_column_box">
+    <div class="detail_column_item">
+      <div class="echart_box" echarts [options]="optionFour"></div>
+    </div>
+    <div class="detail_column_item">
+      <div class="echart_box" echarts [options]="optionFive"></div>
+    </div>
+  </div>
+</div>

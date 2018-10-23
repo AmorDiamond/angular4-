@@ -21,7 +21,31 @@ export class IncumbentPeopleComponent implements OnInit {
   StaffCompositionRatioData: any;
   ManagementStructureEchartData: any;
   EmploymentStatusEchartData: any;
+  peopleTableData: any;
   echartsParams = { name: 'test1', currentPage: 0, pageSize: 20, lastRowKey: '' };
+  chooseYear = new Date().getFullYear() - 1;
+  echartInitConfig = {
+    colors: ['#5079d9', '#57ba8c', '#ffcc00', '#7958d6', '#bcbdbf', '#7c7e80'],
+    backgroundColor: '#191919',
+    titleTextStyle: {
+      color: '#7c7e80',
+      fontSize: 18,
+      fontWeight: 'normal'
+    },
+    legendStyle: {
+      width: '30%',
+      itemWidth: 14,
+      itemHeight: 14,
+      borderRadius: '10px',
+    },
+    labelTextColor: '#7c7e80',
+    gridTop: 100,
+    legendTop: 20,
+    splitLineStyle: {
+      color: '#1f2020',
+    },
+    lineSmooth: true,
+  };
   ngOnInit() {
     this.companyName = this.microcomicService.getUrlParams('name');
     this.microcomicService.setCompanyName(this.companyName);
@@ -51,12 +75,13 @@ export class IncumbentPeopleComponent implements OnInit {
       console.log('结构人数', res.data);
       const options = res.data[0];
       if (res.responseCode === '_200') {
+        this.peopleTableData = res.data[0];
         /*获取人员构成占比图表*/
-        this.creatStaffCompositionRatioEChart(options);
+        this.creatStaffCompositionRatioEChart(options, time);
         /*获取管理结构情况图表*/
-        this.creatManagementStructureEchart(options);
+        this.creatManagementStructureEchart(options, time);
         /*获取就业情况图表*/
-        this.creatEmploymentStatusEchart(options);
+        this.creatEmploymentStatusEchart(options, time);
       }else {
         this.toastModalService.addToasts({tipsMsg: res.errorMsg, type: 'error'});
       }
@@ -65,6 +90,7 @@ export class IncumbentPeopleComponent implements OnInit {
   /*获取所需年份企业结构人数*/
   changeEnterprisePeopleByYear(event) {
     const time = event.name;
+    this.chooseYear = time;
     this.getEnterprisePeopleByYear(time);
   }
   /*绘制在职人员总数和占比*/
@@ -101,8 +127,11 @@ export class IncumbentPeopleComponent implements OnInit {
       data.number = data.number.slice(data.number.length - 7, data.number.length);
     }
     const echatsTitle = `公司近三年`;
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option4 = {
+      color: [this.echartInitConfig.colors[0]],
       title: {
+        show: false,
         text: echatsTitle + '在职人员总数',
         left: 'center', // 居中
         textStyle: {
@@ -110,7 +139,13 @@ export class IncumbentPeopleComponent implements OnInit {
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999'
+          }
+        }
       },
       toolbox: {
       },
@@ -131,7 +166,7 @@ export class IncumbentPeopleComponent implements OnInit {
         data: data.xAxis,
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       }],
@@ -139,12 +174,16 @@ export class IncumbentPeopleComponent implements OnInit {
         type: 'value',
         name: '在职人数(人)',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
+        splitLine: {
+          show: true,
+          lineStyle: this.echartInitConfig.splitLineStyle,
+        },
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       },
@@ -167,7 +206,7 @@ export class IncumbentPeopleComponent implements OnInit {
       series: [{
         name: '在职人数(人)',
         type: 'bar',
-        color: ['#1eb5d4'],
+        barMaxWidth: '60%',
         stack: '总数',
         label: {
           normal: {
@@ -215,7 +254,7 @@ export class IncumbentPeopleComponent implements OnInit {
     this.parkNumberData = option4;
   }
   /*绘制人员构成占比图表*/
-  creatStaffCompositionRatioEChart(options) {
+  creatStaffCompositionRatioEChart(options, year) {
     /*const option = {
       legend: {},
       tooltip: {},
@@ -249,23 +288,31 @@ export class IncumbentPeopleComponent implements OnInit {
     // const xAxisData = ['2013', '2014', '2015', '2016', '2017'];
     const xAxisData = ['研究生', '本科以上', '大专'];
     const seriesData = [data.postgraduate, data.undergraduate, data.college];
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option = {
-      // color: ['#f43723', '#f9b620', '#1eb5d4'],
+      color: [this.echartInitConfig.colors[1]],
       title: {
-        text: '学历结构情况',
+        show: false,
+        text: year + '学历结构情况',
         left: 'center', // 居中
         textStyle: {
           color: '#bcbdbf'
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999'
+          }
+        }
       },
       legend: {
         data: legendData,
         top: 25, // 距离上边框距离
         textStyle: {
-          color: '#bcbdbf'          // 图例文字颜色
+          color: labelTextColor          // 图例文字颜色
         }
       },
       grid: {
@@ -278,12 +325,12 @@ export class IncumbentPeopleComponent implements OnInit {
         type: 'category',
         // boundaryGap: false,
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         },
         data: xAxisData
@@ -292,11 +339,15 @@ export class IncumbentPeopleComponent implements OnInit {
         name: '数量(人)',
         type: 'value',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
+        },
+        splitLine: {
+          show: true,
+          lineStyle: this.echartInitConfig.splitLineStyle,
         },
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       },
@@ -304,7 +355,7 @@ export class IncumbentPeopleComponent implements OnInit {
         {
           name: '人数',
           type: 'bar',
-          color: ['#1eb5d4'],
+          barMaxWidth: '60%',
           stack: '总量',
           label: {
             normal: {
@@ -335,21 +386,29 @@ export class IncumbentPeopleComponent implements OnInit {
     this.StaffCompositionRatioData = option;
   }
   /*绘制管理结构情况图表*/
-  creatManagementStructureEchart(options) {
+  creatManagementStructureEchart(options, year) {
     const data = options ? options : {manager: 0, professionalTechnicians: 0, skilledWorker: 0};
     const xAxisData = ['中层管理及以上', '专业技术人员', '技术工人'];
     const seriesData = [data.manager, data.professionalTechnicians, data.skilledWorker];
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option = {
-      // color: ['#f43723', '#f9b620', '#1eb5d4'],
+      color: [this.echartInitConfig.colors[2]],
       title: {
-        text: '管理结构情况',
+        show: false,
+        text: year + '管理结构情况',
         left: 'center', // 居中
         textStyle: {
           color: '#bcbdbf'
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999'
+          }
+        }
       },
       legend: {
       },
@@ -363,12 +422,12 @@ export class IncumbentPeopleComponent implements OnInit {
         type: 'category',
         // boundaryGap: false,
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         },
         data: xAxisData
@@ -377,11 +436,15 @@ export class IncumbentPeopleComponent implements OnInit {
         name: '数量(人)',
         type: 'value',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
+        },
+        splitLine: {
+          show: true,
+          lineStyle: this.echartInitConfig.splitLineStyle,
         },
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       },
@@ -389,7 +452,7 @@ export class IncumbentPeopleComponent implements OnInit {
         {
           name: '人数',
           type: 'bar',
-          color: ['#1eb5d4'],
+          barMaxWidth: '60%',
           stack: '总量',
           label: {
             normal: {
@@ -407,21 +470,29 @@ export class IncumbentPeopleComponent implements OnInit {
     this.ManagementStructureEchartData = option;
   }
   /*绘制就业情况图表*/
-  creatEmploymentStatusEchart(options) {
+  creatEmploymentStatusEchart(options, year) {
     const data = options ? options : {newEmployees: 0, graduates: 0};
     const xAxisData = ['新增从业人员', '吸纳高校毕业生'];
     const seriesData = [data.newEmployees, data.graduates];
+    const labelTextColor = this.echartInitConfig.labelTextColor;
     const option = {
-      // color: ['#f43723', '#f9b620', '#1eb5d4'],
+      color: [this.echartInitConfig.colors[3]],
       title: {
-        text: '就业情况',
+        show: false,
+        text: year + '就业情况',
         left: 'center', // 居中
         textStyle: {
           color: '#bcbdbf'
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999'
+          }
+        }
       },
       legend: {
       },
@@ -435,12 +506,12 @@ export class IncumbentPeopleComponent implements OnInit {
         type: 'category',
         // boundaryGap: false,
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
         },
         min: 0,
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         },
         data: xAxisData
@@ -449,11 +520,15 @@ export class IncumbentPeopleComponent implements OnInit {
         name: '数量(人)',
         type: 'value',
         nameTextStyle: {
-          color: '#bcbdbf'
+          color: labelTextColor
+        },
+        splitLine: {
+          show: true,
+          lineStyle: this.echartInitConfig.splitLineStyle,
         },
         axisLabel: {
           textStyle: {
-            color: '#bcbdbf'
+            color: labelTextColor
           }
         }
       },
@@ -461,7 +536,6 @@ export class IncumbentPeopleComponent implements OnInit {
         {
           name: '人数',
           type: 'bar',
-          color: ['#1eb5d4'],
           stack: '总量',
           barMaxWidth: '50%',
           label: {

@@ -44,7 +44,7 @@
 }
 
 .panel-menu li {
-  max-width: 150px;
+  max-width: 160px;
   /*overflow: hidden;*/
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -75,7 +75,7 @@
   display: table;
   width: 100%;
   margin: 10px 0;
-  border: 1px solid rgba(249, 182, 32, .3);
+  border: 1px solid #303030;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -90,15 +90,21 @@
   text-align: center;
 }
 
-.company-list .company-item img {
-  width: 50px;
-  height: 50px;
+.company-list .company-item .name-icon {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  background: #5079d9;
+  border-radius: 100px;
+  font-size: 20px;
+  color: #fff;
 }
 
 .company-list .company-item .info {
   display: table-cell;
   padding: 20px;
-  border-left: 1px solid rgba(249, 182, 32, .3);
+  border-left: 1px solid #303030;
 }
 
 .company-list .company-item .info .name {
@@ -165,6 +171,15 @@
 }
 
 .company-list .panel-menu-right {
-  background: linear-gradient(to bottom right, #151411 30%, #151816 50%, #162c2e);
-  border-radius: 0 6px 6px 6px;
+  background: #191919;
+  border-radius: 6px;
+}
+.title .total-number{
+  margin-right: 20px;
+  color: #7c7e80;
+  font-size: 24px;
+  font-weight: normal;
+}
+.title .total-number span{
+  color: #ffcc00;
 }

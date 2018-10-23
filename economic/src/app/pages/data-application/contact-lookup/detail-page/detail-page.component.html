@@ -1,3 +1,4 @@
+<div class="panel-content-box">
 <div class="data-application-box">
   <div class="public-panel-title">
     <div class="back-box fl" routerLink="/dataApplication/contactLookup">
@@ -36,7 +37,7 @@
           <textarea class="border" placeholder="输入内容" [(ngModel)]="sendMessageContent"></textarea>
         </div>
         <div class="contact-list-ft text-c">
-          <button appAccessControl [accessData]="'contact-detail'" [buttonAccess]="true" class="download-btn" (click)="sendMessage()">发送</button>
+          <button appAccessControl [accessData]="'contact-detail'" [buttonAccess]="true" class="color-full-button" (click)="sendMessage()">发送</button>
         </div>
       </div>
     </div>
@@ -69,4 +70,5 @@
     </div>
     </perfect-scrollbar>
   </div>
+</div>
 </div>

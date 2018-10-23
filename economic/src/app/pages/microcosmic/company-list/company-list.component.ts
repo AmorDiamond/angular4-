@@ -6,7 +6,7 @@ import { LayoutService, SearchResponse, SearchParams } from '../../layout/layout
 import { Subscription } from 'rxjs/Subscription';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MicrocosmicService } from '../microcosmic.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Amap } from '../../../core/amap-ngrx/amap.model';
 import { ADD_COMPANY_ADDRESS } from '../../../core/amap-ngrx/amap.actions';
@@ -40,7 +40,10 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     page: 0,
     size: 20
   };
-  private searchUrl = '/v1/epBaseInfoPojo/listCompanysPage';
+  pageParams = {
+    total: ''
+  }
+  private searchUrl = 'assets/jsonData/epBaseInfoPojo/listCompanysPage.json';
   constructor(
     private domSanitizer: DomSanitizer,
     private routerInfo: ActivatedRoute,
@@ -49,6 +52,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private store: Store<ContainerStyle>,
     private storeAmap: Store<Amap>,
+    private router: Router,
     ) {
     this.store.pipe(select('container'));
     this.storeAmap.pipe(select('amap'));
@@ -136,6 +140,7 @@ export class CompanyListComponent implements OnInit, OnDestroy {
       console.log(res)
       if (res.responseCode === '_200') {
         const data = res.data;
+        this.pageParams.total = data.pageParam.total;
         if (this.industryTypeList.length < 1) {
           for (const item in data.industryType) {
             if (item) {
@@ -158,12 +163,18 @@ export class CompanyListComponent implements OnInit, OnDestroy {
             action: 'ADD_COMPANY_ADDRESS',
             data: companysAddress
           }
-        })
+        });
       }
     });
     // this.layoutService.search(this.searchParams);
   }
-
+  /*查看企业详情*/
+  viewCompanyData(name) {
+    sessionStorage.setItem('backRouteUrl', '');
+    this.router.navigate(['/mic/companyDetail/basic/company-profile'], {
+      queryParams: {name: '成都国腾实业集团有限公司'}
+    });
+  }
   setCompanyName(companyName: string) {
     this.microcosmicService.setCompanyName(companyName);
   }

@@ -63,7 +63,7 @@
     <div appAccessControl [accessData]="['track-messagePush','early-warning','recommend','focus-business','personal-preference']" class="menu_box follow_menu_box" routerLink="/mic/eventNotice/track" (click)="isSearchActive = false">
       <div class="menu_box_hover">关注</div>
     </div>
-    <div appAccessControl [accessData]="['research-guide','contact-lookup','data-output','quality-recommend']" class="menu_box data_application_menu_box" routerLink="/dataApplication" (click)="isSearchActive = false">
+    <div appAccessControl [accessData]="['research-guide','contact-lookup','data-output-search']" class="menu_box data_application_menu_box" routerLink="/dataApplication" (click)="isSearchActive = false">
       <div class="menu_box_hover">数据应用</div>
     </div>
     <div appAccessControl [accessData]="[
@@ -75,7 +75,7 @@
     'manager-mechanism-manage',
     'manager-register-category',
     'manager-logs-manage',
-    'manager-industry-manage',
+    'manager-industryClass-search',
     'manager-torch-map',
     'manager-incometax',
     'manager-government-praise',
@@ -92,18 +92,30 @@
     'manager-fixed-investment',
     'manager-public-budget',
     'manager-public-expenditure',
-    'manager-peopleincome',
-    'manager-industry-category',
-    'manager-industry-manage'
+    'manager-peopleincome'
     ]" class="menu_box manager_menu_box" routerLink="/admin" (click)="isSearchActive = false">
       <div class="menu_box_hover">管理</div>
+    </div>
+    <div class="menu_box loginOut_box" (click)="loginOut()">
+      <div class="menu_box_hover">登出</div>
     </div>
   </div>
   <div appAccessControl [accessData]="'search-enterprise'" class="search_mask" [ngClass]="{'active': isSearchActive}" (click)="$event.stopPropagation();notSearchActive()">
   </div>
   <div appAccessControl [accessData]="'search-enterprise'" class="search_input_box" [ngClass]="{'active': isSearchActive}">
-    <input type="text" class="search_input" [(ngModel)]="keyWord" (keyup.enter)="search();notSearchActive()">
-    <button appAccessControl [accessData]="'search-enterprise'" [buttonAccess]="true" class="search_btn" id="searchBtn" (click)="$event.stopPropagation();search();notSearchActive()"></button>
+    <div class="search-con">
+      <input type="text" class="search_input" [(ngModel)]="keyWord" (keyup.enter)="search();notSearchActive()" placeholder="输入企业/关键字">
+      <button appAccessControl [accessData]="'search-enterprise'" [buttonAccess]="true" class="search_btn" id="searchBtn" (click)="$event.stopPropagation();search();notSearchActive()">
+        <span class="search-icon"></span>搜索
+      </button>
+      <div class="search-record-con">
+        <span class="record-item" (click)="keyWord = '成都';search();notSearchActive()">成都</span>
+        <span class="record-item" (click)="keyWord = '高新区';search();notSearchActive()">高新区</span>
+        <span class="record-item" (click)="keyWord = '电子信息';search();notSearchActive()">电子信息</span>
+        <span class="record-item" (click)="keyWord = '高质量企业';search();notSearchActive()">高质量企业</span>
+        <span class="record-item" (click)="keyWord = '电商服务业';search();notSearchActive()">电商服务业</span>
+      </div>
+    </div>
   </div>
   <!-- ===== 搜索 the end ===== ===== ===== ===== ===== -->
   <!-- ===== 内容面板 start ===== ===== ===== ===== ===== -->

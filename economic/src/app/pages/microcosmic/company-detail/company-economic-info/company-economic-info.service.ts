@@ -25,13 +25,13 @@ export class CompanyEconomicInfoService {
     /*获取营业收入信息*/
     private companyIncomeStatisticsUrl = '/v1/eIIRevenueAndStaffPojo/findIncomeStatisticsByCompanyName';
     /*新获取营业收入和收入占比信息公用*/
-    private companyIncomeStatisticsByYearUrl = '/v1/eIIApAssets/findOperatingIncome';
+    private companyIncomeStatisticsByYearUrl = 'assets/jsonData/eIIApAssets/findOperatingIncome.json';
     /*获取收入占比信息Old*/
     private companyRevenueShareUrl = '/v1/eIIRevenueAndStaffPojo/findRevenueShareByCompanyName';
     /*获取在职人数信息*/
     private companyNumberOfActiveStaffUrl = '/v1/eIIRevenueAndStaffPojo/findNumberOfActiveStaffByCompanyName';
     /*新获取在职人数、学历结构、管理结构、就业情况信息*/
-    private companyNumberOfActiveStaffByYearUrl = '/v1/Employees/findServingOfficers';
+    private companyNumberOfActiveStaffByYearUrl = 'assets/jsonData/epBaseInfoPojo/EmployeesfindServingOfficers.json';
     /*获取收入同比信息*/
     private companyRevenueYearOnYearUrl = '/v1/eIIRevenueAndStaffPojo/findRevenueYearOnYearByCompanyName';
     /*取园区人数占比信息*/
@@ -42,7 +42,7 @@ export class CompanyEconomicInfoService {
     private companyGobernmentContactsUrl = '/v1/eIIRelationPojo/findGobernmentContactsByCompanyName';
     /*政府支持、补贴信息*/
     // private companyProjectDeclarationUrl = '/v1/eETProjectDeclarationPojo/findListByCompanyName';
-    private companyProjectDeclarationUrl = '/v1/Governmentsupportpojo/findListByCompanyNameAndYear';
+    private companyProjectDeclarationUrl = 'assets/jsonData/epBaseInfoPojo/GovernmentsupportpojofindListByCompanyNameAndYear.json';
     /*招中标信息*/
     private WinningBidUrl = '/v1/EIIWinningBid/findWinningBidPage';
     /*公司公告列表信息*/
@@ -56,11 +56,19 @@ export class CompanyEconomicInfoService {
     /*保证担保信息(年报)*/
     private guaranteeGuaranteeUrl = '/v1/cgecultivation/findEIIApInvestment';
     /*科技创新 机构数据经费支出信息*/
-    private OrganizationExpenditureUrl = '/v1/DomesticDevelopment/findMechanism';
+    private OrganizationExpenditureUrl = 'assets/jsonData/epBaseInfoPojo/DomesticDevelopmentfindMechanism.json';
     /*科技创新 知识产权信息*/
-    private IntellectualPropertyUrl = '/v1/STAOtherSituation/findAllScienceAndTechnology';
+    private IntellectualPropertyUrl = 'assets/jsonData/epBaseInfoPojo/STAOtherSituationfindAllScienceAndTechnology.json';
     /*单独获取专利数据接口*/
     private PatentUrl = '/v1/IATrademarkAndPatent/findPatentPage';
+    /*获取经济概况表格数据*/
+    private companyIncomeStatisticsTableUrl = 'assets/jsonData/eIIApAssets/findMicroeconomicTypeGrid.json';
+    /*获取科技创新表格数据*/
+    private companyTechnologyTableUrl = 'assets/jsonData/epBaseInfoPojo/STAOtherSituationfindAllScienceAndTechnology.json';
+    /*获取经济概况实际缴税费信息*/
+    private realTaxPayUrl = 'assets/jsonData/eIIApAssets/findRecentTax.json';
+    /*获取经济概况资产总计信息*/
+    private assetsTotalUrl = 'assets/jsonData/eIIApAssets/findRecentAssets.json';
     constructor(private http: HttpClient) { }
 
     getIncomeStatistics(company): Observable<any> {

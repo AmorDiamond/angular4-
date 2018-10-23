@@ -49,9 +49,9 @@ export class LoadingInterceptor implements HttpInterceptor, OnDestroy {
       this.httpRequestCount++;
         return next
             .handle(clonedRequest)
-            .do(event => {
-                if (event instanceof HttpResponse && event.status === 200) {
-                  console.log('new End', this.httpRequestCount);
+            .do((event: any) => {
+              if (event instanceof HttpResponse && event.status === 200) {
+                  // console.log('new End', this.httpRequestCount);
                   this.httpRequestCount = this.httpRequestCount > 0 ? this.httpRequestCount - 1 : 0;
                   if (this.httpRequestCount === 0) {
                     this.store.dispatch({
@@ -72,6 +72,10 @@ export class LoadingInterceptor implements HttpInterceptor, OnDestroy {
             }, err => {
               console.log('拦截器失败', err.error);
               if (err.error.message === 'url Access Denied or login fail!' && err.error.path === '/ldap/security/loginFail' && err.status === 500) {
+                this.toastModalService.addToasts({tipsMsg: '请重新登录！', type: 'warning', timeOut: 3000});
+                this.router.navigate(['/login']);
+              }
+              if (err.error.path === '/ldap/security/loginFail') {
                 this.toastModalService.addToasts({tipsMsg: '请重新登录！', type: 'warning', timeOut: 3000});
                 this.router.navigate(['/login']);
               }

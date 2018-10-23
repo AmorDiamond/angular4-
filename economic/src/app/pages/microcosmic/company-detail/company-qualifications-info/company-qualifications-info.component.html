@@ -1,74 +1,29 @@
 <!-- 企业资质信息 -->
-<div class="panel-bd pop-index-1 animated">
-  <div class="panel-content">
-    <div class="panel-item-title">企业资质认证：</div>
-    <div  *ngIf="Certifications.length>0">
-      <table class="table table-bordered text-c" *ngFor="let item of Certifications">
-        <tr>
-          <th>资质(格)名称</th>
-          <th>许可/发证日期</th>
-          <th>许可/发证机关</th>
-        </tr>
-        <tr>
-          <td class="nowrap">{{item.certificateName}}</td>
-          <td class="nowrap">{{item.permitDate | date:'yyyy-MM-dd'}}</td>
-          <td>{{item.permitOrganization}}</td>
-        </tr>
-      </table>
-      <div class="load-more-info text-c" *ngIf="getCertificationParamas.lastRowKey">
-        <div class="load-more-con" (click)="getCertification()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content">
+      <div class="panel-item-title">企业资质认证：</div>
+      <div  *ngIf="Certifications.length>0">
+        <table class="table table-bordered text-c" *ngFor="let item of Certifications">
+          <tr>
+            <th>资质(格)名称</th>
+            <th>许可/发证日期</th>
+            <th>许可/发证机关</th>
+          </tr>
+          <tr>
+            <td class="nowrap">{{item.certificateName}}</td>
+            <td class="nowrap">{{item.permitDate | date:'yyyy-MM-dd'}}</td>
+            <td>{{item.permitOrganization}}</td>
+          </tr>
+        </table>
+        <div class="load-more-info text-c" *ngIf="getCertificationParamas.lastRowKey">
+          <div class="load-more-con" (click)="getCertification()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+        </div>
+      </div>
+      <div class="no-data-tips no-data-tips-full" *ngIf="Certifications.length<1">
+        <span class="tips-bg"></span>
+        {{CertificationTips}}
       </div>
     </div>
-    <div class="no-data-tips" *ngIf="Certifications.length<1">
-      {{CertificationTips}}
-    </div>
-  </div>
-  <!--<div class="panel-content">
-    <div class="panel-item-title">高企认证：</div>
-    <perfect-scrollbar style="max-height: 366px" *ngIf="HiTechCertifications.length>0">
-      <table class="table table-bordered" *ngFor="let item of HiTechCertifications">
-        <tr>
-          <td class="nowrap">证书名:</td>
-          <td name="name">{{item.certificateName}}</td>
-          <td class="nowrap">证书编号:</td>
-          <td name="number">{{item.certificateCode}}</td>
-        </tr>
-        <tr>
-          <td class="nowrap">批准机关:</td>
-          <td name="office">{{item.permitOrganization}}</td>
-          <td class="nowrap">发证时间:</td>
-          <td class="nowrap" name="certificationDate">{{item.date | date: "yyyy-MM-dd"}}</td>
-        </tr>
-        <tr>
-          <td class="nowrap">有效期:</td>
-          <td colspan="3" name="validityEnd">{{item.validPeriod}}</td>
-        </tr>
-      </table>
-    </perfect-scrollbar>
-    <div class="no-data-tips" *ngIf="HiTechCertifications.length<1">
-      {{HiTechCertificationTips}}
-    </div>
-
-  </div>-->
-  <!--<div class="panel-content">
-    <div class="panel-item-title">标准制定：</div>
-    <div id="certificationsDiv"></div>
-    <perfect-scrollbar style="max-height: 366px" (psYReachEnd)="psYReachEnd('getStandardSetting')">
-      <table class="table table-bordered" *ngFor="let item of StandardSettings">
-        <tr>
-          <td class="nowrap">标准名称:</td>
-          <td name="name">{{item.standardName}}</td>
-          <td class="nowrap">标准编号:</td>
-          <td name="number">{{item.standardCode}}</td>
-        </tr>
-        <tr>
-          <td class="nowrap">标准内容:</td>
-          <td name="content">{{item.standardContent}}</td>
-          <td class="nowrap">公开时间:</td>
-          <td name="content">{{item.publicityDate | date: "yyyy-MM-dd"}}</td>
-        </tr>
-      </table>
-    </perfect-scrollbar>
-
-  </div>-->
+  </perfect-scrollbar>
 </div>

@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 // import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 export interface EventNoticeResponse {
   data: {
@@ -39,16 +40,19 @@ export class EventNoticeService {
     // 新闻
     News: '/v1/KETNews/listNewsPage',
     // 规上企业推荐
-    SmartRecommendation: '/v1/epBaseInfoPojo/findAllSmartRecommendation',
+    SmartRecommendation: 'assets/jsonData/epBaseInfoPojo/findAllSmartRecommendation.json',
   };
   /*获取关注企业列表*/
-  private AttentionCompanysUrl = '/v1/attentionEvent/findAttentionCompanys';
+  private AttentionCompanysUrl = 'assets/jsonData/epBaseInfoPojo/findAttentionCompanys.json';
   /*获取关注企业信用预警事件*/
-  private CorporateCreditEventUrl = '/v1/attentionEvent/findCorporateCreditEvent';
+  private CorporateCreditEventUrl = 'assets/jsonData/epBaseInfoPojo/findCorporateCreditEvent.json';
   /*获取关注的重点企业消息*/
-  private KeyEnterpriseUrl = '/v1/attentionEvent/getKeyEnterprise';
+  private KeyEnterpriseUrl = 'assets/jsonData/epBaseInfoPojo/getKeyEnterprise.json';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) { }
 
   findList(data: RequestParams): Observable<EventNoticeResponse> {
 
@@ -83,6 +87,15 @@ export class EventNoticeService {
       // {'EventNoticeMenusStatus': this.showEventNoticeMenus}
       this.showEventNoticeMenus
     );
+  }
+  /*储存详情返回地址*/
+  setBackRouteUrl(name, backUrl) {
+    sessionStorage.setItem('backRouteUrl', backUrl);
+    this.router.navigate(['/mic/companyDetail/basic/company-profile'], {
+      queryParams: {
+        name: name
+      }
+    });
   }
 
 }

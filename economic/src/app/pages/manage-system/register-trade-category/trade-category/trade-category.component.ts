@@ -29,7 +29,7 @@ export class TradeCategoryComponent implements OnInit {
               const hasChildren = item.children ? item.children : false;
                 treeFormatData.push(
                     {
-                        'label': item.text,
+                        'label': item.text + '（' + item.number + '）',
                         'data': item.id,
                         // "formatparent": item.data ? item.data : '',
                         'expandedIcon': 'fa fa-folder-open',
@@ -45,7 +45,7 @@ export class TradeCategoryComponent implements OnInit {
 
     /*获取数据组装*/
     loadNode(event) {
-        if (event.node) {
+        if (event.node && !event.node.children) {
             // in a real application, make a call to a remote url to load children of the current node and add the new nodes as children
             console.log(event.node);
             const id = event.node.data;
@@ -59,7 +59,7 @@ export class TradeCategoryComponent implements OnInit {
                   const hasChildren = item.children ? item.children : false;
                     treeFormatData.push(
                         {
-                          'label': item.text,
+                          'label': item.text + '（' + item.number + '）',
                           'data': item.id,
                           // "formatparent": item.data ? item.data : '',
                           'expandedIcon': 'fa fa-folder-open',

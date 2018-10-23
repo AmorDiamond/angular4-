@@ -1,46 +1,48 @@
-.focus-business-con{
-    padding: 10px;
-}
 .focus-business-item{
-    width: 90%;
-    height: 100px;
-    margin: 0 auto;
-    border-bottom: 1px solid #f9b620;
+    width: 50%;
+    float: left;
+    padding: 10px;
     cursor: pointer;
-    margin-top: 15px;
     outline: none;
 }
-.focus-business-item:hover{
-    background: rgba(255, 255, 255, .2);
-}
-.focus-business-item .logo {
-    width: 100px;
-    float: left;
-    height: inherit;
-    padding: 10px;
-}
-.focus-business-item .logo img {
-    height: 100%;
-}
-.focus-business-item .column-item {
-    height: inherit;
-    padding: 10px;
+.column-item{
+    position: relative;
     overflow: hidden;
+    padding: 5px;
+    border: 1px solid #303030;
+    border-radius: 6px;
+}
+.column-item:before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    border-right: 1px solid #303030;
+    left: 80px;
+    top: 0;
+}
+.column-item .logo-icon{
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50px;
+    float: left;
+    background: #5079d9;
+    color: #fff;
+    text-align: center;
+    font-size: 24px;
+}
+.column-item .info-data{
+    margin-left: 85px;
     white-space: nowrap;
+    color: #7c7e80;
+    margin-top: 10px;
 }
-.focus-business-item .column-item .name {
-    font-size: 20px;
-    margin-bottom: 10px;
-    line-height: 40px;
-    color: #fff;
+.column-item .info-data .name{
+    font-size: 16px;
+    color: #bcbdbf;
+    margin-bottom: 5px;
 }
-.focus-business-item .column-item .other {
-    font-size: 14px;
-}
-.focus-business-item .column-item .other span {
-    margin-right: 20px;
-}
-.focus-business-item .column-item .other i {
-    font-style: normal;
-    color: #fff;
+.column-item .info-data .name,.column-item .info-data .other{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

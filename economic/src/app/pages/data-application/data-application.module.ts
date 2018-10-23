@@ -7,14 +7,17 @@ import { ContactDetailPageComponent } from './contact-lookup/detail-page/detail-
 import { RecommendListComponent } from './quality-recommend/recommend-list/recommend-list.component';
 import { SharedModule } from '../../shared/shared.module';
 import { DataApplicationService } from './data-application.service';
+import { SearchListComponent } from './data-output/search-list/search-list.component';
+import { PaginationModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     DataApplicationRoutingModule,
+    PaginationModule.forRoot(),
     SharedModule
   ],
-  declarations: [DataApplicationComponent, DetailPageComponent, ContactDetailPageComponent, RecommendListComponent],
+  declarations: [DataApplicationComponent, DetailPageComponent, ContactDetailPageComponent, RecommendListComponent, SearchListComponent],
   providers: [DataApplicationService]
 })
 export class DataApplicationModule { }

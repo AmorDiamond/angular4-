@@ -8,9 +8,9 @@ export class MacEconomicPillarService {
 
   private subject = new BehaviorSubject<any>(0);
   /*所有产业产值和增速*/
-  private macPillarIndustryUrl = '/v1/macroMainstay/findByYear';
+  private macPillarIndustryUrl = 'assets/jsonData/mac/macroMainstayfindByYear';
   /*各季度产值*/
-  private macPillarIndustryQuarterUrl = '/v1/macroMainstay/findByQuarter';
+  private macPillarIndustryQuarterUrl = 'assets/jsonData/mac/macroMainstayfindByQuarter';
   constructor(
     private http: HttpClient,
   ) {
@@ -30,7 +30,7 @@ export class MacEconomicPillarService {
       params = {params: new HttpParams({ fromString: paramsString })};
     }
 
-    return this.http[requestType](httpUrl, params);
+    return this.http[requestType](httpUrl + findParams.year + '.json', params);
   }
 
   /*通过多个请求获取数据*/

@@ -45,7 +45,7 @@
 .follow-box .not-follow span {
   color: #bdbec0;
 }
-
+/*
 .industry-menu {
   position: relative;
   height: 100%;
@@ -93,7 +93,7 @@
 }
 
 .menu-row:not(:first-child) .sub-menu {
-  /*display: none;*/
+  !*display: none;*!
 }
 
 .sub-menu li {
@@ -121,7 +121,7 @@
 .sub-menu li.active em,
 .sub-menu li:hover em {
   visibility: visible;
-}
+}*/
 .back-box{
   outline: none;
 }

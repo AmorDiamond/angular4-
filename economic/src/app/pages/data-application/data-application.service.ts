@@ -8,17 +8,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Injectable()
 export class DataApplicationService {
 
-  private subject = new BehaviorSubject<any>(0);
+  private searchParamsSubject = new BehaviorSubject<any>(0);
+  private outputSearchParams: any;
   private researchSelectedList = [];
   constructor(
     private routerInfo: ActivatedRoute,
     private http: HttpClient,
   ) {}
-  private searchUrl = '/v1/epBaseInfoPojo/listCompanysPage';
+  private searchUrl = 'assets/jsonData/epBaseInfoPojo/listCompanysPage.json';
   /*修改调研企业地址*/
   private editAddressUrl = '/v1/researchPlan/updateCompanyAddress';
   /*获取最优路线*/
-  private bestRouteUrl = '/v1/researchPlan/callMapAPI';
+  private bestRouteUrl = 'assets/jsonData/epBaseInfoPojo/researchPlancallMapAPI.json';
   /*下载调研路线信息*/
   private downLoadBestRouteUrl = '/v1/researchPlan/add';
   /*添加联系人信息*/
@@ -29,16 +30,38 @@ export class DataApplicationService {
   private sendMessageUrl = '/v1/eIIRelationlistController/sendMessage';
   /*导出系统数据*/
   private downLoadSystemDataUrl = '/v1/dataApplication/download';
+  /*获取注册类型、行业类型*/
+  private treeTypesUrl = '/v1/mapTree/getJsTree';
   /*获取所有产业类型*/
   private allIndustryTypesUrl = '/manager/v1/epBaseInfoPojo/findIndustryType';
   /*通过各种类型搜索企业列表*/
-  private getCompanysByTypesUrl = '/manager/v1/epBaseInfoPojo/searchCompanyByParam';
+  private getCompanysByTypesUrl = 'assets/jsonData/epBaseInfoPojo/searchCompanyByParam.json';
+  /*获取具体产业类型详情/获取具体产业下属的行业类型*/
+  private getIndustryTypeInfoUrl = '/v1/mapTree/getIndustryClassTypeById';
+  /*获取枚举数据*/
+  private getEnumsUrl = '/v1/dataApplication/getEnums';
+  private getEnumsUrlEnrollmentOfFundsEnum = 'assets/jsonData/epBaseInfoPojo/dataApplicationgetEnumsEnrollmentOfFundsEnum.json';
+  private getEnumsUrlStaffSizeEnum = 'assets/jsonData/epBaseInfoPojo/dataApplicationgetEnumsStaffSizeEnum.json';
+  private getEnumsUrlIncomeScaleEnum = 'assets/jsonData/epBaseInfoPojo/dataApplicationgetEnumsIncomeScaleEnum.json';
+  private getEnumsUrlTaxScaleEnum = 'assets/jsonData/epBaseInfoPojo/dataApplicationgetEnumsTaxScaleEnum.json';
+  private getEnumsUrlEnergyConsumptionEnum = 'assets/jsonData/epBaseInfoPojo/dataApplicationgetEnumsEnergyConsumptionEnum.json';
+  private getEnumsUrlSewageScaleEenum = 'assets/jsonData/epBaseInfoPojo/dataApplicationgetEnumsSewageScaleEenum.json';
+  /*获取所有自定义标签*/
+  private customizeLabelUrl = 'assets/jsonData/iabels/iabelsfindAll.json';
 
   getSubject() {
-    return this.subject.asObservable();
+    return this.searchParamsSubject.asObservable();
   }
-  changeSubject() {
-    this.subject.next({});
+  changeSubject(options) {
+    this.searchParamsSubject.next(options);
+  }
+  /*改变数据导出搜索参数*/
+  changeOutputSearchParams(options) {
+    this.outputSearchParams = options;
+  }
+  /*获取数据导出搜索参数*/
+  getOutputSearchParams() {
+    return this.outputSearchParams;
   }
   /*改变已选择的企业列表*/
   changeSelectedList(options) {

@@ -36,6 +36,32 @@ export class CompanyProfileComponent implements OnInit {
   // 名优产品
   FamousProduct = [];
   getFamousProductParamas = { companyName: 'test1', pageSize: 10, lastRowKey: '' };
+  /*企业诉求*/
+  corporateAppeal = [];
+  /*综合评价*/
+  BusinessEvaluationData = [];
+  /*自定义标签*/
+  addLabelStatus: false;
+  newLabel: any;
+  labelLists = [];
+  deleteLabelId: number;
+  deleteLabelConfirmTips = '确定要删除该标签吗？';
+  CompanyCustomLabelTips = '加载中...';
+  /*多维排名*/
+  IncomeRankEchart: any;
+  incomeRankData: any;
+  RDRankEchart: any;
+  RDRankData: any;
+  PaidTaxRankEchart: any;
+  PaidTaxRankData: any;
+  GOVSupportRankEchart: any;
+  GOVSupportRankData: any;
+  EnergyConsumptionRankEchart: any;
+  EnergyConsumptionRankData: any;
+  SocialSecurityRankEchart: any;
+  SocialSecurityRankData: any;
+  SiteAreaRankEchart: any;
+  SiteAreaRankData: any;
   ngOnInit() {
 
     this.keyWord = this.microcomicService.getUrlParams('name');
@@ -43,7 +69,10 @@ export class CompanyProfileComponent implements OnInit {
     this.getFamousProductParamas.companyName = this.keyWord;
     this.getCompanyProfile(this.keyWord);
     this.getContactPeopleInfo(this.keyWord);
-    this.getFamousProduct();
+    // this.getFamousProduct();
+    // this.getBusinessEvaluation();
+    this.getCompanyCustomLabel();
+    this.getRankData();
   }
   getCompanyProfile(companyName) {
     console.log(companyName);
@@ -57,11 +86,12 @@ export class CompanyProfileComponent implements OnInit {
           this.CompanyIntroductionTips = '暂无信息！';
         }
         this.baseInfo = res.data.baseInfoPojos;
+        this.corporateAppeal = res.data.companyProblemTypes;
         /*判断是否有主要产品信息*/
-        if (this.baseInfo && this.baseInfo.businessScope) {
+        /*if (this.baseInfo && this.baseInfo.businessScope) {
           const options = this.baseInfo.businessScope.split(/[。、；]/);
           this.creat3DcloudTag(options);
-        }
+        }*/
       }
     });
   }
@@ -91,7 +121,92 @@ export class CompanyProfileComponent implements OnInit {
         }
       });
   }
+  /*获取综合评价*/
+  getBusinessEvaluation() {
+    const params = {name: this.keyWord};
+    this.companyBasicService.findListByUrl(params, 'businessEvaluationUrl').subscribe(res => {
+      console.log(res);
+      if (res.responseCode === '_200') {
+        const data = res.data;
+        const formatData = [
+          {name: '经济指标', number: []},
+          {name: '科技创新', number: []},
+          {name: '人力资源', number: []},
+          {name: '环保排污', number: []},
+          {name: '综合能耗', number: []},
+          {name: '年末资产', number: []},
+        ];
+        const copyArry = [];
+        for (const item in data) {
+          if (item === '综合能耗' || item === '环保排污') {
+            const number = [0, 0, 0, 0];
+            const numberData = data[item][0];
+            number[0] = numberData[0] ? -numberData[0] : 0;
+            number[1] = numberData[2] ? -numberData[2] : 0;
+            number[2] = numberData[1] ? -numberData[1] : 0;
+            number[3] = numberData[3] ? -numberData[3] : 0;
+            copyArry.push({name: item, number: number});
+          }else {
+            copyArry.push({name: item, number: data[item][0]});
+          }
+        }
+        copyArry.forEach(item => {
+          formatData.forEach(childItem => {
+            if (childItem.name === item.name) {
+              childItem.number = item.number;
+            }
+          });
+        });
+        this.BusinessEvaluationData = formatData;
+        console.log(this.BusinessEvaluationData)
+      }
+    });
+  }
+  /*获取多维排名信息*/
+  getRankData() {
+    const params = {name: this.keyWord};
+    this.companyBasicService.findListByUrl(params, 'businessEvaluationUrl').subscribe(res => {
+      console.log('排名信息', res);
+      if (res.responseCode === '_200') {
+        const data = res.data;
+        const incomeRankData = this.formatEchartData({type: '营业收入', data: data['经济指标']});
+        this.incomeRankData = {rankNumber: incomeRankData.rankData, rankTopName: incomeRankData.firstName, dataNumber: incomeRankData.dataNumber};
+        this.creatRankEchart(incomeRankData, 'IncomeRankEchart');
 
+        const RDRankData = this.formatEchartData({type: 'R&D', data: data['研发投入']});
+        this.RDRankData = {rankNumber: RDRankData.rankData, rankTopName: RDRankData.firstName, dataNumber: RDRankData.dataNumber};
+        this.creatRankEchart(RDRankData, 'RDRankEchart');
+
+        const PaidTaxRankData = this.formatEchartData({type: '实缴税收', data: data['实缴税收']});
+        this.PaidTaxRankData = {rankNumber: PaidTaxRankData.rankData, rankTopName: PaidTaxRankData.firstName, dataNumber: PaidTaxRankData.dataNumber};
+        this.creatRankEchart(PaidTaxRankData, 'PaidTaxRankEchart');
+
+        const GOVSupportRankData = this.formatEchartData({type: '政府支持', data: data['政府支持']});
+        this.GOVSupportRankData = {rankNumber: GOVSupportRankData.rankData, rankTopName: GOVSupportRankData.firstName, dataNumber: GOVSupportRankData.dataNumber};
+        this.creatRankEchart(GOVSupportRankData, 'GOVSupportRankEchart');
+
+        /*const EnergyConsumptionRankData = this.formatEchartData({type: '综合能耗', data: data['综合能耗']});
+        this.EnergyConsumptionRankData = {rankNumber: EnergyConsumptionRankData.rankData, rankTopName: EnergyConsumptionRankData.firstName};
+        this.creatRankEchart(EnergyConsumptionRankData, 'EnergyConsumptionRankEchart');*/
+
+        const SocialSecurityRankData = this.formatEchartData({type: '社保人员', data: data['社保人员']});
+        this.SocialSecurityRankData = {rankNumber: SocialSecurityRankData.rankData, rankTopName: SocialSecurityRankData.firstName, dataNumber: SocialSecurityRankData.dataNumber};
+        this.creatRankEchart(SocialSecurityRankData, 'SocialSecurityRankEchart');
+
+        const SiteAreaRankData = this.formatEchartData({type: '经营场地面积', data: data['场地面积'] || []});
+        this.SiteAreaRankData = {rankNumber: SiteAreaRankData.rankData, rankTopName: SiteAreaRankData.firstName, dataNumber: SiteAreaRankData.dataNumber};
+        this.creatRankEchart(SiteAreaRankData, 'SiteAreaRankEchart');
+      }
+    });
+  }
+  /*处理绘制仪表盘所需数据*/
+  formatEchartData(options) {
+    const maxData = options.data[0] ? (options.data[0][3] ? options.data[0][3] : 0) : 10;
+    const rankData = options.data[1] ? (options.data[1][0] ? options.data[1][0] : '未知') : '未知'; // 无数据放在最后一名
+    const firstName = options.data[0] ? (options.data[0][1] ? options.data[0][1] : '未知') : '未知';
+    const dataNumber = options.data[1] ? (options.data[1][2] ? options.data[1][2] : '未知') : '未知';
+    return {type: options.type, maxData: maxData, rankData: rankData, firstName: firstName, dataNumber: dataNumber};
+  }
   /*点击纠错获取原始值*/
   getChangeContactInfo(index, rowkey) {
     this.changeContactPeopleStatus = true;
@@ -113,7 +228,7 @@ export class CompanyProfileComponent implements OnInit {
   /*提交修改联系人*/
   submitChangeContactPeople(template, rowkey) {
     this.dataRowkey = rowkey;
-    this.toastModalService.showModal(template)
+    this.toastModalService.showModal(template);
   }
   /*确认提交修改*/
   saveChangeInfo() {
@@ -228,4 +343,169 @@ export class CompanyProfileComponent implements OnInit {
     $( '#holderProduct' ).svg3DTagCloud( settings );
   }
 
+  /*获取企业的自定义标签*/
+  getCompanyCustomLabel() {
+    this.companyBasicService.findListByUrl({companyName: this.keyWord}, 'companyCustomLabelUrl').subscribe(res => {
+      console.log('自定义标签', res);
+      if (res.responseCode === '_200') {
+        if (res.data.length < 1) {
+          this.CompanyCustomLabelTips = '该企业暂不存在自定义标签！';
+        }
+        this.labelLists = res.data;
+      }
+    });
+  }
+  /*添加新自定义标签*/
+  addNewLabel() {
+    const newLabel = this.newLabel.trim();
+    if (newLabel) {
+      for (let i = 0; i < this.labelLists.length; i++) {
+        if (newLabel === this.labelLists[i].content) {
+          this.toastModalService.showErrorToast({errorMsg: '该标签已存在！'});
+          return;
+        }
+      }
+      this.companyBasicService.findListByTypeAndUrl({companyName: this.keyWord, content: newLabel}, 'addCompanyCustomLabelUrl', 'post').subscribe(res => {
+        console.log(res);
+        if (res.responseCode === '_200') {
+          this.labelLists.push(newLabel);
+          this.toastModalService.showSuccessToast({tipsMsg: '添加标签成功！'});
+          this.addLabelStatus = false;
+          this.newLabel = '';
+          this.getCompanyCustomLabel();
+        }else {
+          this.toastModalService.showErrorToast({errorMsg: res.errorMsg});
+        }
+      });
+    }
+  }
+  /*删除标签操作*/
+  deleteLabel(option, template) {
+    this.deleteLabelId = option;
+    this.toastModalService.showModal(template);
+  }
+  /*确认删除标签操作*/
+  confirmDeleteLabel() {
+    const iabelID = this.deleteLabelId;
+    this.companyBasicService.findListByTypeAndUrl({iabelID: iabelID}, 'deleteCompanyCustomLabelUrl', 'delete').subscribe(res => {
+      console.log(res);
+      if (res.responseCode === '_200') {
+        // this.labelLists.splice(index, 1);
+        this.toastModalService.hideModal();
+        this.toastModalService.showSuccessToast({tipsMsg: '删除标签成功！'});
+        this.getCompanyCustomLabel();
+      }else {
+        this.toastModalService.hideModal();
+        this.toastModalService.showErrorToast({errorMsg: res.errorMsg});
+      }
+    });
+  }
+  /*取消删除标签操作*/
+  declineDeleteLabel() {
+    this.toastModalService.hideModal();
+  }
+  /*绘制多维排名图表*/
+  creatRankEchart(options, dataName?) {
+    const seriseData = [{value: 0, name: '名'}];
+    const maxData = options.maxData;
+    seriseData[0].value = options.rankData;
+    const option = {
+      tooltip : {
+        confine: true,
+        formatter: '{a} <br/>{c} {b}'
+      },
+      series : [
+        {
+          name: '排名',
+          type: 'gauge',
+          center: ['50%', '50%'],
+          radius: '95%',
+          startAngle: 200,
+          endAngle: -20,
+          min: maxData,
+          max: 0,
+          splitNumber: 2,
+          itemStyle: {
+            normal: {
+              color: '#e7e9eb',
+            }
+          },
+          axisLine: {            // 坐标轴线
+            show: false,
+            lineStyle: {       // 属性lineStyle控制线条样式
+              width: 10,
+              color: [[0.2, '#5d80c9'], [0.8, '#facc06'], [1, '#ef5227']],
+            }
+          },
+          axisTick: {            // 坐标轴小标记
+            /*show: false,
+            splitNumber: 5,
+            length: 0,
+            lineStyle: {
+              color: 'auto'
+            }*/
+            length: 10,
+            splitNumber: 100,
+            lineStyle: {
+              color: {
+                image: document.getElementById('linear-pic'),
+                repeat: 'no-repeat'
+              },
+              width: 2
+            }
+          },
+          markPoint: {
+            show: false,
+            symbol: 'circle',
+            symbolSize: 16,
+            silent: true,
+            itemStyle: {
+              color: '#FFF',
+              normal: {
+                label: {
+                  show: false
+                }
+              }
+            },
+            data: [
+              {
+                x: 'center',
+                y: 'center',
+                show: false,
+              }
+            ]
+          },
+          axisLabel: {
+            color: '#7c7e80',
+            formatter: function (v) {
+              switch (v + '') {
+                case '0' : return '上';
+                case (maxData / 2) + '' : return '中';
+                case maxData + '' : return '下';
+              }
+            }
+          },
+          splitLine: {           // 分隔线
+            show: false,
+            length: 6,         // 属性length控制线长
+            lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+              color: 'auto'
+            }
+          },
+          pointer: {
+            width: 5,
+            length: '55%',
+          },
+          title : {
+            show: false
+          },
+          detail : {
+            show: false
+          },
+          data: seriseData
+        }
+      ]
+    };
+    this[dataName] = option;
+  }
 }

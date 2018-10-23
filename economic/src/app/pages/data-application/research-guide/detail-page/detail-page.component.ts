@@ -45,7 +45,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
       }
     });
     const todayTime = new Date();
-    const todayDate = todayTime.getFullYear() + '-' + (todayTime.getMonth() + 1) + '-' + todayTime.getDate();
+    const todayDate = todayTime.getFullYear() + ',' + (todayTime.getMonth() + 1) + ',' + todayTime.getDate();
     this.startWorkerTime = new Date(todayDate).getTime() + 33 * 60 * 60 * 1000; // 第二天早上九点
     this.endWorkerTime = new Date(todayDate).getTime() + 41 * 60 * 60 * 1000; // 第二天下午五点
     this.startResearchTime = new Date(todayDate).getTime() + 33 * 60 * 60 * 1000;
@@ -64,7 +64,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
     selectedList.forEach(item => {
       params.lists.push(item.company.rowKey);
     });
-    this.dataApplicationService.requestByParams(params, 'bestRouteUrl', 'post').subscribe(res => {
+    this.dataApplicationService.requestByParams(params, 'bestRouteUrl').subscribe(res => {
       console.log(res);
       if (res.responseCode === '_200') {
         const list = res.data;
@@ -115,6 +115,10 @@ export class DetailPageComponent implements OnInit, OnDestroy {
       }
     }
     this.endResearchTime = this.selectedList[this.selectedList.length - 1].endDate + this.backGroupTime;
+    /*处理标识是否超出工作时间*/
+    this.handleOverWorkTime();
+    /*提示回程是否超出工作时间*/
+    this.judgmentBackHomeOverWorkTime();
   }
   /*上下移动和删除处理列表时间*/
   moveFormatTimes() {
@@ -146,6 +150,8 @@ export class DetailPageComponent implements OnInit, OnDestroy {
     if (this.selectedList[0].startDate < this.startWorkerTime) {
       this.toastModalService.addToasts({tipsMsg: '调研时间不在当天工作时间，请调整！', type: 'warning', timeout: 3000});
     }
+    /*处理标识是否超出工作时间*/
+    this.handleOverWorkTime();
     /*延迟更新状态，避免页面不更新*/
     this.loadAfterView();
   }
@@ -164,6 +170,8 @@ export class DetailPageComponent implements OnInit, OnDestroy {
       }
     }
     this.endResearchTime = this.selectedList[this.selectedList.length - 1].endDate + this.backGroupTime;
+    /*处理标识是否超出工作时间*/
+    this.handleOverWorkTime();
     /*延迟更新状态，避免页面不更新*/
     this.loadAfterView();
   }
@@ -204,7 +212,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
     // const newTime = new Date(event).getTime();
     const newTime = new Date(event);
     const chooseTime = new Date(event).getTime();
-    const todayDate = newTime.getFullYear() + '-' + (newTime.getMonth() + 1) + '-' + newTime.getDate();
+    const todayDate = newTime.getFullYear() + ',' + (newTime.getMonth() + 1) + ',' + newTime.getDate();
     const startWorkerTime = new Date(todayDate).getTime() + 9 * 60 * 60 * 1000; // 所选日期当天早上九点;
     const endWorkerTime = new Date(todayDate).getTime() + 17 * 60 * 60 * 1000; // 所选日期当天下午五点;
     if (chooseTime < startWorkerTime) {
@@ -320,6 +328,33 @@ export class DetailPageComponent implements OnInit, OnDestroy {
         }
       });
     }, 100);
+  }
+  /*处理标识是否超出工作时间*/
+  handleOverWorkTime() {
+    for (let i = 0; i < this.selectedList.length; i++) {
+      if (new Date(this.selectedList[i].startDate).getHours() >= 17 && new Date(this.selectedList[i].startDate).getMinutes() > 0 ||
+        new Date(this.selectedList[i].endDate).getHours() >= 17 && new Date(this.selectedList[i].endDate).getMinutes() > 0) {
+        this.selectedList[i].remove = true;
+      }else {
+        this.selectedList[i].remove = false;
+      }
+    }
+    let tipsBackHomeOverWorkTime = true;
+    for (let i = 0; i < this.selectedList.length; i++) {
+      if (this.selectedList[i].remove) {
+        tipsBackHomeOverWorkTime = false;
+        return;
+      }
+    }
+    if (tipsBackHomeOverWorkTime) {
+      this.judgmentBackHomeOverWorkTime();
+    }
+  }
+  /*判断最后返回管委会的事件是否超出工作时间*/
+  judgmentBackHomeOverWorkTime() {
+    if (new Date(this.endResearchTime).getHours() >= 17 && new Date(this.endResearchTime).getMinutes() > 0) {
+      this.toastModalService.addToasts({tipsMsg: '最后结束时间超过工作时间，请调整！', type: 'warning', timeout: 3000});
+    }
   }
   /*下载操作*/
   downLoad() {

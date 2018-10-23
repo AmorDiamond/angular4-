@@ -1,5 +1,6 @@
 .table-label{
     width: 110px;
+    color: #7c7e80;
 }
 :host >>> .popover {
     background-color: #009688;

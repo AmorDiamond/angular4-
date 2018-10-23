@@ -1,128 +1,259 @@
-<div class="panel-content data-output-box" *ngIf="!hasSearch && !hasDownload">
-  <div class="flex-column">
+<div class="panel-content-box">
+<perfect-scrollbar>
+<div class="panel-content data-output-box">
+  <!--<div class="flex-column">-->
     <div class="data-output-bd flex-cell">
-      <perfect-scrollbar>
-        <div>
-          <table class="table table-bordered">
-            <tr>
-              <td class="table-label">注册类型</td>
-              <td>
-                <div class="circle-radio-list">
-                  <label *ngFor="let item of registerTypeList" [ngClass]="{'active': item.id == searchParams.enterpriseType}"><span></span><input type="radio" name="enterpriseType" [(ngModel)]="searchParams.enterpriseType" [value]="item.id">{{item.name}}</label>
+      <div class="clearfix  choose-params">
+        <table class="table table-bordered choose-types-table my-hide">
+          <tr>
+            <td class="table-label">注册类型</td>
+
+            <td colspan="2">
+              <div style="position: relative">
+                <div (click)="$event.stopPropagation();openRegisterTypeTree = !openRegisterTypeTree;openTradeTypeTree = false;openIndustryTypeTree = false;registerTypeList ? '' : getTreeData(1)">
+                  <input class="form-control types-input" type="text" disabled placeholder="选择注册类型" [ngModel]="selectedRegisterTypeFile?.label">
                 </div>
-              </td>
-            </tr>
-            <tr><td class="table-label">行业类型</td><td></td></tr>
-            <tr>
-              <td class="table-label">产业类型</td>
-              <td>
-                <div class="circle-radio-list">
-                  <label *ngFor="let item of industryTypeList" [ngClass]="{'active': item.name == searchParams.industryType}"><span></span><input type="radio" name="industryType" [(ngModel)]="searchParams.industryType" [value]="item.name">{{item.name}}</label>
-                  <span class="reset-selected" (click)="searchParams.industryType = ''"><i class="fa fa-rotate-left"></i>重置</span>
+                <div class="tree-box flex-column" *ngIf="openRegisterTypeTree">
+                  <div class="flex-cell">
+                    <perfect-scrollbar>
+                      <p-tree (click)="$event.stopPropagation();" [value]="registerTypeList" [styleClass]="'types-tree'" (onNodeExpand)="loadNode($event)" selectionMode="single" [(selection)]="selectedRegisterTypeFile"></p-tree>
+                    </perfect-scrollbar>
+                  </div>
+                  <div class="btn-box">
+                    <button class="btn choose-btn" (click)="openRegisterTypeTree = false">确认</button>
+                    <button class="btn reset-btn" (click)="openRegisterTypeTree = false;selectedRegisterTypeFile = ''">重置</button>
+                  </div>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="table-label">是否高企</td>
-              <td>
-                <div class="circle-radio-list">
-                  <label [ngClass]="{'active': searchParams.whetherAuthentication}"><span></span><input type="radio" name="whetherAuthentication" [(ngModel)]="searchParams.whetherAuthentication" [value]="true">是</label>
-                  <label [ngClass]="{'active': !searchParams.whetherAuthentication}"><span></span><input type="radio" name="whetherAuthentication" [(ngModel)]="searchParams.whetherAuthentication" [value]="false">否</label>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="table-label">是否规上</td>
-              <td>
-                <div class="circle-radio-list">
-                  <label [ngClass]="{'active': searchParams.supervisory}"><span></span><input type="radio" name="supervisory" [(ngModel)]="searchParams.supervisory" [value]="true">是</label>
-                  <label [ngClass]="{'active': !searchParams.supervisory}"><span></span><input type="radio" name="supervisory" [(ngModel)]="searchParams.supervisory" [value]="false">否</label>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </perfect-scrollbar>
-    </div>
-    <div class="data-output-ft">
-      <!--<div class="select-box fl" [ngClass]="{'active': allSelectedStatus}">
-        <div class="select-con" (click)="allSelectedStatus = !allSelectedStatus;allSelected()"></div>全选
-      </div>-->
-      <button appAccessControl [accessData]="'data-output'" [buttonAccess]="true" class="download-btn fr" (click)="search()">搜索</button>
-    </div>
-  </div>
-</div>
-<div class="panel-content data-output-box" *ngIf="hasSearch">
-  <div class="flex-column">
-    <div class="data-output-bd flex-cell">
-      <perfect-scrollbar>
-        <div *ngIf="companyList.length>0">
-          <table class="table table-bordered text-c company-list">
-            <tr *ngFor="let item of companyList">
-              <td class="company-info">
-                <div class="name">{{item.name}}</div>
-                <div class="address"><span class="info-label">地址：</span>{{item.address ? item.address : '未知'}}</div>
-                <span class="type-item"><span class="info-label">注册类型：</span>{{item.enterpriseType ? item.enterpriseType : '未知'}}</span>
-                <span class="type-item"><span class="info-label">行业类型：</span>{{item.industryType ? item.industryType : '未知'}}</span>
-                <span class="type-item"><span class="info-label">产业类型：</span><span *ngFor="let type of item.industryClassType;index as index">{{index > 0 ? ',' + type : type}}</span>
-                  <span *ngIf="item.industryClassType.length<1">未知</span></span>
-              </td>
-              <td class="selected-td">
-                <div class="select-con" [ngClass]="{'active': item.hasSelected}" (click)="item.hasSelected = !item.hasSelected;singleSelectedCompany()"></div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="no-data-tips" *ngIf="companyList.length<1">
-          暂无信息！
-        </div>
-      </perfect-scrollbar>
-    </div>
-    <div class="data-output-ft">
-      <div class="pages-box">
-        <pagination [totalItems]="pageParams.bigTotalItems" [itemsPerPage]="pageParams.itemsPerPage" [(ngModel)]="pageParams.bigCurrentPage" [maxSize]="pageParams.maxSize" class="pagination-sm"
-                    [boundaryLinks]="true" [rotate]="false" previousText="上一页" nextText="下一页" firstText="首页" lastText="末页" (numPages)="pageParams.numPages = $event" (pageChanged)="pageChanged($event)"></pagination>
-      </div>
-      <div class="left-column">
-        <div class="select-box fl" [ngClass]="{'active': allSelectedCompanyStatus}">
-          <div class="select-con" (click)="allSelectedCompanyStatus = !allSelectedCompanyStatus;allSelectedCompany()"></div>全选
-        </div>
-        <span class="back-btn" (click)="hasSearch = false"><i class="fa fa-mail-reply-all"></i>返回</span>
-      </div>
-      <button appAccessControl [accessData]="'data-output'" [buttonAccess]="true" class="download-btn fr" (click)="goToDownloadPage()">确定</button>
-    </div>
-  </div>
-</div>
-<div class="panel-content data-output-box" *ngIf="hasDownload">
-  <div class="flex-column">
-    <div class="data-output-hd">
-      <div class="left fl text-c">选择</div>
-      <div class="right fl">业务表单</div>
-    </div>
-    <div class="data-output-bd flex-cell">
-      <perfect-scrollbar>
-        <div class="row-box border" *ngFor="let item of dataList; index as listIndex" [hidden]="!item.hasAccess">
-          <div class="all-select-column fl" [ngClass]="{'active': item.hasSelected}">
-            <div class="select-con" (click)="item.hasSelected = !item.hasSelected;allSelectedGroup(listIndex)"></div>
-          </div>
-          <div class="row-right">
-            <div class="row-title" [ngClass]="{'active': !item.children}">{{item.name}}</div>
-            <div class="output-item" *ngFor="let data of item.children" [hidden]="!data.hasAccess">
-              <div class="select-box fl" [ngClass]="{'active': data.hasSelected}">
-                <div class="select-con" (click)="data.hasSelected = !data.hasSelected;selectedHandle(listIndex)"></div>
               </div>
-              <div class="select-label">{{data.name}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="table-label">产业类型</td>
+            <td colspan="3">
+              <div style="position: relative">
+                <div (click)="$event.stopPropagation();openIndustryTypeTree = !openIndustryTypeTree;openRegisterTypeTree = false;openTradeTypeTree = false;industryTypeList ? '' : getTreeData(3)">
+                  <input class="form-control types-input" type="text" disabled placeholder="选择产业类型" [ngModel]="selectedIndustryTypeFile?.label">
+                </div>
+                <div class="tree-box flex-column" *ngIf="openIndustryTypeTree">
+                  <div class="flex-cell">
+                    <perfect-scrollbar>
+                      <p-tree (click)="$event.stopPropagation();" [value]="industryTypeList" [styleClass]="'types-tree'" (onNodeSelect)="changeTradeTypeList($event)" (onNodeExpand)="loadNode($event)" selectionMode="single" [(selection)]="selectedIndustryTypeFile"></p-tree>
+                    </perfect-scrollbar>
+                  </div>
+                  <div class="btn-box">
+                    <button class="btn choose-btn" (click)="openIndustryTypeTree = false;changeTradeTypeList()">确认</button>
+                    <button class="btn reset-btn" (click)="openIndustryTypeTree = false;selectedIndustryTypeFile = '';changeTradeTypeList()">重置</button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="table-label">行业类型</td>
+            <td colspan="3">
+              <div style="position: relative">
+                <!--selectedIndustryTypeFile ? getTradeTypesTree(selectedIndustryTypeFile.data) : getTreeData(2)如果已选产业，获取产业下属行业，否则获取所有行业-->
+                <div (click)="$event.stopPropagation();openTradeTypeTree = !openTradeTypeTree;openRegisterTypeTree = false;openIndustryTypeTree = false;tradeTypeList ? '' : selectedIndustryTypeFile ? getTradeTypesTree(selectedIndustryTypeFile.data) : getTreeData(2)">
+                  <input class="form-control types-input" type="text" disabled placeholder="选择行业类型" [ngModel]="selectedTradeTypeFile?.label">
+                </div>
+                <div class="tree-box flex-column" *ngIf="openTradeTypeTree">
+                  <div class="flex-cell">
+                    <perfect-scrollbar>
+                      <p-tree (click)="$event.stopPropagation();" [value]="tradeTypeList" [styleClass]="'types-tree'" (onNodeExpand)="loadNode($event)" selectionMode="single" [(selection)]="selectedTradeTypeFile"></p-tree>
+                    </perfect-scrollbar>
+                  </div>
+                  <div class="btn-box">
+                    <button class="btn choose-btn" (click)="openTradeTypeTree = false">确认</button>
+                    <button class="btn reset-btn" (click)="openTradeTypeTree = false;selectedTradeTypeFile = ''">重置</button>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="table-label">是否高企</td>
+            <td>
+              <div class="circle-radio-list">
+                <label [ngClass]="{'active': searchParams.whetherAuthentication}"><span></span><input type="radio" name="whetherAuthentication" [(ngModel)]="searchParams.whetherAuthentication" [value]="true">是</label>
+                <label [ngClass]="{'active': !searchParams.whetherAuthentication}"><span></span><input type="radio" name="whetherAuthentication" [(ngModel)]="searchParams.whetherAuthentication" [value]="false">否</label>
+              </div>
+            </td>
+            <td class="table-label">是否规上</td>
+            <td>
+              <div class="circle-radio-list">
+                <label [ngClass]="{'active': searchParams.supervisory}"><span></span><input type="radio" name="supervisory" [(ngModel)]="searchParams.supervisory" [value]="true">是</label>
+                <label [ngClass]="{'active': !searchParams.supervisory}"><span></span><input type="radio" name="supervisory" [(ngModel)]="searchParams.supervisory" [value]="false">否</label>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div class="row-item">
+          <div class="table-label">
+            注册类型
+          </div>
+          <div class="input-box">
+            <div style="position: relative">
+              <div (click)="$event.stopPropagation();openRegisterTypeTree = !openRegisterTypeTree;openTradeTypeTree = false;openIndustryTypeTree = false;registerTypeList ? '' : getTreeData(1)">
+                <input class="form-control types-input" type="text" disabled placeholder="选择注册类型" [ngModel]="selectedRegisterTypeFile?.label">
+              </div>
+              <div class="tree-box flex-column" *ngIf="openRegisterTypeTree">
+                <div class="flex-cell">
+                  <perfect-scrollbar>
+                    <p-tree (click)="$event.stopPropagation();" [value]="registerTypeList" [styleClass]="'types-tree'" (onNodeExpand)="loadNode($event)" selectionMode="single" [(selection)]="selectedRegisterTypeFile"></p-tree>
+                  </perfect-scrollbar>
+                </div>
+                <div class="btn-box">
+                  <button class="btn choose-btn" (click)="openRegisterTypeTree = false">确认</button>
+                  <button class="btn reset-btn" (click)="openRegisterTypeTree = false;selectedRegisterTypeFile = ''">重置</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </perfect-scrollbar>
+        <div class="row-item">
+          <div class="table-label">
+            产业类型
+          </div>
+          <div class="input-box">
+
+            <div style="position: relative">
+              <div (click)="$event.stopPropagation();openIndustryTypeTree = !openIndustryTypeTree;openRegisterTypeTree = false;openTradeTypeTree = false;industryTypeList ? '' : getTreeData(3)">
+                <input class="form-control types-input" type="text" disabled placeholder="选择产业类型" [ngModel]="selectedIndustryTypeFile?.label">
+              </div>
+              <div class="tree-box flex-column" *ngIf="openIndustryTypeTree">
+                <div class="flex-cell">
+                  <perfect-scrollbar>
+                    <p-tree (click)="$event.stopPropagation();" [value]="industryTypeList" [styleClass]="'types-tree'" (onNodeSelect)="changeTradeTypeList($event)" (onNodeExpand)="loadNode($event)" selectionMode="single" [(selection)]="selectedIndustryTypeFile"></p-tree>
+                  </perfect-scrollbar>
+                </div>
+                <div class="btn-box">
+                  <button class="btn choose-btn" (click)="openIndustryTypeTree = false;changeTradeTypeList()">确认</button>
+                  <button class="btn reset-btn" (click)="openIndustryTypeTree = false;selectedIndustryTypeFile = '';changeTradeTypeList()">重置</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">
+            行业类型
+          </div>
+          <div class="input-box">
+            <div style="position: relative">
+              <!--selectedIndustryTypeFile ? getTradeTypesTree(selectedIndustryTypeFile.data) : getTreeData(2)如果已选产业，获取产业下属行业，否则获取所有行业-->
+              <div (click)="$event.stopPropagation();openTradeTypeTree = !openTradeTypeTree;openRegisterTypeTree = false;openIndustryTypeTree = false;tradeTypeList ? '' : selectedIndustryTypeFile ? getTradeTypesTree(selectedIndustryTypeFile.data) : getTreeData(2)">
+                <input class="form-control types-input" type="text" disabled placeholder="选择行业类型" [ngModel]="selectedTradeTypeFile?.label">
+              </div>
+              <div class="tree-box flex-column" *ngIf="openTradeTypeTree">
+                <div class="flex-cell">
+                  <perfect-scrollbar>
+                    <p-tree (click)="$event.stopPropagation();" [value]="tradeTypeList" [styleClass]="'types-tree'" (onNodeExpand)="loadNode($event)" selectionMode="single" [(selection)]="selectedTradeTypeFile"></p-tree>
+                  </perfect-scrollbar>
+                </div>
+                <div class="btn-box">
+                  <button class="btn choose-btn" (click)="openTradeTypeTree = false">确认</button>
+                  <button class="btn reset-btn" (click)="openTradeTypeTree = false;selectedTradeTypeFile = ''">重置</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">注册资金</div>
+          <div class="input-box">
+            <select name="" [(ngModel)]="searchParams.enrollmentOfFundsEnum" class="form-control">
+              <option value="">注册资金</option>
+              <option *ngFor="let item of RegisterMoneyEnums" [value]="item.name">{{item.desc}}万元</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-item full-item">
+          <div class="table-label">通讯地址</div>
+          <div class="input-box">
+            <input class="form-control types-input" [(ngModel)]="searchParams.address" type="text" placeholder="通讯地址">
+          </div>
+        </div>
+        <div class="row-item full-item">
+          <div class="table-label">企业名称</div>
+          <div class="input-box">
+            <input class="form-control types-input" [(ngModel)]="searchParams.companyName" type="text" placeholder="企业名称">
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">注册年份</div>
+          <div class="input-box">
+            <input class="form-control types-input" [(ngModel)]="searchParams.establishDate" type="text" placeholder="注册年份">
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">自定义标签</div>
+          <div class="input-box">
+            <select name="" [(ngModel)]="searchParams.iabels" class="form-control">
+              <option value="">自定义标签</option>
+              <option *ngFor="let item of labelLists" [value]="item">{{item}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">年份</div>
+          <div class="input-box">
+            <input class="form-control types-input" [(ngModel)]="searchParams.year" type="text" placeholder="年份">
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">人员规模</div>
+          <div class="input-box">
+            <select name="" [(ngModel)]="searchParams.staffSizeEnum" class="form-control">
+              <option value="">人员规模</option>
+              <option *ngFor="let item of StaffSizeEnums" [value]="item.name">{{item.desc}}人</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">营业收入规模</div>
+          <div class="input-box">
+            <select name="" [(ngModel)]="searchParams.incomeScaleEnum" class="form-control">
+              <option value="">营业收入规模</option>
+              <option *ngFor="let item of IncomeScaleEnums" [value]="item.name">{{item.desc}}万元</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">税收规模</div>
+          <div class="input-box">
+            <select name="" [(ngModel)]="searchParams.taxScaleEnum" class="form-control">
+              <option value="">税收规模</option>
+              <option *ngFor="let item of TaxScaleEnums" [value]="item.name">{{item.desc}}万元</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">能耗规模</div>
+          <div class="input-box">
+            <select name="" [(ngModel)]="searchParams.energyConsumptionEnum" class="form-control">
+              <option value="">能耗规模</option>
+              <option *ngFor="let item of EnergyConsumptionEnums" [value]="item.name">{{item.desc}}吨/标准煤</option>
+            </select>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="table-label">环保排污规模</div>
+          <div class="input-box">
+            <select name="" [(ngModel)]="searchParams.sewageScaleEenum" class="form-control">
+              <option value="">环保排污规模</option>
+              <option *ngFor="let item of SewageScaleEenums" [value]="item.name">{{item.desc}}吨</option>
+            </select>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="data-output-ft">
+    <div class="data-output-ft text-c">
       <!--<div class="select-box fl" [ngClass]="{'active': allSelectedStatus}">
         <div class="select-con" (click)="allSelectedStatus = !allSelectedStatus;allSelected()"></div>全选
       </div>-->
-      <span class="back-btn" (click)="hasSearch = false;hasDownload = false"> <i class="fa fa-mail-reply-all"></i>返回搜索</span>
-      <button appAccessControl [accessData]="'data-output'" [buttonAccess]="true" class="download-btn fr" (click)="downLoadDataFn()">下载</button>
+      <button appAccessControl [accessData]="'data-output-search'" [buttonAccess]="true" class="color-full-button" (click)="search()">搜索</button>
     </div>
-  </div>
+  <!--</div>-->
+</div>
+</perfect-scrollbar>
 </div>

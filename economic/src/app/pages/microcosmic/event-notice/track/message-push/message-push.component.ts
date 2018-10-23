@@ -3,7 +3,8 @@ import { EventNoticeService, EventNoticeResponse, RequestParams  } from '../../e
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { bounce, slideOutRight, slideInLeft } from 'ng-animate';
 import { LoadingService } from '../../../../../shared/loading/loading.service';
-import { ToastModalService } from "../../../../../shared/toast-modal/toast-modal.service";
+import { ToastModalService } from '../../../../../shared/toast-modal/toast-modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-message-push',
@@ -32,6 +33,7 @@ export class MessagePushComponent implements OnInit, OnDestroy {
     private trackService: EventNoticeService,
     private loadingService: LoadingService,
     private toastModalService: ToastModalService,
+    private router: Router,
   ) { }
   newsInfo = [];
   newsInfoTips = '加载中...';
@@ -134,6 +136,15 @@ export class MessagePushComponent implements OnInit, OnDestroy {
     } else {
       this.findNewsPage();
     }
+  }
+  /*去企业详情*/
+  viewCompanyData(name) {
+    sessionStorage.setItem('backRouteUrl', '/mic/eventNotice/track/messagePush');
+    this.router.navigate(['/mic/companyDetail/basic/company-profile'], {
+      queryParams: {
+        name: name
+      }
+    });
   }
 
   newsNext() {

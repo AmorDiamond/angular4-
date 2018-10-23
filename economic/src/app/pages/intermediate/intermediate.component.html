@@ -1,9 +1,9 @@
 <!-- 中观首页 -->
 <div class="column_title_box">
   <!--<h3 routerLink="indexAbstract" routerLinkActive="active">首页概要</h3>-->
-  <h3 routerLink="industryBoard" routerLinkActive="active">产业看板</h3>
-  <!--<h3 routerLink="businessTrain" routerLinkActive="active">企业培育看板</h3>-->
-  <h3 routerLink="industryMap" routerLinkActive="active">产业地图</h3>
+  <h3 appAccessControl [accessData]="'medium-industryClass-borad'" routerLink="industryBoard" routerLinkActive="active">产业看板</h3>
+  <h3 appAccessControl [accessData]="'medium-area-borad'" routerLink="areaFocus" routerLinkActive="active">地域聚焦</h3>
+  <h3 appAccessControl [accessData]="'medium-industry-board'" routerLink="tradeBoard" routerLinkActive="active">行业看板</h3>
 </div>
 <div class="middle-view-bd">
   <router-outlet></router-outlet>

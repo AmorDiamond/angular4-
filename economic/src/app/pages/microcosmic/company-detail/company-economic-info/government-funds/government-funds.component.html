@@ -1,4 +1,6 @@
-<div class="panel-content">
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content">
   <div class="panel-item-title">政府支持总金额：</div>
   <div class="total-money"><span *ngIf="totalMoney"><span class="number">{{totalMoney}}</span>万元</span><span class="number" *ngIf="!totalMoney">0</span></div>
   <div class="panel-item-title">政府支持详情：</div>
@@ -21,7 +23,10 @@
   <div class="load-more-info text-c" *ngIf="findParams.page < pageParams.totalPages">
     <div class="load-more-con" (click)="getGovernmentProject()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
   </div>
-  <div class="no-data-tips" *ngIf="ProjectDeclarations.length<1">
+  <div class="no-data-tips no-data-tips-full" *ngIf="ProjectDeclarations.length<1">
+    <span class="tips-bg"></span>
     {{GovernmentProjectTips}}
   </div>
+</div>
+  </perfect-scrollbar>
 </div>

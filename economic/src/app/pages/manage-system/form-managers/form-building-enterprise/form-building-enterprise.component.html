@@ -1,61 +1,75 @@
-<div class="con-hd">
-  <button appAccessControl [accessData]="'manager-import-building'" class="excel-import" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/floorInfoPojo/uploadExcel'}">EXCEL导入</button>
-  <button appAccessControl [accessData]="'manager-export-building'" class="excel-import">
-  <a class="excel-import" target="_blank" href="/manager/v1/floorInfoPojo/exportExcelForm?enterpriseName={{getListParams.companyName}}" download="{{getListParams.companyName+'-'+'楼宇入住.xlsx'}}">导出</a>
+<!-- <div class="con-hd">
+  <button appAccessControl [accessData]="'manager-import-building'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/floorInfoPojo/uploadExcel'}">EXCEL导入</button>
+  <button appAccessControl [accessData]="'manager-export-building'" class="btn">
+  <a class="btn" target="_blank" href="/manager/v1/floorInfoPojo/exportExcelForm?enterpriseName={{getListParams.companyName}}" download="{{getListParams.companyName+'-'+'楼宇入住.xlsx'}}">导出</a>
   </button>
-  <button appAccessControl [accessData]="'manager-download-building'" class="excel-import">
-  <a class="excel-import" target="_blank" href="{{formExcelTemplateData}}" download="企业楼宇入住模板.xlsx">EXCEL模板下载</a>
+  <button appAccessControl [accessData]="'manager-download-building'" class="btn">
+  <a class="btn" target="_blank" href="{{formExcelTemplateData}}" download="企业楼宇入住模板.xlsx">EXCEL模板下载</a>
   </button>
   
-
-  <!-- <button class="excel-export">EXCEL模板下载</button> -->
-</div>
+</div> -->
 <div class="filter">
   <form class="form-inline">
-      <div class="form-group">
-        <label>企业名称:</label>
-        <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.companyName" placeholder="企业名称">
-      </div>
-      <div class="form-group">
-        <label>楼宇名称:</label>
-        <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.floorName" placeholder="楼宇名称">
-      </div>
-    <div class="filter-bt">
+    <div class="form-group">
+      <label>企业名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.companyName" placeholder="企业名称">
+    </div>
+    <div class="form-group">
+      <label>楼宇名称:</label>
+      <input type="text" class="form-control" name="ldapName" [(ngModel)]="getListParams.floorName" placeholder="楼宇名称">
+    </div>
+    <div class="form-group">
       <button class="btn search-btn" (click)="search()">搜索</button>
-      <button class="btn search-btn" (click)="resetSearch()">重置</button>
+      <button class="btn" (click)="resetSearch()">重置</button>
+    </div>
+    <div class="form-group fr">
+      <button appAccessControl [accessData]="'manager-import-building'" class="btn" [routerLink]="['../UploadFile']" [queryParams]="{url:'/manager/v1/floorInfoPojo/uploadExcel'}">EXCEL导入</button>
+      <!-- <button class="btn"> -->
+      <a class="btn" appAccessControl [accessData]="'manager-export-building'" target="_blank" href="/manager/v1/floorInfoPojo/exportExcelForm?enterpriseName={{getListParams.companyName}}"
+        download="{{getListParams.companyName+'-'+'楼宇入住.xlsx'}}">导出</a>
+      <!-- </button> -->
+      <!-- <button class="btn"> -->
+      <a class="btn" appAccessControl [accessData]="'manager-download-building'" target="_blank" href="{{formExcelTemplateData}}"
+        download="企业楼宇入住模板.xlsx">EXCEL模板下载</a>
+      <!-- </button> -->
+
     </div>
   </form>
 </div>
 <table class="table table-bordered table-hover table-s table-overflow-x">
   <thead>
-  <tr class="text-c">
-    <th>楼宇名称</th>
-    <th>楼宇详细地址</th>
-    <th>企业名称</th>
-    <th>统一社会信用代码</th>
-    <th>注册类型</th>
-    <th>入驻楼宇时间</th>
-    <th>租赁面积（㎡）</th>
-  </tr>
+    <tr class="text-c">
+      <th>楼宇名称</th>
+      <th>楼宇详细地址</th>
+      <th>企业名称</th>
+      <th>统一社会信用代码</th>
+      <th>注册类型</th>
+      <th>入驻楼宇时间</th>
+      <th>租赁面积（㎡）</th>
+    </tr>
   </thead>
   <tbody>
-  <tr class="text-c ng-scope" *ngFor="let item of list">
-    <td class="nowrap">{{item.floorName}}</td>
-    <td class="nowrap">{{item.floorDetailAddress}}</td>
-    <td class="nowrap">{{item.enterpriseName}}</td>
-    <td class="nowrap">{{item.creditCode}}</td>
-    <td class="nowrap">{{item.enterpriseType}}</td>
-    <td class="nowrap">{{item.intoFloorTime | date:'yyyy-MM-dd'}}</td>
-    <td class="nowrap">{{item.leaseArea}}</td>
-  </tr>
+    <tr class="text-c ng-scope" *ngFor="let item of list">
+      <td class="nowrap">{{item.floorName}}</td>
+      <td class="nowrap">{{item.floorDetailAddress}}</td>
+      <td class="nowrap">{{item.enterpriseName}}</td>
+      <td class="nowrap">{{item.creditCode}}</td>
+      <td class="nowrap">{{item.enterpriseType}}</td>
+      <td class="nowrap">{{item.intoFloorTime | date:'yyyy-MM-dd'}}</td>
+      <td class="nowrap">{{item.leaseArea}}</td>
+    </tr>
   </tbody>
 </table>
 <div class="row rowkey-pagination">
   <div class="col-xs-12 col-12">
     <nav aria-label="Page navigation">
       <ul class="pager">
-        <li [ngClass]="{'disabled' : nowPagesNum < 1}"><a href="javascript:void(0)" (click)="pageChanged(-1)">上一页</a></li>
-        <li [ngClass]="{'disabled' : !getListParams.lastRowKey}"><a href="javascript:void(0)" (click)="pageChanged(1)">下一页</a></li>
+        <li [ngClass]="{'disabled' : nowPagesNum < 1}">
+          <a href="javascript:void(0)" (click)="pageChanged(-1)">上一页</a>
+        </li>
+        <li [ngClass]="{'disabled' : !getListParams.lastRowKey}">
+          <a href="javascript:void(0)" (click)="pageChanged(1)">下一页</a>
+        </li>
       </ul>
     </nav>
   </div>

@@ -77,7 +77,7 @@ export const routes: Routes = [
       // 经营者关联
       { path: 'operatorNexus', component: CompanyOperatorNexusInfoComponent },
       // 综合评价
-      { path: 'overview', component: CompanyOverviewInfoComponent },
+      // { path: 'overview', component: CompanyOverviewInfoComponent },
       { path: '**', redirectTo: 'basic', pathMatch: 'full' }
     ]
   },

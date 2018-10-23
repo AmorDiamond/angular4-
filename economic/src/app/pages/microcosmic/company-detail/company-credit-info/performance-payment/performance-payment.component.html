@@ -1,4 +1,6 @@
-<div class="panel-content">
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content">
   <div>
     <div class="panel-item-title">履约缴费：</div>
     <div class="con" *ngIf="PerformancePayment.length>0">
@@ -22,8 +24,11 @@
       </table>
     </div>
 
-    <div class="no-data-tips" *ngIf="PerformancePayment.length<1">
+    <div class="no-data-tips no-data-tips-full" *ngIf="PerformancePayment.length<1">
+      <span class="tips-bg"></span>
       {{PerformancePaymentTips}}
     </div>
   </div>
+</div>
+  </perfect-scrollbar>
 </div>

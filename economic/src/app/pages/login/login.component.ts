@@ -7,6 +7,8 @@ import { bounce } from 'ng-animate';
 import { Store } from '@ngrx/store';
 import { CHANGE } from '../../core/loading-ngrx/loading.action';
 import { LoadingShow } from '../../core/loading-ngrx/loading.model';
+import { LayoutService } from '../layout/layout.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -20,14 +22,16 @@ import { LoadingShow } from '../../core/loading-ngrx/loading.model';
 export class LoginComponent implements OnInit {
 
   bounce: any;
-  username = '';
-  password = '';
+  username = 'test';
+  password = 'test123456';
   constructor(
     private loginService: LoginService,
     private toastyService: ToastyService,
     private toastyConfig: ToastyConfig,
     private router: Router,
-    private store: Store<LoadingShow>
+    private store: Store<LoadingShow>,
+    private layoutService: LayoutService,
+    private http: HttpClient
   ) {
     this.toastyConfig.theme = 'material';
   }
@@ -47,21 +51,28 @@ export class LoginComponent implements OnInit {
       username: this.username,
       password: this.password
     };
-
-    this.loginService.login(params)
+    sessionStorage.setItem('hasLogin', 'YES');
+    sessionStorage.setItem('userId', '1');
+    sessionStorage.setItem('userRole', 'ADMIN');
+    /*退出登录重新处理权限*/
+    this.layoutService.getAccessData();
+    this.router.navigate(['mic']);
+    /*this.loginService.login(params)
       .subscribe((res: any) => {
+        console.log(res)
         if (res.responseCode === '_200') {
           sessionStorage.setItem('hasLogin', 'YES');
           sessionStorage.setItem('userId', res.data.id);
           sessionStorage.setItem('userRole', res.data.role[0].name);
-
+          /!*退出登录重新处理权限*!/
+          this.layoutService.getAccessData();
           this.store.dispatch({
             type: CHANGE,
             payload: {
               show: false
             }
           });
-          /*登录跳转偏好设置页面*/
+          /!*登录跳转偏好设置页面*!/
           if (res.data.preferenceType) {
             let defaultPage = res.data.preferenceType;
             sessionStorage.setItem('userDefaultPage', defaultPage);
@@ -103,11 +114,11 @@ export class LoginComponent implements OnInit {
           this.addToast(res.errorMsg);
         }
       }
-      /*, err => {
+      /!*, err => {
         this.addToast(err.error.message);
         console.log('LOGIN_ERROR::', err.error.message);
-      }*/
-      );
+      }*!/
+      );*/
   }
 
   addToast(msg) {

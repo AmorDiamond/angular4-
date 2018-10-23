@@ -48,5 +48,9 @@ export class RecommendComponent implements OnInit {
         }
       });
   }
+  /*去企业详情*/
+  viewCompanyData(name) {
+    this.eventNoticeService.setBackRouteUrl(name, '/mic/eventNotice/recommend');
+  }
 
 }

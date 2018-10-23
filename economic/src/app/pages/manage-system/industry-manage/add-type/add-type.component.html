@@ -1,0 +1,17 @@
+<div class="address-con"><span class="back-btn" routerLink="../"></span><span class="home-icon fa fa-home"></span>首页 > 产业类型管理 > {{nowLocation}}</div>
+<div class="single-form">
+  <div class="form-group">
+    <label class="form-label" for="name">产业名称</label>
+    <input type="text" class="form-control" id="name" [(ngModel)]="typeName" placeholder="产业类型名称">
+  </div>
+  <div class="industry-list nz-tree-box">
+    <nz-tree #nzTree [(ngModel)]="nodes"
+             [nzAsyncData]="true"
+             [nzCheckable]="true"
+             (nzExpandChange)="mouseAction('expand',$event)">
+    </nz-tree>
+  </div>
+  <div class="submit-con">
+    <button appAccessControl [accessData]="'manager-edit-industry'" [buttonAccess]="true" class="btn btn-warning" (click)="submitAdd()">提交</button>
+  </div>
+</div>

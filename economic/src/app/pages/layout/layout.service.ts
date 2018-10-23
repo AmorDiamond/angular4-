@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { QueueingSubject } from 'queueing-subject';
 import websocketConnect from 'rxjs-websockets';
 import 'rxjs/add/operator/share';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/map';
@@ -54,8 +54,12 @@ export class LayoutService {
   private searchUrl = '/v1/epBaseInfoPojo/listCompanysPage';
 
   constructor(private http: HttpClient, private router: Router, private routerInfo: ActivatedRoute) {
+    this.getAccessData();
+  }
+  /*获取权限数据处理*/
+  getAccessData() {
     const loginRole = sessionStorage.getItem('userRole');
-    const accessControlDataUrl = '../../../assets/accessControlData.json';
+    const accessControlDataUrl = 'assets/accessControlData.json';
     /*判断是否超级管理员登录*/
     if (loginRole === 'ADMIN') {
       this.http.get(accessControlDataUrl).subscribe(result => {
@@ -68,8 +72,8 @@ export class LayoutService {
         }
         this.changeAccessControlSubject();
       });
-    }else {
-      this.http.get('/v1/competence/findByCurrentUser').subscribe((res: any) => {
+    } else {
+      /*this.http.get('/v1/competence/findByCurrentUser').subscribe((res: any) => {
         console.log('获取所有权限', res);
         if (res.responseCode === '_200') {
           this.http.get(accessControlDataUrl).subscribe(result => {
@@ -82,12 +86,12 @@ export class LayoutService {
             const len = this.accessControlData.length;
             for (let i = 0; i < len; i++) {
               let hasAccess = true;
-              /*const idsLen = this.accessControlData[i].ids.length;
+              /!*const idsLen = this.accessControlData[i].ids.length;
               for (let j = 0; j < idsLen; j++) {
                 if (requstData.indexOf(this.accessControlData[i].ids[j]) < 0) {
                   hasAccess = false;
                 }
-              }*/
+              }*!/
               const resourcesLen = this.accessControlData[i].resources.length;
               for (let j = 0; j < resourcesLen; j++) {
                 if (requstData.indexOf(this.accessControlData[i].resources[j]) < 0) {
@@ -100,10 +104,9 @@ export class LayoutService {
             this.changeAccessControlSubject();
           });
         }
-      });
+      });*/
     }
   }
-
   public connect() {
     if (this.messages) {
       return;
@@ -120,6 +123,13 @@ export class LayoutService {
     this.messages = ws.messages.share();
 
     this.connectionStatus = ws.connectionStatus.share();
+  }
+
+  loginOut() {
+    console.log('=================loginOutServe');
+    return this.http.post('/ldap/security/logout',new HttpParams(), {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    });
   }
 
   public send(message: string): void {
@@ -143,13 +153,13 @@ export class LayoutService {
         if (res.responseCode === '_200') {
           console.log(1111, res)
           if (this.typesList.length < 1) {
-              const Types = res.data.industryType;
-              this.enterpriseTypesNumber = res.data.industryType;
-              for (const key in Types) {
-                  if (Types.hasOwnProperty(key)) {
-                      this.typesList.push(key);
-                  }
+            const Types = res.data.industryType;
+            this.enterpriseTypesNumber = res.data.industryType;
+            for (const key in Types) {
+              if (Types.hasOwnProperty(key)) {
+                this.typesList.push(key);
               }
+            }
           }
           this.subject.next(res);
           this.router.navigate(['/mic/companyList', res.data.keyWord]);
@@ -166,7 +176,7 @@ export class LayoutService {
     return this.subject.asObservable();
   }
   getTypeList() {
-    return {list: this.typesList, num: this.enterpriseTypesNumber};
+    return { list: this.typesList, num: this.enterpriseTypesNumber };
   }
   /*改变保存的权限控制数据*/
   changeAccessControlSubject() {

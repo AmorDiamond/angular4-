@@ -1,24 +1,29 @@
 <!-- 专利信息 -->
-<div class="panel-content">
-  <div class="panel-item-title">企业专利信息：</div>
-  <table class="table table-bordered table-align-c" *ngIf="patenList.length>0">
-    <tr>
-      <th>专利名称</th>
-      <th>类型</th>
-      <th>申请日期</th>
-      <th>专利号</th>
-    </tr>
-    <tr *ngFor="let data of patenList">
-      <td>{{data.patentName}}</td>
-      <td>{{data.patentType}}</td>
-      <td class="nowrap">{{data.applicationDate | date:'yyyy-MM-dd'}}</td>
-      <td class="nowrap">{{data.patentCode}}</td>
-    </tr>
-  </table>
-  <div class="load-more-info text-c" *ngIf="patentListPramas.lastRowKey">
-    <div class="load-more-con" (click)="getPatentList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
-  </div>
-  <div class="no-data-tips" *ngIf="patenList.length<1">
-    {{PatentListTips}}
-  </div>
+<div class="panel-content-box">
+  <perfect-scrollbar>
+    <div class="panel-content">
+      <div class="panel-item-title">企业专利信息：</div>
+      <table class="table table-bordered table-align-c" *ngIf="patenList.length>0">
+        <tr>
+          <th>专利名称</th>
+          <th>类型</th>
+          <th>申请日期</th>
+          <th>专利号</th>
+        </tr>
+        <tr *ngFor="let data of patenList">
+          <td>{{data.patentName}}</td>
+          <td>{{data.patentType}}</td>
+          <td class="nowrap">{{data.applicationDate | date:'yyyy-MM-dd'}}</td>
+          <td class="nowrap">{{data.patentCode}}</td>
+        </tr>
+      </table>
+      <div class="load-more-info text-c" *ngIf="patentListPramas.lastRowKey">
+        <div class="load-more-con" (click)="getPatentList()"><span class="fa fa-2x fa-angle-double-down"></span>加载更多</div>
+      </div>
+      <div class="no-data-tips no-data-tips-full" *ngIf="patenList.length<1">
+        <span class="tips-bg"></span>
+        {{PatentListTips}}
+      </div>
+    </div>
+  </perfect-scrollbar>
 </div>
