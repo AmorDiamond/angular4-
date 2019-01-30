@@ -1,0 +1,34 @@
+<ul nz-menu [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+  <li nz-menu-item [routerLink]="['/user']" class="cl-outline" routerLinkActive="ant-menu-item-selected">
+          <span title>
+            <i nz-icon type="user"></i>
+            <span>用户管理</span>
+          </span>
+  </li>
+  <li nz-submenu [nzOpen]="menuStatus.roles">
+          <span title>
+            <i nz-icon type="appstore"></i>
+            <span>权限管理</span>
+          </span>
+    <ul>
+      <li nz-menu-item [routerLink]="['/roles/roleList']" class="cl-outline" routerLinkActive="ant-menu-item-selected">角色管理</li>
+      <li nz-menu-item [routerLink]="['/roles/functionList']" class="cl-outline" routerLinkActive="ant-menu-item-selected">功能管理</li>
+    </ul>
+  </li>
+  <li nz-submenu [nzOpen]="menuStatus.formManage">
+          <span title>
+            <i nz-icon type="table"></i>
+            <span>表单管理</span>
+          </span>
+    <ul>
+      <li nz-menu-item [routerLink]="['/formManage/technology']" class="cl-outline" routerLinkActive="ant-menu-item-selected">科技型企业</li>
+      <li nz-menu-item [routerLink]="['/formManage/doubleVenture']" class="cl-outline" routerLinkActive="ant-menu-item-selected">双创企业</li>
+      <li nz-menu-item [routerLink]="['/formManage/sedEnterprise']" class="cl-outline" routerLinkActive="ant-menu-item-selected">种子企业</li>
+      <li nz-menu-item [routerLink]="['/formManage/gazelleEnterprise']" class="cl-outline" routerLinkActive="ant-menu-item-selected">瞪羚企业</li>
+      <li nz-menu-item [routerLink]="['/formManage/unicornEnterprise']" class="cl-outline" routerLinkActive="ant-menu-item-selected">独角兽企业</li>
+      <li nz-menu-item [routerLink]="['/formManage/technologyPlatform']" class="cl-outline" routerLinkActive="ant-menu-item-selected">公共技术平台</li>
+      <li nz-menu-item [routerLink]="['/formManage/intermediary']" class="cl-outline" routerLinkActive="ant-menu-item-selected">科技中介机构</li>
+      <li nz-menu-item [routerLink]="['/formManage/incubator']" class="cl-outline" routerLinkActive="ant-menu-item-selected">孵化器</li>
+    </ul>
+  </li>
+</ul>

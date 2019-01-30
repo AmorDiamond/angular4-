@@ -1,0 +1,105 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="name">企业名称</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="name" name="name" minlength="4" type="text" id="name" placeholder="请输入企业名称">
+      <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">
+        <ng-container *ngIf="validateForm.get('name').errors.required">
+          请输入企业名称
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('name').errors.minlength">
+          长度不能少于{{validateForm.get('name').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="creditCode">社会信用代码</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="creditCode" name="creditCode" minlength="4" type="text" id="creditCode" placeholder="请输入社会信用代码">
+      <nz-form-explain *ngIf="validateForm.get('creditCode').dirty && validateForm.get('creditCode').errors">
+        <ng-container *ngIf="validateForm.get('creditCode').errors.required">
+          请输入社会信用代码
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('creditCode').errors.minlength">
+          长度不能少于{{validateForm.get('account').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="address">注册地址</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="address" name="address" minlength="4" type="text" id="address" placeholder="请输入注册地址">
+      <nz-form-explain *ngIf="validateForm.get('address').dirty && validateForm.get('address').errors">
+        <ng-container *ngIf="validateForm.get('address').errors.required">
+          请输入注册地址
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('address').errors.minlength">
+          长度不能少于{{validateForm.get('address').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="businessScope">经营范围</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="businessScope" name="businessScope" type="text" placeholder="请输入经营范围">
+      <nz-form-explain *ngIf="validateForm.get('businessScope').dirty && validateForm.get('businessScope').errors">
+        请输入经营范围
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="businessStatus">经营状态</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select style="width: 100%" name="businessStatus" formControlName="businessStatus" nzPlaceHolder="请选择状态">
+        <nz-option *ngFor="let item of statusEnum" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="validateForm.get('businessStatus').dirty && validateForm.get('businessStatus').errors">
+        请选择状态
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="legalPersonName">法人代表</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="legalPersonName" name="legalPersonName" type="text" placeholder="请输入法人代表">
+      <nz-form-explain *ngIf="validateForm.get('legalPersonName').dirty && validateForm.get('legalPersonName').errors">
+        请输入法人代表
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="telephone">联系电话</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="telephone" name="telephone" minlength="4" type="text" placeholder="请输入联系电话">
+      <nz-form-explain *ngIf="validateForm.get('telephone').dirty && validateForm.get('telephone').errors">
+        <ng-container *ngIf="validateForm.get('telephone').errors.required">
+          请输入联系电话
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('telephone').errors.minlength">
+          长度不能少于{{validateForm.get('telephone').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="registCapital">注册资金</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="registCapital" name="registCapital" type="text" placeholder="请输入注册资金">
+      <nz-form-explain *ngIf="validateForm.get('registCapital').dirty && validateForm.get('registCapital').errors">
+        请输入注册资金
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="establishDate">成立日期</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="establishDate" name="establishDate" type="text" placeholder="请输入成立日期">
+      <nz-form-explain *ngIf="validateForm.get('establishDate').dirty && validateForm.get('establishDate').errors">
+        请输入成立日期
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+</form>

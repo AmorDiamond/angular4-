@@ -1,0 +1,40 @@
+<div class="filter-box">
+  <app-filter (filterChange)="search($event)" (addUser)="addUser()"></app-filter>
+</div>
+<nz-table #basicTable
+          [nzData]="list"
+          [nzLoading]="loadingStatus"
+          nzFrontPagination="false"
+          [nzPageIndex]="pageParams.currentPage"
+          [nzPageSize]="Params.size"
+          [nzTotal]="pageParams.totalItems"
+          (nzPageIndexChange)="pageChange($event)">
+  <thead>
+  <tr>
+    <th>用户账户</th>
+    <th>用户名称</th>
+    <th>状态</th>
+    <th>最后登录时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.account}}</td>
+    <td>{{data.userName}}</td>
+    <td>
+      <i *ngIf="data.status==='STATUS_NORMAL'" nz-icon type="check-circle" theme="twotone" twoToneColor="#52c41a" nz-tooltip [nzTitle]="userStatus[data.status]"></i>
+      <i *ngIf="data.status==='STATUS_DISABLE'" nz-icon type="stop" theme="twotone" twoToneColor="#eb2f96" nz-tooltip [nzTitle]="userStatus[data.status]"></i>
+    </td>
+    <td>{{data.lastLoginDate | date:'yyyy-MM-dd HH:mm'}}</td>
+    <td>
+      <a (click)="createComponentModal(data)"><i nz-icon type="edit" theme="outline" nz-tooltip nzTitle="编辑"></i></a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a (click)="createSetRolesModal(data)"><i nz-icon type="setting" theme="outline" nz-tooltip nzTitle="设置"></i></a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a *ngIf="data.status==='STATUS_NORMAL'" nz-popconfirm nzTitle="确认禁用该用户?" (nzOnConfirm)="confirm(data, data.status)" nzPlacement="topRight"><i nz-icon type="stop" theme="outline" nz-tooltip nzTitle="禁用"></i></a>
+      <a *ngIf="data.status==='STATUS_DISABLE'" nz-popconfirm nzTitle="确认启用该用户?" (nzOnConfirm)="confirm(data, data.status)" nzPlacement="topRight"><i nz-icon type="check-circle" theme="twotone" twoToneColor="#52c41a" nz-tooltip nzTitle="启用"></i></a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

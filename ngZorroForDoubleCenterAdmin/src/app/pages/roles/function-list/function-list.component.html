@@ -1,0 +1,84 @@
+<div class="filter-box">
+  <form nz-form [nzLayout]="'inline'">
+    <nz-form-item class="nowrap form-item">
+      <nz-form-label [nzSpan]="6" nzFor="comment">权限名称</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-input-group [nzSuffix]="suffixTemplate">
+          <input type="text" name="comment" nz-input placeholder="请输入权限名称" [(ngModel)]="Params.comment">
+        </nz-input-group>
+        <ng-template #suffixTemplate><i nz-icon type="close-circle" theme="fill" (click)="Params.comment=null" *ngIf="comment" class="clear-input"></i></ng-template>
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item class="nowrap form-item">
+      <nz-form-label [nzSpan]="6" nzFor="resource">权限串</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-input-group [nzSuffix]="resourceTemplate">
+          <input type="text" name="resource" nz-input placeholder="请输入权限串" [(ngModel)]="Params.resource">
+        </nz-input-group>
+        <ng-template #resourceTemplate><i nz-icon type="close-circle" theme="fill" (click)="Params.resource=null" *ngIf="resource" class="clear-input"></i></ng-template>
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item class="nowrap form-item">
+      <nz-form-label [nzSpan]="10" nzFor="methods">权限method</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-select style="width: 100%" name="methods" [(ngModel)]="Params.methods" nzAllowClear nzPlaceHolder="选择method">
+          <nz-option *ngFor="let item of methods" [nzValue]="item" [nzLabel]="item"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item class="nowrap form-item">
+      <nz-form-label [nzSpan]="6" nzFor="status">状态</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-select style="width: 100%" name="status" [(ngModel)]="Params.status" nzAllowClear nzPlaceHolder="选择状态">
+          <nz-option *ngFor="let item of filterStatusEnum" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item >
+    <button nz-button nzType="primary" class="filter-btn" (click)="search()"><i nz-icon type="search"></i>搜索</button>
+    <button nz-button nzType="default" class="filter-btn" (click)="reset()"><i nz-icon type="redo"></i>重置</button>
+    <button nz-button nzType="default" class="filter-btn fr" (click)="createComponentModal()"><i nz-icon type="plus"></i>新增功能</button>
+  </form>
+</div>
+
+<nz-table #basicTable
+          [nzData]="dataSet"
+          [nzLoading]="loadingStatus"
+          nzFrontPagination="false"
+          [nzPageIndex]="pageParams.currentPage"
+          [nzPageSize]="Params.size"
+          [nzTotal]="pageParams.totalItems"
+          (nzPageIndexChange)="pageChange($event)">
+  <thead>
+  <tr>
+    <th>编号</th>
+    <th>权限名称</th>
+    <th>methods</th>
+    <th>权限串</th>
+    <th>状态</th>
+    <th>创建时间</th>
+    <th>修改时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.id.length>6 ? (data.id | slice:0:6) + '***' : data.id}}</td>
+    <td>{{data.comment}}</td>
+    <td>{{data.methods}}</td>
+    <td>{{data.resource}}</td>
+    <td>
+      <i *ngIf="data.status==='STATUS_NORMAL'" nz-icon type="check-circle" theme="twotone" twoToneColor="#52c41a" nz-tooltip [nzTitle]="statusEnum[data.status]"></i>
+      <i *ngIf="data.status==='STATUS_DISABLE'" nz-icon type="stop" theme="twotone" twoToneColor="#eb2f96" nz-tooltip [nzTitle]="statusEnum[data.status]"></i>
+    </td>
+    <td>{{data.createDate | date:'yyyy-MM-dd'}}</td>
+    <td>{{data.modifyDate | date:'yyyy-MM-dd'}}</td>
+    <td>
+      <a (click)="createComponentModal(data)"><i nz-icon type="edit" theme="outline" nz-tooltip nzTitle="编辑"></i></a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a *ngIf="data.status==='STATUS_NORMAL'" nz-popconfirm nzTitle="确认禁用该功能?" (nzOnConfirm)="confirm(data)" nzPlacement="topRight"><i nz-icon type="stop" theme="outline" nz-tooltip nzTitle="禁用"></i></a>
+      <a *ngIf="data.status==='STATUS_DISABLE'" nz-popconfirm nzTitle="确认启用该功能?" (nzOnConfirm)="confirm(data)" nzPlacement="topRight"><i nz-icon type="check-circle" theme="twotone" twoToneColor="#52c41a" nz-tooltip nzTitle="启用"></i></a>
+
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

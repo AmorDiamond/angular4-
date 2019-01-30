@@ -1,0 +1,41 @@
+.login-bg{
+  position: absolute;
+  background: url("../../../../assets/images/login_bg.svg");
+  background-repeat: no-repeat;
+  background-position: center 110px;
+  background-size: 100%;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
+.login-title{
+  position: absolute;
+  text-align: center;
+  font-size: 34px;
+  font-weight: 700;
+  top: -100px;
+  left: -100px;
+  right: -100px;
+  letter-spacing: 4px;
+}
+.login-container{
+  position: absolute;
+  padding: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px #a7a7a7;
+}
+.login-form {
+  width: 300px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}

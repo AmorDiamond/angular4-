@@ -1,0 +1,18 @@
+.item-group{
+  border-bottom: 1px solid rgb(233, 233, 233);
+}
+:host >>> .role-manage .checkbox-container .checkbox-item .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  margin-left: 0;
+}
+:host >>> .role-manage .checkbox-container .checkbox-item .ant-checkbox-wrapper {
+  width: 50%;
+  margin-top: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (min-width: 1900px) {
+  :host >>> .role-manage .checkbox-container .checkbox-item .ant-checkbox-wrapper {
+    width: 33.33%;
+  }
+}

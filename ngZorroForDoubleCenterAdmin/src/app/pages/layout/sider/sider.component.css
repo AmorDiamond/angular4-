@@ -1,0 +1,3 @@
+.layout-sider :host >>> .ant-menu-inline{
+  border-right: none;
+}

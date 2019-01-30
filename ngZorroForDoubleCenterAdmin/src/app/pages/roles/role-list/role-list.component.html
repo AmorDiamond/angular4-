@@ -1,0 +1,43 @@
+<div class="filter-box">
+  <app-filter (filterChange)="search($event)"></app-filter>
+</div>
+<nz-table
+  #basicTable
+  [nzData]="dataSet"
+  [nzLoading]="loadingStatus"
+  nzFrontPagination="false"
+  [nzPageIndex]="pageParams.currentPage"
+  [nzPageSize]="Params.size"
+  [nzTotal]="pageParams.totalItems"
+  (nzPageIndexChange)="pageChange($event)">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>角色名称</th>
+    <th>创建时间</th>
+    <th>修改时间</th>
+    <th>状态</th>
+    <th>备注</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.id.length>6 ? (data.id | slice:0:6) + '***' : data.id}}</td>
+    <td>{{data.name}}</td>
+    <td>{{data.createDate | date:'yyyy-MM-dd'}}</td>
+    <td>{{data.modifyDate | date:'yyyy-MM-dd'}}</td>
+    <td>
+      <i *ngIf="data.status==='STATUS_NORMAL'" nz-icon type="check-circle" theme="twotone" twoToneColor="#52c41a" nz-tooltip [nzTitle]="statusEnum[data.status]"></i>
+      <i *ngIf="data.status==='STATUS_DISABLE'" nz-icon type="stop" theme="twotone" twoToneColor="#eb2f96" nz-tooltip [nzTitle]="statusEnum[data.status]"></i>
+    </td>
+    <td>{{data.comment}}</td>
+    <td>
+      <a [routerLink]="['../roleManage',data.id]"><i nz-icon type="edit" theme="outline" nz-tooltip nzTitle="编辑"></i></a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a *ngIf="data.status==='STATUS_NORMAL'" nz-popconfirm nzTitle="确认禁用该角色?" (nzOnConfirm)="confirm(data, data.status)" nzPlacement="topRight"><i nz-icon type="stop" theme="outline" nz-tooltip nzTitle="禁用"></i></a>
+      <a *ngIf="data.status==='STATUS_DISABLE'" nz-popconfirm nzTitle="确认启用该角色?" (nzOnConfirm)="confirm(data, data.status)" nzPlacement="topRight"><i nz-icon type="check-circle" theme="twotone" twoToneColor="#52c41a" nz-tooltip nzTitle="启用"></i></a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

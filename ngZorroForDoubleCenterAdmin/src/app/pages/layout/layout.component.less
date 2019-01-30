@@ -1,0 +1,36 @@
+@import "../../../../src/theme.less";
+.layout-container{
+}
+.layout-head{
+  position: fixed;
+  width: 100%;
+  box-shadow: 0 1px 10px rgba(0,0,0,.2);
+  color: #fff;
+  z-index: 2;
+}
+.layout-content{
+  margin-top: @layout-header-height;
+  background: #f5f7fa;
+}
+.layout-sider{
+  position: fixed;
+  left: 0;
+  top: @layout-header-height;
+  bottom: 0;
+  overflow: hidden;
+  background-color: #fff;
+  border-right: 1px solid #efe3e5;
+  padding-top: 20px;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+}
+.layout-view-content{
+  margin-left: 220px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #fff;
+}

@@ -1,0 +1,55 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="userName">用户名称</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="userName" name="userName" minlength="4" type="text" id="userName" placeholder="请输入用户名称">
+      <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">
+        <ng-container *ngIf="validateForm.get('userName').errors.required">
+          请输入用户名称
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('userName').errors.minlength">
+          长度不能少于{{validateForm.get('userName').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="account">用户账号</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="account" name="account" minlength="4" type="text" id="account" placeholder="请输入用户账号">
+      <nz-form-explain *ngIf="validateForm.get('account').dirty && validateForm.get('account').errors">
+        <ng-container *ngIf="validateForm.get('account').errors.required">
+          请输入用户账号
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('account').errors.minlength">
+          长度不能少于{{validateForm.get('account').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="password">登录密码</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="password" name="password" minlength="4" type="password" id="password" placeholder="请输入密码">
+      <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">
+        <ng-container *ngIf="validateForm.get('password').errors.required">
+          请输入密码
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('password').errors.minlength">
+          长度不能少于{{validateForm.get('password').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <!--<nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="functionMethod">methods</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select style="width: 100%" name="status" formControlName="functionMethod" nzPlaceHolder="请选择method">
+        <nz-option *ngFor="let item of methods" [nzValue]="item" [nzLabel]="item"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="validateForm.get('functionMethod').dirty && validateForm.get('functionMethod').errors">
+        请选择method
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >-->
+</form>

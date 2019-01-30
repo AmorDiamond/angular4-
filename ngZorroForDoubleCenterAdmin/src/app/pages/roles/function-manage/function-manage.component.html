@@ -1,0 +1,41 @@
+<form nz-form [formGroup]="validateForm">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="comment">权限名称</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="comment" name="comment" minlength="4" type="text" id="comment" placeholder="请输入权限名称">
+      <nz-form-explain *ngIf="validateForm.get('comment').dirty && validateForm.get('comment').errors">
+        <ng-container *ngIf="validateForm.get('comment').errors.required">
+          请输入权限名称
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('comment').errors.minlength">
+          长度不能少于{{validateForm.get('comment').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="methods">methods</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select style="width: 100%" name="status" formControlName="methods" nzPlaceHolder="请选择method">
+        <nz-option *ngFor="let item of methods" [nzValue]="item" [nzLabel]="item"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="validateForm.get('methods').dirty && validateForm.get('methods').errors">
+        请选择method
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzRequired nzFor="resource">权限串</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input formControlName="resource" name="resource" minlength="4" type="text" id="resource" placeholder="请输入权限串">
+      <nz-form-explain *ngIf="validateForm.get('resource').dirty && validateForm.get('resource').errors">
+        <ng-container *ngIf="validateForm.get('resource').errors.required">
+          请输入权限串
+        </ng-container >
+        <ng-container *ngIf="validateForm.get('resource').errors.minlength">
+          长度不能少于{{validateForm.get('resource').errors.minlength.requiredLength}}位
+        </ng-container >
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item >
+</form>

@@ -1,0 +1,24 @@
+<form nz-form>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="userName">用户名称</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input [value]="data.userName" name="userName" disabled type="text" id="userName" placeholder="请输入用户名称">
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6" nzFor="account">用户账号</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input [value]="data.account" name="account" disabled type="text" id="account" placeholder="请输入用户账号">
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label [nzSpan]="6">角色列表</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-checkbox-wrapper style="width: 100%;" (nzOnChange)="change($event)">
+        <div nz-row>
+          <div nz-col [nzSpan]="12" class="checkbox-item" *ngFor="let item of rolesData"><label nz-checkbox [nzValue]="item?.id" [ngModel]="item?.checked" [name]="item?.id">{{item.comment}}</label></div>
+        </div>
+      </nz-checkbox-wrapper>
+    </nz-form-control>
+  </nz-form-item >
+</form>

@@ -1,0 +1,30 @@
+<form nz-form [nzLayout]="'inline'">
+  <nz-form-item class="nowrap form-item">
+    <nz-form-label [nzSpan]="6" nzFor="account">用户账户</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <nz-input-group [nzSuffix]="suffixTemplate">
+        <input type="text" name="account" nz-input placeholder="请输入用账户" [(ngModel)]="account">
+      </nz-input-group>
+      <ng-template #suffixTemplate><i nz-icon type="close-circle" theme="fill" (click)="account=null" *ngIf="account" class="clear-input"></i></ng-template>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item class="nowrap form-item">
+    <nz-form-label [nzSpan]="6" nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <nz-select style="width: 100%" name="status" [(ngModel)]="filterStatus" nzAllowClear nzPlaceHolder="选择状态">
+        <nz-option *ngFor="let item of filterStatusEnum" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item >
+  <!--<nz-form-item class="nowrap form-item">
+    <nz-form-label [nzSpan]="4" nzFor="time">起止时间</nz-form-label>
+    <nz-form-control [nzSpan]="20">
+      <nz-date-picker name="time" [(ngModel)]="date" (ngModelChange)="onChange($event)" nzPlaceHolder="开始时间"></nz-date-picker>
+      ~
+      <nz-date-picker name="time" [(ngModel)]="date" (ngModelChange)="onChange($event)" nzPlaceHolder="结束时间"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item >-->
+  <button nz-button nzType="primary" class="filter-btn" (click)="search()"><i nz-icon type="search"></i>搜索</button>
+  <button nz-button nzType="default" class="filter-btn" (click)="reset()"><i nz-icon type="redo"></i>重置</button>
+  <button nz-button nzType="default" class="filter-btn fr" (click)="addUserHandle()"><i nz-icon type="plus"></i>新增用户</button>
+</form>

@@ -1,0 +1,22 @@
+<form nz-form [nzLayout]="'inline'">
+  <nz-form-item class="nowrap form-item">
+    <nz-form-label [nzSpan]="6" nzFor="roleName">角色名称</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <nz-input-group [nzSuffix]="suffixTemplate">
+        <input type="text" name="roleName" nz-input placeholder="请输入角色名称" [(ngModel)]="Params.roleName">
+      </nz-input-group>
+      <ng-template #suffixTemplate><i nz-icon type="close-circle" theme="fill" (click)="Params.roleName=null" *ngIf="roleName" class="clear-input"></i></ng-template>
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item class="nowrap form-item">
+    <nz-form-label [nzSpan]="6" nzFor="status">状态</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <nz-select style="width: 100%" name="status" [(ngModel)]="Params.status" nzAllowClear nzPlaceHolder="选择状态">
+        <nz-option *ngFor="let item of filterStatusEnum" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item >
+  <button nz-button nzType="primary" class="filter-btn" (click)="search()"><i nz-icon type="search"></i>搜索</button>
+  <button nz-button nzType="default" class="filter-btn" (click)="reset()"><i nz-icon type="redo"></i>重置</button>
+  <button nz-button nzType="default" class="filter-btn fr" [routerLink]="['/roles/roleManage', '-1']"><i nz-icon type="plus"></i>新增角色</button>
+</form>

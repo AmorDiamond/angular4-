@@ -1,0 +1,22 @@
+{
+  "/manager": {
+    "target": "http://127.0.0.1:6650",
+    "secure": "false"
+  },
+  "/v1": {
+    "target": "http://127.0.0.1:6650",
+    "secure": "false"
+  },
+  "/ldap": {
+    "target": "http://127.0.0.1:6650",
+    "secure": "false"
+  },
+  "/login": {
+    "target": "http://127.0.0.1:6650",
+    "secure": "false"
+  },
+  "/xlsx": {
+    "target": "http://127.0.0.1:6650",
+    "secure": "false"
+  }
+}

@@ -1,0 +1,43 @@
+<div class="role-manage">
+  <div class="back-container">
+    <span class="back-con" (click)="back()"><i nz-icon type="rollback" theme="outline" class="back-icon"></i>返回</span>
+    <span>{{location}}</span>
+  </div>
+  <form nz-form [formGroup]="validateForm">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="name">角色名称</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="name" [readonly]="editRole" id="name">
+        <nz-form-explain *ngIf="validateForm.get('name').dirty && validateForm.get('name').errors">角色名称不能为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="comment">备注</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <input nz-input formControlName="comment" id="comment">
+        <nz-form-explain *ngIf="validateForm.get('comment').dirty && validateForm.get('comment').errors">备注不能为空</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div class="checkbox-container">
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24">角色功能</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <ng-container *ngFor="let groupItem of groups; index as i;">
+          <div class="item-group">
+            <label nz-checkbox [(ngModel)]="groupItem.hasChecked" (ngModelChange)="updateAllChecked(groupItem.name,groupItem.hasChecked)" [nzIndeterminate]="groupItem.indeterminate && !groupItem.hasChecked">
+              {{groupItem.name}}
+            </label>
+          </div>
+          <nz-checkbox-group class="checkbox-item" [(ngModel)]="checkOptions[groupItem.name]" (ngModelChange)="updateSingleChecked($event)"></nz-checkbox-group>
+        </ng-container>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzOffset]="5">
+      <button nz-button nzType="primary" (click)="submitForm()" [nzLoading]="isLoading">确认</button>
+    </nz-form-control>
+  </nz-form-item>
+</div>

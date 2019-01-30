@@ -1,0 +1,59 @@
+<div class="filter-box">
+  <form nz-form [nzLayout]="'inline'">
+    <nz-form-item class="nowrap form-item">
+      <nz-form-label [nzSpan]="6" nzFor="comment">名称</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-input-group [nzSuffix]="suffixTemplate">
+          <input type="text" name="comment" nz-input placeholder="请输入名称" [(ngModel)]="Params.comment">
+        </nz-input-group>
+        <ng-template #suffixTemplate><i nz-icon type="close-circle" theme="fill" (click)="Params.comment=null" *ngIf="comment" class="clear-input"></i></ng-template>
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item class="nowrap form-item">
+      <nz-form-label [nzSpan]="10" nzFor="methods">类型</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-select style="width: 100%" name="methods" [(ngModel)]="Params.methods" nzAllowClear nzPlaceHolder="选择类型">
+          <nz-option *ngFor="let item of methods" [nzValue]="item" [nzLabel]="item"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item >
+    <nz-form-item class="nowrap form-item">
+      <nz-form-label [nzSpan]="6" nzFor="status">状态</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-select style="width: 100%" name="status" [(ngModel)]="Params.status" nzAllowClear nzPlaceHolder="选择状态">
+          <nz-option *ngFor="let item of filterStatusEnum" [nzValue]="item.value" [nzLabel]="item.label"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item >
+    <button nz-button nzType="primary" class="filter-btn"><i nz-icon type="search"></i>搜索</button>
+    <button nz-button nzType="default" class="filter-btn"><i nz-icon type="redo"></i>重置</button>
+    <button nz-button nzType="default" class="filter-btn fr" [routerLink]="['/formManage/upload', '瞪羚企业']"><i nz-icon type="plus"></i>上传</button>
+  </form>
+</div>
+
+<nz-table #basicTable [nzData]="dataSet">
+  <thead>
+  <tr>
+    <th>编号</th>
+    <th>名称</th>
+    <th>类型</th>
+    <th>状态</th>
+    <th>创建时间</th>
+    <th>修改时间</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of basicTable.data">
+    <td>{{data.name}}</td>
+    <td>{{data.age}}</td>
+    <td>{{data.address}}</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>
+      <a nz-popconfirm nzTitle="确认禁用该功能?" (nzOnConfirm)="confirm(data.key)" nzPlacement="topRight"><i nz-icon type="stop" theme="outline" nz-tooltip nzTitle="禁用"></i></a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
