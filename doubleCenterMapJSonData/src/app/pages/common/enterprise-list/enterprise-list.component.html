@@ -1,0 +1,27 @@
+<div class="panel-box">
+  <div class="area-panel list-panel">
+    <div class="panel-hd">
+      <span class="hd-title">{{areaParkName}}</span>
+      <span class="hd-right" [ngClass]="{'hasSearch': showSearch}"><span class="number">{{enterpriseTotal}}</span>家</span>
+      <span class="search-con" [ngClass]="{'active': searchActive}" *ngIf="showSearch">
+        <input type="text" class="search-input" [(ngModel)]="searchWord" (keyup.enter)="searchHandle($event)" (click)="$event.stopPropagation();"><button class="search-btn" (click)="searchHandle($event)"></button>
+      </span>
+    </div>
+    <div class="panel-bd enterprise-list" appScroll [(ngModel)]="scrollToTop">
+      <ul class="area-enterprise-list">
+        <li class="enterprise-item" *ngFor="let item of enterpriseList" [routerLink]="['../../detail', item.id]"><span class="enterprise-icon">{{item.prefixName}}</span>{{item.name}}</li>
+      </ul>
+      <div class="no-data-tips" *ngIf="!enterpriseList.length">暂无信息！</div>
+    </div>
+    <div class="panel-ft">
+      <!--<pagination [boundaryLinks]="true" [totalItems]="paginationParams.totalItems"
+                  [(ngModel)]="paginationParams.currentPage"
+                  (numPages)="paginationParams.currentPage = $event"
+                  [maxSize]="paginationParams.maxSize"
+                  (pageChanged)="changePage($event)"
+                  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+      </pagination>-->
+      <custom-pagination *ngIf="enterpriseList.length" [fastTurnBtn]="false" [totalPage]="paginationParams.totalPages" [maxSize]="paginationParams.maxSize" [(ngModel)]="paginationParams.currentPage" (changePage)="changePage($event)"></custom-pagination>
+    </div>
+  </div>
+</div>

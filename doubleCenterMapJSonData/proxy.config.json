@@ -1,0 +1,10 @@
+{
+  "/v1": {
+    "target": "http://127.0.0.1:6650",
+    "secure": "false"
+  },
+  "/ldap": {
+    "target": "http://192.168.0.24:6650",
+    "secure": "false"
+  }
+}

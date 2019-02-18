@@ -1,0 +1,131 @@
+.nav-list{
+  position: absolute;
+  left: 40px;
+  bottom: 70px;
+  line-height: 40px;
+  color: #50555e;
+  font-size: 14px;
+}
+.nav-list .nav-item{
+  margin-bottom: 8px;
+  position: relative;
+  cursor: pointer;
+  color: #6a9fff;
+  text-decoration: none;
+  display: block;
+  outline: none;
+}
+.nav-list a{
+  color: #50555e;
+  text-decoration: none;
+}
+.nav-list .nav-icon{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: #ddd;
+  vertical-align: middle;
+  margin-right: 13px;
+  border-radius: 8px;
+}
+.nav-list .sub-nav{
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  transition: opacity .3s;
+  padding-left: 20px;
+  overflow: hidden;
+}
+.nav-list .sub-nav .sub-item{
+  outline: none;
+}
+.nav-list .nav-item:hover .sub-nav{
+  opacity: 1;
+  width: max-content;
+  height: auto;
+}
+.nav-list .nav-item:hover>span, .nav-list .nav-item.active>span, .nav-list .sub-item:hover span, .nav-list .sub-item.active span{
+  color: #fff;
+}
+/*.nav-item .nav-icon1{
+  background: url("../../../../assets/images/keji_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .nav-icon2{
+  background: url("../../../../assets/images/shuangchuang_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .nav-icon3{
+  background: url("../../../../assets/images/fuhua_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .nav-icon4{
+  background: url("../../../../assets/images/gonggong_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .nav-icon5{
+  background: url("../../../../assets/images/kejizhongjie_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .nav-icon6{
+  background: url("../../../../assets/images/fuhuaqi_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .nav-icon7{
+  background: url("../../../../assets/images/fuhuayuan_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .sub-item .nav-icon1{
+  background: url("../../../../assets/images/fuhua_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .sub-item .nav-icon2{
+  background: url("../../../../assets/images/denglinqiye_menu_icon.png") no-repeat center;
+  background-size: contain;
+}
+.nav-item .sub-item .nav-icon3{
+  background: url("../../../../assets/images/dujiaoshou_menu_icon.png") no-repeat center;
+  background-size: contain;
+}*/
+.nav-item .technology-icon{
+  background-color: #4fd0f7;
+}
+.nav-item .doubleVenture-icon{
+  background-color: #d35227;
+}
+.nav-item .incubation-icon{
+  background-color: #1c8366;
+}
+.nav-item .seedEnterprise-icon{
+  background-color: #1c8366;
+}
+.nav-item .gazelleEnterprise-icon{
+  background-color: #749e2f;
+}
+.nav-item .unicornEnterprise-icon{
+  background-color: #a28636;
+}
+.nav-item .technologyPlatform-icon{
+  background-color: #cc782d;
+}
+.nav-item .intermediary-icon{
+  background-color: #1d8b9a;
+}
+.nav-item .incubator-icon{
+  background-color: #46428e;
+}
+.nav-list .menu-text{
+  width: 104px;
+  height: 32px;
+  line-height: 32px;
+  background-image: url("../../../../assets/images/menu_bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  vertical-align: middle;
+  text-indent: 10px;
+}

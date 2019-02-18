@@ -1,0 +1,59 @@
+<div class="panel-box">
+  <div class="area-panel">
+    <div class="panel-hd"><span class="hd-title">{{areaParkName}}</span><span [routerLink]="['list', areaParkName]" class="hd-right view-list">查看企业</span></div>
+    <div class="panel-bd" appScroll>
+      <div class="area-info">
+        <div class="total-enterprise">
+          <div class="total-icon"></div>
+          <div class="total-info">
+            <p><span class="number">{{parkEnterpriseTotal}}</span>家</p>
+            <p class="total-desc">企业总数</p>
+          </div>
+        </div>
+        <div class="area-wrapper">
+          <div class="area-title">创新创业企业数量</div>
+          <ul class="wrapper-box">
+            <li class="wrapper-item">
+              <div class="item-con">
+                <div class="con-box">
+                  <p><span class="number">{{typeEnterprises.doubleCreation}}</span>家</p>
+                  <p class="item-desc">双创企业</p>
+                </div>
+              </div>
+            </li>
+            <li class="wrapper-item">
+              <div class="item-con">
+                <div class="con-box">
+                  <p><span class="number">{{typeEnterprises.policySupport}}</span>家</p>
+                  <p class="item-desc">政策扶持企业</p>
+                </div>
+              </div>
+            </li>
+            <li class="wrapper-item">
+              <div class="item-con">
+                <div class="con-box">
+                  <p><span class="number">{{typeEnterprises.incubator}}</span>家</p>
+                  <p class="item-desc">孵化器</p>
+                </div>
+              </div>
+            </li>
+            <li class="wrapper-item">
+              <div class="item-con">
+                <div class="con-box">
+                  <p><span class="number">{{typeEnterprises.publicTechnology}}</span>家</p>
+                  <p class="item-desc">公共技术平台</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="area-wrapper">
+          <div class="area-title">功能区简介</div>
+          <div class="area-desc">
+            <p>成都高新南区筹建于1988年，1991年批准为首批国家高新技术产业开发区，高新区分为高新南区和高新西区，2000年批准为中国亚太经济合作组织（APEC）科技工业园区，2001年成为中国西部第一个通过ISO14001中国认证和英国皇家UKAS国际认证的区域，2006年成为全国首批“创建世界一流园区”试点单位。2011年在全省率先迈入“千亿工业园区”行列。最近几年，在科技部举行的综合评比中，成都高新区连续保持第四名、中西部第一位。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

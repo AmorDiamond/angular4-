@@ -1,0 +1,96 @@
+.area-enterprise-list{
+  padding: 30px;
+}
+.area-enterprise-list .enterprise-item {
+  line-height: 70px;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  outline: none;
+  transition: background .3s;
+  /*background: #c2e5ff;*/
+  background: linear-gradient(to bottom, #07143e, #03031b);
+  border: 1px solid transparent;
+  border-image: linear-gradient( #28334c, #03031b) 1 1;
+  border-bottom: none;
+  position: relative;
+  color: #afc6f2;
+}
+.area-enterprise-list .enterprise-item:before {
+  position: absolute;
+  content: '';
+  height: 1px;
+  left: 25%;
+  right: 25%;
+  top: 0;
+  z-index: 2;
+  background: linear-gradient(to right, #07143e, #b5eafd, #07143e);
+}
+/*.area-enterprise-list .enterprise-item:nth-child(2n+1) {
+  background: #e2eef7;
+}*/
+.area-enterprise-list li.enterprise-item:hover {
+  background: #8aebf4;
+  color: #000;
+}
+.area-enterprise-list li:hover.enterprise-item:before {
+  height: 0;
+}
+.area-enterprise-list .enterprise-item .enterprise-icon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 25px;
+  background: #06a2e7;
+  margin-right: 10px;
+  vertical-align: middle;
+  text-align: center;
+  color: #fff;
+}
+.search-con{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(100% - 32px);
+  right: 4px;
+  background: linear-gradient(to bottom, #0c245f, #133f95, #1952bd);
+  display: flex;
+  align-items: center;
+  transition: left .3s, right .3s;
+}
+.search-con.active{
+  right: 30px;
+  left: 30px;
+}
+.search-input{
+  width: 0;
+  height: 30px;
+  vertical-align: middle;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+  transition: width .6s;
+  padding: 0;
+}
+.search-con.active .search-input{
+  width: 100%;
+  flex: 1;
+  padding: 0 14px;
+}
+.search-btn{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: url("../../../../assets/images/search_min_icon2.png") no-repeat center;
+  background-size: 70%;
+  border: none;
+  vertical-align: middle;
+  outline: none;
+  cursor: pointer;
+}
+:host>>>.list-panel .hd-right.hasSearch{
+  margin-right: 10px;
+}

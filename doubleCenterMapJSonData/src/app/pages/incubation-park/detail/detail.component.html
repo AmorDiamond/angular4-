@@ -1,0 +1,65 @@
+<div class="panel-box">
+  <div class="area-panel">
+    <div class="panel-hd"><span class="back-arrow-icon" (click)="backHistory()"></span><span class="enterprise-name">{{enterpriseData?.name}}</span></div>
+    <div class="panel-bd" appScroll>
+      <ul class="area-enterprise-detail platform-detail">
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">注册时间</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.registrationDate ? (enterpriseData?.registrationDate | date:'yyyy-MM-dd') : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">注册资金</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.registCapital ? enterpriseData?.registCapital : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">专业人员数量</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.peopleNumber ? enterpriseData?.peopleNumber : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">入库时间</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.storageDate ? enterpriseData?.storageDate : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">建设承担单位</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.unitName ? enterpriseData?.unitName : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">服务内容</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.description ? enterpriseData?.description : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">注册地址</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.address ? enterpriseData?.address : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">有效券</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.validCoupon ? enterpriseData?.validCoupon : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">联系人信息</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.contactName}}</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.telephone}}</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.eMail}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

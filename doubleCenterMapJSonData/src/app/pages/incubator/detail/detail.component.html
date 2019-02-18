@@ -1,0 +1,87 @@
+<div class="panel-box">
+  <div class="area-panel">
+    <div class="panel-hd"><span class="back-arrow-icon" (click)="backHistory()"></span><span class="enterprise-name">{{enterpriseData?.name}}</span></div>
+    <div class="panel-bd" appScroll>
+      <ul class="area-enterprise-detail platform-detail">
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">入驻企业</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.enterprisesNum ? enterpriseData?.enterprisesNum : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">产业类型</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.industryType ? enterpriseData?.industryType : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">高新技术企业</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.highTechEnterpriseNum ? enterpriseData?.highTechEnterpriseNum : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">孵化面积</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.area ? enterpriseData?.area : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">载体级别</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.carrierLevel ? enterpriseData?.carrierLevel : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">运营机构/单位名称</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.operatingAgency ? enterpriseData?.operatingAgency : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">注册地址</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.address ? enterpriseData?.address : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">孵化基金投资家数</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.incubationNum ? enterpriseData?.incubationNum : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">投融资总额</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.investmentSum ? enterpriseData?.investmentSum : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">获得投融资企业数</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.investmentNum ? enterpriseData?.investmentNum : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">获得知识产权的企业数</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.hasIntellectualPropertyNum ? enterpriseData?.hasIntellectualPropertyNum : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">获得省级以上科技领军人才数</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.hasTechnologyLeaderNum ? enterpriseData?.hasTechnologyLeaderNum : '未知'}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">收入超过5000万元的企业数</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.complianceEnterpriseNum ? enterpriseData?.complianceEnterpriseNum : '未知'}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

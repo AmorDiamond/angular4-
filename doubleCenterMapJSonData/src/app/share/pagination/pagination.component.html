@@ -1,0 +1,9 @@
+<ul class="custom-pagination">
+  <li class="page-item first-page" *ngIf="fastTurnBtn" [ngClass]="{'disabled': currentPage === 1}" (click)="goToPage(1)"><span><<</span></li>
+  <li class="page-item prev-page" *ngIf="turnBtn" [ngClass]="{'disabled': currentPage === 1}" (click)="prevNextPage('上一页')"><span><</span></li>
+  <li class="page-item left-more-page" *ngIf="showLeftMoreStatus && moreBtn" (click)="leftMoreClick()" title="查看更多"><span></span></li>
+  <li class="page-item" *ngFor="let item of showPageList" [ngClass]="{'active': currentPage === item}" (click)="goToPage(item)">{{item}}</li>
+  <li class="page-item right-more-page" *ngIf="showRightMoreStatus && moreBtn" (click)="rightMoreClick()" title="查看更多"><span></span></li>
+  <li class="page-item next-page" *ngIf="turnBtn" [ngClass]="{'disabled': currentPage === totalPage}" (click)="prevNextPage('下一页')"><span>></span></li>
+  <li class="page-item last-page" *ngIf="fastTurnBtn" [ngClass]="{'disabled': currentPage === totalPage}" (click)="goToPage(totalPage)"><span>>></span></li>
+</ul>

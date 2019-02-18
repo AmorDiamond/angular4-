@@ -1,0 +1,21 @@
+<div class="panel-box">
+  <div class="area-panel">
+    <div class="panel-hd"><span class="hd-title">{{searchWord}}</span><span class="hd-right"><span class="number">{{enterpriseTotal}}</span>家</span></div>
+    <div class="panel-bd" appScroll [(ngModel)]="scrollToTop">
+      <ul class="area-enterprise-list">
+        <li class="enterprise-item" *ngFor="let item of enterpriseList" [routerLink]="['../../detail', item.id]"><span class="enterprise-icon">{{item.prefixName}}</span><span [innerHTML]="item.hilightName?item.hilightName:item.name"></span></li>
+      </ul>
+      <div class="no-data-tips" *ngIf="!enterpriseList.length">暂无信息！</div>
+  </div>
+    <div class="panel-ft">
+      <!--<pagination [boundaryLinks]="true" [totalItems]="paginationParams.totalItems"
+                  [(ngModel)]="paginationParams.currentPage"
+                  (numPages)="paginationParams.currentPage = $event"
+                  [maxSize]="paginationParams.maxSize"
+                  (pageChanged)="changePage($event)"
+                  previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+      </pagination>-->
+      <custom-pagination *ngIf="enterpriseList.length" [fastTurnBtn]="false" [totalPage]="paginationParams.totalPages" [maxSize]="paginationParams.maxSize" [(ngModel)]="paginationParams.currentPage" (changePage)="changePage($event)"></custom-pagination>
+    </div>
+</div>
+</div>

@@ -1,0 +1,37 @@
+<div class="map-container">
+  <app-map></app-map>
+</div>
+<div class="page-title"><img src="assets/images/page_title_bg.png" alt=""></div>
+<div class="home-menu" routerLink="/home"></div>
+<div class="search-box" (click)="showSearchPop = !showSearchPop"></div>
+<div class="search-pop" [ngClass]="{'active': showSearchPop}" (click)="showSearchPop = !showSearchPop">
+  <div class="search-con" (click)="$event.stopPropagation();">
+    <input type="text" [(ngModel)]="searchWord" (keyup.enter)="search()" placeholder="请输入关键字"><button (click)="search()">搜索</button>
+  </div>
+</div>
+<app-layout-nav></app-layout-nav>
+
+<!--园区概述-->
+<div class="right-panel-bg">
+  <div class="top-line line-bg"></div>
+  <div class="right-line line-bg"></div>
+  <div class="bottom-line line-bg"></div>
+  <div class="left-line line-bg"></div>
+  <div class="left-top-circle circle-bg"></div>
+  <div class="right-top-circle circle-bg"></div>
+  <div class="right-bottom-circle circle-bg"></div>
+  <div class="left-bottom-circle circle-bg"></div>
+  <div class="right-panel park-overview-panel">
+    <div class="top-border right-panel-border"></div>
+    <div class="right-border right-panel-border"></div>
+    <div class="bottom-border right-panel-border"></div>
+    <div class="left-border right-panel-border"></div>
+    <div class="left-top-circle-border circle-border"></div>
+    <div class="right-top-circle-border circle-border"></div>
+    <div class="right-bottom-circle-border circle-border"></div>
+    <div class="left-bottom-circle-border circle-border"></div>
+    <router-outlet></router-outlet>
+    <app-loading></app-loading>
+  </div>
+</div>
+<app-full-loading></app-full-loading>

@@ -1,0 +1,45 @@
+<div class="panel-box">
+  <div class="area-panel">
+    <div class="panel-hd"><span class="back-arrow-icon" (click)="backHistory()"></span><span class="enterprise-name">{{enterpriseData?.name}}</span></div>
+    <div class="panel-bd" appScroll>
+      <ul class="area-enterprise-detail">
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">统一社会信用代码</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.creditCode}}</p>
+        </li>
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">企业名称</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.name}}</p>
+        </li>
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">注册地址</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.registeredAddress}}</p>
+        </li>
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">经营范围</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.businessScope ? enterpriseData.businessScope : '未知'}}</p>
+        </li>
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">成立日期</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.establishDate ? (enterpriseData.establishDate | date:'yyyy-MM-dd') : '未知'}}</p>
+        </li>
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">经营状态</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.businessStatus ? enterpriseData.businessStatus : '未知'}}</p>
+        </li>
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">法定代表人</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.legalPersonName ? enterpriseData.legalPersonName : '未知'}}</p>
+        </li>
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">注册资金</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.registCapital ? enterpriseData.registCapital : '未知'}}</p>
+        </li>
+        <li class="enterprise-item">
+          <p class="enterprise-detail-title">联系电话</p>
+          <p class="enterprise-detail-data">{{enterpriseData?.telephone ? enterpriseData.telephone : '未知'}}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

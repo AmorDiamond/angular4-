@@ -1,0 +1,51 @@
+<div class="panel-box">
+  <div class="area-panel">
+    <div class="panel-hd"><span class="back-arrow-icon" (click)="backHistory()"></span><span class="enterprise-name">{{enterpriseData?.name}}</span></div>
+    <div class="panel-bd" appScroll>
+      <ul class="area-enterprise-detail platform-detail">
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">年份</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.year}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">类别</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.type}}</p>
+          </div>
+        </li>
+        <!--<li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">所属领域</p>
+            <p class="enterprise-detail-data">信息技术</p>
+          </div>
+        </li>
+        <li class="enterprise-item row-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">投资模式</p>
+            <p class="enterprise-detail-data">融资</p>
+          </div>
+        </li>-->
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">建设承担单位</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.unitName}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">提供服务情况</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.description}}</p>
+          </div>
+        </li>
+        <li class="enterprise-item">
+          <div class="row-con">
+            <p class="enterprise-detail-title">地址</p>
+            <p class="enterprise-detail-data">{{enterpriseData?.address}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
